@@ -1,0 +1,87 @@
+create database mlsJYDB default character set utf8;
+use mlsJYDB;
+
+create table principalSetTable(
+	id int unsigned not null auto_increment,
+	schoolZone char(32) not null default '',
+	assistant varchar(20) not null default '',
+	product1 varchar(20) not null default '',
+	product2 varchar(20) not null default '',
+	product3 varchar(20) not null default '',
+	product4 varchar(20) not null default '',
+	product5 varchar(20) not null default '',
+	course1 varchar(20) not null default '',
+	course2 varchar(20) not null default '',
+	course3 varchar(20) not null default '',
+	course4 varchar(20) not null default '',
+	course5 varchar(20) not null default '',
+	grade7 varchar(20) not null default '',
+	grade8 varchar(20) not null default '',
+	grade9 varchar(20) not null default '',
+	grade10 varchar(20) not null default '',
+	grade11 varchar(20) not null default '',
+	grade12 varchar(20) not null default '',
+	subFeeItem1 varchar(20) not null default '',
+	subFeeItem2 varchar(20) not null default '',
+	subFeeItem3 varchar(20) not null default '',
+	subFeeItem4 varchar(20) not null default '',
+	subFeeItem5 varchar(20) not null default '',
+	priceBKgrade7 int unsigned not null default '0',
+	priceBKgrade8 int unsigned not null default '0',
+	priceBKgrade9 int unsigned not null default '0',
+	priceBKgrade10 int unsigned not null default '0',
+	priceBKgrade11 int unsigned not null default '0',
+	priceBKgrade12 int unsigned not null default '0',
+	hour1 int unsigned not null default '50',
+	hour2 int unsigned not null default '100',
+	hour3 int unsigned not null default '100',
+	price7hour1YDY int unsigned not null default '0',
+	price7hour2YDY int unsigned not null default '0',
+	price7hour3YDY int unsigned not null default '0',
+	pay7 int unsigned not null default '0',
+	price8hour1YDY int unsigned not null default '0',
+	price8hour2YDY int unsigned not null default '0',
+	price8hour3YDY int unsigned not null default '0',
+	pay8 int unsigned not null default '0',
+	price9hour1YDY int unsigned not null default '0',
+	price9hour2YDY int unsigned not null default '0',
+	price9hour3YDY int unsigned not null default '0',
+	pay9 int unsigned not null default '0',
+	price10hour1YDY int unsigned not null default '0',
+	price10hour2YDY int unsigned not null default '0',
+	price10hour3YDY int unsigned not null default '0',
+	pay10 int unsigned not null default '0',
+	price11hour1YDY int unsigned not null default '0',
+	price11hour2YDY int unsigned not null default '0',
+	price11hour3YDY int unsigned not null default '0',
+	pay11 int unsigned not null default '0',
+	price12hour1YDY int unsigned not null default '0',
+	price12hour2YDY int unsigned not null default '0',
+	price12hour3YDY int unsigned not null default '0',
+	pay12 int unsigned not null default '0',
+	time varchar(20) not null default '000000',	
+	primary key(id)
+);
+
+drop table principalSetTable;
+
+
+-- 清空全部数据，不写日志，不可恢复，速度极快
+truncate table 表名;
+ 
+-- 清空全部数据，写日志，数据可恢复，速度慢
+delete from 表名
+
+// 增加一列
+alter table principalSetTable add pay7 int unsigned not null default '0' after price7hour3YDY;
+// 修改
+alter table principalSetTable change column pay9 int unsigned not null default '0' after price7hour3YDY;
+
+insert into fee (id,passWD,name,sex,role) values(1,md5("admin"),"admin","男","1");
+
+
+insert into user (name,sex,passWD,role) values("admin","男",md5("admin"),1);
+insert into user (name,sex,passWD) values("张三","女",md5("123"));
+insert into user (name,sex,passWD) values("李四","男",md5("123abc"));
+insert into user (name,sex,passWD) values("王五","女",md5("abc"));
+insert into user (name,sex,passWD) values("孙六","男",md5("abc"));

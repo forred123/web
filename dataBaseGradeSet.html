@@ -1,0 +1,35 @@
+create database mlsJYDB default character set utf8;
+use mlsJYDB;
+
+create table gradeSetTable(
+	id int unsigned not null auto_increment,
+	schoolZone char(32) not null default '',
+	startTime varchar(20) not null default '000000',	
+	endTime varchar(20) not null default '000000',
+	teacher char(32) not null default '',
+	grade char(4) not null default '-',
+	course char(4) not null default '-',
+	product char(5) not null default '',
+	class varchar(32) not null default '???',
+	greadeSetResult varchar(128) not null default '???',
+	primary key(id)
+);
+
+// 增加一列
+alter table gradeSetTable add greadeSetResult varchar(128) not null default '???' after class;
+
+insert into recordTeacher (name,role) values("admin",9);
+
+//alter table user change passWD passWD char(32) not null default '';
+//默认密码为mls123
+insert into recordTeacher (uid,passWD,name,sex,role) values(1,md5("admin"),"admin","男","9");
+
+update recordTeacher set role=9 where uid=1;
+
+
+
+insert into user (name,sex,passWD,role) values("admin","男",md5("admin"),1);
+insert into user (name,sex,passWD) values("张三","女",md5("123"));
+insert into user (name,sex,passWD) values("李四","男",md5("123abc"));
+insert into user (name,sex,passWD) values("王五","女",md5("abc"));
+insert into user (name,sex,passWD) values("孙六","男",md5("abc"));

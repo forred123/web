@@ -1,0 +1,103 @@
+create database mlsJYDB default character set utf8;
+use mlsJYDB;
+
+ create table addFeeTable(
+    id int unsigned not null auto_increment,
+    mode char(1) not null default '', # ""：为默认无意义，j：为交费，z为转费，t：为退费
+    uid int unsigned not null default '0',
+    name1 varchar(20) not null default '',
+    name2 varchar(20) not null default '',
+    sex char(4) not null default '',
+    grade char(4) not null default '',
+    schoolZone1 char(32) not null default '',
+    schoolZone2 char(32) not null default '',
+    schoolZone3 char(32) not null default '',
+    receiptNum char(32) not null default '0',
+    billNum char(10) not null default '',
+    time varchar(20) not null default '0', 
+    priceBK int unsigned not null default '0',
+    hour1 int unsigned not null default '50',
+    priceHour1YDY int unsigned not null default '0',
+    pay1 int unsigned not null default '0',
+	hour2 int unsigned not null default '100',
+    priceHour2YDY int unsigned not null default '0', 
+    pay2 int unsigned not null default '0',
+	hour3 int unsigned not null default '100',
+    priceHour3YDY int unsigned not null default '0',  
+    pay3 int unsigned not null default '0',   
+    feeSum int not null default '0',
+    subFee1Name varchar(20) not null default '费用1',
+    subFee2Name varchar(20) not null default '费用2',
+    subFee3Name varchar(20) not null default '费用3',
+    subFee4Name varchar(20) not null default '费用4',
+    subFee5Name varchar(20) not null default '费用5',
+    MathProduct varchar(20) not null default '未选择', 
+    Math int not null default '0',
+    MathSubFee1 int unsigned not null default '0',
+    MathSubFee2 int unsigned not null default '0',
+    MathSubFee3 int unsigned not null default '0',
+    MathSubFee4 int unsigned not null default '0',
+    MathSubFee5 int unsigned not null default '0',
+    ChineseProduct varchar(20) not null default '未选择',
+    Chinese int not null default '0',
+    ChineseSubFee1 int unsigned not null default '0',
+    ChineseSubFee2 int unsigned not null default '0',
+    ChineseSubFee3 int unsigned not null default '0',
+    ChineseSubFee4 int unsigned not null default '0',
+    ChineseSubFee5 int unsigned not null default '0',
+    EnglishProduct varchar(20) not null default '未选择',
+    English int not null default '0',
+    EnglishSubFee1 int unsigned not null default '0',
+    EnglishSubFee2 int unsigned not null default '0',
+    EnglishSubFee3 int unsigned not null default '0',
+    EnglishSubFee4 int unsigned not null default '0',
+    EnglishSubFee5 int unsigned not null default '0',
+    PhysicsProduct varchar(20) not null default '未选择',
+    Physics int not null default '0',
+    PhysicsSubFee1 int unsigned not null default '0',
+    PhysicsSubFee2 int unsigned not null default '0',
+    PhysicsSubFee3 int unsigned not null default '0',
+    PhysicsSubFee4 int unsigned not null default '0',
+    PhysicsSubFee5 int unsigned not null default '0',
+    ChemistryProduct varchar(20) not null default '未选择',
+    Chemistry int not null default '0',
+    ChemistrySubFee1 int unsigned not null default '0',
+    ChemistrySubFee2 int unsigned not null default '0',
+    ChemistrySubFee3 int unsigned not null default '0',
+    ChemistrySubFee4 int unsigned not null default '0',
+    ChemistrySubFee5 int unsigned not null default '0',
+    
+    primary key(id)
+    );
+    
+    truncate addFeeTable;
+	// 修改某一列名称
+	alter table addFeeTable change column product MathProduct varchar(20) not null default '未选择';
+	alter table addFeeTable change column name name1 varchar(20) not null default '';
+	alter table addFeeTable change column feeSum feeSum int not null default '0';
+	
+
+    // 增加一列
+	alter table addFeeTable add pay1 int unsigned not null default '0' after priceHour1YDY;
+	alter table addFeeTable add name2 varchar(20) not null default '' after name1;
+	alter table addFeeTable add sex char(4) not null default '' after name2;
+	
+	--删除列
+	alter table tablename drop column password
+	--添加列
+	alter table tablename add chengji int(10) null
+
+	// MySQL 修改字段类型或长度
+	alter table addFeeTable modify column mode char(1) not null default ''; # ""：为默认无意义，j：为交费，z为转费，t：为退费
+
+	alter table addFeeTable add hour1 int unsigned not null default '50' after priceBK;
+	alter table addFeeTable add hour2 int unsigned not null default '100' after priceHour1YDY;
+	alter table addFeeTable add hour3 int unsigned not null default '100' after priceHour2YDY;
+	
+	alter table addFeeTable add ChineseProduct varchar(20) not null default '未选择' after MathSubFee5;
+	alter table addFeeTable add EnglishProduct varchar(20) not null default '未选择' after ChineseSubFee5;
+	alter table addFeeTable add PhysicsProduct varchar(20) not null default '未选择' after EnglishSubFee5;
+	alter table addFeeTable add ChemistryProduct varchar(20) not null default '未选择' after PhysicsSubFee5;
+	
+	
+	

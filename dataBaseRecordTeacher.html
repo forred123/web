@@ -1,0 +1,67 @@
+create database mlsJYDB default character set utf8;
+use mlsJYDB;
+
+create table recordTeacherTable(
+	uid int unsigned not null auto_increment,
+	passWD char(32) not null default 'mlsfdb', # 2ce6f329bebefe7c57394c7b0930cf33--mls123
+	name varchar(20) not null default '',
+	sex char(4) not null default '',
+	imgUrl varchar(32) not null default '',
+	schoolZone1 char(32) not null default '',
+	schoolZone2 char(32) not null default '',
+	schoolZone3 char(32) not null default '',
+	schoolZone4 char(32) not null default '',
+	schoolZone5 char(32) not null default '',
+	bankCardNumber char(20) not null default '',
+	bank char(32) not null default '',
+	bankCardUser char(20) not null default '',
+	requireConditon char(32) not null default '', 
+	product1 char(5) not null default '',
+	product2 char(5) not null default '',
+	product3 char(5) not null default '',
+	product4 char(5) not null default '',
+	product5 char(5) not null default '',
+	course1 char(4) not null default '-',
+	course2 char(4) not null default '-',
+	course3 char(4) not null default '-',
+	course4 char(4) not null default '-',
+	course5 char(4) not null default '-',
+	grade7 char(4) not null default '-',
+	grade8 char(4) not null default '-',
+	grade9 char(4) not null default '-',
+	grade10 char(4) not null default '-',
+	grade11 char(4) not null default '-',	
+	grade12 char(4) not null default '-',	
+	school char(32) default '',	
+	teacherWX char(16) default '',
+	teacherQQ char(16) default '',
+	teacherTel char(16) default '',
+	teacherEmail char(32) default '',
+	address Text default '',
+	idCardNum char(20) not null default '',
+	workCondition char(4) not null default '',
+	workTime char(4) not null default '',
+	inTime varchar(20) not null default '000000',	
+	outTime varchar(20) not null default '000000',
+	role int not null default 1, #权限，校长是9，校区负责人是8，教师是1，学生是0
+	primary key(uid)
+);
+
+insert into recordTeacherTable (name,role) values("admin",9);
+
+//alter table user change passWD passWD char(32) not null default '';
+//默认密码为mls123
+insert into recordTeacher (uid,passWD,name,sex,role) values(1,md5("admin"),"admin","男","9");
+
+update recordTeacher set role=9 where uid=1;
+
+alter table recordTeacherTable change passWD passWD char(32) not null default 'mlsfdb';
+update recordTeacherTable set passWD='mlsfdb';
+
+
+
+insert into user (name,sex,passWD,role) values("admin","男",md5("admin"),1);
+insert into user (name,sex,passWD) values("张三","女",md5("123"));
+insert into user (name,sex,passWD) values("李四","男",md5("123abc"));
+insert into user (name,sex,passWD) values("王五","女",md5("abc"));
+insert into user (name,sex,passWD) values("孙六","男",md5("abc"));

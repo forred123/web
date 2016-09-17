@@ -1,0 +1,108 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: verdana, arial, sans-serif;
+}
+
+#container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	text-align: left;
+}
+
+#header {
+	float: left;
+	width: 100%;
+	height: 90px;//无单位时经常加载空白
+	background: #579ad1;
+}
+
+#header #band {
+	float: left;
+	width: 740px;
+	height: 100%;
+	background: url("../image/band.jpg");
+}
+
+#header #login {
+	float: left;
+	width: 210px;
+	height: 100%;
+	margin-right: 10px;
+	background: #87cefa;
+	font: 16px verdana, arial, sans-serif;
+}
+
+#header input {
+	font: 16px verdana, arial, sans-serif;
+	margin-left: 5px;
+	width: 95px;
+	text-align: center;
+}
+
+#mainbody {
+	float: left;
+	width: 100%;
+	height: 650px;
+	margin-right: 10px;//
+	background: #FDF5E6;
+}
+
+#mainbody #leftbox {
+	float: left;
+	width: 210px;
+	height: 100%;
+	background: #87cefa;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+#mainbody #leftbox #menu {
+	margin-left: 25px;
+	margin-top: 35px;
+}
+
+#mainbody .li {
+	font: 16px verdana, arial, sans-serif;
+	margin-top: 20px;
+}
+
+#mainbody #rightbox {
+	float: right;
+	width: 740px;
+	height: 100%;
+	background: #87cefa;
+}
+
+#mainbody #rightbox .paragraph {
+	margin-left: 20px;
+	margin-right: 20px;
+	text-indent: 2em;
+	font: 16px verdana, arial, sans-serif;
+}
+
+/* ID选择器 */
+#footer {
+	float: left;
+	width: 100%;
+	height: 90px;
+	background: #87cefa;
+	font: 16px verdana, arial, sans-serif;
+}
+
+#footer #address {
+	margin-top: 15px;
+	margin-left: 150px;
+}
+
+/* 类选择器 */
+.breakline {
+	float: left;
+	width: 100%;
+	height: 10px;
+	clear: both; /* 两侧不允许有盒子 */
+	overflow: hidden; /*IE最小默认高度为18PX，让超出部分隐藏*/
+}
+

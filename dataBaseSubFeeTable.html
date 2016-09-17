@@ -1,0 +1,44 @@
+create database mlsJYDB default character set utf8;
+use mlsJYDB;
+
+create table subFeeTable(
+	id int unsigned not null auto_increment,
+    uid int unsigned not null default '0',
+    name1 varchar(20) not null default '',
+    name2 varchar(20) not null default '',
+    schoolZone char(32) not null default '',
+    grade char(4) not null default '',
+    product varchar(20) not null default '', 
+    teacher varchar(20) not null default '',
+    classInMLS varchar(32) not null default '',
+    className varchar(32) not null default '',
+    attendance char(6) not null default '',
+    notAttendanceReason varchar(20) not null default '', #缺勤原因
+    attandenceTime varchar(20) not null default '0',
+    period char(6) not null default '0',#一对一时用于计算学生单价和显示上课时间段的结束时间，班课时用于显示学生上课时间段的结束时间
+    subFeeCourse int unsigned not null default '0', # 1-5
+    price float unsigned not null default '0',#当次课扣费真实价格，请假不扣费，旷课和上课是一样扣费
+    pay int unsigned not null default '0',   
+    # priceState只有0和1两个值，默认为0，表示不给教师算工资，当为1时，表示给教师算工资，当为2时也给教师算工资，表示是试听成功的学生
+    priceState int unsigned not null default '0',
+    testResultTime varchar(20) not null default '0',#确定试听成败结果的时间，这个时间决定了在何时给教师算试听学生的工资
+    primary key(id)
+);
+
+-- 清空全部数据，不写日志，不可恢复，速度极快
+truncate table 表名;
+
+// 增加一列
+alter table subFeeTable add className varchar(32) not null default '' after classInMLS;
+alter table subFeeTable add priceState int unsigned not null default '0' after pay;
+alter table subFeeTable add testResultTime varchar(20) not null default '0' after priceState;
+ 
+alter table subFeeTable change periodYDY period char(6) not null default '0';
+
+alter table subFeeTable change price price float unsigned not null default '0';
+ 
+ 
+-- 清空全部数据，写日志，数据可恢复，速度慢
+delete from 表名
+
+alter table subFeeTable add periodYDY char(6) not null default '0' after attandenceTime;
