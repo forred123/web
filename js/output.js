@@ -919,19 +919,23 @@ function appendRowBK(mat,index){
 					if(mat[i+1]==""){
 						//nameTmp += "{" + mat[i] + "-" + "/" +"}";	
 						//nameTmp += mat[i] + "-" + "/" +"; ";
-						nameFail += mat[i] +"; ";
+						//nameFail += mat[i] +"; ";
+						nameFail += mat[i] +"、";
 					}else{
 						//nameTmp += "{" + mat[i] +"-", mat[i+1] +"}";
-						nameFail += mat[i] +"-", mat[i+1] +"; ";
+						//nameFail += mat[i] +"-", mat[i+1] +"; ";
+						nameFail += mat[i] +"-", mat[i+1] +"、";
 					}
 				}
 
 				if (mat[i + 3] == 2) {
 					testSucNum++;
 					if (mat[i + 1] == "") {
-						nameSuc += mat[i] + "; ";
+						//nameSuc += mat[i] + "; ";
+						nameSuc += mat[i] + "、";
 					} else {
-						nameSuc += mat[i] + "-", mat[i + 1] + "; ";
+						//nameSuc += mat[i] + "-", mat[i + 1] + "; ";
+						nameSuc += mat[i] + "-", mat[i + 1] + "、";
 					}
 				}
 			}
