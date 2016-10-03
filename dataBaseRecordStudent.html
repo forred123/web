@@ -82,7 +82,7 @@ create table recordStudentTable(
 	inTime varchar(20) not null default '000000',	
 	outTime varchar(20) not null default '000000',
 	
-	role int not null default 0,
+	role int not null default 0,#权限，校长是9，校区负责人是8，教师是1，学生是0
 	primary key(uid)
 );
 

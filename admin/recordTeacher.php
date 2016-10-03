@@ -156,6 +156,11 @@ if (isset($_POST['submitType'])) {
 	$course[2] = "";
 	$course[3] = "";
 	$course[4] = "";
+	$course[5] = "";
+	$course[6] = "";
+	$course[7] = "";
+	$course[8] = "";
+	$course[9] = "";
 
 	if (isset($_POST['course1copy'])) {
 		$course[0] = $_POST['course1copy'];
@@ -171,6 +176,21 @@ if (isset($_POST['submitType'])) {
 	}
 	if (isset($_POST['course5copy'])) {
 		$course[4] = $_POST['course5copy'];
+	}
+	if (isset($_POST['course6copy'])) {
+		$course[5] = $_POST['course6copy'];
+	}
+	if (isset($_POST['course7copy'])) {
+		$course[6] = $_POST['course7copy'];
+	}
+	if (isset($_POST['course8copy'])) {
+		$course[7] = $_POST['course8copy'];
+	}
+	if (isset($_POST['course9copy'])) {
+		$course[8] = $_POST['course9copy'];
+	}
+	if (isset($_POST['course10copy'])) {
+		$course[9] = $_POST['course10copy'];
 	}
 
 	// print_r($course);
@@ -240,10 +260,10 @@ if (isset($_POST['submitType'])) {
 	if (isset($_POST['submitAdd'])) {
 		$sbmt = $pdo -> prepare("insert into recordTeacherTable (name,sex,passWD,imgUrl,schoolZone1,schoolZone2,schoolZone3,schoolZone4,schoolZone5,bankCardNumber,
 					bank,bankCardUser,requireConditon, product1,product2,product3,product4,product5,
-					course1,course2,course3,course4,course5,grade7,grade8,grade9,grade10,grade11,grade12,	
+					course1,course2,course3,course4,course5,course6,course7,course8,course9,course10,grade7,grade8,grade9,grade10,grade11,grade12,	
 					school,	teacherWX,teacherQQ,teacherTel,teacherEmail,address,idCardNum,workCondition,
-					workTime,inTime,outTime,role) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'],str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime, $role));
+					workTime,inTime,outTime,role) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'],str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5],$course[6],$course[7],$course[8],$course[9],$grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime, $role));
 
 		// 修改头像姓名
 		if(file_exists('../uploadImg/tmp.jpg')){
@@ -287,10 +307,10 @@ if (isset($_POST['submitType'])) {
 	if (isset($_POST['submitUpdate'])) {
 		$sbmt = $pdo -> prepare("update recordTeacherTable set  name=?,sex=?,passWD=?,imgUrl=?,schoolZone1=?,schoolZone2=?,schoolZone3=?,schoolZone4=?,schoolZone5=?,bankCardNumber=?,
 					bank=?,bankCardUser=?,requireConditon=?, product1=?,product2=?,product3=?,product4=?,product5=?,
-					course1=?,course2=?,course3=?,course4=?,course5=?,grade7=?,grade8=?,grade9=?,grade10=?,grade11=?,grade12=?,	
+					course1=?,course2=?,course3=?,course4=?,course5=?,course6=?,course7=?,course8=?,course9=?,course10=?,grade7=?,grade8=?,grade9=?,grade10=?,grade11=?,grade12=?,	
 					school=?,	teacherWX=?,teacherQQ=?,teacherTel=?,teacherEmail=?,address=?,idCardNum=?,workCondition=?,
 					workTime=?,inTime=?,outTime=?,role=? where name=?");
-		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime,$role, str_replace(' ', '', $_POST['userName'])));
+		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5], $course[6], $course[7], $course[8], $course[9], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime,$role, str_replace(' ', '', $_POST['userName'])));
 
 		// 修改头像姓名
 		if(file_exists('../uploadImg/tmp.jpg')){
@@ -336,7 +356,7 @@ if (isset($_POST['submitType'])) {
 		$str = $_POST['userID'];
 		$uid = substr($str, 1);
 		
-		$sbmt = $pdo -> prepare("delete from recordTeacherTable where uid = ?");
+		$sbmt = $pdo -> prepare("delete * from recordTeacherTable where uid = ?");
 		$flag = $sbmt -> execute(array($uid));
 
 		if ($flag) {
@@ -637,8 +657,7 @@ if (isset($_POST['submitType'])) {
 						科目3</label>
 					<input type="hidden" name=course3copy value="" />
 					<label name="courseLabel" for="course4">
-						<input type="checkbox"
-						name="course[]" id="course4">
+						<input type="checkbox" name="course[]" id="course4">
 						科目4</label>
 					<input type="hidden" name=course4copy value="" />
 					<label name="courseLabel"
@@ -646,6 +665,31 @@ if (isset($_POST['submitType'])) {
 						<input type="checkbox" name="course[]" id="course5">
 						科目5</label>
 					<input type="hidden" name=course5copy value="" />
+					<label name="courseLabel"
+					for="course6">
+						<input type="checkbox" name="course[]" id="course6">
+						科目6</label>
+					<input type="hidden" name=course6copy value="" />
+					<label name="courseLabel"
+					for="course7">
+						<input type="checkbox" name="course[]" id="course7">
+						科目7</label>
+					<input type="hidden" name=course7copy value="" />
+					<label name="courseLabel"
+					for="course8">
+						<input type="checkbox" name="course[]" id="course8">
+						科目8</label>
+					<input type="hidden" name=course8copy value="" /><br />
+					<label name="courseLabel"
+					for="course9">
+						<input type="checkbox" name="course[]" id="course9">
+						科目9</label>
+					<input type="hidden" name=course9copy value="" />
+					<label name="courseLabel"
+					for="course10">
+						<input type="checkbox" name="course[]" id="course10">
+						科目10</label>
+					<input type="hidden" name=course10copy value="" />
 					</td>
 				</tr>
 

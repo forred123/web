@@ -15,6 +15,11 @@ create table principalSetTable(
 	course3 varchar(20) not null default '',
 	course4 varchar(20) not null default '',
 	course5 varchar(20) not null default '',
+	course6 varchar(20) not null default '',
+	course7 varchar(20) not null default '',
+	course8 varchar(20) not null default '',
+	course9 varchar(20) not null default '',
+	course10 varchar(20) not null default '',
 	grade7 varchar(20) not null default '',
 	grade8 varchar(20) not null default '',
 	grade9 varchar(20) not null default '',
@@ -74,6 +79,13 @@ delete from 表名
 
 // 增加一列
 alter table principalSetTable add pay7 int unsigned not null default '0' after price7hour3YDY;
+
+alter table principalSetTable add course6 varchar(20) not null default '' after course5;
+alter table principalSetTable add course7 varchar(20) not null default '' after course6;
+alter table principalSetTable add course8 varchar(20) not null default '' after course7;
+alter table principalSetTable add course9 varchar(20) not null default '' after course8;
+alter table principalSetTable add course10 varchar(20) not null default '' after course9;
+
 // 修改
 alter table principalSetTable change column pay9 int unsigned not null default '0' after price7hour3YDY;
 

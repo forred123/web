@@ -419,6 +419,21 @@ if (isset($_POST['submitType'])) {
 						科目4</label><label for="course5" name="courseLabel">
 						<input type="radio" name="course" id="course5">
 						科目5</label>
+						<label for="course6" name="courseLabel">
+						<input type="radio" name="course" id="course6">
+						科目6</label>
+						<label for="course7" name="courseLabel">
+						<input type="radio" name="course" id="course7">
+						科目7</label>
+						<label for="course8" name="courseLabel">
+						<input type="radio" name="course" id="course8">
+						科目8</label>
+						<label for="course9" name="courseLabel">
+						<input type="radio" name="course" id="course9">
+						科目9</label>
+						<label for="course10" name="courseLabel">
+						<input type="radio" name="course" id="course10">
+						科目10</label>
 						<input type="hidden" name="courseCopy"/>
 						</td>
 				</tr>

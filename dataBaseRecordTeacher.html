@@ -26,6 +26,11 @@ create table recordTeacherTable(
 	course3 char(4) not null default '-',
 	course4 char(4) not null default '-',
 	course5 char(4) not null default '-',
+	course6 char(4) not null default '-',
+	course7 char(4) not null default '-',
+	course8 char(4) not null default '-',
+	course9 char(4) not null default '-',
+	course10 char(4) not null default '-',
 	grade7 char(4) not null default '-',
 	grade8 char(4) not null default '-',
 	grade9 char(4) not null default '-',
@@ -46,6 +51,16 @@ create table recordTeacherTable(
 	role int not null default 1, #权限，校长是9，校区负责人是8，教师是1，学生是0
 	primary key(uid)
 );
+
+
+// 增加一列
+alter table recordTeacherTable add course6 char(4) not null default '-' after course5;
+alter table recordTeacherTable add course7 char(4) not null default '-' after course6;
+alter table recordTeacherTable add course8 char(4) not null default '-' after course7;
+alter table recordTeacherTable add course9 char(4) not null default '-' after course8;
+alter table recordTeacherTable add course10 char(4) not null default '-' after course9;
+
+update recordTeacherTable set course6="" where uid=1;
 
 insert into recordTeacherTable (name,role) values("admin",9);
 

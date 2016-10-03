@@ -1,8 +1,10 @@
 var info;
 var i = 0;
 var len = 0;
-var schoolZoneLoad = new Array;
-var productLoad = new Array;
+var maxCourseNum = 10;
+var schoolZoneLoad = new Array();
+var productLoad = new Array();
+var courseLoad = new Array();
 
 function getCookie(name){
 	if(document.cookie.length>0){
@@ -109,37 +111,72 @@ function checkHiddenValueGrade() {
 function checkHiddenValueCourse() {
 	if (document.getElementById("course1")) {
 		if (document.getElementById("course1").checked == true) {
-			document.getElementsByName("course1copy")[0].value = "数学";
+			document.getElementsByName("course1copy")[0].value = courseLoad[0];
 		} else {
 			document.getElementsByName("course1copy")[0].value = "";
 		}
 	}
 	if (document.getElementById("course2")) {
 		if (document.getElementById("course2").checked == true) {
-			document.getElementsByName("course2copy")[0].value = "语文";
+			document.getElementsByName("course2copy")[0].value = courseLoad[1];
 		} else {
 			document.getElementsByName("course2copy")[0].value = "";
 		}
 	}
 	if (document.getElementById("course3")) {
 		if (document.getElementById("course3").checked == true) {
-			document.getElementsByName("course3copy")[0].value = "英语";
+			document.getElementsByName("course3copy")[0].value = courseLoad[2];
 		} else {
 			document.getElementsByName("course3copy")[0].value = "";
 		}
 	}
 	if (document.getElementById("course4")) {
 		if (document.getElementById("course4").checked == true) {
-			document.getElementsByName("course4copy")[0].value = "物理";
+			document.getElementsByName("course4copy")[0].value = courseLoad[3];
 		} else {
 			document.getElementsByName("course4copy")[0].value = "";
 		}
 	}
 	if (document.getElementById("course5")) {
 		if (document.getElementById("course5").checked == true) {
-			document.getElementsByName("course5copy")[0].value = "化学";
+			document.getElementsByName("course5copy")[0].value = courseLoad[4];
 		} else {
 			document.getElementsByName("course5copy")[0].value = "";
+		}
+	}
+	if (document.getElementById("course6")) {
+		if (document.getElementById("course6").checked == true) {
+			document.getElementsByName("course6copy")[0].value = courseLoad[5];
+		} else {
+			document.getElementsByName("course6copy")[0].value = "";
+		}
+	}
+	if (document.getElementById("course7")) {
+		if (document.getElementById("course7").checked == true) {
+			document.getElementsByName("course7copy")[0].value = courseLoad[6];
+		} else {
+			document.getElementsByName("course7copy")[0].value = "";
+		}
+	}
+	if (document.getElementById("course8")) {
+		if (document.getElementById("course8").checked == true) {
+			document.getElementsByName("course8copy")[0].value = courseLoad[7];
+		} else {
+			document.getElementsByName("course8copy")[0].value = "";
+		}
+	}
+	if (document.getElementById("course9")) {
+		if (document.getElementById("course9").checked == true) {
+			document.getElementsByName("course9copy")[0].value = courseLoad[8];
+		} else {
+			document.getElementsByName("course9copy")[0].value = "";
+		}
+	}
+	if (document.getElementById("course10")) {
+		if (document.getElementById("course10").checked == true) {
+			document.getElementsByName("course10copy")[0].value = courseLoad[9];
+		} else {
+			document.getElementsByName("course10copy")[0].value = "";
 		}
 	}
 }
@@ -312,6 +349,21 @@ function sqlRecord() {
 					}
 					if (info[0].course5 != "") {
 						document.getElementById("course5").checked = true;
+					}
+					if (info[0].course6 != "") {
+						document.getElementById("course6").checked = true;
+					}
+					if (info[0].course7 != "") {
+						document.getElementById("course7").checked = true;
+					}
+					if (info[0].course8 != "") {
+						document.getElementById("course8").checked = true;
+					}
+					if (info[0].course9 != "") {
+						document.getElementById("course9").checked = true;
+					}
+					if (info[0].course10 != "") {
+						document.getElementById("course10").checked = true;
 					}
 
 					if (info[0].grade7 != "") {
@@ -817,6 +869,59 @@ function loadProduct() {
 
 function loadCourse() {
 	// 根据所选校区自动加载相应的科目
+	if ((info[0].course1 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[0].innerHTML = '<input type="checkbox" name="course[]" id="course1" onclick="checkHiddenValueCourse()">' + courseLoad[0];
+	} else {
+		document.getElementsByName("courseLabel")[0].innerHTML = "";
+	}
+	if ((info[0].course2 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[1].innerHTML = '<input type="checkbox" name="course[]" id="course2" onclick="checkHiddenValueCourse()">' + courseLoad[1];
+	} else {
+		document.getElementsByName("courseLabel")[1].innerHTML = "";
+	}
+	if ((info[0].course3 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[2].innerHTML = '<input type="checkbox" name="course[]" id="course3" onclick="checkHiddenValueCourse()">' + courseLoad[2];
+	} else {
+		document.getElementsByName("courseLabel")[2].innerHTML = "";
+	}
+	if ((info[0].course4 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[3].innerHTML = '<input type="checkbox" name="course[]" id="course4" onclick="checkHiddenValueCourse()">' + courseLoad[3];
+	} else {
+		document.getElementsByName("courseLabel")[3].innerHTML = "";
+	}
+	if ((info[0].course5 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[4].innerHTML = '<input type="checkbox" name="course[]" id="course5" onclick="checkHiddenValueCourse()">' + courseLoad[4];
+	} else {
+		document.getElementsByName("courseLabel")[4].innerHTML = "";
+	}
+	if ((info[0].course6 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[5].innerHTML = '<input type="checkbox" name="course[]" id="course6" onclick="checkHiddenValueCourse()">' + courseLoad[5];
+	} else {
+		document.getElementsByName("courseLabel")[5].innerHTML = "";
+	}
+	if ((info[0].course7 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[6].innerHTML = '<input type="checkbox" name="course[]" id="course7" onclick="checkHiddenValueCourse()">' + courseLoad[6];
+	} else {
+		document.getElementsByName("courseLabel")[6].innerHTML = "";
+	}
+	if ((info[0].course8 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[7].innerHTML = '<input type="checkbox" name="course[]" id="course8" onclick="checkHiddenValueCourse()">' + courseLoad[7];
+	} else {
+		document.getElementsByName("courseLabel")[7].innerHTML = "";
+	}
+	if ((info[0].course9 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[8].innerHTML = '<input type="checkbox" name="course[]" id="course9" onclick="checkHiddenValueCourse()">' + courseLoad[8];
+	} else {
+		document.getElementsByName("courseLabel")[8].innerHTML = "";
+	}
+	if ((info[0].course10 != "") && (document.getElementById("schoolZone1").checked == true)) {
+		document.getElementsByName("courseLabel")[9].innerHTML = '<input type="checkbox" name="course[]" id="course10" onclick="checkHiddenValueCourse()">' + courseLoad[9];
+	} else {
+		document.getElementsByName("courseLabel")[9].innerHTML = "";
+	}
+
+	
+	/*
 	switch (len) {
 	case 1:
 		if ((info[0].course1 !="") && (document.getElementById("schoolZone1").checked == true)) {
@@ -956,7 +1061,7 @@ function loadCourse() {
 	default:
 		break;
 	}
-
+*/
 }
 
 function checkPrinciple(){
@@ -1069,6 +1174,9 @@ function initPage() {
 					
 					// 默认填写当前日期
 					document.getElementsByName("inTime")[0].value = getNowFormatDate();
+					
+					// 载入校长设置中科目名称
+					sqlCourse();
 				}
 
 			} else {
@@ -1080,6 +1188,112 @@ function initPage() {
 	// 3发出http请求
 	var url = "recordTeacher.php";
 	url = url + "?noValue=0";
+	// 很重要，必须有的
+	url = url + "&sid=" + Math.random();
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send(null);
+}
+
+function sqlCourse() {
+	var xmlhttp;
+
+	// 1创建AJAX对象
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	// 2指定回调函数
+	xmlhttp.onreadystatechange = function() {
+		// 4接收响应数据，处理服务器返回的信息
+		// 判断对象状态是否交互完成，如果为4则交互完成
+		if (xmlhttp.readyState == 4) {
+			// 判断对象状态是否交互成功,如果成功则为200
+
+			if (xmlhttp.status == 200) {
+				// 接收数据,得到服务器输出的XML数据
+
+				var ret = xmlhttp.responseText;
+
+				if (ret == "0") {
+					// alert("");
+				} else if (ret == "2") {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+					// alert("检查到该校区名有多条记录，请联系管理员！");
+				} else {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+
+					// var info = eval(ret);
+					info = eval(ret);
+
+					// var len = 0;
+					len = 0;
+					for (var tmp in info) {
+						len++;
+					}
+								
+					// 根据所选校区自动加载相应的科目
+					// 根据所选校区自动加载相应的科目
+					var courseNameIndex = new Array();
+					for(var i=0;i<maxCourseNum;i++){
+						courseNameIndex[i] = 0;
+					}
+						for(var i=0;i<len;i++){
+							if(info[i].course1 != ""){
+								courseNameIndex[0] = i;
+							}
+							if(info[i].course2 != ""){
+								courseNameIndex[1] = i;
+							}	
+							if(info[i].course3 != ""){
+								courseNameIndex[2] = i;
+							}	
+							if(info[i].course4 != ""){
+								courseNameIndex[3] = i;
+							}	
+							if(info[i].course5 != ""){
+								courseNameIndex[4] = i;
+							}
+							if(info[i].course6 != ""){
+								courseNameIndex[5] = i;
+							}
+							if(info[i].course7 != ""){
+								courseNameIndex[6] = i;
+							}	
+							if(info[i].course8 != ""){
+								courseNameIndex[7] = i;
+							}	
+							if(info[i].course9 != ""){
+								courseNameIndex[8] = i;
+							}	
+							if(info[i].course10 != ""){
+								courseNameIndex[9] = i;
+							}		
+						}
+						
+						courseLoad[0] = info[courseNameIndex[0]].course1;
+						courseLoad[1] = info[courseNameIndex[1]].course2;
+						courseLoad[2] = info[courseNameIndex[2]].course3;
+						courseLoad[3] = info[courseNameIndex[3]].course4;
+						courseLoad[4] = info[courseNameIndex[4]].course5;
+						courseLoad[5] = info[courseNameIndex[5]].course6;
+						courseLoad[6] = info[courseNameIndex[6]].course7;
+						courseLoad[7] = info[courseNameIndex[7]].course8;
+						courseLoad[8] = info[courseNameIndex[8]].course9;
+						courseLoad[9] = info[courseNameIndex[9]].course10;
+				}
+
+			} else {
+				alert("错误，请求页面异常！");
+			}
+		}
+
+	};
+	// 3发出http请求
+	var url = "principalSet.php";
+	url = url + '?noValue=""';
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
 	xmlhttp.open("GET", url, true);

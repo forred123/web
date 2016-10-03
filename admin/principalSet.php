@@ -112,22 +112,43 @@ if (isset($_POST['submitType'])) {
 	$course[2] = "";
 	$course[3] = "";
 	$course[4] = "";
+	$course[5] = "";
+	$course[6] = "";
+	$course[7] = "";
+	$course[8] = "";
+	$course[9] = "";
 
 	if (isset($_POST['course1'])) {
-		$course[0] = $_POST['course1'];
+		$course[0] = str_replace(' ', '', $_POST['course1']);
 	}
 	if (isset($_POST['course2'])) {
-		$course[1] = $_POST['course2'];
+		$course[1] = str_replace(' ', '', $_POST['course2']);
 	}
 	if (isset($_POST['course3'])) {
-		$course[2] = $_POST['course3'];
+		$course[2] = str_replace(' ', '', $_POST['course3']);
 	}
 	if (isset($_POST['course4'])) {
-		$course[3] = $_POST['course4'];
+		$course[3] = str_replace(' ', '', $_POST['course4']);
 	}
 	if (isset($_POST['course5'])) {
-		$course[4] = $_POST['course5'];
+		$course[4] = str_replace(' ', '', $_POST['course5']);
 	}
+	if (isset($_POST['course6'])) {
+		$course[5] = str_replace(' ', '', $_POST['course6']);
+	}
+	if (isset($_POST['course7'])) {
+		$course[6] = str_replace(' ', '', $_POST['course7']);
+	}
+	if (isset($_POST['course8'])) {
+		$course[7] = str_replace(' ', '', $_POST['course8']);
+	}
+	if (isset($_POST['course9'])) {
+		$course[8] = str_replace(' ', '', $_POST['course9']);
+	}
+	if (isset($_POST['course10'])) {
+		$course[9] = str_replace(' ', '', $_POST['course10']);
+	}
+	
 
 	//print_r($course);
 	$grade[0] = "";
@@ -203,15 +224,15 @@ if (isset($_POST['submitType'])) {
 
 	if (isset($_POST['submitAdd'])) {
 		$sbmt = $pdo -> prepare("insert into principalSetTable (schoolZone, assistant, 
-	product1, product2,	product3, product4,	product5,course1,course2,course3,course4,course5,grade7,grade8,
+	product1, product2,	product3, product4,	product5,course1,course2,course3,course4,course5,course6,course7,course8,course9,course10,grade7,grade8,
 	grade9,grade10,grade11,grade12,subFeeItem1,subFeeItem2,subFeeItem3,subFeeItem4,subFeeItem5,priceBKgrade7,
 	priceBKgrade8,priceBKgrade9,priceBKgrade10,	priceBKgrade11,priceBKgrade12,	
 	hour1,hour2,hour3,price7hour1YDY,price7hour2YDY,price7hour3YDY,pay7,price8hour1YDY,price8hour2YDY,price8hour3YDY,pay8,
 	price9hour1YDY,price9hour2YDY,price9hour3YDY,pay9,price10hour1YDY,price10hour2YDY,price10hour3YDY,pay10,
 	price11hour1YDY,price11hour2YDY,price11hour3YDY,pay11,price12hour1YDY,price12hour2YDY,price12hour3YDY,pay12,time) 
-	values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+	values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['schoolZone']), str_replace(' ', '', $_POST['assistant']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], $subFeeItem[0], $subFeeItem[1], $subFeeItem[2], $subFeeItem[3], $subFeeItem[4], str_replace(' ', '', $_POST['priceBKgrade7']), str_replace(' ', '', $_POST['priceBKgrade8']), str_replace(' ', '', $_POST['priceBKgrade9']), str_replace(' ', '', $_POST['priceBKgrade10']), str_replace(' ', '', $_POST['priceBKgrade11']), str_replace(' ', '', $_POST['priceBKgrade12']), str_replace(' ', '', $_POST['hour1']), str_replace(' ', '', $_POST['hour2']), str_replace(' ', '', $_POST['hour3']), str_replace(' ', '', $_POST['price7hour1YDY']), str_replace(' ', '', $_POST['price7hour2YDY']), str_replace(' ', '', $_POST['price7hour3YDY']), str_replace(' ', '', $_POST['pay7']), str_replace(' ', '', $_POST['price8hour1YDY']), str_replace(' ', '', $_POST['price8hour2YDY']), str_replace(' ', '', $_POST['price8hour3YDY']), str_replace(' ', '', $_POST['pay8']), str_replace(' ', '', $_POST['price9hour1YDY']), str_replace(' ', '', $_POST['price9hour2YDY']), str_replace(' ', '', $_POST['price9hour3YDY']), str_replace(' ', '', $_POST['pay9']), str_replace(' ', '', $_POST['price10hour1YDY']), str_replace(' ', '', $_POST['price10hour2YDY']), str_replace(' ', '', $_POST['price10hour3YDY']), str_replace(' ', '', $_POST['pay10']), str_replace(' ', '', $_POST['price11hour1YDY']), str_replace(' ', '', $_POST['price11hour2YDY']), str_replace(' ', '', $_POST['price11hour3YDY']), str_replace(' ', '', $_POST['pay11']), str_replace(' ', '', $_POST['price12hour1YDY']), str_replace(' ', '', $_POST['price12hour2YDY']), str_replace(' ', '', $_POST['price12hour3YDY']), str_replace(' ', '', $_POST['pay12']), $time));
+		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['schoolZone']), str_replace(' ', '', $_POST['assistant']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5], $course[6], $course[7], $course[8], $course[9], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], $subFeeItem[0], $subFeeItem[1], $subFeeItem[2], $subFeeItem[3], $subFeeItem[4], str_replace(' ', '', $_POST['priceBKgrade7']), str_replace(' ', '', $_POST['priceBKgrade8']), str_replace(' ', '', $_POST['priceBKgrade9']), str_replace(' ', '', $_POST['priceBKgrade10']), str_replace(' ', '', $_POST['priceBKgrade11']), str_replace(' ', '', $_POST['priceBKgrade12']), str_replace(' ', '', $_POST['hour1']), str_replace(' ', '', $_POST['hour2']), str_replace(' ', '', $_POST['hour3']), str_replace(' ', '', $_POST['price7hour1YDY']), str_replace(' ', '', $_POST['price7hour2YDY']), str_replace(' ', '', $_POST['price7hour3YDY']), str_replace(' ', '', $_POST['pay7']), str_replace(' ', '', $_POST['price8hour1YDY']), str_replace(' ', '', $_POST['price8hour2YDY']), str_replace(' ', '', $_POST['price8hour3YDY']), str_replace(' ', '', $_POST['pay8']), str_replace(' ', '', $_POST['price9hour1YDY']), str_replace(' ', '', $_POST['price9hour2YDY']), str_replace(' ', '', $_POST['price9hour3YDY']), str_replace(' ', '', $_POST['pay9']), str_replace(' ', '', $_POST['price10hour1YDY']), str_replace(' ', '', $_POST['price10hour2YDY']), str_replace(' ', '', $_POST['price10hour3YDY']), str_replace(' ', '', $_POST['pay10']), str_replace(' ', '', $_POST['price11hour1YDY']), str_replace(' ', '', $_POST['price11hour2YDY']), str_replace(' ', '', $_POST['price11hour3YDY']), str_replace(' ', '', $_POST['pay11']), str_replace(' ', '', $_POST['price12hour1YDY']), str_replace(' ', '', $_POST['price12hour2YDY']), str_replace(' ', '', $_POST['price12hour3YDY']), str_replace(' ', '', $_POST['pay12']), $time));
 
 		if ($flag) {
 			echo "<html>";
@@ -233,14 +254,14 @@ if (isset($_POST['submitType'])) {
 
 	if (isset($_POST['submitUpdate'])) {
 		$sbmt = $pdo -> prepare("update principalSetTable set assistant=?, 
-	product1=?, product2=?,	product3=?, product4=?,	product5=?,course1=?,course2=?,course3=?,course4=?,course5=?,grade7=?,grade8=?,
+	product1=?, product2=?,	product3=?, product4=?,	product5=?,course1=?,course2=?,course3=?,course4=?,course5=?,course6=?,course7=?,course8=?,course9=?,course10=?,grade7=?,grade8=?,
 	grade9=?,grade10=?,grade11=?,grade12=?,subFeeItem1=?,subFeeItem2=?,subFeeItem3=?,subFeeItem4=?,subFeeItem5=?,priceBKgrade7=?,
 	priceBKgrade8=?,priceBKgrade9=?,priceBKgrade10=?,	priceBKgrade11=?,priceBKgrade12=?,	
 	hour1=?,hour2=?,hour3=?,price7hour1YDY=?,price7hour2YDY=?,price7hour3YDY=?,pay7=?,price8hour1YDY=?,price8hour2YDY=?,price8hour3YDY=?,pay8=?,
 	price9hour1YDY=?,price9hour2YDY=?,price9hour3YDY=?,pay9=?,price10hour1YDY=?,price10hour2YDY=?,price10hour3YDY=?,pay10=?,
 	price11hour1YDY=?,price11hour2YDY=?,price11hour3YDY=?,pay11=?,price12hour1YDY=?,price12hour2YDY=?,price12hour3YDY=?,pay12=?,time=? where schoolZone=?");
 
-		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['assistant']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], $subFeeItem[0], $subFeeItem[1], $subFeeItem[2], $subFeeItem[3], $subFeeItem[4],  str_replace(' ', '', $_POST['priceBKgrade7']), str_replace(' ', '', $_POST['priceBKgrade8']), str_replace(' ', '', $_POST['priceBKgrade9']), str_replace(' ', '', $_POST['priceBKgrade10']), str_replace(' ', '', $_POST['priceBKgrade11']), str_replace(' ', '', $_POST['priceBKgrade12']), str_replace(' ', '', $_POST['hour1']), str_replace(' ', '', $_POST['hour2']), str_replace(' ', '', $_POST['hour3']), str_replace(' ', '', $_POST['price7hour1YDY']), str_replace(' ', '', $_POST['price7hour2YDY']), str_replace(' ', '', $_POST['price7hour3YDY']), str_replace(' ', '', $_POST['pay7']), str_replace(' ', '', $_POST['price8hour1YDY']), str_replace(' ', '', $_POST['price8hour2YDY']), str_replace(' ', '', $_POST['price8hour3YDY']), str_replace(' ', '', $_POST['pay8']), str_replace(' ', '', $_POST['price9hour1YDY']), str_replace(' ', '', $_POST['price9hour2YDY']), str_replace(' ', '', $_POST['price9hour3YDY']), str_replace(' ', '', $_POST['pay9']), str_replace(' ', '', $_POST['price10hour1YDY']), str_replace(' ', '', $_POST['price10hour2YDY']), str_replace(' ', '', $_POST['price10hour3YDY']), str_replace(' ', '', $_POST['pay10']), str_replace(' ', '', $_POST['price11hour1YDY']), str_replace(' ', '', $_POST['price11hour2YDY']), str_replace(' ', '', $_POST['price11hour3YDY']), str_replace(' ', '', $_POST['pay11']), str_replace(' ', '', $_POST['price12hour1YDY']), str_replace(' ', '', $_POST['price12hour2YDY']), str_replace(' ', '', $_POST['price12hour3YDY']), str_replace(' ', '', $_POST['pay12']), $time, str_replace(' ', '', $_POST['schoolZone'])));
+		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['assistant']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5], $course[6], $course[7], $course[8], $course[9], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], $subFeeItem[0], $subFeeItem[1], $subFeeItem[2], $subFeeItem[3], $subFeeItem[4],  str_replace(' ', '', $_POST['priceBKgrade7']), str_replace(' ', '', $_POST['priceBKgrade8']), str_replace(' ', '', $_POST['priceBKgrade9']), str_replace(' ', '', $_POST['priceBKgrade10']), str_replace(' ', '', $_POST['priceBKgrade11']), str_replace(' ', '', $_POST['priceBKgrade12']), str_replace(' ', '', $_POST['hour1']), str_replace(' ', '', $_POST['hour2']), str_replace(' ', '', $_POST['hour3']), str_replace(' ', '', $_POST['price7hour1YDY']), str_replace(' ', '', $_POST['price7hour2YDY']), str_replace(' ', '', $_POST['price7hour3YDY']), str_replace(' ', '', $_POST['pay7']), str_replace(' ', '', $_POST['price8hour1YDY']), str_replace(' ', '', $_POST['price8hour2YDY']), str_replace(' ', '', $_POST['price8hour3YDY']), str_replace(' ', '', $_POST['pay8']), str_replace(' ', '', $_POST['price9hour1YDY']), str_replace(' ', '', $_POST['price9hour2YDY']), str_replace(' ', '', $_POST['price9hour3YDY']), str_replace(' ', '', $_POST['pay9']), str_replace(' ', '', $_POST['price10hour1YDY']), str_replace(' ', '', $_POST['price10hour2YDY']), str_replace(' ', '', $_POST['price10hour3YDY']), str_replace(' ', '', $_POST['pay10']), str_replace(' ', '', $_POST['price11hour1YDY']), str_replace(' ', '', $_POST['price11hour2YDY']), str_replace(' ', '', $_POST['price11hour3YDY']), str_replace(' ', '', $_POST['pay11']), str_replace(' ', '', $_POST['price12hour1YDY']), str_replace(' ', '', $_POST['price12hour2YDY']), str_replace(' ', '', $_POST['price12hour3YDY']), str_replace(' ', '', $_POST['pay12']), $time, str_replace(' ', '', $_POST['schoolZone'])));
 
 		if ($flag) {
 			echo "修改成功！";
@@ -411,7 +432,9 @@ if (isset($_POST['submitType'])) {
 
 				<tr>
 					<th>科目名称：</th>
-					<td><label for="Math">
+					<td>
+						<!--
+						<label for="Math">
 						<input type="checkbox" name="course1" id="Math" />
 						数学</label><label for="Chinese">
 						<input	type="checkbox" name="course2" id="Chinese" />
@@ -421,7 +444,21 @@ if (isset($_POST['submitType'])) {
 						<input	type="checkbox" name="course4" id="Physics" />
 						物理</label><label for="Chemistry">
 						<input type="checkbox" name="course5" id="Chemistry" />
-						化学</label></td>
+						化学</label>
+						-->
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(1)" /> <input type="text" style="width: 4em" name="course1"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(2)" /> <input type="text" style="width: 4em" name="course2"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(3)" /> <input type="text" style="width: 4em" name="course3"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(4)" /> <input type="text" style="width: 4em" name="course4"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(5)" /> <input type="text" style="width: 4em" name="course5"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(6)" /> <input type="text" style="width: 4em" name="course6"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(7)" /> <input type="text" style="width: 4em" name="course7"  value="" disabled="true" />
+						<br />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(8)" /> <input type="text" style="width: 4em" name="course8"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(9)" /> <input type="text" style="width: 4em" name="course9"  value="" disabled="true" />
+						<input type="checkbox" name="courseLabel" onclick="enableCourse(10)" /> <input type="text" style="width: 4em" name="course10"  value="" disabled="true" />						
+						(提示：新产生的科目名称不可更改)
+					</td>
 				</tr>
 
 				<tr>
@@ -466,6 +503,7 @@ if (isset($_POST['submitType'])) {
 					<input type="checkbox" name="subFeeItemLabel" onclick="enablesubFeeItem(3)"/> <input type="text" style="width: 6em" class="inputText" name="subFeeItem3" size="16" value="" disabled="true"/>
 					<input type="checkbox" name="subFeeItemLabel" onclick="enablesubFeeItem(4)"/> <input type="text" style="width: 6em" class="inputText" name="subFeeItem4" size="16" value="" disabled="true"/>
 					<input type="checkbox" name="subFeeItemLabel" onclick="enablesubFeeItem(5)"/> <input type="text" style="width: 6em" class="inputText" name="subFeeItem5" size="16" value="" disabled="true"/>
+					<br />(提示：新产生的扣费名称不可更改)
 					</td>
 				</tr>
 

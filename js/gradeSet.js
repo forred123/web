@@ -6,6 +6,8 @@ var info;
 var teacherInfo;
 var i = 0;
 var len = 0;
+var maxCourseNum = 10;
+var courseLoad = new Array();
 var productLoad = new Array();
 var greadeSetResultLoad = new Array();
 var flagSubmitType = false;
@@ -66,25 +68,7 @@ function checkHiddenValueGrade(value) {
 }
 
 function checkHiddenValueCourse(value) {
-	switch(value){
-	case 1:
-		document.getElementsByName("courseCopy")[0].value = "数学";
-		break;
-	case 2:
-		document.getElementsByName("courseCopy")[0].value = "语文";
-		break;
-	case 3:
-		document.getElementsByName("courseCopy")[0].value = "英语";
-		break;
-	case 4:
-		document.getElementsByName("courseCopy")[0].value = "物理";
-		break;
-	case 5:
-		document.getElementsByName("courseCopy")[0].value = "化学";
-		break;
-	default:
-		break;
-	}
+	document.getElementsByName("courseCopy")[0].value = courseLoad[value-1];
 }
 
 function checkHiddenValueProduct(value) {
@@ -136,15 +120,25 @@ function updateResult() {
 			var course = temp[i].value;
 	}
 	if (course == 1) {
-		result += "-" + "数学";
+		result += "-" + courseLoad[0];
 	} else if (course == 2) {
-		result += "-" + "语文";
+		result += "-" + courseLoad[1];
 	} else if (course == 3) {
-		result += "-" + "英语";
+		result += "-" + courseLoad[2];
 	} else if (course == 4) {
-		result += "-" + "物理";
+		result += "-" + courseLoad[3];
 	} else if (course == 5) {
-		result += "-" + "化学";
+		result += "-" + courseLoad[4];
+	} else if (course == 6) {
+		result += "-" + courseLoad[5];
+	} else if (course == 7) {
+		result += "-" + courseLoad[6];
+	} else if (course == 8) {
+		result += "-" + courseLoad[7];
+	} else if (course == 9) {
+		result += "-" + courseLoad[8];
+	} else if (course == 10) {
+		result += "-" + courseLoad[9];
 	} else {
 		result += "-" + "?";
 	}
@@ -214,29 +208,54 @@ function loadCourse(schoolZone) {
 	}
 
 	if (info[i].course1 != "") {
-		document.getElementsByName("courseLabel")[0].innerHTML = '<input type="radio" name="course" id="course1" value="1">' + '数学';
+		document.getElementsByName("courseLabel")[0].innerHTML = '<input type="radio" name="course" id="course1" value="1">' + courseLoad[0];
 	} else {
 		document.getElementsByName("courseLabel")[0].innerHTML = "";
 	}
 	if (info[i].course2 != "") {
-		document.getElementsByName("courseLabel")[1].innerHTML = '<input type="radio" name="course" id="course2" value="2">' + '语文';
+		document.getElementsByName("courseLabel")[1].innerHTML = '<input type="radio" name="course" id="course2" value="2">' + courseLoad[1];
 	} else {
 		document.getElementsByName("courseLabel")[1].innerHTML = "";
 	}
 	if (info[i].course3 != "") {
-		document.getElementsByName("courseLabel")[2].innerHTML = '<input type="radio" name="course" id="course3"  value="3">' + '英语';
+		document.getElementsByName("courseLabel")[2].innerHTML = '<input type="radio" name="course" id="course3"  value="3">' + courseLoad[2];
 	} else {
 		document.getElementsByName("courseLabel")[2].innerHTML = "";
 	}
 	if (info[i].course4 != "") {
-		document.getElementsByName("courseLabel")[3].innerHTML = '<input type="radio" name="course" id="course4"  value="4">' + '物理';
+		document.getElementsByName("courseLabel")[3].innerHTML = '<input type="radio" name="course" id="course4"  value="4">' + courseLoad[3];
 	} else {
 		document.getElementsByName("courseLabel")[3].innerHTML = "";
 	}
 	if (info[i].course5 != "") {
-		document.getElementsByName("courseLabel")[4].innerHTML = '<input type="radio" name="course" id="course5"  value="5">' + '化学';
+		document.getElementsByName("courseLabel")[4].innerHTML = '<input type="radio" name="course" id="course5"  value="5">' + courseLoad[4];
 	} else {
 		document.getElementsByName("courseLabel")[4].innerHTML = "";
+	}
+	if (info[i].course6 != "") {
+		document.getElementsByName("courseLabel")[5].innerHTML = '<input type="radio" name="course" id="course6"  value="5">' + courseLoad[5];
+	} else {
+		document.getElementsByName("courseLabel")[5].innerHTML = "";
+	}
+	if (info[i].course7 != "") {
+		document.getElementsByName("courseLabel")[6].innerHTML = '<input type="radio" name="course" id="course7"  value="5">' + courseLoad[6];
+	} else {
+		document.getElementsByName("courseLabel")[6].innerHTML = "";
+	}
+	if (info[i].course8 != "") {
+		document.getElementsByName("courseLabel")[7].innerHTML = '<input type="radio" name="course" id="course8"  value="5">' + courseLoad[7];
+	} else {
+		document.getElementsByName("courseLabel")[7].innerHTML = "";
+	}
+	if (info[i].course9 != "") {
+		document.getElementsByName("courseLabel")[8].innerHTML = '<input type="radio" name="course" id="course9"  value="5">' + courseLoad[8];
+	} else {
+		document.getElementsByName("courseLabel")[8].innerHTML = "";
+	}
+	if (info[i].course10 != "") {
+		document.getElementsByName("courseLabel")[9].innerHTML = '<input type="radio" name="course" id="course10"  value="5">' + courseLoad[9];
+	} else {
+		document.getElementsByName("courseLabel")[9].innerHTML = "";
 	}
 }
 
@@ -422,26 +441,41 @@ function sqlRecord() {
 					value = info[0].course;
 					
 					str = info[0].course;
-					if(str =="数学"){
+					if(str == courseLoad[0]){
 						value = 1;
 					}
-					if(str =="语文"){
+					if(str == courseLoad[1]){
 						value = 2;
 					}
-					if(str =="英语"){
+					if(str == courseLoad[2]){
 						value = 3;
 					}
-					if(str =="物理"){
+					if(str == courseLoad[3]){
 						value = 4;
 					}
-					if(str =="化学"){
+					if(str == courseLoad[4]){
 						value = 5;
+					}
+					if(str == courseLoad[5]){
+						value = 6;
+					}
+					if(str == courseLoad[6]){
+						value = 7;
+					}
+					if(str == courseLoad[7]){
+						value = 8;
+					}
+					if(str == courseLoad[8]){
+						value = 9;
+					}
+					if(str == courseLoad[9]){
+						value = 10;
 					}
 					document.getElementById("course" + value).checked = true;
 					checkHiddenValueCourse(value);
 					value = info[0].product;
 					var j =0;
-					for ( j = 1; j < 6; j++) {						
+					for ( j = 1; j <= maxCourseNum; j++) {						
 						if (productLoad[j - 1] == value) {
 							document.getElementById("product" + j.toString()).checked = true;
 							break;
@@ -567,20 +601,35 @@ function recordWithSameName(flag) {
 	value = resultsWithSomeRecord[resultsIndex].course;
 	
 	str = resultsWithSomeRecord[resultsIndex].course;
-	if(str =="数学"){
+	if(str == courseLoad[0]){
 		value = 1;
 	}
-	if(str =="语文"){
+	if(str == courseLoad[1]){
 		value = 2;
 	}
-	if(str =="英语"){
+	if(str == courseLoad[2]){
 		value = 3;
 	}
-	if(str =="物理"){
+	if(str == courseLoad[3]){
 		value = 4;
 	}
-	if(str =="化学"){
+	if(str == courseLoad[4]){
 		value = 5;
+	}
+	if(str == courseLoad[5]){
+		value = 6;
+	}
+	if(str == courseLoad[6]){
+		value = 7;
+	}
+	if(str == courseLoad[7]){
+		value = 8;
+	}
+	if(str == courseLoad[8]){
+		value = 9;
+	}
+	if(str == courseLoad[9]){
+		value = 10;
 	}
 
 	document.getElementById("course" + value).checked = true;
@@ -743,29 +792,54 @@ function loadTeacherProperty() {
 	
 		// 教师科目属性
 		if ((teacherInfo[i].course1 != "") && (document.getElementById("course1"))) {
-			document.getElementsByName("courseLabel")[0].innerHTML = '<input type="radio" name="course" id="course1" value="1" onclick="checkHiddenValueCourse(1)">' + '数学';
+			document.getElementsByName("courseLabel")[0].innerHTML = '<input type="radio" name="course" id="course1" value="1" onclick="checkHiddenValueCourse(1)">' + courseLoad[0];
 		} else {
 			document.getElementsByName("courseLabel")[0].innerHTML = "";
 		}
 		if ((teacherInfo[i].course2 != "") && (document.getElementById("course2"))) {
-			document.getElementsByName("courseLabel")[1].innerHTML = '<input type="radio" name="course" id="course2" value="2" onclick="checkHiddenValueCourse(2)">' + '语文';
+			document.getElementsByName("courseLabel")[1].innerHTML = '<input type="radio" name="course" id="course2" value="2" onclick="checkHiddenValueCourse(2)">' + courseLoad[1];
 		} else {
 			document.getElementsByName("courseLabel")[1].innerHTML = "";
 		}
 		if ((teacherInfo[i].course3 != "") && (document.getElementById("course3"))) {
-			document.getElementsByName("courseLabel")[2].innerHTML = '<input type="radio" name="course" id="course3"  value="3" onclick="checkHiddenValueCourse(3)">' + '英语';
+			document.getElementsByName("courseLabel")[2].innerHTML = '<input type="radio" name="course" id="course3"  value="3" onclick="checkHiddenValueCourse(3)">' + courseLoad[2];
 		} else {
 			document.getElementsByName("courseLabel")[2].innerHTML = "";
 		}
 		if ((teacherInfo[i].course4 != "") && (document.getElementById("course4"))) {
-			document.getElementsByName("courseLabel")[3].innerHTML = '<input type="radio" name="course" id="course4"  value="4" onclick="checkHiddenValueCourse(4)">' + '物理';
+			document.getElementsByName("courseLabel")[3].innerHTML = '<input type="radio" name="course" id="course4"  value="4" onclick="checkHiddenValueCourse(4)">' + courseLoad[3];
 		} else {
 			document.getElementsByName("courseLabel")[3].innerHTML = "";
 		}
 		if ((teacherInfo[i].course5 != "") && (document.getElementById("course5"))) {
-			document.getElementsByName("courseLabel")[4].innerHTML = '<input type="radio" name="course" id="course5"  value="5" onclick="checkHiddenValueCourse(5)">' + '化学';
+			document.getElementsByName("courseLabel")[4].innerHTML = '<input type="radio" name="course" id="course5"  value="5" onclick="checkHiddenValueCourse(5)">' + courseLoad[4];
 		} else {
 			document.getElementsByName("courseLabel")[4].innerHTML = "";
+		}
+		if ((teacherInfo[i].course6 != "") && (document.getElementById("course6"))) {
+			document.getElementsByName("courseLabel")[5].innerHTML = '<input type="radio" name="course" id="course6"  value="6" onclick="checkHiddenValueCourse(6)">' + courseLoad[5];
+		} else {
+			document.getElementsByName("courseLabel")[5].innerHTML = "";
+		}
+		if ((teacherInfo[i].course7 != "") && (document.getElementById("course7"))) {
+			document.getElementsByName("courseLabel")[6].innerHTML = '<input type="radio" name="course" id="course7"  value="7" onclick="checkHiddenValueCourse(7)">' + courseLoad[6];
+		} else {
+			document.getElementsByName("courseLabel")[6].innerHTML = "";
+		}
+		if ((teacherInfo[i].course8 != "") && (document.getElementById("course8"))) {
+			document.getElementsByName("courseLabel")[7].innerHTML = '<input type="radio" name="course" id="course8"  value="8" onclick="checkHiddenValueCourse(8)">' + courseLoad[7];
+		} else {
+			document.getElementsByName("courseLabel")[7].innerHTML = "";
+		}
+		if ((teacherInfo[i].course9 != "") && (document.getElementById("course9"))) {
+			document.getElementsByName("courseLabel")[8].innerHTML = '<input type="radio" name="course" id="course9"  value="9" onclick="checkHiddenValueCourse(9)">' + courseLoad[8];
+		} else {
+			document.getElementsByName("courseLabel")[8].innerHTML = "";
+		}
+		if ((teacherInfo[i].course10 != "") && (document.getElementById("course10"))) {
+			document.getElementsByName("courseLabel")[9].innerHTML = '<input type="radio" name="course" id="course10"  value="10" onclick="checkHiddenValueCourse(10)">' + courseLoad[9];
+		} else {
+			document.getElementsByName("courseLabel")[9].innerHTML = "";
 		}
 	
 		// 更新的隐藏域中的内容为教师姓名和value值
@@ -817,6 +891,9 @@ function initPage() {
 					// 载入所有设立的班级名称，为提示用户不能输入已经存在的班级名称使用
 					loadClassName();
 					
+					// 载入校长设置中科目名称
+					sqlCourse();
+					
 					// 校区负责人只负责自己校区的事
 					if (GetCookie('role') == '8') {
 						// 先清除原来的
@@ -844,8 +921,8 @@ function initPage() {
 						
 						// 默认第一个,可能有多个
 						document.getElementsByName("schoolZone")[0].value = 1;
-						
-						loadPrincipalSetAndTeacher(1);
+																		
+						loadPrincipalSetAndTeacher(1);					
 					}
 					
 				}
@@ -908,6 +985,112 @@ function loadClassName() {
 	// 3发出http请求
 	var url = "gradeSet.php";
 	url = url + "?loadClassName=1";
+	// 很重要，必须有的
+	url = url + "&sid=" + Math.random();
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send(null);
+}
+
+function sqlCourse() {
+	var xmlhttp;
+
+	// 1创建AJAX对象
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	// 2指定回调函数
+	xmlhttp.onreadystatechange = function() {
+		// 4接收响应数据，处理服务器返回的信息
+		// 判断对象状态是否交互完成，如果为4则交互完成
+		if (xmlhttp.readyState == 4) {
+			// 判断对象状态是否交互成功,如果成功则为200
+
+			if (xmlhttp.status == 200) {
+				// 接收数据,得到服务器输出的XML数据
+
+				var ret = xmlhttp.responseText;
+
+				if (ret == "0") {
+					// alert("");
+				} else if (ret == "2") {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+					// alert("检查到该校区名有多条记录，请联系管理员！");
+				} else {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+
+					// var info = eval(ret);
+					info = eval(ret);
+
+					// var len = 0;
+					len = 0;
+					for (var tmp in info) {
+						len++;
+					}
+								
+					// 根据所选校区自动加载相应的科目
+					// 根据所选校区自动加载相应的科目
+					var courseNameIndex = new Array();
+					for(var i=0;i<maxCourseNum;i++){
+						courseNameIndex[i] = 0;
+					}
+						for(var i=0;i<len;i++){
+							if(info[i].course1 != ""){
+								courseNameIndex[0] = i;
+							}
+							if(info[i].course2 != ""){
+								courseNameIndex[1] = i;
+							}	
+							if(info[i].course3 != ""){
+								courseNameIndex[2] = i;
+							}	
+							if(info[i].course4 != ""){
+								courseNameIndex[3] = i;
+							}	
+							if(info[i].course5 != ""){
+								courseNameIndex[4] = i;
+							}
+							if(info[i].course6 != ""){
+								courseNameIndex[5] = i;
+							}
+							if(info[i].course7 != ""){
+								courseNameIndex[6] = i;
+							}	
+							if(info[i].course8 != ""){
+								courseNameIndex[7] = i;
+							}	
+							if(info[i].course9 != ""){
+								courseNameIndex[8] = i;
+							}	
+							if(info[i].course10 != ""){
+								courseNameIndex[9] = i;
+							}		
+						}
+						
+						courseLoad[0] = info[courseNameIndex[0]].course1;
+						courseLoad[1] = info[courseNameIndex[1]].course2;
+						courseLoad[2] = info[courseNameIndex[2]].course3;
+						courseLoad[3] = info[courseNameIndex[3]].course4;
+						courseLoad[4] = info[courseNameIndex[4]].course5;
+						courseLoad[5] = info[courseNameIndex[5]].course6;
+						courseLoad[6] = info[courseNameIndex[6]].course7;
+						courseLoad[7] = info[courseNameIndex[7]].course8;
+						courseLoad[8] = info[courseNameIndex[8]].course9;
+						courseLoad[9] = info[courseNameIndex[9]].course10;
+				}
+
+			} else {
+				alert("错误，请求页面异常！");
+			}
+		}
+
+	};
+	// 3发出http请求
+	var url = "principalSet.php";
+	url = url + '?noValue=""';
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
 	xmlhttp.open("GET", url, true);
