@@ -7,7 +7,7 @@
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>上课考勤</title>
 	</head>
 	<body>
@@ -69,11 +69,11 @@
 					} elseif ($_COOKIE['role'] > 0) {
 						if ($_POST['sqlType'] == 1) {
 							$sbmt = $pdo -> prepare("select * from classRecord where uid = ?");
-							$sbmt -> execute(array(str_replace(' ','',$_POST['sqlCondition'])));
+							$sbmt -> execute(array(str_replace(' ', '', $_POST['sqlCondition'])));
 						}
 						if ($_POST['sqlType'] == 2) {
 							$sbmt = $pdo -> prepare("select * from classRecord where name = ?");
-							$sbmt -> execute(array(str_replace(' ','',$_POST['sqlCondition'])));
+							$sbmt -> execute(array(str_replace(' ', '', $_POST['sqlCondition'])));
 						}
 					}
 
@@ -101,13 +101,13 @@
 							echo '<td>' . '课时长' . '</td>';
 							echo '<td>' . $row['timePeriod'] . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '考勤时间' . '</td>';
-							$time = date("Y年m月d日 H:i:s",$row['time']);
+							$time = date("Y年m月d日 H:i:s", $row['time']);
 							echo '<td>' . $time . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '科目' . '</td>';
 							echo '<td>' . $row['course'] . '</td>';
@@ -117,12 +117,12 @@
 							echo '<td>' . '教师姓名' . '</td>';
 							echo '<td>' . $row['teacherName'] . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '考勤情况' . '</td>';
 							echo '<td>' . $row['attendence'] . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '缺勤原因' . '</td>';
 							echo '<td>' . $row['reason'] . '</td>';

@@ -1,7 +1,7 @@
 <?php
 header("Content-Type:text/html;charset=utf-8");
 if (isset($_POST['backToIndex'])) {
-	
+
 }
 ?>
 
@@ -17,9 +17,10 @@ if (isset($_POST['backToIndex'])) {
 					<td>您好！</td>
 				</tr>
 				<tr>
-					<td align="center"><?php echo $_COOKIE['userName']?>&nbsp;已登录</td>
+					<td align="center"><?php echo $_COOKIE['userName']?>&
+					nbsp;已登录</td>
 				</tr>
-				
+
 			</table>
 		</form>
 	</body>

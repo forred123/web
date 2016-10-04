@@ -57,7 +57,7 @@ function htCheckRole(obj) {
 			alert('只有校长才有进入"校长设置"页面的权限！');
 			return false;
 		}
-		if(GetCookie('role') == '9'){
+		if (GetCookie('role') == '9') {
 			return true;
 		}
 	}

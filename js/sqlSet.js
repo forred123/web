@@ -21,17 +21,17 @@ function initPage() {
 				// 接收数据,得到服务器输出的XML数据
 
 				var ret = xmlhttp.responseText;
-				
+
 				if (ret == "0") {
 					alert("不存在校区信息，请在后台管理中设置校长设置！");
 				} else {
 					info = eval(ret);
-						
+
 					appendRowHeader(sqlSetTable);
-					
+
 					var i = 0;
 					for (var tmp in info) {
-						appendRow(info[i],i);
+						appendRow(info[i], i);
 						i++;
 					}
 				}
@@ -52,7 +52,7 @@ function initPage() {
 }
 
 // 插入班课查询结果表头
-function appendRowHeader(TableID){
+function appendRowHeader(TableID) {
 	// 添加一行
 	var newTr = TableID.insertRow(-1);
 	// 添加两列
@@ -116,65 +116,65 @@ function appendRowHeader(TableID){
 	var newTd57 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';
-	newTd22.align='center';
-	newTd23.align='center';
-	newTd24.align='center';
-	newTd25.align='center';
-	newTd26.align='center';
-	newTd27.align='center';
-	newTd28.align='center';
-	newTd29.align='center';
-	newTd30.align='center';
-	newTd31.align='center';
-	newTd32.align='center';
-	newTd33.align='center';
-	newTd34.align='center';
-	newTd35.align='center';
-	newTd36.align='center';
-	newTd37.align='center';
-	newTd38.align='center';
-	newTd39.align='center';
-	newTd40.align='center';
-	newTd41.align='center';
-	newTd42.align='center';
-	newTd43.align='center';
-	newTd44.align='center';
-	newTd45.align='center';
-	newTd46.align='center';
-	newTd47.align='center';
-	newTd48.align='center';
-	newTd49.align='center';
-	newTd50.align='center';
-	newTd51.align='center';
-	newTd52.align='center';
-	newTd53.align='center';
-	newTd54.align='center';
-	newTd55.align='center';
-	newTd56.align='center';
-	newTd57.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+	newTd37.align = 'center';
+	newTd38.align = 'center';
+	newTd39.align = 'center';
+	newTd40.align = 'center';
+	newTd41.align = 'center';
+	newTd42.align = 'center';
+	newTd43.align = 'center';
+	newTd44.align = 'center';
+	newTd45.align = 'center';
+	newTd46.align = 'center';
+	newTd47.align = 'center';
+	newTd48.align = 'center';
+	newTd49.align = 'center';
+	newTd50.align = 'center';
+	newTd51.align = 'center';
+	newTd52.align = 'center';
+	newTd53.align = 'center';
+	newTd54.align = 'center';
+	newTd55.align = 'center';
+	newTd56.align = 'center';
+	newTd57.align = 'center';
+
 	newTd0.innerHTML = "序号";
 	newTd1.innerHTML = "ID";
 	newTd2.innerHTML = "校区名";
@@ -211,7 +211,7 @@ function appendRowHeader(TableID){
 	newTd33.innerHTML = "初一1";
 	newTd34.innerHTML = "初一2";
 	newTd35.innerHTML = "初一3";
-	newTd36.innerHTML = "初一单小时工资";	
+	newTd36.innerHTML = "初一单小时工资";
 	newTd37.innerHTML = "初二1";
 	newTd38.innerHTML = "初二2";
 	newTd39.innerHTML = "初二3";
@@ -236,10 +236,10 @@ function appendRowHeader(TableID){
 }
 
 // 插入班课表格相关函数
-function appendRow(obj,index){
+function appendRow(obj, index) {
 	// 序号从1开始
 	index = index + 1;
-	
+
 	var TableID = sqlSetTable;
 
 	// 添加一行
@@ -305,179 +305,179 @@ function appendRow(obj,index){
 	var newTd57 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';
-	newTd22.align='center';
-	newTd23.align='center';
-	newTd24.align='center';
-	newTd25.align='center';
-	newTd26.align='center';
-	newTd27.align='center';
-	newTd28.align='center';
-	newTd29.align='center';
-	newTd30.align='center';
-	newTd31.align='center';
-	newTd32.align='center';
-	newTd33.align='center';
-	newTd34.align='center';
-	newTd35.align='center';
-	newTd36.align='center';
-	newTd37.align='center';
-	newTd38.align='center';
-	newTd39.align='center';
-	newTd40.align='center';
-	newTd41.align='center';
-	newTd42.align='center';
-	newTd43.align='center';
-	newTd44.align='center';
-	newTd45.align='center';
-	newTd46.align='center';
-	newTd47.align='center';
-	newTd48.align='center';
-	newTd49.align='center';
-	newTd50.align='center';
-	newTd51.align='center';
-	newTd52.align='center';
-	newTd53.align='center';
-	newTd54.align='center';
-	newTd55.align='center';
-	newTd56.align='center';
-	newTd57.align='center';
-		
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+	newTd37.align = 'center';
+	newTd38.align = 'center';
+	newTd39.align = 'center';
+	newTd40.align = 'center';
+	newTd41.align = 'center';
+	newTd42.align = 'center';
+	newTd43.align = 'center';
+	newTd44.align = 'center';
+	newTd45.align = 'center';
+	newTd46.align = 'center';
+	newTd47.align = 'center';
+	newTd48.align = 'center';
+	newTd49.align = 'center';
+	newTd50.align = 'center';
+	newTd51.align = 'center';
+	newTd52.align = 'center';
+	newTd53.align = 'center';
+	newTd54.align = 'center';
+	newTd55.align = 'center';
+	newTd56.align = 'center';
+	newTd57.align = 'center';
+
 	newTd0.innerHTML = index;
 	newTd1.innerHTML = obj.id;
 	newTd2.innerHTML = obj.schoolZone;
 	newTd3.innerHTML = obj.assistant;
-	if(obj.product1 != ""){
+	if (obj.product1 != "") {
 		newTd4.innerHTML = obj.product1;
-	}else{
+	} else {
 		newTd4.innerHTML = "/";
 	}
-	if(obj.product2 != ""){
+	if (obj.product2 != "") {
 		newTd5.innerHTML = obj.product2;
-	}else{
+	} else {
 		newTd5.innerHTML = "/";
-	}	
+	}
 
-	if(obj.product3 != ""){
+	if (obj.product3 != "") {
 		newTd6.innerHTML = obj.product3;
-	}else{
+	} else {
 		newTd6.innerHTML = "/";
-	}	
+	}
 
-	if(obj.product4 != ""){
+	if (obj.product4 != "") {
 		newTd7.innerHTML = obj.product4;
-	}else{
+	} else {
 		newTd7.innerHTML = "/";
-	}	
+	}
 
-	if(obj.product5 != ""){
+	if (obj.product5 != "") {
 		newTd8.innerHTML = obj.product5;
-	}else{
+	} else {
 		newTd8.innerHTML = "/";
-	}	
+	}
 
-	if(obj.course1 == "on"){
+	if (obj.course1 == "on") {
 		newTd9.innerHTML = "数学";
-	}else{
+	} else {
 		newTd9.innerHTML = "/";
-	}	
-	if(obj.course2 == "on"){
+	}
+	if (obj.course2 == "on") {
 		newTd10.innerHTML = "语文";
-	}else{
+	} else {
 		newTd10.innerHTML = "/";
-	}	
-	if(obj.course3 == "on"){
+	}
+	if (obj.course3 == "on") {
 		newTd11.innerHTML = "英语";
-	}else{
+	} else {
 		newTd11.innerHTML = "/";
-	}		
-	if(obj.course4 == "on"){
+	}
+	if (obj.course4 == "on") {
 		newTd12.innerHTML = "物理";
-	}else{
+	} else {
 		newTd12.innerHTML = "/";
-	}	
-	if(obj.course5 == "on"){
+	}
+	if (obj.course5 == "on") {
 		newTd13.innerHTML = "化学";
-	}else{
+	} else {
 		newTd13.innerHTML = "/";
 	}
-		
-	if(obj.grade7 == "on"){
+
+	if (obj.grade7 == "on") {
 		newTd14.innerHTML = "初一";
-	}else{
+	} else {
 		newTd14.innerHTML = "/";
-	}	
-	if(obj.grade8 == "on"){
+	}
+	if (obj.grade8 == "on") {
 		newTd15.innerHTML = "初二";
-	}else{
+	} else {
 		newTd15.innerHTML = "/";
-	}	
-	if(obj.grade9 == "on"){
+	}
+	if (obj.grade9 == "on") {
 		newTd16.innerHTML = "初三";
-	}else{
+	} else {
 		newTd16.innerHTML = "/";
-	}	
-	if(obj.grade10 == "on"){
+	}
+	if (obj.grade10 == "on") {
 		newTd17.innerHTML = "高一";
-	}else{
+	} else {
 		newTd17.innerHTML = "/";
-	}	
-	if(obj.grade11 == "on"){
+	}
+	if (obj.grade11 == "on") {
 		newTd18.innerHTML = "高二";
-	}else{
+	} else {
 		newTd18.innerHTML = "/";
-	}	
-	if(obj.grade12 == "on"){
+	}
+	if (obj.grade12 == "on") {
 		newTd19.innerHTML = "高三";
-	}else{
+	} else {
 		newTd19.innerHTML = "/";
-	}	
-	if(obj.subFeeItem1 != ""){
+	}
+	if (obj.subFeeItem1 != "") {
 		newTd20.innerHTML = obj.subFeeItem1;
-	}else{
+	} else {
 		newTd20.innerHTML = "/";
 	}
-	if(obj.subFeeItem2 != ""){
+	if (obj.subFeeItem2 != "") {
 		newTd21.innerHTML = obj.subFeeItem2;
-	}else{
+	} else {
 		newTd21.innerHTML = "/";
 	}
-	if(obj.subFeeItem3 != ""){
+	if (obj.subFeeItem3 != "") {
 		newTd22.innerHTML = obj.subFeeItem3;
-	}else{
+	} else {
 		newTd22.innerHTML = "/";
 	}
-	if(obj.subFeeItem4 != ""){
+	if (obj.subFeeItem4 != "") {
 		newTd23.innerHTML = obj.subFeeItem4;
-	}else{
+	} else {
 		newTd23.innerHTML = "/";
 	}
-	if(obj.subFeeItem5 != ""){
+	if (obj.subFeeItem5 != "") {
 		newTd24.innerHTML = obj.subFeeItem5;
-	}else{
+	} else {
 		newTd24.innerHTML = "/";
-	}	
+	}
 	newTd25.innerHTML = obj.priceBKgrade7;
 	newTd26.innerHTML = obj.priceBKgrade8;
 	newTd27.innerHTML = obj.priceBKgrade9;
@@ -489,7 +489,7 @@ function appendRow(obj,index){
 	newTd33.innerHTML = obj.price7hour1YDY;
 	newTd34.innerHTML = obj.price7hour2YDY;
 	newTd35.innerHTML = obj.price7hour3YDY;
-	newTd36.innerHTML = obj.pay7;	
+	newTd36.innerHTML = obj.pay7;
 	newTd37.innerHTML = obj.price8hour1YDY;
 	newTd38.innerHTML = obj.price8hour2YDY;
 	newTd39.innerHTML = obj.price8hour3YDY;
@@ -510,16 +510,16 @@ function appendRow(obj,index){
 	newTd54.innerHTML = obj.price12hour2YDY;
 	newTd55.innerHTML = obj.price12hour3YDY;
 	newTd56.innerHTML = obj.pay12;
-	newTd57.innerHTML = dateJS("Y-m-d",obj.time);
-	
+	newTd57.innerHTML = dateJS("Y-m-d", obj.time);
+
 	// 添加表格样式
-	$("#sqlSetTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlSetTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlSetTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlSetTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlSetTable tr:odd").addClass("rowBgColorOdd");
 	$("#sqlSetTable tr:even").addClass("rowBgColorEven");
@@ -527,11 +527,11 @@ function appendRow(obj,index){
 
 // 窗口表格删除一行
 function removeRow(TableID) {
-	var tabObj = document.getElementById(TableID);	
+	var tabObj = document.getElementById(TableID);
 	tableRowCount = document.getElementById(TableID).rows.length;
-		for(var j=0;j<tableRowCount;j++){
-			// 从表格首行开始删除，所以使用0，如果要保留首行则使用1
-				tabObj.deleteRow(0);
-		}
+	for (var j = 0; j < tableRowCount; j++) {
+		// 从表格首行开始删除，所以使用0，如果要保留首行则使用1
+		tabObj.deleteRow(0);
+	}
 	tableRowCount = 0;
 }

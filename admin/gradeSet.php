@@ -82,8 +82,8 @@ if (isset($_GET['schoolZoneSQL'])) {
 	$pdo -> query('set names utf8');
 
 	$sbmt = $pdo -> prepare("select * from recordTeacherTable where schoolZone1=? or schoolZone2=? or schoolZone3=? or schoolZone4=? or schoolZone5=?");
-	$sbmt -> execute(array($_GET['schoolZoneSQL'],$_GET['schoolZoneSQL'],$_GET['schoolZoneSQL'],$_GET['schoolZoneSQL'],$_GET['schoolZoneSQL']));
-	
+	$sbmt -> execute(array($_GET['schoolZoneSQL'], $_GET['schoolZoneSQL'], $_GET['schoolZoneSQL'], $_GET['schoolZoneSQL'], $_GET['schoolZoneSQL']));
+
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
 		$allRows = $sbmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -126,14 +126,14 @@ if (isset($_GET['schoolZoneSQLRecord'])) {
 
 		// 查询内容到此为止，否则返回的是整个html
 		$data = json_encode($allRows);
-		
+
 		echo $data;
-	} 
-	/*else if ($sbmt -> rowCount() > 1) {
-		// 有多个记录
-		$result = "2";
-		echo $result;
-	} */
+	}
+	/* else if ($sbmt -> rowCount() > 1) {
+	 // 有多个记录
+	 $result = "2";
+	 echo $result;
+	 } */
 	else {
 		$result = "0";
 		echo $result;
@@ -152,16 +152,16 @@ if (isset($_POST['submitType'])) {
 	}
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
-	
+
 	date_default_timezone_set('PRC');
 	$startTime = strtotime($_POST['startTime']);
 	$endTime = strtotime($_POST['endTime']);
-	
-	if (isset($_POST['submitAdd'])) {		
+
+	if (isset($_POST['submitAdd'])) {
 		$sbmt = $pdo -> prepare("insert into gradeSetTable (schoolZone,startTime,endTime,teacher,grade,course,product,class,greadeSetResult) values(?,?,?,?,?,?,?,?,?)");
-		
+
 		$flagSubOK = $sbmt -> execute(array($_POST['schoolZoneCopy'], $startTime, $endTime, $_POST['teacherCopy'], $_POST['gradeCopy'], $_POST['courseCopy'], $_POST['productCopy'], str_replace(' ', '', $_POST['className']), str_replace(' ', '', $_POST['greadeSetResult'])));
-		
+
 		if ($flagSubOK) {
 			//echo "添加成功！";
 			echo "<html>";
@@ -169,11 +169,11 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=gradeSet.php>';
 			echo "</head>";
 			echo "<body>";
-			echo "添加成功"."</br></br>";
+			echo "添加成功" . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="gradeSet.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return TRUE;
 		} else {
 			//echo "添加失败！";
@@ -182,18 +182,18 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=gradeSet.php>';
 			echo "</head>";
 			echo "<body>";
-			echo "添加成功"."</br></br>";
+			echo "添加成功" . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="gradeSet.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return FALSE;
 		}
-	}	
-	
+	}
+
 	if (isset($_POST['submitUpdate'])) {
 		$sbmt = $pdo -> prepare("update gradeSetTable set schoolZone=?,startTime=?,endTime=?,teacher=?,grade=?,course=?,product=?,class=? where greadeSetResult = ?");
-		$flagSubOK = $sbmt -> execute(array($_POST['schoolZoneCopy'], $startTime, $endTime, $_POST['teacherCopy'], $_POST['gradeCopy'], $_POST['courseCopy'], $_POST['productCopy'], str_replace(' ', '', $_POST['className']),str_replace(' ', '', $_POST['greadeSetResult'])));
+		$flagSubOK = $sbmt -> execute(array($_POST['schoolZoneCopy'], $startTime, $endTime, $_POST['teacherCopy'], $_POST['gradeCopy'], $_POST['courseCopy'], $_POST['productCopy'], str_replace(' ', '', $_POST['className']), str_replace(' ', '', $_POST['greadeSetResult'])));
 		if ($flagSubOK) {
 			//echo "修改成功！";
 			echo "<html>";
@@ -201,11 +201,11 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=gradeSet.php>';
 			echo "</head>";
 			echo "<body>";
-			echo "修改成功"."</br></br>";
+			echo "修改成功" . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="gradeSet.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return TRUE;
 		} else {
 			//echo "修改失败！";
@@ -214,15 +214,15 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=gradeSet.php>';
 			echo "</head>";
 			echo "<body>";
-			echo "修改成功"."</br></br>";
+			echo "修改成功" . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="gradeSet.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return FALSE;
 		}
 	}
-	
+
 }
 ?>
 <!DOCTYPE html>
@@ -233,7 +233,7 @@ if (isset($_POST['submitType'])) {
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>班级设置</title>
 
 		<link rel="stylesheet" type="text/css" href="../css/table.css" />
@@ -308,15 +308,15 @@ if (isset($_POST['submitType'])) {
 			});
 		</script>
 		<!--end datepicker -->
-		
+
 		<!-- 		添加表格样式 -->
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$("tr").mouseover(function(){
-					$(this).css("background-color","#e9eaec");
+			$(document).ready(function() {
+				$("tr").mouseover(function() {
+					$(this).css("background-color", "#e9eaec");
 				});
-				$("tr").mouseout(function(){
-					$(this).css("background-color","");
+				$("tr").mouseout(function() {
+					$(this).css("background-color", "");
 				});
 				$("tr:odd").addClass("rowBgColorOdd");
 				$("tr:even").addClass("rowBgColorEven");
@@ -383,27 +383,24 @@ if (isset($_POST['submitType'])) {
 					</td>
 				</tr>
 
-
 				<tr>
 					<th>年级</th>
 					<td><label for="grade7" name="gradeLabel">
 						<input type="radio" name="grade" size="16" id="grade7" />
 						初一</label><label for="grade8" name="gradeLabel">
 						<input type="radio" name="grade" size="16" id="grade8" />
-						初二</label>
-						<label for="grade9" name="gradeLabel">
+						初二</label><label for="grade9" name="gradeLabel">
 						<input type="radio" name="grade" size="16" id="grade9" />
-						初三</label>
-						<label for="grade10" name="gradeLabel">
+						初三</label><label for="grade10" name="gradeLabel">
 						<input type="radio" name="grade" size="16" id="grade10" />
 						高一</label><label for="grade11" name="gradeLabel">
 						<input type="radio" name="grade" size="16" id="grade11" />
 						高二</label><label for="grade12" name="gradeLabel">
 						<input type="radio" name="grade" size="16" id="grade12" />
 						高三</label>
-						<input type="hidden" name="gradeCopy"/>
-						</td>
-						
+					<input type="hidden" name="gradeCopy"/>
+					</td>
+
 				</tr>
 
 				<tr>
@@ -418,26 +415,21 @@ if (isset($_POST['submitType'])) {
 						<input	type="radio" name="course" id="course4">
 						科目4</label><label for="course5" name="courseLabel">
 						<input type="radio" name="course" id="course5">
-						科目5</label>
-						<label for="course6" name="courseLabel">
+						科目5</label><label for="course6" name="courseLabel">
 						<input type="radio" name="course" id="course6">
-						科目6</label>
-						<label for="course7" name="courseLabel">
+						科目6</label><label for="course7" name="courseLabel">
 						<input type="radio" name="course" id="course7">
-						科目7</label>
-						<label for="course8" name="courseLabel">
+						科目7</label><label for="course8" name="courseLabel">
 						<input type="radio" name="course" id="course8">
-						科目8</label>
-						<label for="course9" name="courseLabel">
+						科目8</label><label for="course9" name="courseLabel">
 						<input type="radio" name="course" id="course9">
-						科目9</label>
-						<label for="course10" name="courseLabel">
+						科目9</label><label for="course10" name="courseLabel">
 						<input type="radio" name="course" id="course10">
 						科目10</label>
-						<input type="hidden" name="courseCopy"/>
-						</td>
+					<input type="hidden" name="courseCopy"/>
+					</td>
 				</tr>
-				
+
 				<tr>
 					<th>班级性质</th>
 					<td><label for="product1" name="productLabel" >
@@ -451,22 +443,22 @@ if (isset($_POST['submitType'])) {
 						产品4</label><label for="product5" name="productLabel" >
 						<input type="radio" name="courseType" id="product5">
 						产品5</label>
-						<input type="hidden" name="productCopy"/>
-						</td>
+					<input type="hidden" name="productCopy"/>
+					</td>
 				</tr>
 
 				<tr>
 					<th>班级名称</th>
 					<td>
 					<input type="text" class="inputText" name="className" size="16" value="" onblur="updateResult()" required="true" />
-					（提示：填写完班级名称后，请将光标移走，核对“将要设立的班级”信息）
-					</td>
+					（提示：填写完班级名称后，请将光标移走，核对“将要设立的班级”信息） </td>
 				</tr>
 
 				<tr>
 					<th>将要设立的班级</th>
-					<td><input type="text" name="greadeSetResult" style="width: 40ex" value="年度＋校区＋年级＋科目＋教师＋班级名称" readonly="false" />
-						&nbsp;&nbsp;<a href="../public/sqlGrade.php" target="_blank">查询已设立班级</a></td>
+					<td>
+					<input type="text" name="greadeSetResult" style="width: 40ex" value="年度＋校区＋年级＋科目＋教师＋班级名称" readonly="false" />
+					&nbsp;&nbsp;<a href="../public/sqlGrade.php" target="_blank">查询已设立班级</a></td>
 				</tr>
 
 				<tr>
@@ -479,7 +471,7 @@ if (isset($_POST['submitType'])) {
 					<input type="button" class="btn" name="buttonSql" value="查询" onclick="sqlRecord()" />
 					<input type="submit" class="btn" name="submitAdd" value="增加" onclick="checkGradeSet(this)" disabled="true" />
 					<input type="submit" class="btn" name="submitUpdate" value="修改" onclick="checkGradeSet(this)" />
-					<!-- 
+					<!--
 					<input type="submit" class="btn" name="submitDelete" value="删除"  disabled/> -->
 					<input type="reset" class="btn" name="reset" value="重置" />
 					</td>

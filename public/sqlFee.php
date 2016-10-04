@@ -1,6 +1,6 @@
 <?php
 header("Content-Type:text/html;charset=utf-8");
-include 'verifyID.php';					
+include 'verifyID.php';
 
 // ajax查询校长设置,用于初始化
 if (isset($_GET['noValue'])) {
@@ -46,78 +46,59 @@ if (isset($_GET['sqlFee'])) {
 
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
-	
+
 	date_default_timezone_set('PRC');
-	if($_GET['timeStart']=="%"){
+	if ($_GET['timeStart'] == "%") {
 		$timeStart = strtotime("2010-01-01");
-	}else{
+	} else {
 		$timeStart = strtotime($_GET['timeStart']);
 	}
-	
-	if($_GET['timeEnd']=="%"){
+
+	if ($_GET['timeEnd'] == "%") {
 		$timeEnd = strtotime(date("Y-m-d"));
-	}else{
-		$timeEnd = strtotime($_GET['timeEnd']) + 24*3600-1;
+	} else {
+		$timeEnd = strtotime($_GET['timeEnd']) + 24 * 3600 - 1;
 	}
 
-	if($_GET['course']=="1"){
+	if ($_GET['course'] == "1") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and Math !=? and MathProduct like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], 
-					$_GET['grade'],"0", $_GET['product'],
-					str_replace(' ', '', $_GET['name']),str_replace(' ', '', $_GET['name']),$_GET['receiptNum'],
-					$_GET['mode'],$timeStart, $timeEnd));
-	}else if($_GET['course']=="2"){
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "2") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and Chinese !=? and ChineseProduct like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], 
-					$_GET['grade'],"0", $_GET['product'],
-					str_replace(' ', '', $_GET['name']),str_replace(' ', '', $_GET['name']),$_GET['receiptNum'],
-					$_GET['mode'],$timeStart, $timeEnd));
-	}else if($_GET['course']=="3"){
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "3") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and English !=? and EnglishProduct like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], 
-					$_GET['grade'],"0", $_GET['product'],
-					str_replace(' ', '', $_GET['name']),str_replace(' ', '', $_GET['name']),$_GET['receiptNum'],
-					$_GET['mode'],$timeStart, $timeEnd));
-	}else if($_GET['course']=="4"){
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "4") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and Physics !=? and PhysicsProduct like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], 
-					$_GET['grade'],"0", $_GET['product'],
-					str_replace(' ', '', $_GET['name']),str_replace(' ', '', $_GET['name']),$_GET['receiptNum'],
-					$_GET['mode'],$timeStart, $timeEnd));
-	}else if($_GET['course']=="5"){
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "5") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and Chemistry !=? and ChemistryProduct like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], 
-					$_GET['grade'],"0", $_GET['product'],
-					str_replace(' ', '', $_GET['name']),str_replace(' ', '', $_GET['name']),$_GET['receiptNum'],
-					$_GET['mode'],$timeStart, $timeEnd));
-	}else{
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and mode like ? 
 					and (MathProduct like ? or ChineseProduct like ? or EnglishProduct like ? or PhysicsProduct like ? or ChemistryProduct like ?)
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], 
-					$_GET['grade'],$_GET['mode'],
-					$_GET['product'],$_GET['product'],$_GET['product'],$_GET['product'],$_GET['product'],
-					str_replace(' ', '', $_GET['name']),str_replace(' ', '', $_GET['name']),$_GET['receiptNum'],
-					$timeStart, $timeEnd));
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], $_GET['mode'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $timeStart, $timeEnd));
 	}
-		
+
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
 		$allRows = $sbmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -135,7 +116,6 @@ if (isset($_GET['sqlFee'])) {
 
 	return;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -146,13 +126,13 @@ if (isset($_GET['sqlFee'])) {
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>费用记录查询</title>
-		
+
 		<link rel="stylesheet" type="text/css" href="../css/table.css" />
 		<script src="../js/sqlFee.js"></script>
 		<script src="../js/common.js"></script>
-		
+
 		<!--datetimepicker-->
 		<link type="text/css" href="../jquery/jquery1.10.3/themes/base/jquery-ui.css" rel="stylesheet" />
 		<link type="text/css" href="../jquery/jQuery-Timepicker-Addon/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css" />
@@ -215,67 +195,60 @@ if (isset($_GET['sqlFee'])) {
 			});
 		</script>
 		<!--end datepicker -->
-				
+
 		<style>
 			body {
 				font: 14px verdana, arial, sans-serif;
 			}
 		</style>
-		
+
 	</head>
-    <body onload="initPage()"> 	
+	<body onload="initPage()">
 		<form action="sqlteacher.php" method="post">
 			<table align="center" width="3000px" border="0" cellpadding="0" cellspacing="0">
-			<!-- <caption align="left"> -->
+				<!-- <caption align="left"> -->
 				<h3>费用记录查询</h3>
-			<!-- </caption> -->
-			<tr>
-				<th style="width: 70px">查询条件</th>
-				<td>				
-				校区
-				<select name="schoolZone" onchange="loadPrincipalSetAndTeacher()">
-					<option value="0">-请选择-</option>
-				</select> 年级
-				<select name="grade" >
-					<option value="0">-请选择-</option>
-				</select> 科目
-				<select name="course" >
-					<option value="0">-请选择-</option>
-				</select> 产品名称
-				<select name="product" >
-					<option value="0">-请选择-</option>
-				</select> 
-				类别
-				<select name="mode">
-					<option value="0">--请选择--</option>
-					<option value="1">交费</option>
-					<option value="2">转费</option>
-					<option value="3">退费</option>
-				</select>	
-				姓名
-				<input type="text" name="name" style="width: 6em"/>
-				收据编号
-				<input type="number" name="receiptNum" style="width: 6em"/>			
-			</tr>
-			<tr>
-				<!-- <td>查询结果</td> -->
-				<th style="width: 70px">记录时间</th>
-				<td>
-				开始时间
-				<input type="text" class="date" style="width: 10ex" name="timeStart" readonly/>
-				结束时间
-				<input type="text" class="date" style="width: 10ex" name="timeEnd" readonly/>
-				<input type="button" name="sqlFeeBtn" value="查 询" onclick="sqlFee()" />				
-				(提示：按时间为闭区间进行查询	)	 &nbsp;&nbsp;&nbsp;&nbsp;
-				<a onclick='exportToCSV(this,"sqlFeeTable")' download="费用记录报表.csv" href="#">导出Excel</a>
-				</td>
-			</tr>
-		</table>
+				<!-- </caption> -->
+				<tr>
+					<th style="width: 70px">查询条件</th>
+					<td> 校区
+					<select name="schoolZone" onchange="loadPrincipalSetAndTeacher()">
+						<option value="0">-请选择-</option>
+					</select> 年级
+					<select name="grade" >
+						<option value="0">-请选择-</option>
+					</select> 科目
+					<select name="course" >
+						<option value="0">-请选择-</option>
+					</select> 产品名称
+					<select name="product" >
+						<option value="0">-请选择-</option>
+					</select> 类别
+					<select name="mode">
+						<option value="0">--请选择--</option>
+						<option value="1">交费</option>
+						<option value="2">转费</option>
+						<option value="3">退费</option>
+					</select> 姓名
+					<input type="text" name="name" style="width: 6em"/>
+					收据编号
+					<input type="number" name="receiptNum" style="width: 6em"/>
+				</tr>
+				<tr>
+					<!-- <td>查询结果</td> -->
+					<th style="width: 70px">记录时间</th>
+					<td> 开始时间
+					<input type="text" class="date" style="width: 10ex" name="timeStart" readonly/>
+					结束时间
+					<input type="text" class="date" style="width: 10ex" name="timeEnd" readonly/>
+					<input type="button" name="sqlFeeBtn" value="查 询" onclick="sqlFee()" />
+					(提示：按时间为闭区间进行查询	)	 &nbsp;&nbsp;&nbsp;&nbsp; <a onclick='exportToCSV(this,"sqlFeeTable")' download="费用记录报表.csv" href="#">导出Excel</a></td>
+				</tr>
+			</table>
 		</form>
 
 		<!--  查询结果表 -->
 		<table id="sqlFeeTable" align="center" width="3000px" border="0" cellpadding="0" cellspacing="0">
-	
 
 		</table>
 		<!--  end查询结果表 -->

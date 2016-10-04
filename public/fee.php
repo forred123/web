@@ -7,7 +7,7 @@
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>学生交费</title>
 	</head>
 	<body>
@@ -65,11 +65,11 @@
 					} elseif ($_COOKIE['role'] > 0) {
 						if ($_POST['sqlType'] == 1) {
 							$sbmt = $pdo -> prepare("select * from fee where uid = ?");
-							$sbmt -> execute(array(str_replace(' ','',$_POST['sqlCondition'])));
+							$sbmt -> execute(array(str_replace(' ', '', $_POST['sqlCondition'])));
 						}
 						if ($_POST['sqlType'] == 2) {
 							$sbmt = $pdo -> prepare("select * from fee where name = ?");
-							$sbmt -> execute(array(str_replace(' ','',$_POST['sqlCondition'])));
+							$sbmt -> execute(array(str_replace(' ', '', $_POST['sqlCondition'])));
 						}
 					}
 
@@ -104,27 +104,27 @@
 						echo '<th bgcolor=#FF9900>' . '交费总额' . '</th>';
 						echo '<th bgcolor=#FF9900>' . $tmpFee . '</th>';
 						echo '</tr>';
-						
+
 						echo '<tr>';
 						echo '<td>' . '数学总额' . '</td>';
 						echo '<td>' . $tmpFeeMath . '</td>';
 						echo '</tr>';
-						
+
 						echo '<tr>';
 						echo '<td>' . '语文总额' . '</td>';
 						echo '<td>' . $tmpFeeChinese . '</td>';
 						echo '</tr>';
-						
+
 						echo '<tr>';
 						echo '<td>' . '英语总额' . '</td>';
 						echo '<td>' . $tmpFeeEnglish . '</td>';
 						echo '</tr>';
-						
+
 						echo '<tr>';
 						echo '<td>' . '物理总额' . '</td>';
 						echo '<td>' . $tmpFeePhysics . '</td>';
 						echo '</tr>';
-						
+
 						echo '<tr>';
 						echo '<td>' . '化学总额' . '</td>';
 						echo '<td>' . $tmpFeeChemistry . '</td>';
@@ -135,11 +135,11 @@
 						echo '</tr>';
 
 						$tmpNum = $tmpNum + 1;
-						
+
 						//foreach ($allRows as $row) {  //正向遍历数组
-						foreach(array_reverse($allRows) as $row){ // 逆向遍历数组
+						foreach (array_reverse($allRows) as $row) {// 逆向遍历数组
 							$tmpNum = $tmpNum - 1;
-						
+
 							echo '<tr>';
 							echo '<th>交费次数</th>';
 							echo '<th>' . $tmpNum . '</th>';
@@ -164,25 +164,25 @@
 
 							echo '<tr>';
 							echo '<td>' . '交费时间' . '</td>';
-							$time = date("Y年m月d",$row['time']);
+							$time = date("Y年m月d", $row['time']);
 							echo '<td>' . $time . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '收据编号' . '</td>';
 							echo '<td>' . $row['receiptNum'] . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '票号' . '</td>';
 							echo '<td>' . $row['billNum'] . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '校区' . '</td>';
 							echo '<td>' . $row['schoolZone'] . '</td>';
 							echo '</tr>';
-							
+
 							echo '<tr>';
 							echo '<td>' . '班课类型' . '</td>';
 							echo '<td>' . $row['classType'] . '</td>';

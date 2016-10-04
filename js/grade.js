@@ -81,7 +81,7 @@ function sqlClassInfo() {
 		str3 = document.getElementsByName("course")[0].options[document.getElementsByName("course")[0].value].text;
 		str3 = encodeURIComponent(str3);
 	}
-	if (document.getElementsByName("product")[0].value != 0) {		
+	if (document.getElementsByName("product")[0].value != 0) {
 		str4 = document.getElementsByName("product")[0].options[document.getElementsByName("product")[0].value].text;
 		str4 = encodeURIComponent(str4);
 	}
@@ -291,8 +291,8 @@ function loadProduct(schoolZone) {
 	for ( i = 1; i < obj.options.length; ) {
 		obj.removeChild(obj.options[i]);
 	}
-	
-	i=1;
+
+	i = 1;
 	if (info[index].product1 != "") {
 		obj.options.add(new Option(productLoad[0], i));
 		i++;
@@ -374,7 +374,7 @@ function loadTeacher(schoolZone) {
 	xmlhttp.send(null);
 }
 
-function loadNotInClassStudent(flag,schoolZone,product) {
+function loadNotInClassStudent(flag, schoolZone, product) {
 	var xmlhttp;
 
 	// 1创建AJAX对象
@@ -401,17 +401,17 @@ function loadNotInClassStudent(flag,schoolZone,product) {
 
 					var info = eval(ret);
 					var obj = document.getElementById("studentNotGradeTable");
-					
+
 					i = 0;
 					//alert(ret);
 					for (var tmp in info) {
-//						loadstudentNotInGrade(info[i].uid,flag);
+						//						loadstudentNotInGrade(info[i].uid,flag);
 						//alert(info[i].MathClassIdInMLS);
 						//alert(ret);
-						loadstudentNotInGrade(info[i],flag,product);
+						loadstudentNotInGrade(info[i], flag, product);
 						i++;
 					}
-			
+
 				}
 
 			} else {
@@ -431,7 +431,7 @@ function loadNotInClassStudent(flag,schoolZone,product) {
 	xmlhttp.send(null);
 }
 
-function loadstudentNotInGrade(recordStudentObj,flag,product){
+function loadstudentNotInGrade(recordStudentObj, flag, product) {
 	var xmlhttp;
 
 	// 1创建AJAX对象
@@ -455,75 +455,75 @@ function loadstudentNotInGrade(recordStudentObj,flag,product){
 					// 只有页面初始化时才显示全部学科交过费待分班学生，其它都是显示某一学科待分班学生，此时不显示提示，否则每个学生都提示一次
 					// 以上只是针对某一个学生的，不能得出没有交费但没分班的学生结论，所以不提示有无交费但没分班学生的提示，有就载入，没有也不提示，如果没有提示就是真的没有学生交过费待分班
 					//if(flag == 0){
-						//alert("没有交过费待分班学生43！");
+					//alert("没有交过费待分班学生43！");
 					//}
 				} else {
 
 					var info = eval(ret);
-					var obj = document.getElementById("studentNotGradeTable");	
-						
+					var obj = document.getElementById("studentNotGradeTable");
+
 					var i = 0;
-					
+
 					//alert(ret);
 					// 下面载入的是交过费待分班的学生，针对各个学科，如果该学科交过费待分班则显示出来，交过费已经分班则不显示，
 					// 例如某个学生交了两科学费，未分班前显示两个待分班结果，一个一个分班，如果其中一个分完班，则以后不显示这个学科的待分班记录，直到第二个也分班后则不显示有该学生的待分班信息
-					for (var tmp in info) {						
-						if(flag == 0){
-							if ((info[i].MathProduct != "")&&((recordStudentObj.MathStateInGrade=="0")||(recordStudentObj.MathStateInGrade=="4"))) {					
+					for (var tmp in info) {
+						if (flag == 0) {
+							if ((info[i].MathProduct != "") && ((recordStudentObj.MathStateInGrade == "0") || (recordStudentObj.MathStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "数学", tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].ChineseProduct != "")&&((recordStudentObj.ChineseStateInGrade=="0")||(recordStudentObj.ChineseStateInGrade=="4"))) {
+							if ((info[i].ChineseProduct != "") && ((recordStudentObj.ChineseStateInGrade == "0") || (recordStudentObj.ChineseStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "语文", tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].EnglishProduct != "")&&((recordStudentObj.EnglishStateInGrade=="0")||(recordStudentObj.EnglishStateInGrade=="4"))) {
+							if ((info[i].EnglishProduct != "") && ((recordStudentObj.EnglishStateInGrade == "0") || (recordStudentObj.EnglishStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "英语", tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].PhysicsProduct != "")&&((recordStudentObj.PhysicsStateInGrade=="0")||(recordStudentObj.PhysicsStateInGrade=="4"))) {
+							if ((info[i].PhysicsProduct != "") && ((recordStudentObj.PhysicsStateInGrade == "0") || (recordStudentObj.PhysicsStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "物理", tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].ChemistryProduct != "")&&((recordStudentObj.ChemistryStateInGrade=="0")||(recordStudentObj.ChemistryStateInGrade=="4"))) {
+							if ((info[i].ChemistryProduct != "") && ((recordStudentObj.ChemistryStateInGrade == "0") || (recordStudentObj.ChemistryStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "化学", tableRowCount);
 								tableRowCount++;
 							}
-							
+
 						}
-						if(flag==1){
-							if ((info[i].MathProduct != "")&&((recordStudentObj.MathStateInGrade=="0")||(recordStudentObj.MathStateInGrade=="4"))) {
+						if (flag == 1) {
+							if ((info[i].MathProduct != "") && ((recordStudentObj.MathStateInGrade == "0") || (recordStudentObj.MathStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "数学", tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 2) {
-							if ((info[i].ChineseProduct != "")&&((recordStudentObj.ChineseStateInGrade=="0")||(recordStudentObj.ChineseStateInGrade=="4"))) {
+							if ((info[i].ChineseProduct != "") && ((recordStudentObj.ChineseStateInGrade == "0") || (recordStudentObj.ChineseStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "语文", tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 3) {
-							if ((info[i].EnglishProduct != "")&&((recordStudentObj.EnglishStateInGrade=="0")||(recordStudentObj.EnglishStateInGrade=="4"))) {
+							if ((info[i].EnglishProduct != "") && ((recordStudentObj.EnglishStateInGrade == "0") || (recordStudentObj.EnglishStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "英语", tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 4) {
-							if ((info[i].PhysicsProduct != "")&&((recordStudentObj.PhysicsStateInGrade=="0")||(recordStudentObj.PhysicsStateInGrade=="4"))) {
+							if ((info[i].PhysicsProduct != "") && ((recordStudentObj.PhysicsStateInGrade == "0") || (recordStudentObj.PhysicsStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "物理", tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 5) {
-							if ((info[i].ChemistryProduct != "")&&((recordStudentObj.ChemistryStateInGrade=="0")||(recordStudentObj.ChemistryStateInGrade=="4"))) {
+							if ((info[i].ChemistryProduct != "") && ((recordStudentObj.ChemistryStateInGrade == "0") || (recordStudentObj.ChemistryStateInGrade == "4"))) {
 								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "化学", tableRowCount);
 								tableRowCount++;
 							}
 						}
 						i++;
 					}
-					
+
 				}
 
 			} else {
@@ -534,14 +534,12 @@ function loadstudentNotInGrade(recordStudentObj,flag,product){
 	};
 	// 3发出http请求
 	var url = "grade.php";
-	url = url + "?loadstudentDataInFeeTable=" + recordStudentObj.uid
-			  + "&operateCourse=" + encodeURIComponent(document.getElementsByName("operateCourse")[0].value)
-			  + "&operateGrade=" + encodeURIComponent(document.getElementsByName("operateGrade")[0].value)
-			  + "&operateProduct=" + product;
+	url = url + "?loadstudentDataInFeeTable=" + recordStudentObj.uid + "&operateCourse=" + encodeURIComponent(document.getElementsByName("operateCourse")[0].value) + "&operateGrade=" + encodeURIComponent(document.getElementsByName("operateGrade")[0].value) + "&operateProduct=" + product;
 	//alert(url);
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
-	xmlhttp.open("GET", url, true); //false 同步，true异步
+	xmlhttp.open("GET", url, true);
+	//false 同步，true异步
 	xmlhttp.send(null);
 }
 
@@ -581,7 +579,7 @@ function initPage() {
 						i++;
 					}
 					len = i;
-					
+
 					// 校区负责人只负责自己校区的事
 					if (GetCookie('role') == '8') {
 						// 先清除原来的
@@ -599,17 +597,17 @@ function initPage() {
 						schoolZone[4] = decodeURIComponent(GetCookie('schoolZone5'));
 						i = 0;
 						for (var tmp in info) {
-							for(var j=0;j<5;j++){
-								if(schoolZone[j] == info[i].schoolZone){
+							for (var j = 0; j < 5; j++) {
+								if (schoolZone[j] == info[i].schoolZone) {
 									document.getElementsByName("schoolZone")[0].options.add(new Option(info[i].schoolZone, info[i].id));
-								}	
+								}
 							}
 							i++;
-						};											
-						
+						};
+
 						// 默认第一个,可能有多个
 						document.getElementsByName("schoolZone")[0].value = 1;
-						
+
 						loadPrincipalSetAndTeacher();
 					}
 
@@ -619,7 +617,7 @@ function initPage() {
 					// alert(len);
 
 					// ajax 加载交过费还未分班的所有学科学生
-					loadNotInClassStudent(0,"%");
+					loadNotInClassStudent(0, "%");
 				}
 
 			} else {
@@ -638,9 +636,9 @@ function initPage() {
 }
 
 // 插入表格相关函数
-function appendRow(TableID,studentID,obj,course,index){
+function appendRow(TableID, studentID, obj, course, index) {
 	// 序号从1开始
-	index = index +1;
+	index = index + 1;
 
 	//alert(product);
 	// 添加一行
@@ -653,135 +651,89 @@ function appendRow(TableID,studentID,obj,course,index){
 	var newTd4 = newTr.insertCell(-1);
 	var newTd5 = newTr.insertCell(-1);
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	
-	newTd0.innerHTML = '<input type="number" style="width:5em" name="numInTable" value=' + index  + ' ' +'readonly/>';
-	newTd1.innerHTML = '<input type="text" style="width: 6em" name="studentID" value=' + 'x' + studentID + ' ' +'readonly/>';
-	newTd2.innerHTML = '<input type="text" style="width: 6em" name="studentName" value=' + obj.name1 + ' ' +' readonly/>';;
-	newTd3.innerHTML = '<input type="text" style="width: 6em" name="course" value=' + course + ' readonly/>';
-	
-	/*
-	if(obj.product=="班课"){
-		newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
-							//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-	}else if(obj.product=="一对一"){
-		newTd4.innerHTML = '一对一'  + '<br/>'
-								 + '<input type="number" style="width:2em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
-								 + '<input type="number" style="width:2em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' + '<br/>'
-								 + '<input type="number" style="width:2em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
-								 + '<input type="number" style="width:2em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' + '<br/>'
-								 + '<input type="number" style="width:2em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
-								 + '<input type="number" style="width:2em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元';
-	}
-	*/
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
 
-	if(course=="数学"){
-		if(obj.MathProduct=="班课"){
-			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
-								//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		}else if(obj.MathProduct=="一对一"){
-			newTd4.innerHTML = '一对一'  + '<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay1" + index +' ' +'value=' + obj.pay1 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay2" + index +' ' +'value=' + obj.pay2 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元'
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay3" + index +' ' +'value=' + obj.pay3 +' />';
+	newTd0.innerHTML = '<input type="number" style="width:5em" name="numInTable" value=' + index + ' ' + 'readonly/>';
+	newTd1.innerHTML = '<input type="text" style="width: 6em" name="studentID" value=' + 'x' + studentID + ' ' + 'readonly/>';
+	newTd2.innerHTML = '<input type="text" style="width: 6em" name="studentName" value=' + obj.name1 + ' ' + ' readonly/>';
+	;
+	newTd3.innerHTML = '<input type="text" style="width: 6em" name="course" value=' + course + ' readonly/>';
+
+	/*
+	 if(obj.product=="班课"){
+	 newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
+	 //'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+	 }else if(obj.product=="一对一"){
+	 newTd4.innerHTML = '一对一'  + '<br/>'
+	 + '<input type="number" style="width:2em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
+	 + '<input type="number" style="width:2em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' + '<br/>'
+	 + '<input type="number" style="width:2em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
+	 + '<input type="number" style="width:2em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' + '<br/>'
+	 + '<input type="number" style="width:2em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
+	 + '<input type="number" style="width:2em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元';
+	 }
+	 */
+
+	if (course == "数学") {
+		if (obj.MathProduct == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.MathProduct == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
-	
-	if(course=="语文"){
-		if(obj.ChineseProduct=="班课"){
-			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
-								//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		}else if(obj.ChineseProduct=="一对一"){
-			newTd4.innerHTML = '一对一'  + '<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay1" + index +' ' +'value=' + obj.pay1 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay2" + index +' ' +'value=' + obj.pay2 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元'
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay3" + index +' ' +'value=' + obj.pay3 +' />';
+
+	if (course == "语文") {
+		if (obj.ChineseProduct == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.ChineseProduct == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
-	
-	if(course=="英语"){
-		if(obj.EnglishProduct=="班课"){
-			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
-								//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		}else if(obj.EnglishProduct=="一对一"){
-			newTd4.innerHTML = '一对一'  + '<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay1" + index +' ' +'value=' + obj.pay1 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay2" + index +' ' +'value=' + obj.pay2 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元'
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay3" + index +' ' +'value=' + obj.pay3 +' />';
+
+	if (course == "英语") {
+		if (obj.EnglishProduct == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.EnglishProduct == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
-	
-	if(course=="物理"){
-		if(obj.PhysicsProduct=="班课"){
-			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
-								//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		}else if(obj.PhysicsProduct=="一对一"){
-			newTd4.innerHTML = '一对一'  + '<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay1" + index +' ' +'value=' + obj.pay1 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay2" + index +' ' +'value=' + obj.pay2 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元'
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay3" + index +' ' +'value=' + obj.pay3 +' />';
+
+	if (course == "物理") {
+		if (obj.PhysicsProduct == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.PhysicsProduct == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
-	
-	if(course=="化学"){
-		if(obj.ChemistryProduct=="班课"){
-			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index +' ' +'value=' + obj.priceBK + ' />元';
-								//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		}else if(obj.ChemistryProduct=="一对一"){
-			newTd4.innerHTML = '一对一'  + '<br/>'
-									+ '<input type="number" style="width:4em"' + 'name='+"hour1_" + index +' ' +'value=' + obj.hour1 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour1YDY" + index +' ' +'value=' + obj.priceHour1YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay1" + index +' ' +'value=' + obj.pay1 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour2_" + index +' ' +'value=' + obj.hour2 + ' readonly/>'	 + '小时以内'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour2YDY" + index +' ' +'value=' + obj.priceHour2YDY + ' />元' 
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay2" + index +' ' +'value=' + obj.pay2 +' />' +'<br/>'
-									 + '<input type="number" style="width:4em"' + 'name='+"hour3_" + index +' ' +'value=' + obj.hour3 + ' readonly/>'	 + '小时以外'
-									 + '<input type="number" style="width:4em"' + 'name='+"priceHour3YDY" + index +' ' +'value=' + obj.priceHour3YDY + ' />元'
-									 + '，工资<input type="number" style="width: 4em"' + 'name='+"pay3" + index +' ' +'value=' + obj.pay3 +' />';
+
+	if (course == "化学") {
+		if (obj.ChemistryProduct == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.ChemistryProduct == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
-	
-	
+
 	// 提交类型，2为试听入班，1为直接入班，与学生表中定义一致
 	//newTd5.innerHTML = '<input type="submit" class="btn" name="submitBTNgrade" value="入班" onclick="submitGrade(' + studentID +',this' +')" />';
-	newTd5.innerHTML = '<input type="button" name="submitBTNgradeTest" value="试听入班" onclick="submitGrade(' + studentID +', this ,2)" />'
-	+ '&nbsp&nbsp&nbsp&nbsp <input type="button" name="submitBTNgrade" value="直接入班" onclick="submitGrade(' + studentID +', this ,1)" />';
-	
+	newTd5.innerHTML = '<input type="button" name="submitBTNgradeTest" value="试听入班" onclick="submitGrade(' + studentID + ', this ,2)" />' + '&nbsp&nbsp&nbsp&nbsp <input type="button" name="submitBTNgrade" value="直接入班" onclick="submitGrade(' + studentID + ', this ,1)" />';
+
 	//添加表格样式
-	$("tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
+	$("tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
 	});
-	$("tr").mouseout(function(){
-		$(this).css("background-color","");
+	$("tr").mouseout(function() {
+		$(this).css("background-color", "");
 	});
 	$("tr:odd").addClass("rowBgColorOdd");
 	$("tr:even").addClass("rowBgColorEven");
@@ -790,177 +742,175 @@ function appendRow(TableID,studentID,obj,course,index){
 // 窗口表格删除一行
 function removeRow(TableID) {
 	var tabObj = document.getElementById(TableID);
-		for(var j=0;j<tableRowCount;j++){
-				tabObj.deleteRow(1);
-		}
+	for (var j = 0; j < tableRowCount; j++) {
+		tabObj.deleteRow(1);
+	}
 	tableRowCount = 0;
 }
 
-function copyConditionToHidden(){
+function copyConditionToHidden() {
 	var obj = document.getElementsByName("gradeResult")[0];
-	if(obj.value == 0){
+	if (obj.value == 0) {
 		location.reload();
-	}else{
+	} else {
 		document.getElementsByName("operateGradeID")[0].value = obj.value;
-		
+
 		var str = obj.options[obj.selectedIndex].text;
 		var courseIndex = 0;
-		if(str.indexOf("数学") != -1){
+		if (str.indexOf("数学") != -1) {
 			courseIndex = 1;
-		}else if(str.indexOf("语文") != -1){
+		} else if (str.indexOf("语文") != -1) {
 			courseIndex = 2;
-		}else if(str.indexOf("英语") != -1){
+		} else if (str.indexOf("英语") != -1) {
 			courseIndex = 3;
-		}else if(str.indexOf("物理") != -1){
+		} else if (str.indexOf("物理") != -1) {
 			courseIndex = 4;
-		}else if(str.indexOf("化学") != -1){
+		} else if (str.indexOf("化学") != -1) {
 			courseIndex = 5;
-		}else{
+		} else {
 			courseIndex = 0;
 		}
 		document.getElementsByName("operateCourse")[0].value = courseIndex;
-		
+
 		var gradeIndex = "初一";
-		
-		if(str.indexOf("初一") != -1){
+
+		if (str.indexOf("初一") != -1) {
 			gradeIndex = "初一";
-		}else if(str.indexOf("初二") != -1){
+		} else if (str.indexOf("初二") != -1) {
 			gradeIndex = "初二";
-		}else if(str.indexOf("初三") != -1){
+		} else if (str.indexOf("初三") != -1) {
 			gradeIndex = "初三";
-		}else if(str.indexOf("高一") != -1){
+		} else if (str.indexOf("高一") != -1) {
 			gradeIndex = "高一";
-		}else if(str.indexOf("高二") != -1){
+		} else if (str.indexOf("高二") != -1) {
 			gradeIndex = "高二";
-		}else if(str.indexOf("高三") != -1){
+		} else if (str.indexOf("高三") != -1) {
 			gradeIndex = "高三";
-		}else{
+		} else {
 			gradeIndex = "";
 		}
-		
+
 		document.getElementsByName("operateGrade")[0].value = gradeIndex;
-		
+
 		// 操作的校区
 		var str = obj.options[obj.selectedIndex].text;
-		var strtemp =str.split("-");		
-	
+		var strtemp = str.split("-");
+
 		//document.getElementsByName("operateSchoolZone")[0].value = strtemp[3];
-		
+
 		// ajax 加载交过费还未分班的与选中结果班级的学科一样的学生
 		// 先清除表格第二行及以后的行
 		removeRow('studentNotGradeTable');
-	
-		loadNotInClassStudent(courseIndex,strtemp[3],strtemp[6]);
+
+		loadNotInClassStudent(courseIndex, strtemp[3], strtemp[6]);
 	}
 }
 
 //ajax 提交分班
-function submitGrade(studentID,obj,type) {
+function submitGrade(studentID, obj, type) {
 	document.getElementsByName("operateStudentID")[0].value = studentID;
 	var index = -1;
 	// 提交按钮在表格中的行数，从0开始，用于区分提交的是第几行的数据，很重要
 	// 提交类型，2为试听入班，1为直接入班，与学生表中定义一致
 	var objtmp;
-	if(type=="1"){
+	if (type == "1") {
 		objtmp = document.getElementsByName("submitBTNgrade");
-	}else if(type=="2"){
+	} else if (type == "2") {
 		objtmp = document.getElementsByName("submitBTNgradeTest");
 	}
 	//var objtmp = document.getElementsByName("submitBTNgrade");
-	for(var i=0;i<objtmp.length;i++){
-		if(obj == objtmp[i]){
-			index = i+1;
+	for (var i = 0; i < objtmp.length; i++) {
+		if (obj == objtmp[i]) {
+			index = i + 1;
 			break;
 		}
 	}
-	
+
 	// 更新要提交到学生档案中的班课和一对一单价用于提交
-	if(document.getElementsByName("priceBK" + index)[0]){
-		document.getElementsByName("priceBKCopy")[0].value=document.getElementsByName("priceBK" + index)[0].value;
-	}else{
-		document.getElementsByName("priceBKCopy")[0].value="0";
+	if (document.getElementsByName("priceBK" + index)[0]) {
+		document.getElementsByName("priceBKCopy")[0].value = document.getElementsByName("priceBK" + index)[0].value;
+	} else {
+		document.getElementsByName("priceBKCopy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("hour1_" + index)[0]){
-		document.getElementsByName("hour1Copy")[0].value=document.getElementsByName("hour1_" + index)[0].value;
-	}else{
-		document.getElementsByName("hour1Copy")[0].value="0";
+
+	if (document.getElementsByName("hour1_" + index)[0]) {
+		document.getElementsByName("hour1Copy")[0].value = document.getElementsByName("hour1_" + index)[0].value;
+	} else {
+		document.getElementsByName("hour1Copy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("priceHour1YDY" + index)[0]){
-		document.getElementsByName("priceHour1YDYCopy")[0].value=document.getElementsByName("priceHour1YDY" + index)[0].value;
-	}else{
-		document.getElementsByName("priceHour1YDYCopy")[0].value="0";
+
+	if (document.getElementsByName("priceHour1YDY" + index)[0]) {
+		document.getElementsByName("priceHour1YDYCopy")[0].value = document.getElementsByName("priceHour1YDY" + index)[0].value;
+	} else {
+		document.getElementsByName("priceHour1YDYCopy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("pay1" + index)[0]){
-		document.getElementsByName("pay1Copy")[0].value=document.getElementsByName("pay1" + index)[0].value;
-	}else{
-		document.getElementsByName("pay1Copy")[0].value="0";
+
+	if (document.getElementsByName("pay1" + index)[0]) {
+		document.getElementsByName("pay1Copy")[0].value = document.getElementsByName("pay1" + index)[0].value;
+	} else {
+		document.getElementsByName("pay1Copy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("hour2_" + index)[0]){
-		document.getElementsByName("hour2Copy")[0].value=document.getElementsByName("hour2_" + index)[0].value;
-	}else{
-		document.getElementsByName("hour2Copy")[0].value="0";
+
+	if (document.getElementsByName("hour2_" + index)[0]) {
+		document.getElementsByName("hour2Copy")[0].value = document.getElementsByName("hour2_" + index)[0].value;
+	} else {
+		document.getElementsByName("hour2Copy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("priceHour2YDY" + index)[0]){
-		document.getElementsByName("priceHour2YDYCopy")[0].value=document.getElementsByName("priceHour2YDY" + index)[0].value;
-	}else{
-		document.getElementsByName("priceHour2YDYCopy")[0].value="0";
+
+	if (document.getElementsByName("priceHour2YDY" + index)[0]) {
+		document.getElementsByName("priceHour2YDYCopy")[0].value = document.getElementsByName("priceHour2YDY" + index)[0].value;
+	} else {
+		document.getElementsByName("priceHour2YDYCopy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("pay2" + index)[0]){
-		document.getElementsByName("pay2Copy")[0].value=document.getElementsByName("pay2" + index)[0].value;
-	}else{
-		document.getElementsByName("pay2Copy")[0].value="0";
+
+	if (document.getElementsByName("pay2" + index)[0]) {
+		document.getElementsByName("pay2Copy")[0].value = document.getElementsByName("pay2" + index)[0].value;
+	} else {
+		document.getElementsByName("pay2Copy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("hour3_" + index)[0]){
-		document.getElementsByName("hour3Copy")[0].value=document.getElementsByName("hour3_" + index)[0].value;
-	}else{
-		document.getElementsByName("hour3Copy")[0].value="0";
+
+	if (document.getElementsByName("hour3_" + index)[0]) {
+		document.getElementsByName("hour3Copy")[0].value = document.getElementsByName("hour3_" + index)[0].value;
+	} else {
+		document.getElementsByName("hour3Copy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("priceHour3YDY" + index)[0]){
-		document.getElementsByName("priceHour3YDYCopy")[0].value=document.getElementsByName("priceHour3YDY" + index)[0].value;
-	}else{
-		document.getElementsByName("priceHour3YDYCopy")[0].value="0";
+
+	if (document.getElementsByName("priceHour3YDY" + index)[0]) {
+		document.getElementsByName("priceHour3YDYCopy")[0].value = document.getElementsByName("priceHour3YDY" + index)[0].value;
+	} else {
+		document.getElementsByName("priceHour3YDYCopy")[0].value = "0";
 	}
-	
-	if(document.getElementsByName("pay3" + index)[0]){
-		document.getElementsByName("pay3Copy")[0].value=document.getElementsByName("pay3" + index)[0].value;
-	}else{
-		document.getElementsByName("pay3Copy")[0].value="0";
+
+	if (document.getElementsByName("pay3" + index)[0]) {
+		document.getElementsByName("pay3Copy")[0].value = document.getElementsByName("pay3" + index)[0].value;
+	} else {
+		document.getElementsByName("pay3Copy")[0].value = "0";
 	}
-	
+
 	// 提交类型，2为试听入班，1为直接入班，与学生表中定义一致
-	document.getElementsByName("testType")[0].value=type;
-	
+	document.getElementsByName("testType")[0].value = type;
+
 	// 提交产品类型到表中
 	var obj = document.getElementsByName("gradeResult")[0];
 	var str = obj.options[obj.selectedIndex].text;
-	var strData =str.split("-");		
-	document.getElementsByName("productCopy")[0].value=strData[6];
-	
-	
-	// 使用js提交表单，表单中必须有type=submit的按钮
-	var operateName = document.getElementsByName("studentName")[index-1].value;
-	var str = "请确认" + "'"+operateName +"'" + "的分班内容正确再提交！\n\n确认要提交分班操作吗？";
-	if(document.getElementsByName("gradeResult")[0].value>0){
-		//if(confirm('请确认填写的分班内容正确再提交！\n\n确认要提交分班操作吗？')){
-		if(confirm(str)){
+	var strData = str.split("-");
+	document.getElementsByName("productCopy")[0].value = strData[6];
 
-		}else{
+	// 使用js提交表单，表单中必须有type=submit的按钮
+	var operateName = document.getElementsByName("studentName")[index - 1].value;
+	var str = "请确认" + "'" + operateName + "'" + "的分班内容正确再提交！\n\n确认要提交分班操作吗？";
+	if (document.getElementsByName("gradeResult")[0].value > 0) {
+		//if(confirm('请确认填写的分班内容正确再提交！\n\n确认要提交分班操作吗？')){
+		if (confirm(str)) {
+
+		} else {
 			return;
 		}
-	}else{
+	} else {
 		alert("请先在查询结果中选择班级，后入班！");
 		return;
 	}
-	
-	
+
 	// ajax
 	var xmlhttp;
 
@@ -974,16 +924,16 @@ function submitGrade(studentID,obj,type) {
 	xmlhttp.onreadystatechange = function() {
 		// 4接收响应数据，处理服务器返回的信息
 		// 判断对象状态是否交互完成，如果为4则交互完成
-       	if (xmlhttp.readyState == 4) {
+		if (xmlhttp.readyState == 4) {
 			// 判断对象状态是否交互成功,如果成功则为200
 			if (xmlhttp.status == 200) {
 				// 接收数据,得到服务器输出的XML数据
 				var ret = xmlhttp.responseText;
-				
-				var objBtn1 = document.getElementsByName("submitBTNgrade")[index-1];
-				var objBtn2 = document.getElementsByName("submitBTNgradeTest")[index-1];
-											
-				if (ret == "0"){
+
+				var objBtn1 = document.getElementsByName("submitBTNgrade")[index - 1];
+				var objBtn2 = document.getElementsByName("submitBTNgradeTest")[index - 1];
+
+				if (ret == "0") {
 					alert("分班失败，请重新操作！");
 				} else {
 					objBtn1.disabled = "true";
@@ -997,26 +947,10 @@ function submitGrade(studentID,obj,type) {
 
 	};
 
-	
 	// 3发出http请求
 	var url = "grade.php";
-	url = url + "?submitGrade=1" 
-			+ "&operateCourse=" + document.getElementsByName("operateCourse")[0].value
-			+ "&operateGradeID=" + document.getElementsByName("operateGradeID")[0].value
-			+ "&testType=" + document.getElementsByName("testType")[0].value
-			+ "&productCopy=" + document.getElementsByName("productCopy")[0].value
-			+ "&priceBKCopy=" + document.getElementsByName("priceBKCopy")[0].value
-			+ "&hour1Copy=" + document.getElementsByName("hour1Copy")[0].value
-			+ "&priceHour1YDYCopy=" + document.getElementsByName("priceHour1YDYCopy")[0].value
-			+ "&pay1Copy=" + document.getElementsByName("pay1Copy")[0].value
-			+ "&hour2Copy=" + document.getElementsByName("hour2Copy")[0].value
-			+ "&priceHour2YDYCopy=" + document.getElementsByName("priceHour2YDYCopy")[0].value
-			+ "&pay2Copy=" + document.getElementsByName("pay2Copy")[0].value
-			+ "&hour3Copy=" + document.getElementsByName("hour3Copy")[0].value
-			+ "&priceHour3YDYCopy=" + document.getElementsByName("priceHour3YDYCopy")[0].value
-			+ "&pay3Copy=" + document.getElementsByName("pay3Copy")[0].value
-			+ "&operateStudentID=" + document.getElementsByName("operateStudentID")[0].value;
-	
+	url = url + "?submitGrade=1" + "&operateCourse=" + document.getElementsByName("operateCourse")[0].value + "&operateGradeID=" + document.getElementsByName("operateGradeID")[0].value + "&testType=" + document.getElementsByName("testType")[0].value + "&productCopy=" + document.getElementsByName("productCopy")[0].value + "&priceBKCopy=" + document.getElementsByName("priceBKCopy")[0].value + "&hour1Copy=" + document.getElementsByName("hour1Copy")[0].value + "&priceHour1YDYCopy=" + document.getElementsByName("priceHour1YDYCopy")[0].value + "&pay1Copy=" + document.getElementsByName("pay1Copy")[0].value + "&hour2Copy=" + document.getElementsByName("hour2Copy")[0].value + "&priceHour2YDYCopy=" + document.getElementsByName("priceHour2YDYCopy")[0].value + "&pay2Copy=" + document.getElementsByName("pay2Copy")[0].value + "&hour3Copy=" + document.getElementsByName("hour3Copy")[0].value + "&priceHour3YDYCopy=" + document.getElementsByName("priceHour3YDYCopy")[0].value + "&pay3Copy=" + document.getElementsByName("pay3Copy")[0].value + "&operateStudentID=" + document.getElementsByName("operateStudentID")[0].value;
+
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
 	xmlhttp.open("GET", url, true);

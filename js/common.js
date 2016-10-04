@@ -8,85 +8,79 @@ var resultsIndex = 0;
 var resultsLen = 0;
 
 function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentDate = year + seperator1 + month + seperator1 + strDate;
-    var currentDateTime = year + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes();
-    var currentDateTimeWithSecond = year + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes()
-            + seperator2 + date.getSeconds();
-    return currentDate;
+	var date = new Date();
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if (strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
+	}
+	var currentDate = year + seperator1 + month + seperator1 + strDate;
+	var currentDateTime = year + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes();
+	var currentDateTimeWithSecond = year + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
+	return currentDate;
 }
 
 function getYear0FormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var year = date.getFullYear();
-    /*
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    */
-    var currentDate = year + seperator1 + "01" + seperator1 + "01";
-    return currentDate;
+	var date = new Date();
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var year = date.getFullYear();
+	/*
+	 var month = date.getMonth() + 1;
+	 var strDate = date.getDate();
+	 if (month >= 1 && month <= 9) {
+	 month = "0" + month;
+	 }
+	 if (strDate >= 0 && strDate <= 9) {
+	 strDate = "0" + strDate;
+	 }
+	 */
+	var currentDate = year + seperator1 + "01" + seperator1 + "01";
+	return currentDate;
 }
 
 function getNowFormatDateTime() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentDate = year + seperator1 + month + seperator1 + strDate;
-    var currentDateTime = year + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes();
-    var currentDateTimeWithSecond = year + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes()
-            + seperator2 + date.getSeconds();
-    return currentDateTime;
+	var date = new Date();
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if (strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
+	}
+	var currentDate = year + seperator1 + month + seperator1 + strDate;
+	var currentDateTime = year + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes();
+	var currentDateTimeWithSecond = year + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
+	return currentDateTime;
 }
 
 // 自定义时间显示
-function getCustomFormatDateTime(tagName,timePeriod) {
-	var dateStr=document.getElementsByName(tagName)[0].value;
-	    
-    var newstr = dateStr.replace(/-/g,'/'); 
-    var date =  new Date(newstr); 
-    var time = parseInt(date.getTime().toString().substr(0,10)) + timePeriod*60;
-    var timeStr = time.toString();
+function getCustomFormatDateTime(tagName, timePeriod) {
+	var dateStr = document.getElementsByName(tagName)[0].value;
 
-    var str = dateJS('Y-m-d H:i',timeStr);
-    
-    return str;
+	var newstr = dateStr.replace(/-/g, '/');
+	var date = new Date(newstr);
+	var time = parseInt(date.getTime().toString().substr(0, 10)) + timePeriod * 60;
+	var timeStr = time.toString();
+
+	var str = dateJS('Y-m-d H:i', timeStr);
+
+	return str;
 }
 
 // function sqlClassStudentInfo() {
-	// alert("d");
-	// document.getElementsByName("backtoGradeName")[0].disabled = false;
+// alert("d");
+// document.getElementsByName("backtoGradeName")[0].disabled = false;
 // }
 
 function checkClassRecord() {
@@ -445,30 +439,30 @@ function sqlNameByID() {
 }
 
 // 导出表格到CSV
-function exportToCSV(aLink,tableID){
+function exportToCSV(aLink, tableID) {
 	// var str = "栏位1,栏位2,栏位3\n值1,值2,值3";
 	//var str = "报表类型,一对一查询,";
-	
+
 	var str = GetInfoFromTable(tableID);
 	str = encodeURIComponent(str);
 	aLink.href = "data:text/csv;charset=utf-8,\ufeff" + str;
-	
+
 	/*
-	var str = GetInfoFromTable(tableID);
+	 var str = GetInfoFromTable(tableID);
 
-	if (window.navigator.msSaveOrOpenBlob) {
-		var csvContent = "data:text/csv;charset=utf-8,\ufeff" + str;
+	 if (window.navigator.msSaveOrOpenBlob) {
+	 var csvContent = "data:text/csv;charset=utf-8,\ufeff" + str;
 
-		var blob = new Blob([ decodeURIComponent(encodeURI(csvContent))], {
-			//type : "text/csv;charset=utf-8,;"
-		});
-		navigator.msSaveBlob(blob, 'subject.csv');
-	} else {
-		var str = GetInfoFromTable(tableID);
-		str = encodeURIComponent(str);
-		aLink.href = "data:text/csv;charset=utf-8,\ufeff" + str;
-	} 
-	*/
+	 var blob = new Blob([ decodeURIComponent(encodeURI(csvContent))], {
+	 //type : "text/csv;charset=utf-8,;"
+	 });
+	 navigator.msSaveBlob(blob, 'subject.csv');
+	 } else {
+	 var str = GetInfoFromTable(tableID);
+	 str = encodeURIComponent(str);
+	 aLink.href = "data:text/csv;charset=utf-8,\ufeff" + str;
+	 }
+	 */
 }
 
 // 获得整个表格的具体内容并返回字符串
@@ -494,34 +488,33 @@ function GetInfoFromTable(tableid) {
 	return tableInfo;
 }
 
-
 function showName() {
 	//document.getElementsByName('userName')[0].value = "中工";
 }
 
 // JS中，日期时间格式转Unix时间戳
-function datetime_to_unix(datetime){
-    var tmp_datetime = datetime.replace(/:/g,'-');
-    tmp_datetime = tmp_datetime.replace(/ /g,'-');
-    var arr = tmp_datetime.split("-");
-    var now = new Date(Date.UTC(arr[0],arr[1]-1,arr[2],arr[3]-8,arr[4],arr[5]));
-    return parseInt(now.getTime()/1000);
+function datetime_to_unix(datetime) {
+	var tmp_datetime = datetime.replace(/:/g, '-');
+	tmp_datetime = tmp_datetime.replace(/ /g, '-');
+	var arr = tmp_datetime.split("-");
+	var now = new Date(Date.UTC(arr[0], arr[1] - 1, arr[2], arr[3] - 8, arr[4], arr[5]));
+	return parseInt(now.getTime() / 1000);
 }
+
 /*
 // JS中，日期时间格式转Unix时间戳
 function unix_to_datetime(unix) {
-    var now = new Date(parseInt(unix) * 1000);
-    return now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+var now = new Date(parseInt(unix) * 1000);
+return now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
 }
 */
-
 
 /**
  * 和PHP一样的时间戳格式化函数
  * @param  {string} format    格式
  * @param  {int}    timestamp 要格式化的时间 默认为当前时间
  * @return {string}           格式化的时间字符串
- * dateJS('Y-m-d','1350052653');//很方便的将时间戳转换成了2012-10-11 
+ * dateJS('Y-m-d','1350052653');//很方便的将时间戳转换成了2012-10-11
  * dateJS('Y-m-d H:i:s','1350052653');//得到的结果是2012-10-12 22:37:33
  */
 function dateJS(format, timestamp) {

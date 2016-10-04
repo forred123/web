@@ -14,15 +14,15 @@ if (isset($_GET['sqlClass'])) {
 
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
-	
+
 	//减一天是为了保证查询时间段为完全闭区间，因为默认为当日的0:0:0
 	date_default_timezone_set('PRC');
 	$timeStart = strtotime($_GET['timeStart']);
-	$timeEnd = strtotime($_GET['timeEnd']) + 24*60*60-1;
+	$timeEnd = strtotime($_GET['timeEnd']) + 24 * 60 * 60 - 1;
 
 	$sbmt = $pdo -> prepare("select * from subFeeTable where uid=? and attandenceTime>=? and attandenceTime<=?  order by subFeeCourse asc,convert(product using gbk) asc,attandenceTime desc");
-	$sbmt -> execute(array($_GET['uid'],$timeStart,$timeEnd));
-	
+	$sbmt -> execute(array($_GET['uid'], $timeStart, $timeEnd));
+
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
 		$allRows = $sbmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -54,21 +54,21 @@ if (isset($_GET['sqlFee'])) {
 	$pdo -> query('set names utf8');
 	//减一天是为了保证查询时间段为完全闭区间，因为默认为当日的0:0:0
 	date_default_timezone_set('PRC');
-	
-	if($_GET['timeStart']=="%"){
+
+	if ($_GET['timeStart'] == "%") {
 		$timeStart = strtotime("2010-01-01");
-	}else{
+	} else {
 		$timeStart = strtotime($_GET['timeStart']);
 	}
-	
-	if($_GET['timeEnd']=="%"){
+
+	if ($_GET['timeEnd'] == "%") {
 		$timeEnd = strtotime(date("Y-m-d"));
-	}else{
-		$timeEnd = strtotime($_GET['timeEnd']) + 24*3600-1;
+	} else {
+		$timeEnd = strtotime($_GET['timeEnd']) + 24 * 3600 - 1;
 	}
 
 	$sbmt = $pdo -> prepare("select * from addFeeTable where uid = ? and time>=? and time<=?");
-	$sbmt -> execute(array($_GET['uid'],$timeStart, $timeEnd));
+	$sbmt -> execute(array($_GET['uid'], $timeStart, $timeEnd));
 
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
@@ -129,7 +129,7 @@ if (isset($_GET['sqlName'])) {
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>综合查询</title>
 
 		<link rel="stylesheet" type="text/css" href="../css/table.css" />
@@ -215,8 +215,7 @@ if (isset($_GET['sqlName'])) {
 				<input type="text" class="date" style="width: 10ex" name="timeStart" readonly/>
 				结束时间
 				<input type="text" class="date" style="width: 10ex" name="timeEnd" readonly/>
-				(提示：按时间为闭区间进行查询	) 
-				 </td>
+				(提示：按时间为闭区间进行查询	) </td>
 			</tr>
 
 			<tr>
@@ -230,9 +229,7 @@ if (isset($_GET['sqlName'])) {
 				<input type="button" name="showClassTable" value="只显示考勤表" onclick='showTable(2)'/>
 				<input type="button" name="showFeeTable" value="只显示交费表" onclick='showTable(3)'/>
 				<input type="button" name="showAllTable" value="显示所有表" onclick='showTable(4)'/>
-				&nbsp;
-				<a onclick='exportToCSVsqlSome(this)' download="综合查询报表.csv" href="#">导出Excel</a>
-				</td>
+				&nbsp; <a onclick='exportToCSVsqlSome(this)' download="综合查询报表.csv" href="#">导出Excel</a></td>
 			</tr>
 
 		</table>

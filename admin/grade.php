@@ -91,14 +91,14 @@ if (isset($_GET['stateInGrade'])) {
 	// 先从学生表中查询分班状态为未分班的学生的ID，然后再去交费表中查询该ID的学生的信息
 	//$sbmt = $pdo -> prepare("select * from recordStudentTable where MathStateInGrade=? or ChineseStateInGrade=? or EnglishStateInGrade=? or PhysicsStateInGrade=? or ChemistryStateInGrade=?");
 	//$sbmt -> execute(array("0","0","0","0","0"));
-	if($_GET['schoolZone']!="%"){
-		$schoolZone = $_GET['schoolZone']."_";
-	}else{
+	if ($_GET['schoolZone'] != "%") {
+		$schoolZone = $_GET['schoolZone'] . "_";
+	} else {
 		$schoolZone = "%";
 	}
-	
+
 	$sbmt = $pdo -> prepare("select * from recordStudentTable where (MathStateInGrade=? or MathStateInGrade=? or ChineseStateInGrade=? or ChineseStateInGrade=? or EnglishStateInGrade=? or EnglishStateInGrade=? or PhysicsStateInGrade=? or PhysicsStateInGrade=? or ChemistryStateInGrade=? or ChemistryStateInGrade=?) and (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) order by convert (name1 using gbk) asc");
-	$sbmt -> execute(array("0", "4", "0", "4", "0", "4", "0", "4", "0", "4",$schoolZone,$schoolZone,$schoolZone));
+	$sbmt -> execute(array("0", "4", "0", "4", "0", "4", "0", "4", "0", "4", $schoolZone, $schoolZone, $schoolZone));
 
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {

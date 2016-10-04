@@ -10,20 +10,20 @@ if (isset($_POST['submitIn'])) {
 
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
-	
+
 	//echo md5("admin");
 	// echo $_POST['userID'];
 	// echo md5($_POST['userPW']);
-	
-	// 先从教师表中查询，如果不存在则从学生表中查询，如果都不存在则登录失败	
+
+	// 先从教师表中查询，如果不存在则从学生表中查询，如果都不存在则登录失败
 	$sbmtTeacher = $pdo -> prepare("select uid, passWD, name, schoolZone1, schoolZone2, schoolZone3, schoolZone4, schoolZone5, role from recordTeacherTable where name=? and passWD=?");
 	$sbmtTeacher -> execute(array($_POST['userName'], $_POST['userPW']));
-	
+
 	$sbmtStudent = $pdo -> prepare("select uid, passWD, name1, role from recordStudentTable where uid=? and passWD=?");
 	$sbmtStudent -> execute(array($_POST['userName'], $_POST['userPW']));
 
 	// 如果查出数据，就说明用户存在，就登录
-	if($sbmtTeacher -> rowCount() > 0){
+	if ($sbmtTeacher -> rowCount() > 0) {
 		list($userID, $userPW, $userName, $schoolZone1, $schoolZone2, $schoolZone3, $schoolZone4, $schoolZone5, $role) = $sbmtTeacher -> fetch(PDO::FETCH_NUM);
 		echo $userName;
 		echo "已登录," . $userName . "你好";
@@ -43,9 +43,9 @@ if (isset($_POST['submitIn'])) {
 		setcookie("schoolZone5", $schoolZone5, $effictivTime, "/");
 
 		// 设置一个登录标记$isLogin
-		setcookie("isLogin", 1, $effictivTime,"/");
+		setcookie("isLogin", 1, $effictivTime, "/");
 		header("Location:public/indexLogin.php");
-	}elseif($sbmtStudent -> rowCount() > 0){
+	} elseif ($sbmtStudent -> rowCount() > 0) {
 		list($userID, $userPW, $userName, $role) = $sbmtStudent -> fetch(PDO::FETCH_NUM);
 		echo $userName;
 		echo "已登录," . $userName . "你好";
@@ -59,30 +59,30 @@ if (isset($_POST['submitIn'])) {
 		setcookie("userName", urlencode($userName), $effictivTime, "/");
 
 		// 设置一个登录标记$isLogin
-		setcookie("isLogin", 1, $effictivTime,"/");
-		header("Location:public/indexLogin.php");
-	}else{
-		echo "登录失败";
-	}
-	/*
-	if ($sbmtTeacher -> rowCount() > 0) {
-		list($userID, $userPW, $userName, $role) = $sbmtTeacher -> fetch(PDO::FETCH_NUM);
-		echo $userName;
-		echo "已登录," . $userName . "你好";
-		// 登录有效时长为1.0小时
-		$effictivTime = time() + 1.0*60*60;
-
-		setcookie("userID", $userID, $effictivTime, "/");
-		setcookie("userPW", $userPW, $effictivTime, "/");
-		setcookie("role", $role, $effictivTime, "/");
-		setcookie("userName", $userName, $effictivTime, "/");
-
-		// 设置一个登录标记$isLogin
-		setcookie("isLogin", 1, $effictivTime,"/");
+		setcookie("isLogin", 1, $effictivTime, "/");
 		header("Location:public/indexLogin.php");
 	} else {
 		echo "登录失败";
 	}
+	/*
+	 if ($sbmtTeacher -> rowCount() > 0) {
+	 list($userID, $userPW, $userName, $role) = $sbmtTeacher -> fetch(PDO::FETCH_NUM);
+	 echo $userName;
+	 echo "已登录," . $userName . "你好";
+	 // 登录有效时长为1.0小时
+	 $effictivTime = time() + 1.0*60*60;
+
+	 setcookie("userID", $userID, $effictivTime, "/");
+	 setcookie("userPW", $userPW, $effictivTime, "/");
+	 setcookie("role", $role, $effictivTime, "/");
+	 setcookie("userName", $userName, $effictivTime, "/");
+
+	 // 设置一个登录标记$isLogin
+	 setcookie("isLogin", 1, $effictivTime,"/");
+	 header("Location:public/indexLogin.php");
+	 } else {
+	 echo "登录失败";
+	 }
 	 */
 }
 ?>

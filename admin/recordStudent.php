@@ -50,8 +50,7 @@ if (isset($_GET['userName1'])) {
 	$pdo -> query('set names utf8');
 
 	$sbmt = $pdo -> prepare("select * from recordStudentTable where name1 = ? or name2=?");
-	$sbmt -> execute(array($_GET['userName1'],$_GET['userName1']));
-
+	$sbmt -> execute(array($_GET['userName1'], $_GET['userName1']));
 
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
@@ -63,14 +62,14 @@ if (isset($_GET['userName1'])) {
 		// 查询内容到此为止，否则返回的是整个html
 		$data = json_encode($allRows);
 		echo $data;
-	} 
-	/*
-	else if ($sbmt -> rowCount() > 1) {
-		// 有多个记录
-		$result = "2";
-		echo $result;
-	}*/
-	 else {
+	}
+	/* else
+	  if ($sbmt -> rowCount() > 1) {
+	 // 有多个记录
+	 $result = "2";
+	 echo $result;
+	 }*/
+	else {
 		// 没有记录
 		$result = "0";
 		echo $result;
@@ -87,14 +86,14 @@ if (isset($_POST['submitType'])) {
 		echo "数据库连接失败：" . $e -> getMessage();
 		exit();
 	}
-	
+
 	date_default_timezone_set('PRC');
-	
+
 	$inTime = strtotime($_POST['inTime']);
-	
-	if($_POST['outTime']==""){
-		$outTime="";
-	}else{
+
+	if ($_POST['outTime'] == "") {
+		$outTime = "";
+	} else {
 		$outTime = strtotime($_POST['outTime']);
 	}
 
@@ -111,11 +110,11 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=recordStudent.php>';
 			echo "</head>";
 			echo "<body>";
-			echo "添加成功"."</br></br>";
+			echo "添加成功" . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="recordStudent.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return TRUE;
 		} else {
 			echo "添加失败";
@@ -125,23 +124,20 @@ if (isset($_POST['submitType'])) {
 
 	$temp = $_POST['userID'];
 	$uid = substr($temp, 1);
-	
+
 	if (isset($_POST['submitUpdate'])) {
-		if($outTime!=""){
-			// 退学 
+		if ($outTime != "") {
+			// 退学
 			$sbmt = $pdo -> prepare("update recordStudentTable set name1=?,name2=?,sex=?,passWD=?,schoolZone1=?,schoolZone2=?,schoolZone3=?,school1=?,school2=?,grade=?,class=?,
 					studentWX=?,studentQQ=?,studentTel=?,motherTel=?,motherWX=?,fatherTel=?,fatherWX=?,address=?,inTime=?,outTime=?,
 					MathStateInGrade=?,ChineseStateInGrade=?,EnglishStateInGrade=?,PhysicsStateInGrade=?,ChemistryStateInGrade=?
 					where name1=? and uid=?");
-			$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName1']), str_replace(' ', '', $_POST['userName2']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $_POST['schoolZone1Copy'], $_POST['schoolZone2Copy'], $_POST['schoolZone3Copy'], 
-					$_POST['school1'], $_POST['school2'], $_POST['grade'], $_POST['class'], $_POST['studentWX'], $_POST['studentQQ'], $_POST['studentTel'], $_POST['motherTel'], $_POST['motherWX'], $_POST['fatherTel'], $_POST['fatherWX'], $_POST['address'], $inTime, $outTime, 
-					"5","5","5","5","5",
-					str_replace(' ', '', $_POST['userName1']),$uid));
-		}else{
-			// 非退学的修改学生档案 
+			$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName1']), str_replace(' ', '', $_POST['userName2']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $_POST['schoolZone1Copy'], $_POST['schoolZone2Copy'], $_POST['schoolZone3Copy'], $_POST['school1'], $_POST['school2'], $_POST['grade'], $_POST['class'], $_POST['studentWX'], $_POST['studentQQ'], $_POST['studentTel'], $_POST['motherTel'], $_POST['motherWX'], $_POST['fatherTel'], $_POST['fatherWX'], $_POST['address'], $inTime, $outTime, "5", "5", "5", "5", "5", str_replace(' ', '', $_POST['userName1']), $uid));
+		} else {
+			// 非退学的修改学生档案
 			$sbmt = $pdo -> prepare("update recordStudentTable set name1=?,name2=?,sex=?,schoolZone1=?,schoolZone2=?,schoolZone3=?,school1=?,school2=?,grade=?,class=?,
 					studentWX=?,studentQQ=?,studentTel=?,motherTel=?,motherWX=?,fatherTel=?,fatherWX=?,address=?,inTime=?,outTime=? where name1=? and uid=?");
-			$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName1']), str_replace(' ', '', $_POST['userName2']), $_POST['sex'], $_POST['schoolZone1Copy'], $_POST['schoolZone2Copy'], $_POST['schoolZone3Copy'], $_POST['school1'], $_POST['school2'], $_POST['grade'], $_POST['class'], $_POST['studentWX'], $_POST['studentQQ'], $_POST['studentTel'], $_POST['motherTel'], $_POST['motherWX'], $_POST['fatherTel'], $_POST['fatherWX'], $_POST['address'], $inTime, $outTime, str_replace(' ', '', $_POST['userName1']),$uid));
+			$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName1']), str_replace(' ', '', $_POST['userName2']), $_POST['sex'], $_POST['schoolZone1Copy'], $_POST['schoolZone2Copy'], $_POST['schoolZone3Copy'], $_POST['school1'], $_POST['school2'], $_POST['grade'], $_POST['class'], $_POST['studentWX'], $_POST['studentQQ'], $_POST['studentTel'], $_POST['motherTel'], $_POST['motherWX'], $_POST['fatherTel'], $_POST['fatherWX'], $_POST['address'], $inTime, $outTime, str_replace(' ', '', $_POST['userName1']), $uid));
 		}
 		if ($flag) {
 			echo "<html>";
@@ -149,21 +145,21 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=recordStudent.php>';
 			echo "</head>";
 			echo "<body>";
-			echo "修改成功"."</br></br>";
+			echo "修改成功" . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="recordStudent.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return TRUE;
 		} else {
 			echo "修改失败";
 			return FALSE;
 		}
 	}
-	
+
 	if (isset($_POST['submitDelete'])) {
 		$sbmt = $pdo -> prepare("delete from recordStudentTable where name1 = ? and uid=?");
-		$flag = $sbmt -> execute(array($_POST['userName1'],$uid));
+		$flag = $sbmt -> execute(array($_POST['userName1'], $uid));
 
 		if ($flag) {
 			echo "删除成功！";
@@ -185,7 +181,7 @@ if (isset($_POST['submitType'])) {
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>学生档案</title>
 
 		<link rel="stylesheet" type="text/css" href="../css/table.css" />
@@ -262,15 +258,15 @@ if (isset($_POST['submitType'])) {
 
 			});
 		</script>
-		
+
 		<!-- 		添加表格样式 -->
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$("tr").mouseover(function(){
-					$(this).css("background-color","#e9eaec");
+			$(document).ready(function() {
+				$("tr").mouseover(function() {
+					$(this).css("background-color", "#e9eaec");
 				});
-				$("tr").mouseout(function(){
-					$(this).css("background-color","");
+				$("tr").mouseout(function() {
+					$(this).css("background-color", "");
 				});
 				$("tr:odd").addClass("rowBgColorOdd");
 				$("tr:even").addClass("rowBgColorEven");
@@ -285,7 +281,7 @@ if (isset($_POST['submitType'])) {
 			.btn {
 				width: 6ex;
 			}
-			
+
 		</style>
 		<!--end datepicker -->
 
@@ -332,7 +328,7 @@ if (isset($_POST['submitType'])) {
 						<option value="2">女</option>
 					</select></td>
 				</tr>
-				
+
 				<tr>
 					<th>登录密码：</th>
 					<td>
@@ -405,9 +401,7 @@ if (isset($_POST['submitType'])) {
 						<option value="11">高二</option>
 						<option value="12">高三</option>
 						<option value="13">大学</option>
-					</select>
-					（提示：大于高三的学生显示为大学。）
-					</td>
+					</select> （提示：大于高三的学生显示为大学。） </td>
 				</tr>
 
 				<tr>
@@ -484,14 +478,14 @@ if (isset($_POST['submitType'])) {
 					<th>退学时间：</th>
 					<td>
 					<input type="text" class="date" size="18" name="outTime"
-					readonly="true" /> &nbsp;&nbsp;
+					readonly="true" />
+					&nbsp;&nbsp;
 					<input type="button" value="清空当前退学时间" onclick="clearOutTime()" />
 					</td>
 				</tr>
 				<tr>
 					<th style="width: 180px"></th>
-					<td>
-					(提示：填写退学时间提交后，会退掉该学生所有班级！)</td>
+					<td> (提示：填写退学时间提交后，会退掉该学生所有班级！)</td>
 				</tr>
 				<tr>
 					<td colspan="4" align="center">

@@ -23,7 +23,7 @@ function sqlStudent() {
 		course = "%";
 	}
 	var state = document.getElementsByName("state")[0].value;
-	if(state=="0"){
+	if (state == "0") {
 		state = "%";
 	}
 	var product = document.getElementsByName("product")[0].options[document.getElementsByName("product")[0].options.selectedIndex].text;
@@ -39,19 +39,19 @@ function sqlStudent() {
 		classInMLS = "%";
 	}
 	var timeStart = document.getElementsByName("timeStart")[0].value;
-	if(timeStart ==""){
+	if (timeStart == "") {
 		timeStart = "%";
-	}	
+	}
 	var timeEnd = document.getElementsByName("timeEnd")[0].value;
-	if(timeEnd ==""){
+	if (timeEnd == "") {
 		timeEnd = "%";
-	}	
+	}
 	var name = document.getElementsByName("name")[0].value;
-	if(name ==""){
+	if (name == "") {
 		name = "%";
 	}
-	var studyState = document.getElementsByName("studyState")[0].value;	
-		
+	var studyState = document.getElementsByName("studyState")[0].value;
+
 	var xmlhttp;
 
 	// 1创建AJAX对象
@@ -70,22 +70,22 @@ function sqlStudent() {
 				// 接收数据,得到服务器输出的XML数据
 
 				var ret = xmlhttp.responseText;
-				
+
 				removeRow('sqlStudentTable');
-				
+
 				if (ret == "0") {
 					alert("该查询条件下无学生信息记录，请核对查询条件！");
 				} else {
 					var infoStudent = eval(ret);
 
 					appendRowHeader(sqlStudentTable);
-					
+
 					i = 0;
 					for (var tmp in infoStudent) {
-						appendRow(infoStudent[i],i);
+						appendRow(infoStudent[i], i);
 						i++;
 					}
-					
+
 				}
 
 			} else {
@@ -94,21 +94,10 @@ function sqlStudent() {
 		}
 
 	};
-	// 3发出http请求		
+	// 3发出http请求
 	var url = "sqlStudent.php";
-	url = url + "?sqlStudent=1"
-			  + "&schoolZone=" + encodeURIComponent(schoolZone)
-			  + "&grade=" + grade
-			  + "&course=" + course
-			  + "&state=" + state
-			  + "&product=" + encodeURIComponent(product)
-			  + "&sex=" + sex
-			  + "&classIDInMLS=" + classInMLS
-			  + "&timeStart=" + timeStart
-			  + "&timeEnd="+ timeEnd
-			  + "&name=" + name
-			  + "&studyState=" + studyState;
-	
+	url = url + "?sqlStudent=1" + "&schoolZone=" + encodeURIComponent(schoolZone) + "&grade=" + grade + "&course=" + course + "&state=" + state + "&product=" + encodeURIComponent(product) + "&sex=" + sex + "&classIDInMLS=" + classInMLS + "&timeStart=" + timeStart + "&timeEnd=" + timeEnd + "&name=" + name + "&studyState=" + studyState;
+
 	// alert(url);
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
@@ -117,9 +106,9 @@ function sqlStudent() {
 }
 
 function loadPrincipalSetAndTeacher() {
-	if(document.getElementsByName("schoolZone")[0].value>0){
+	if (document.getElementsByName("schoolZone")[0].value > 0) {
 		var schoolZone = document.getElementsByName("schoolZone")[0].options[document.getElementsByName("schoolZone")[0].value].text;
-		
+
 		loadPrincipalSet(schoolZone);
 		// ajax 获得班级名称
 		loadGradeSetName(schoolZone);
@@ -167,7 +156,7 @@ function loadGradeSetName(schoolZone) {
 						obj.options.add(new Option(info[i].class, info[i].id));
 						i++;
 					}
-					
+
 				}
 
 			} else {
@@ -207,7 +196,7 @@ function loadCourse(schoolZone) {
 	for ( i = 1; i < obj.options.length; ) {
 		obj.removeChild(obj.options[i]);
 	}
-	
+
 	if (info[index].course1 != "") {
 		obj.options.add(new Option("数学", 1));
 	}
@@ -293,8 +282,8 @@ function loadProduct(schoolZone) {
 	for ( i = 1; i < obj.options.length; ) {
 		obj.removeChild(obj.options[i]);
 	}
-	
-	i=1;
+
+	i = 1;
 	if (info[index].product1 != "") {
 		obj.options.add(new Option(productLoad[0], i));
 		i++;
@@ -336,14 +325,14 @@ function initPage() {
 				// 接收数据,得到服务器输出的XML数据
 
 				var ret = xmlhttp.responseText;
-				
+
 				if (ret == "0") {
 					alert("系统内无校区信息，请录入后重新查看！");
 				} else if (ret == "2") {
 					alert("检查到该校区名有多条记录，请联系管理员！");
 				} else {
 					info = eval(ret);
-						
+
 					var obj1 = document.getElementsByName("schoolZone")[0];
 					i = 0;
 					for (var tmp in info) {
@@ -351,7 +340,7 @@ function initPage() {
 						i++;
 					}
 					len = i;
-					
+
 					// 默认填写当前日期
 					document.getElementsByName("timeStart")[0].value = getYear0FormatDate();
 					document.getElementsByName("timeEnd")[0].value = getNowFormatDate();
@@ -373,7 +362,7 @@ function initPage() {
 }
 
 // 插入班课查询结果表头
-function appendRowHeader(TableID){
+function appendRowHeader(TableID) {
 	// 添加一行
 	var newTr = TableID.insertRow(-1);
 	// 添加两列
@@ -416,44 +405,44 @@ function appendRowHeader(TableID){
 	var newTd36 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';
-	newTd22.align='center';
-	newTd23.align='center';
-	newTd24.align='center';
-	newTd25.align='center';
-	newTd26.align='center';
-	newTd27.align='center';
-	newTd28.align='center';
-	newTd29.align='center';
-	newTd30.align='center';
-	newTd31.align='center';
-	newTd32.align='center';
-	newTd33.align='center';
-	newTd34.align='center';
-	newTd35.align='center';
-	newTd36.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+
 	newTd0.innerHTML = "序号";
 	newTd1.innerHTML = "ID";
 	newTd2.innerHTML = "姓名1";
@@ -490,14 +479,14 @@ function appendRowHeader(TableID){
 	newTd33.innerHTML = "物理产品";
 	newTd34.innerHTML = "化学";
 	newTd35.innerHTML = "化学状态";
-	newTd36.innerHTML = "化学产品";	
+	newTd36.innerHTML = "化学产品";
 }
 
 // 插入班课表格相关函数
-function appendRow(obj,index){
+function appendRow(obj, index) {
 	// 序号从1开始
 	index = index + 1;
-	
+
 	var TableID = sqlStudentTable;
 
 	// 添加一行
@@ -542,224 +531,224 @@ function appendRow(obj,index){
 	var newTd36 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';	
-	newTd22.align='center';	
-	newTd23.align='center';	
-	newTd24.align='center';	
-	newTd25.align='center';	
-	newTd26.align='center';	
-	newTd27.align='center';	
-	newTd28.align='center';	
-	newTd29.align='center';	
-	newTd30.align='center';	
-	newTd31.align='center';	
-	newTd32.align='center';	
-	newTd33.align='center';	
-	newTd34.align='center';	
-	newTd35.align='center';	
-	newTd36.align='center';	
-		/*
-	var attandenceDate = dateJS("Y-M-d", mat[5]);
-	var attandenceTimeStart = dateJS("H:i", mat[5]);
-	
-	var attandenceTimeEnd = dateJS("H:i", parseInt(mat[5])+mat[11]*60);
-	var strTimePeriod = attandenceTimeStart +"~"+ attandenceTimeEnd;
-	var nameTmp = "";
-	*/
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+	/*
+	 var attandenceDate = dateJS("Y-M-d", mat[5]);
+	 var attandenceTimeStart = dateJS("H:i", mat[5]);
+
+	 var attandenceTimeEnd = dateJS("H:i", parseInt(mat[5])+mat[11]*60);
+	 var strTimePeriod = attandenceTimeStart +"~"+ attandenceTimeEnd;
+	 var nameTmp = "";
+	 */
 	newTd0.innerHTML = index;
 	newTd1.innerHTML = obj.uid;
 	newTd2.innerHTML = obj.name1;
-	if(obj.name2 == ""){
+	if (obj.name2 == "") {
 		newTd3.innerHTML = "/";
-	}else{
+	} else {
 		newTd3.innerHTML = obj.name2;
 	}
-	
-	if(obj.sex=="1"){
+
+	if (obj.sex == "1") {
 		newTd4.innerHTML = "男";
-	}else if(obj.sex=="2"){
+	} else if (obj.sex == "2") {
 		newTd4.innerHTML = "女";
-	}else{
+	} else {
 		newTd4.innerHTML = "未填写";
 	}
 	strtmp = obj.schoolZone1;
-	newTd5.innerHTML = strtmp.substr(0,strtmp.length-1);
-	if(obj.schoolZone2==""){
-		newTd6.innerHTML ="/";
-	}else{
+	newTd5.innerHTML = strtmp.substr(0, strtmp.length - 1);
+	if (obj.schoolZone2 == "") {
+		newTd6.innerHTML = "/";
+	} else {
 		strtmp = obj.schoolZone2;
-		newTd6.innerHTML = strtmp.substr(0,strtmp.length-1);
+		newTd6.innerHTML = strtmp.substr(0, strtmp.length - 1);
 	}
-	if(obj.schoolZone3==""){
-		newTd7.innerHTML ="/";
-	}else{
+	if (obj.schoolZone3 == "") {
+		newTd7.innerHTML = "/";
+	} else {
 		strtmp = obj.schoolZone3;
-		newTd7.innerHTML = strtmp.substr(0,strtmp.length-1);
+		newTd7.innerHTML = strtmp.substr(0, strtmp.length - 1);
 	}
 	newTd8.innerHTML = obj.school1;
-	if(obj.schoolZone3==""){
-		newTd9.innerHTML ="/";
-	}else{
+	if (obj.schoolZone3 == "") {
+		newTd9.innerHTML = "/";
+	} else {
 		newTd9.innerHTML = obj.school2;
 	}
-	if(obj.grade == "7"){
+	if (obj.grade == "7") {
 		newTd10.innerHTML = "初一";
 	}
-	if(obj.grade == "8"){
+	if (obj.grade == "8") {
 		newTd10.innerHTML = "初二";
 	}
-	if(obj.grade == "9"){
+	if (obj.grade == "9") {
 		newTd10.innerHTML = "初三";
 	}
-	if(obj.grade == "10"){
+	if (obj.grade == "10") {
 		newTd10.innerHTML = "高一";
 	}
-	if(obj.grade == "11"){
+	if (obj.grade == "11") {
 		newTd10.innerHTML = "高二";
 	}
-	if(obj.grade == "12"){
+	if (obj.grade == "12") {
 		newTd10.innerHTML = "高三";
 	}
-	if(parseInt(obj.grade)>= 13){
+	if (parseInt(obj.grade) >= 13) {
 		newTd10.innerHTML = "大学";
 	}
-	
-	newTd11.innerHTML = obj.class;	
+
+	newTd11.innerHTML = obj.class;
 	newTd12.innerHTML = obj.studentTel;
 	newTd13.innerHTML = obj.studentWX;
 	newTd14.innerHTML = obj.studentQQ;
 	newTd15.innerHTML = obj.motherTel;
 	newTd16.innerHTML = obj.motherWX;
 	newTd17.innerHTML = obj.fatherTel;
-	newTd18.innerHTML = obj.fatherWX;	
+	newTd18.innerHTML = obj.fatherWX;
 	newTd19.innerHTML = obj.address;
-	newTd20.innerHTML = dateJS("Y-m-d",obj.inTime);
-	if(obj.outTime==""){
+	newTd20.innerHTML = dateJS("Y-m-d", obj.inTime);
+	if (obj.outTime == "") {
 		newTd21.innerHTML = "未退学";
-	}else{
-		newTd21.innerHTML = dateJS("Y-m-d",obj.outTime);
+	} else {
+		newTd21.innerHTML = dateJS("Y-m-d", obj.outTime);
 	}
 
-	if((obj.MathStateInGrade=="1")||(obj.MathStateInGrade=="3")){
-		newTd22.innerHTML = "数学";	
-		newTd23.innerHTML = "在班";	
-	}else if(obj.MathStateInGrade=="2"){
+	if ((obj.MathStateInGrade == "1") || (obj.MathStateInGrade == "3")) {
+		newTd22.innerHTML = "数学";
+		newTd23.innerHTML = "在班";
+	} else if (obj.MathStateInGrade == "2") {
 		newTd22.innerHTML = "数学";
 		newTd23.innerHTML = "试听";
 	}
 	newTd24.innerHTML = obj.MathProduct;
-	if((obj.MathStateInGrade=="0")||(obj.MathStateInGrade=="4")||(obj.MathProduct=="")){
+	if ((obj.MathStateInGrade == "0") || (obj.MathStateInGrade == "4") || (obj.MathProduct == "")) {
 		newTd22.innerHTML = "/";
 		newTd23.innerHTML = "/";
 		newTd24.innerHTML = "/";
 	}
-	if((obj.MathStateInGrade=="5")&&(obj.MathProduct!="")){
+	if ((obj.MathStateInGrade == "5") && (obj.MathProduct != "")) {
 		newTd22.innerHTML = "数学";
 		newTd23.innerHTML = "退学";
 	}
 
-	if((obj.ChineseStateInGrade=="1")||((obj.ChineseStateInGrade=="3"))){
-		newTd25.innerHTML = "语文";	
+	if ((obj.ChineseStateInGrade == "1") || ((obj.ChineseStateInGrade == "3"))) {
+		newTd25.innerHTML = "语文";
 		newTd26.innerHTML = "在班";
-	}else if(obj.ChineseStateInGrade=="2"){
+	} else if (obj.ChineseStateInGrade == "2") {
 		newTd25.innerHTML = "语文";
 		newTd26.innerHTML = "试听";
 	}
 	newTd27.innerHTML = obj.ChineseProduct;
-	
-	if((obj.ChineseStateInGrade=="0")||(obj.ChineseStateInGrade=="4")||(obj.ChineseProduct=="")){
+
+	if ((obj.ChineseStateInGrade == "0") || (obj.ChineseStateInGrade == "4") || (obj.ChineseProduct == "")) {
 		newTd25.innerHTML = "/";
 		newTd26.innerHTML = "/";
 		newTd27.innerHTML = "/";
 	}
-	if((obj.ChineseStateInGrade=="5")&&(obj.ChineseProduct!="")){
+	if ((obj.ChineseStateInGrade == "5") && (obj.ChineseProduct != "")) {
 		newTd25.innerHTML = "语文";
 		newTd26.innerHTML = "退学";
 	}
 
-	if((obj.EnglishStateInGrade=="1")||((obj.EnglishStateInGrade=="3"))){
-		newTd28.innerHTML = "英语";	
+	if ((obj.EnglishStateInGrade == "1") || ((obj.EnglishStateInGrade == "3"))) {
+		newTd28.innerHTML = "英语";
 		newTd29.innerHTML = "在班";
-	}else if(obj.EnglishStateInGrade=="2"){
+	} else if (obj.EnglishStateInGrade == "2") {
 		newTd28.innerHTML = "英语";
 		newTd29.innerHTML = "试听";
 	}
 	newTd30.innerHTML = obj.EnglishProduct;
-	if((obj.EnglishStateInGrade=="0")||(obj.EnglishStateInGrade=="4")||(obj.EnglishProduct=="")){
+	if ((obj.EnglishStateInGrade == "0") || (obj.EnglishStateInGrade == "4") || (obj.EnglishProduct == "")) {
 		newTd28.innerHTML = "/";
 		newTd29.innerHTML = "/";
 		newTd30.innerHTML = "/";
 	}
-	if((obj.EnglishStateInGrade=="5")&&(obj.EnglishProduct!="")){
+	if ((obj.EnglishStateInGrade == "5") && (obj.EnglishProduct != "")) {
 		newTd28.innerHTML = "英语";
 		newTd29.innerHTML = "退学";
 	}
-	
-	if((obj.PhysicsStateInGrade=="1")||((obj.PhysicsStateInGrade=="3"))){
-		newTd31.innerHTML = "物理";	
-		newTd32.innerHTML = "在班";	
-	}else if(obj.PhysicsStateInGrade=="2"){
+
+	if ((obj.PhysicsStateInGrade == "1") || ((obj.PhysicsStateInGrade == "3"))) {
+		newTd31.innerHTML = "物理";
+		newTd32.innerHTML = "在班";
+	} else if (obj.PhysicsStateInGrade == "2") {
 		newTd31.innerHTML = "物理";
 		newTd32.innerHTML = "试听";
 	}
 	newTd33.innerHTML = obj.PhysicsProduct;
-	if((obj.PhysicsStateInGrade=="0")||(obj.PhysicsStateInGrade=="4")||(obj.PhysicsProduct=="")){
+	if ((obj.PhysicsStateInGrade == "0") || (obj.PhysicsStateInGrade == "4") || (obj.PhysicsProduct == "")) {
 		newTd31.innerHTML = "/";
 		newTd32.innerHTML = "/";
 		newTd33.innerHTML = "/";
 	}
-	if((obj.PhysicsStateInGrade=="5")&&(obj.PhysicsProduct!="")){
-		newTd31.innerHTML = "物理";	
+	if ((obj.PhysicsStateInGrade == "5") && (obj.PhysicsProduct != "")) {
+		newTd31.innerHTML = "物理";
 		newTd32.innerHTML = "退学";
 	}
-	
-	if((obj.ChemistryStateInGrade=="1")||((obj.ChemistryStateInGrade=="3"))){
-		newTd34.innerHTML = "化学";	
-		newTd35.innerHTML = "在班";	
-	}else if(obj.ChemistryStateInGrade=="2"){
+
+	if ((obj.ChemistryStateInGrade == "1") || ((obj.ChemistryStateInGrade == "3"))) {
+		newTd34.innerHTML = "化学";
+		newTd35.innerHTML = "在班";
+	} else if (obj.ChemistryStateInGrade == "2") {
 		newTd34.innerHTML = "化学";
 		newTd35.innerHTML = "试听";
 	}
 	newTd36.innerHTML = obj.ChemistryProduct;
-	if((obj.ChemistryStateInGrade=="0")||(obj.ChemistryStateInGrade=="4")||(obj.ChemistryProduct=="")){
+	if ((obj.ChemistryStateInGrade == "0") || (obj.ChemistryStateInGrade == "4") || (obj.ChemistryProduct == "")) {
 		newTd34.innerHTML = "/";
 		newTd35.innerHTML = "/";
 		newTd36.innerHTML = "/";
 	}
-	if((obj.ChemistryStateInGrade=="5")&&(obj.ChemistryProduct!="")){
-		newTd34.innerHTML = "化学";	
+	if ((obj.ChemistryStateInGrade == "5") && (obj.ChemistryProduct != "")) {
+		newTd34.innerHTML = "化学";
 		newTd35.innerHTML = "退学";
 	}
-	
+
 	// 添加表格样式
-	$("#sqlStudentTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlStudentTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlStudentTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlStudentTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlStudentTable tr:odd").addClass("rowBgColorOdd");
 	$("#sqlStudentTable tr:even").addClass("rowBgColorEven");
@@ -768,11 +757,11 @@ function appendRow(obj,index){
 
 // 窗口表格删除一行
 function removeRow(TableID) {
-	var tabObj = document.getElementById(TableID);	
+	var tabObj = document.getElementById(TableID);
 	tableRowCount = document.getElementById(TableID).rows.length;
-		for(var j=0;j<tableRowCount;j++){
-			// 从表格首行开始删除，所以使用0，如果要保留首行则使用1
-				tabObj.deleteRow(0);
-		}
+	for (var j = 0; j < tableRowCount; j++) {
+		// 从表格首行开始删除，所以使用0，如果要保留首行则使用1
+		tabObj.deleteRow(0);
+	}
 	tableRowCount = 0;
 }

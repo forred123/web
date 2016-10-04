@@ -248,7 +248,7 @@ function upgradeAll() {
 	document.getElementsByName("submitType")[0].value = "upgradeFlag";
 	if (confirm('请确认是否使所有学生升级一年？\n\n确认要提交该升级操作吗？')) {
 		document.getElementById("principalSetForm").submit();
-	} 
+	}
 }
 
 function sqlRecord() {
@@ -323,16 +323,16 @@ function sqlRecord() {
 						document.getElementsByName("course1")[0].value = info[0].course1;
 						document.getElementsByName("course1")[0].disabled = false;
 						document.getElementsByName("courseLabel")[0].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course1")[0].disabled = true;
 						document.getElementsByName("courseLabel")[0].checked = false;
 					}
-					
+
 					if (info[0].course2 != "") {
 						document.getElementsByName("course2")[0].value = info[0].course2;
 						document.getElementsByName("course2")[0].disabled = false;
 						document.getElementsByName("courseLabel")[1].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course2")[0].disabled = true;
 						document.getElementsByName("courseLabel")[1].checked = false;
 					}
@@ -340,7 +340,7 @@ function sqlRecord() {
 						document.getElementsByName("course3")[0].value = info[0].course3;
 						document.getElementsByName("course3")[0].disabled = false;
 						document.getElementsByName("courseLabel")[2].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course3")[0].disabled = true;
 						document.getElementsByName("courseLabel")[2].checked = false;
 					}
@@ -348,7 +348,7 @@ function sqlRecord() {
 						document.getElementsByName("course4")[0].value = info[0].course4;
 						document.getElementsByName("course4")[0].disabled = false;
 						document.getElementsByName("courseLabel")[3].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course4")[0].disabled = true;
 						document.getElementsByName("courseLabel")[4].checked = false;
 					}
@@ -356,7 +356,7 @@ function sqlRecord() {
 						document.getElementsByName("course5")[0].value = info[0].course5;
 						document.getElementsByName("course5")[0].disabled = false;
 						document.getElementsByName("courseLabel")[4].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course5")[0].disabled = true;
 						document.getElementsByName("courseLabel")[4].checked = false;
 					}
@@ -364,7 +364,7 @@ function sqlRecord() {
 						document.getElementsByName("course6")[0].value = info[0].course6;
 						document.getElementsByName("course6")[0].disabled = false;
 						document.getElementsByName("courseLabel")[5].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course6")[0].disabled = true;
 						document.getElementsByName("courseLabel")[5].checked = false;
 					}
@@ -372,7 +372,7 @@ function sqlRecord() {
 						document.getElementsByName("course7")[0].value = info[0].course7;
 						document.getElementsByName("course7")[0].disabled = false;
 						document.getElementsByName("courseLabel")[6].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course7")[0].disabled = true;
 						document.getElementsByName("courseLabel")[6].checked = false;
 					}
@@ -380,7 +380,7 @@ function sqlRecord() {
 						document.getElementsByName("course8")[0].value = info[0].course8;
 						document.getElementsByName("course8")[0].disabled = false;
 						document.getElementsByName("courseLabel")[7].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course8")[0].disabled = true;
 						document.getElementsByName("courseLabel")[7].checked = false;
 					}
@@ -388,7 +388,7 @@ function sqlRecord() {
 						document.getElementsByName("course9")[0].value = info[0].course9;
 						document.getElementsByName("course9")[0].disabled = false;
 						document.getElementsByName("courseLabel")[8].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course9")[0].disabled = true;
 						document.getElementsByName("courseLabel")[8].checked = false;
 					}
@@ -396,7 +396,7 @@ function sqlRecord() {
 						document.getElementsByName("course10")[0].value = info[0].course10;
 						document.getElementsByName("course10")[0].disabled = false;
 						document.getElementsByName("courseLabel")[9].checked = true;
-					}else{
+					} else {
 						document.getElementsByName("course10")[0].disabled = true;
 						document.getElementsByName("courseLabel")[9].checked = false;
 					}
@@ -531,14 +531,13 @@ function CloseWebPage() {
 	}
 }
 
-
 function initPage() {
 	// 只有校长才有进入校长设置的权限
 	if (GetCookie('role') == '8') {
-			// 校区负责人不能进入校长设置，只有校长可以进入
-			CloseWebPage();
-			alert('只有校长才有进入"校长设置"页面的权限！');
-			return ;
+		// 校区负责人不能进入校长设置，只有校长可以进入
+		CloseWebPage();
+		alert('只有校长才有进入"校长设置"页面的权限！');
+		return;
 	}
 	//
 	var xmlhttp;
@@ -590,7 +589,7 @@ function initPage() {
 
 					// 根据所选校区自动加载相应的产品
 					loadProduct(len);
-					
+
 					// 根据所选校区自动加载相应的科目
 					loadCourse(len);
 
@@ -617,907 +616,907 @@ function initPage() {
 function loadProduct(len) {
 	// 根据所选校区自动加载相应的产品
 	var productNameIndex = new Array();
-		for(var i=0;i<5;i++){
-			productNameIndex[i] = 0;
-		}
-		for(var i=0;i<len;i++){
-			if(info[i].product1 != ""){
-				productNameIndex[0] = i;
-			}
-			if(info[i].product2 != ""){
-				productNameIndex[1] = i;
-			}	
-			if(info[i].product3 != ""){
-				productNameIndex[2] = i;
-			}	
-			if(info[i].product4 != ""){
-				productNameIndex[3] = i;
-			}	
-			if(info[i].product5 != ""){
-				productNameIndex[4] = i;
-			}	
-		}
-		
-		document.getElementsByName("product1")[0].value = info[productNameIndex[0]].product1;
-		document.getElementsByName("product2")[0].value = info[productNameIndex[1]].product2;
-		document.getElementsByName("product3")[0].value = info[productNameIndex[2]].product3;
-		document.getElementsByName("product4")[0].value = info[productNameIndex[3]].product4;
-		document.getElementsByName("product5")[0].value = info[productNameIndex[4]].product5;
-	/*
-	switch (len) {
-	case 1:
-		if (info[0].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[0].product1;
-		} else {
-			//document.getElementsByName("product1")[0].value = "";
-		}
-		if (info[0].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[0].product2;
-		} else {
-			//document.getElementsByName("product2")[0].value = "";
-		}
-		if (info[0].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[0].product3;
-		} else {
-			//document.getElementsByName("product3")[0].value = "";
-		}
-		if (info[0].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[0].product4;
-		} else {
-			//document.getElementsByName("product4")[0].value = "";
-		}
-		if (info[0].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[0].product5;
-		} else {
-			//document.getElementsByName("product5")[0].value = "";
-		}
-		break;
-	case 2:
-		if (info[0].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[0].product1;
-		} else if (info[1].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[1].product1;
-		} else {
-			//document.getElementsByName("product1")[0].value = "";
-		}
-		if (info[0].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[0].product2;
-		} else if (info[1].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[1].product2;
-		} else {
-			//document.getElementsByName("product2")[0].value = "";
-		}
-		if (info[0].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[0].product3;
-		} else if (info[1].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[1].product3;
-		} else {
-			//document.getElementsByName("product3")[0].value = "";
-		}
-		if (info[0].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[0].product4;
-		} else if (info[1].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[1].product4;
-		} else {
-			//document.getElementsByName("product4")[0].value = "";
-		}
-		if (info[0].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[0].product5;
-		} else if (info[1].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[1].product5;
-		} else {
-			//document.getElementsByName("product5")[0].value = "";
-		}
-		break;
-	case 3:
-		if (info[0].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[0].product1;
-		} else if (info[1].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[1].product1;
-		} else if (info[2].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[2].product1;
-		} else {
-			//document.getElementsByName("product1")[0].value = "";
-		}
-		if (info[0].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[0].product2;
-		} else if (info[1].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[1].product2;
-		} else if (info[2].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[2].product2;
-		} else {
-			//document.getElementsByName("product2")[0].value = "";
-		}
-		if (info[0].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[0].product3;
-		} else if (info[1].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[1].product3;
-		} else if (info[2].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[2].product3;
-		} else {
-			//document.getElementsByName("product3")[0].value = "";
-		}
-		if (info[0].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[0].product4;
-		} else if (info[1].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[1].product4;
-		} else if (info[2].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[2].product4;
-		} else {
-			//document.getElementsByName("product4")[0].value = "";
-		}
-		if (info[0].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[0].product5;
-		} else if (info[1].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[1].product5;
-		} else if (info[2].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[2].product5;
-		} else {
-			//document.getElementsByName("product5")[0].value = "";
-		}
-		break;
-	case 4:
-		if (info[0].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[0].product1;
-		} else if (info[1].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[1].product1;
-		} else if (info[2].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[2].product1;
-		} else if (info[3].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[3].product1;
-		} else {
-			//document.getElementsByName("product1")[0].value = "";
-		}
-		if (info[0].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[0].product2;
-		} else if (info[1].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[1].product2;
-		} else if (info[2].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[2].product2;
-		} else if (info[3].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[3].product2;
-		} else {
-			//document.getElementsByName("product2")[0].value = "";
-		}
-		if (info[0].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[0].product3;
-		} else if (info[1].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[1].product3;
-		} else if (info[2].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[2].product3;
-		} else if (info[3].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[3].product3;
-		} else {
-			//document.getElementsByName("product3")[0].value = "";
-		}
-		if (info[0].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[0].product4;
-		} else if (info[1].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[1].product4;
-		} else if (info[2].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[2].product4;
-		} else if (info[3].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[3].product4;
-		} else {
-			//document.getElementsByName("product4")[0].value = "";
-		}
-		if (info[0].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[0].product5;
-		} else if (info[1].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[1].product5;
-		} else if (info[2].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[2].product5;
-		} else if (info[3].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[3].product5;
-		} else {
-			//document.getElementsByName("product5")[0].value = "";
-		}
-		break;
-	case 5:
-		if (info[0].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[0].product1;
-		} else if (info[1].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[1].product1;
-		} else if (info[2].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[2].product1;
-		} else if (info[3].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[3].product1;
-		} else if (info[4].product1 != "") {
-			document.getElementsByName("product1")[0].value = info[4].product1;
-		} else {
-			//document.getElementsByName("product1")[0].value = "";
-		}
-		if (info[0].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[0].product2;
-		} else if (info[1].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[1].product2;
-		} else if (info[2].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[2].product2;
-		} else if (info[3].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[3].product2;
-		} else if (info[4].product2 != "") {
-			document.getElementsByName("product2")[0].value = info[4].product2;
-		} else {
-			//document.getElementsByName("product2")[0].value = "";
-		}
-		if (info[0].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[0].product3;
-		} else if (info[1].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[1].product3;
-		} else if (info[2].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[2].product3;
-		} else if (info[3].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[3].product3;
-		} else if (info[4].product3 != "") {
-			document.getElementsByName("product3")[0].value = info[4].product3;
-		} else {
-			//document.getElementsByName("product3")[0].value = "";
-		}
-		if (info[0].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[0].product4;
-		} else if (info[1].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[1].product4;
-		} else if (info[2].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[2].product4;
-		} else if (info[3].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[3].product4;
-		} else if (info[4].product4 != "") {
-			document.getElementsByName("product4")[0].value = info[4].product4;
-		} else {
-			//document.getElementsByName("product4")[0].value = "";
-		}
-		if (info[0].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[0].product5;
-		} else if (info[1].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[1].product5;
-		} else if (info[2].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[2].product5;
-		} else if (info[3].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[3].product5;
-		} else if (info[4].product5 != "") {
-			document.getElementsByName("product5")[0].value = info[4].product5;
-		} else {
-			//document.getElementsByName("product5")[0].value = "";
-		}
-		break;
-	default:
-		break;
+	for (var i = 0; i < 5; i++) {
+		productNameIndex[i] = 0;
 	}
-	*/
+	for (var i = 0; i < len; i++) {
+		if (info[i].product1 != "") {
+			productNameIndex[0] = i;
+		}
+		if (info[i].product2 != "") {
+			productNameIndex[1] = i;
+		}
+		if (info[i].product3 != "") {
+			productNameIndex[2] = i;
+		}
+		if (info[i].product4 != "") {
+			productNameIndex[3] = i;
+		}
+		if (info[i].product5 != "") {
+			productNameIndex[4] = i;
+		}
+	}
+
+	document.getElementsByName("product1")[0].value = info[productNameIndex[0]].product1;
+	document.getElementsByName("product2")[0].value = info[productNameIndex[1]].product2;
+	document.getElementsByName("product3")[0].value = info[productNameIndex[2]].product3;
+	document.getElementsByName("product4")[0].value = info[productNameIndex[3]].product4;
+	document.getElementsByName("product5")[0].value = info[productNameIndex[4]].product5;
+	/*
+	 switch (len) {
+	 case 1:
+	 if (info[0].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[0].product1;
+	 } else {
+	 //document.getElementsByName("product1")[0].value = "";
+	 }
+	 if (info[0].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[0].product2;
+	 } else {
+	 //document.getElementsByName("product2")[0].value = "";
+	 }
+	 if (info[0].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[0].product3;
+	 } else {
+	 //document.getElementsByName("product3")[0].value = "";
+	 }
+	 if (info[0].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[0].product4;
+	 } else {
+	 //document.getElementsByName("product4")[0].value = "";
+	 }
+	 if (info[0].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[0].product5;
+	 } else {
+	 //document.getElementsByName("product5")[0].value = "";
+	 }
+	 break;
+	 case 2:
+	 if (info[0].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[0].product1;
+	 } else if (info[1].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[1].product1;
+	 } else {
+	 //document.getElementsByName("product1")[0].value = "";
+	 }
+	 if (info[0].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[0].product2;
+	 } else if (info[1].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[1].product2;
+	 } else {
+	 //document.getElementsByName("product2")[0].value = "";
+	 }
+	 if (info[0].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[0].product3;
+	 } else if (info[1].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[1].product3;
+	 } else {
+	 //document.getElementsByName("product3")[0].value = "";
+	 }
+	 if (info[0].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[0].product4;
+	 } else if (info[1].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[1].product4;
+	 } else {
+	 //document.getElementsByName("product4")[0].value = "";
+	 }
+	 if (info[0].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[0].product5;
+	 } else if (info[1].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[1].product5;
+	 } else {
+	 //document.getElementsByName("product5")[0].value = "";
+	 }
+	 break;
+	 case 3:
+	 if (info[0].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[0].product1;
+	 } else if (info[1].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[1].product1;
+	 } else if (info[2].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[2].product1;
+	 } else {
+	 //document.getElementsByName("product1")[0].value = "";
+	 }
+	 if (info[0].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[0].product2;
+	 } else if (info[1].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[1].product2;
+	 } else if (info[2].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[2].product2;
+	 } else {
+	 //document.getElementsByName("product2")[0].value = "";
+	 }
+	 if (info[0].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[0].product3;
+	 } else if (info[1].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[1].product3;
+	 } else if (info[2].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[2].product3;
+	 } else {
+	 //document.getElementsByName("product3")[0].value = "";
+	 }
+	 if (info[0].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[0].product4;
+	 } else if (info[1].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[1].product4;
+	 } else if (info[2].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[2].product4;
+	 } else {
+	 //document.getElementsByName("product4")[0].value = "";
+	 }
+	 if (info[0].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[0].product5;
+	 } else if (info[1].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[1].product5;
+	 } else if (info[2].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[2].product5;
+	 } else {
+	 //document.getElementsByName("product5")[0].value = "";
+	 }
+	 break;
+	 case 4:
+	 if (info[0].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[0].product1;
+	 } else if (info[1].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[1].product1;
+	 } else if (info[2].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[2].product1;
+	 } else if (info[3].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[3].product1;
+	 } else {
+	 //document.getElementsByName("product1")[0].value = "";
+	 }
+	 if (info[0].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[0].product2;
+	 } else if (info[1].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[1].product2;
+	 } else if (info[2].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[2].product2;
+	 } else if (info[3].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[3].product2;
+	 } else {
+	 //document.getElementsByName("product2")[0].value = "";
+	 }
+	 if (info[0].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[0].product3;
+	 } else if (info[1].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[1].product3;
+	 } else if (info[2].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[2].product3;
+	 } else if (info[3].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[3].product3;
+	 } else {
+	 //document.getElementsByName("product3")[0].value = "";
+	 }
+	 if (info[0].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[0].product4;
+	 } else if (info[1].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[1].product4;
+	 } else if (info[2].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[2].product4;
+	 } else if (info[3].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[3].product4;
+	 } else {
+	 //document.getElementsByName("product4")[0].value = "";
+	 }
+	 if (info[0].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[0].product5;
+	 } else if (info[1].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[1].product5;
+	 } else if (info[2].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[2].product5;
+	 } else if (info[3].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[3].product5;
+	 } else {
+	 //document.getElementsByName("product5")[0].value = "";
+	 }
+	 break;
+	 case 5:
+	 if (info[0].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[0].product1;
+	 } else if (info[1].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[1].product1;
+	 } else if (info[2].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[2].product1;
+	 } else if (info[3].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[3].product1;
+	 } else if (info[4].product1 != "") {
+	 document.getElementsByName("product1")[0].value = info[4].product1;
+	 } else {
+	 //document.getElementsByName("product1")[0].value = "";
+	 }
+	 if (info[0].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[0].product2;
+	 } else if (info[1].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[1].product2;
+	 } else if (info[2].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[2].product2;
+	 } else if (info[3].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[3].product2;
+	 } else if (info[4].product2 != "") {
+	 document.getElementsByName("product2")[0].value = info[4].product2;
+	 } else {
+	 //document.getElementsByName("product2")[0].value = "";
+	 }
+	 if (info[0].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[0].product3;
+	 } else if (info[1].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[1].product3;
+	 } else if (info[2].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[2].product3;
+	 } else if (info[3].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[3].product3;
+	 } else if (info[4].product3 != "") {
+	 document.getElementsByName("product3")[0].value = info[4].product3;
+	 } else {
+	 //document.getElementsByName("product3")[0].value = "";
+	 }
+	 if (info[0].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[0].product4;
+	 } else if (info[1].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[1].product4;
+	 } else if (info[2].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[2].product4;
+	 } else if (info[3].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[3].product4;
+	 } else if (info[4].product4 != "") {
+	 document.getElementsByName("product4")[0].value = info[4].product4;
+	 } else {
+	 //document.getElementsByName("product4")[0].value = "";
+	 }
+	 if (info[0].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[0].product5;
+	 } else if (info[1].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[1].product5;
+	 } else if (info[2].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[2].product5;
+	 } else if (info[3].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[3].product5;
+	 } else if (info[4].product5 != "") {
+	 document.getElementsByName("product5")[0].value = info[4].product5;
+	 } else {
+	 //document.getElementsByName("product5")[0].value = "";
+	 }
+	 break;
+	 default:
+	 break;
+	 }
+	 */
 }
 
 function loadCourse(len) {
 	// 根据所选校区自动加载相应的科目
 	var courseNameIndex = new Array();
-	for(var i=0;i<len;i++){
+	for (var i = 0; i < len; i++) {
 		courseNameIndex[i] = 0;
 	}
-		for(var i=0;i<len;i++){
-			if(info[i].course1 != ""){
-				courseNameIndex[0] = i;
-			}
-			if(info[i].course2 != ""){
-				courseNameIndex[1] = i;
-			}	
-			if(info[i].course3 != ""){
-				courseNameIndex[2] = i;
-			}	
-			if(info[i].course4 != ""){
-				courseNameIndex[3] = i;
-			}	
-			if(info[i].course5 != ""){
-				courseNameIndex[4] = i;
-			}
-			if(info[i].course6 != ""){
-				courseNameIndex[5] = i;
-			}
-			if(info[i].course7 != ""){
-				courseNameIndex[6] = i;
-			}	
-			if(info[i].course8 != ""){
-				courseNameIndex[7] = i;
-			}	
-			if(info[i].course9 != ""){
-				courseNameIndex[8] = i;
-			}	
-			if(info[i].course10 != ""){
-				courseNameIndex[9] = i;
-			}		
+	for (var i = 0; i < len; i++) {
+		if (info[i].course1 != "") {
+			courseNameIndex[0] = i;
 		}
-		
-		document.getElementsByName("course1")[0].value = info[courseNameIndex[0]].course1;
-		document.getElementsByName("course2")[0].value = info[courseNameIndex[1]].course2;
-		document.getElementsByName("course3")[0].value = info[courseNameIndex[2]].course3;
-		document.getElementsByName("course4")[0].value = info[courseNameIndex[3]].course4;
-		document.getElementsByName("course5")[0].value = info[courseNameIndex[4]].course5;
-		document.getElementsByName("course6")[0].value = info[courseNameIndex[5]].course6;
-		document.getElementsByName("course7")[0].value = info[courseNameIndex[6]].course7;
-		document.getElementsByName("course8")[0].value = info[courseNameIndex[7]].course8;
-		document.getElementsByName("course9")[0].value = info[courseNameIndex[8]].course9;
-		document.getElementsByName("course10")[0].value = info[courseNameIndex[9]].course10;
-	
-	/*
-	switch (len) {
-	case 1:
-		if (info[0].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[0].course1;
-		} else {
-			//document.getElementsByName("course1")[0].value = "";
+		if (info[i].course2 != "") {
+			courseNameIndex[1] = i;
 		}
-		if (info[0].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[0].course2;
-		} else {
-			//document.getElementsByName("course2")[0].value = "";
+		if (info[i].course3 != "") {
+			courseNameIndex[2] = i;
 		}
-		if (info[0].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[0].course3;
-		} else {
-			//document.getElementsByName("course3")[0].value = "";
+		if (info[i].course4 != "") {
+			courseNameIndex[3] = i;
 		}
-		if (info[0].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[0].course4;
-		} else {
-			//document.getElementsByName("course4")[0].value = "";
+		if (info[i].course5 != "") {
+			courseNameIndex[4] = i;
 		}
-		if (info[0].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[0].course5;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
+		if (info[i].course6 != "") {
+			courseNameIndex[5] = i;
 		}
-		if (info[0].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[0].course6;
-		} else {
-			//document.getElementsByName("course6")[0].value = "";
+		if (info[i].course7 != "") {
+			courseNameIndex[6] = i;
 		}
-		if (info[0].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[0].course7;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
+		if (info[i].course8 != "") {
+			courseNameIndex[7] = i;
 		}
-		if (info[0].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[0].course8;
-		} else {
-			//document.getElementsByName("course8")[0].value = "";
+		if (info[i].course9 != "") {
+			courseNameIndex[8] = i;
 		}
-		if (info[0].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[0].course9;
-		} else {
-			//document.getElementsByName("course9")[0].value = "";
+		if (info[i].course10 != "") {
+			courseNameIndex[9] = i;
 		}
-		if (info[0].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[0].course10;
-		} else {
-			//document.getElementsByName("course10")[0].value = "";
-		}
-		break;
-	case 2:
-		if (info[0].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[0].course1;
-		} else if (info[1].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[1].course1;
-		} else {
-			//document.getElementsByName("course1")[0].value = "";
-		}
-		if (info[0].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[0].course2;
-		} else if (info[1].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[1].course2;
-		} else {
-			//document.getElementsByName("course2")[0].value = "";
-		}
-		if (info[0].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[0].course3;
-		} else if (info[1].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[1].course3;
-		} else {
-			//document.getElementsByName("course3")[0].value = "";
-		}
-		if (info[0].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[0].course4;
-		} else if (info[1].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[1].course4;
-		} else {
-			//document.getElementsByName("course4")[0].value = "";
-		}
-		if (info[0].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[0].course5;
-		} else if (info[1].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[1].course5;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
-		}
-		if (info[0].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[0].course6;
-		} else if (info[1].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[1].course6;
-		} else {
-			//document.getElementsByName("course6")[0].value = "";
-		}
-		if (info[0].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[0].course7;
-		} else if (info[1].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[1].course7;
-		} else {
-			//document.getElementsByName("course7")[0].value = "";
-		}
-		if (info[0].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[0].course8;
-		} else if (info[1].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[1].course8;
-		} else {
-			//document.getElementsByName("course8")[0].value = "";
-		}
-		if (info[0].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[0].course9;
-		} else if (info[1].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[1].course9;
-		} else {
-			//document.getElementsByName("course9")[0].value = "";
-		}
-		if (info[0].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[0].course10;
-		} else if (info[1].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[1].course10;
-		} else {
-			//document.getElementsByName("course10")[0].value = "";
-		}
-		break;
-	case 3:
-		if (info[0].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[0].course1;
-		} else if (info[1].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[1].course1;
-		} else if (info[2].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[2].course1;
-		} else {
-			//document.getElementsByName("course1")[0].value = "";
-		}
-		if (info[0].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[0].course2;
-		} else if (info[1].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[1].course2;
-		} else if (info[2].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[2].course2;
-		} else {
-			//document.getElementsByName("course2")[0].value = "";
-		}
-		if (info[0].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[0].course3;
-		} else if (info[1].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[1].course3;
-		} else if (info[2].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[2].course3;
-		} else {
-			//document.getElementsByName("course3")[0].value = "";
-		}
-		if (info[0].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[0].course4;
-		} else if (info[1].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[1].course4;
-		} else if (info[2].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[2].course4;
-		} else {
-			//document.getElementsByName("course4")[0].value = "";
-		}
-		if (info[0].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[0].course5;
-		} else if (info[1].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[1].course5;
-		} else if (info[2].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[2].course5;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
-		}
-		if (info[0].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[0].course6;
-		} else if (info[1].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[1].course6;
-		} else if (info[2].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[2].course6;
-		} else {
-			//document.getElementsByName("course6")[0].value = "";
-		}
-		if (info[0].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[0].course7;
-		} else if (info[1].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[1].course7;
-		} else if (info[2].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[2].course7;
-		} else {
-			//document.getElementsByName("course7")[0].value = "";
-		}
-		if (info[0].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[0].course8;
-		} else if (info[1].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[1].course8;
-		} else if (info[2].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[2].course8;
-		} else {
-			//document.getElementsByName("course8")[0].value = "";
-		}
-		if (info[0].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[0].course9;
-		} else if (info[1].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[1].course9;
-		} else if (info[2].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[2].course9;
-		} else {
-			//document.getElementsByName("course9")[0].value = "";
-		}
-		if (info[0].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[0].course10;
-		} else if (info[1].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[1].course10;
-		} else if (info[2].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[2].course10;
-		} else {
-			//document.getElementsByName("course10")[0].value = "";
-		}
-		break;
-	case 4:
-		var courseNameIndex = new Array();
-		for(var i=0;i<len;i++){
-			if(info[i].course1 != ""){
-				courseNameIndex[0] = i;
-			}
-			if(info[i].course2 != ""){
-				courseNameIndex[1] = i;
-			}	
-			if(info[i].course3 != ""){
-				courseNameIndex[2] = i;
-			}	
-			if(info[i].course4 != ""){
-				courseNameIndex[3] = i;
-			}	
-			if(info[i].course5 != ""){
-				courseNameIndex[4] = i;
-			}
-			if(info[i].course6 != ""){
-				courseNameIndex[5] = i;
-			}
-			if(info[i].course7 != ""){
-				courseNameIndex[6] = i;
-			}	
-			if(info[i].course8 != ""){
-				courseNameIndex[7] = i;
-			}	
-			if(info[i].course9 != ""){
-				courseNameIndex[8] = i;
-			}	
-			if(info[i].course10 != ""){
-				courseNameIndex[9] = i;
-			}		
-		}
-		
-		document.getElementsByName("course1")[0].value = info[courseNameIndex[0]].course1;
-		document.getElementsByName("course2")[0].value = info[courseNameIndex[1]].course2;
-		document.getElementsByName("course3")[0].value = info[courseNameIndex[2]].course3;
-		document.getElementsByName("course4")[0].value = info[courseNameIndex[3]].course4;
-		document.getElementsByName("course5")[0].value = info[courseNameIndex[4]].course5;
-		document.getElementsByName("course6")[0].value = info[courseNameIndex[5]].course6;
-		document.getElementsByName("course7")[0].value = info[courseNameIndex[6]].course7;
-		document.getElementsByName("course8")[0].value = info[courseNameIndex[7]].course8;
-		document.getElementsByName("course9")[0].value = info[courseNameIndex[8]].course9;
-		document.getElementsByName("course10")[0].value = info[courseNameIndex[9]].course10;
-		
-		/*
-		if (info[0].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[0].course1;
-		} else if (info[1].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[1].course1;
-		} else if (info[2].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[2].course1;
-		} else if (info[3].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[3].course1;
-		} else {
-			//document.getElementsByName("course1")[0].value = "";
-		}
-		if (info[0].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[0].course2;
-		} else if (info[1].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[1].course2;
-		} else if (info[2].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[2].course2;
-		} else if (info[3].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[3].course2;
-		} else {
-			//document.getElementsByName("course2")[0].value = "";
-		}
-		if (info[0].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[0].course3;
-		} else if (info[1].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[1].course3;
-		} else if (info[2].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[2].course3;
-		} else if (info[3].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[3].course3;
-		} else {
-			//document.getElementsByName("course3")[0].value = "";
-		}
-		if (info[0].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[0].course4;
-		} else if (info[1].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[1].course4;
-		} else if (info[2].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[2].course4;
-		} else if (info[3].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[3].course4;
-		} else {
-			//document.getElementsByName("course4")[0].value = "";
-		}
-		if (info[0].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[0].course5;
-		} else if (info[1].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[1].course5;
-		} else if (info[2].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[2].course5;
-		} else if (info[3].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[3].course5;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
-		}
-		if (info[0].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[0].course6;
-		} else if (info[1].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[1].course6;
-		} else if (info[2].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[2].course6;
-		} else if (info[3].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[3].course6;
-		} else {
-			//document.getElementsByName("course6")[0].value = "";
-		}
-		if (info[0].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[0].course7;
-		} else if (info[1].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[1].course7;
-		} else if (info[2].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[2].course7;
-		} else if (info[3].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[3].course7;
-		} else {
-			//document.getElementsByName("course7")[0].value = "";
-		}
-		if (info[0].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[0].course8;
-		} else if (info[1].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[1].course8;
-		} else if (info[2].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[2].course8;
-		} else if (info[3].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[3].course8;
-		} else {
-			//document.getElementsByName("course8")[0].value = "";
-		}
-		if (info[0].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[0].course9;
-		} else if (info[1].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[1].course9;
-		} else if (info[2].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[2].course9;
-		} else if (info[3].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[3].course9;
-		} else {
-			//document.getElementsByName("course9")[0].value = "";
-		}
-		if (info[0].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[0].course10;
-		} else if (info[1].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[1].course10;
-		} else if (info[2].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[2].course10;
-		} else if (info[3].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[3].course10;
-		} else {
-			//document.getElementsByName("course10")[0].value = "";
-		}
-		//
-		break;
-	case 5:
-		if (info[0].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[0].course1;
-		} else if (info[1].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[1].course1;
-		} else if (info[2].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[2].course1;
-		} else if (info[3].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[3].course1;
-		} else if (info[4].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[4].course1;
-		} else {
-			//document.getElementsByName("course1")[0].value = "";
-		}
-		if (info[0].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[0].course2;
-		} else if (info[1].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[1].course2;
-		} else if (info[2].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[2].course2;
-		} else if (info[3].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[3].course2;
-		} else if (info[4].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[4].course2;
-		} else {
-			//document.getElementsByName("course2")[0].value = "";
-		}
-		if (info[0].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[0].course3;
-		} else if (info[1].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[1].course3;
-		} else if (info[2].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[2].course3;
-		} else if (info[3].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[3].course3;
-		} else if (info[4].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[4].course3;
-		} else {
-			//document.getElementsByName("course3")[0].value = "";
-		}
-		if (info[0].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[0].course4;
-		} else if (info[1].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[1].course4;
-		} else if (info[2].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[2].course4;
-		} else if (info[3].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[3].course4;
-		} else if (info[4].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[4].course4;
-		} else {
-			//document.getElementsByName("course4")[0].value = "";
-		}
-		if (info[0].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[0].course5;
-		} else if (info[1].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[1].course5;
-		} else if (info[2].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[2].course5;
-		} else if (info[3].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[3].course5;
-		} else if (info[4].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[4].course5;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
-		}
-		if (info[0].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[0].course6;
-		} else if (info[1].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[1].course6;
-		} else if (info[2].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[2].course6;
-		} else if (info[3].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[3].course6;
-		} else if (info[4].course6 != "") {
-			document.getElementsByName("course6")[0].value = info[4].course6;
-		} else {
-			//document.getElementsByName("course6")[0].value = "";
-		}
-		if (info[0].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[0].course7;
-		} else if (info[1].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[1].course7;
-		} else if (info[2].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[2].course7;
-		} else if (info[3].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[3].course7;
-		} else if (info[4].course7 != "") {
-			document.getElementsByName("course7")[0].value = info[4].course7;
-		} else {
-			//document.getElementsByName("course7")[0].value = "";
-		}
-		if (info[0].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[0].course8;
-		} else if (info[1].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[1].course8;
-		} else if (info[2].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[2].course8;
-		} else if (info[3].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[3].course8;
-		} else if (info[4].course8 != "") {
-			document.getElementsByName("course8")[0].value = info[4].course8;
-		} else {
-			//document.getElementsByName("course8")[0].value = "";
-		}
-		if (info[0].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[0].course9;
-		} else if (info[1].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[1].course9;
-		} else if (info[2].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[2].course9;
-		} else if (info[3].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[3].course9;
-		} else if (info[4].course9 != "") {
-			document.getElementsByName("course9")[0].value = info[4].course9;
-		} else {
-			//document.getElementsByName("course9")[0].value = "";
-		}
-		if (info[0].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[0].course10;
-		} else if (info[1].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[1].course10;
-		} else if (info[2].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[2].course10;
-		} else if (info[3].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[3].course10;
-		} else if (info[4].course10 != "") {
-			document.getElementsByName("course10")[0].value = info[4].course10;
-		} else {
-			//document.getElementsByName("course10")[0].value = "";
-		}
-		break;
-	case 6:
-		if (info[0].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[0].course1;
-		} else if (info[1].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[1].course1;
-		} else if (info[2].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[2].course1;
-		} else if (info[3].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[3].course1;
-		} else if (info[4].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[4].course1;
-		} else if (info[5].course1 != "") {
-			document.getElementsByName("course1")[0].value = info[5].course1;
-		}else {
-			//document.getElementsByName("course1")[0].value = "";
-		}
-		if (info[0].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[0].course2;
-		} else if (info[1].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[1].course2;
-		} else if (info[2].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[2].course2;
-		} else if (info[3].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[3].course2;
-		} else if (info[4].course2 != "") {
-			document.getElementsByName("course2")[0].value = info[4].course2;
-		} else {
-			//document.getElementsByName("course2")[0].value = "";
-		}
-		if (info[0].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[0].course3;
-		} else if (info[1].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[1].course3;
-		} else if (info[2].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[2].course3;
-		} else if (info[3].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[3].course3;
-		} else if (info[4].course3 != "") {
-			document.getElementsByName("course3")[0].value = info[4].course3;
-		} else {
-			//document.getElementsByName("course3")[0].value = "";
-		}
-		if (info[0].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[0].course4;
-		} else if (info[1].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[1].course4;
-		} else if (info[2].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[2].course4;
-		} else if (info[3].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[3].course4;
-		} else if (info[4].course4 != "") {
-			document.getElementsByName("course4")[0].value = info[4].course4;
-		} else {
-			//document.getElementsByName("course4")[0].value = "";
-		}
-		if (info[0].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[0].course5;
-		} else if (info[1].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[1].course5;
-		} else if (info[2].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[2].course5;
-		} else if (info[3].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[3].course5;
-		} else if (info[4].course5 != "") {
-			document.getElementsByName("course5")[0].value = info[4].course5;
-		} else {
-			//document.getElementsByName("course5")[0].value = "";
-		}
-		break;
-	default:
-		break;
 	}
-	*/
+
+	document.getElementsByName("course1")[0].value = info[courseNameIndex[0]].course1;
+	document.getElementsByName("course2")[0].value = info[courseNameIndex[1]].course2;
+	document.getElementsByName("course3")[0].value = info[courseNameIndex[2]].course3;
+	document.getElementsByName("course4")[0].value = info[courseNameIndex[3]].course4;
+	document.getElementsByName("course5")[0].value = info[courseNameIndex[4]].course5;
+	document.getElementsByName("course6")[0].value = info[courseNameIndex[5]].course6;
+	document.getElementsByName("course7")[0].value = info[courseNameIndex[6]].course7;
+	document.getElementsByName("course8")[0].value = info[courseNameIndex[7]].course8;
+	document.getElementsByName("course9")[0].value = info[courseNameIndex[8]].course9;
+	document.getElementsByName("course10")[0].value = info[courseNameIndex[9]].course10;
+
+	/*
+	 switch (len) {
+	 case 1:
+	 if (info[0].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[0].course1;
+	 } else {
+	 //document.getElementsByName("course1")[0].value = "";
+	 }
+	 if (info[0].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[0].course2;
+	 } else {
+	 //document.getElementsByName("course2")[0].value = "";
+	 }
+	 if (info[0].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[0].course3;
+	 } else {
+	 //document.getElementsByName("course3")[0].value = "";
+	 }
+	 if (info[0].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[0].course4;
+	 } else {
+	 //document.getElementsByName("course4")[0].value = "";
+	 }
+	 if (info[0].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[0].course5;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 if (info[0].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[0].course6;
+	 } else {
+	 //document.getElementsByName("course6")[0].value = "";
+	 }
+	 if (info[0].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[0].course7;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 if (info[0].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[0].course8;
+	 } else {
+	 //document.getElementsByName("course8")[0].value = "";
+	 }
+	 if (info[0].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[0].course9;
+	 } else {
+	 //document.getElementsByName("course9")[0].value = "";
+	 }
+	 if (info[0].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[0].course10;
+	 } else {
+	 //document.getElementsByName("course10")[0].value = "";
+	 }
+	 break;
+	 case 2:
+	 if (info[0].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[0].course1;
+	 } else if (info[1].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[1].course1;
+	 } else {
+	 //document.getElementsByName("course1")[0].value = "";
+	 }
+	 if (info[0].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[0].course2;
+	 } else if (info[1].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[1].course2;
+	 } else {
+	 //document.getElementsByName("course2")[0].value = "";
+	 }
+	 if (info[0].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[0].course3;
+	 } else if (info[1].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[1].course3;
+	 } else {
+	 //document.getElementsByName("course3")[0].value = "";
+	 }
+	 if (info[0].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[0].course4;
+	 } else if (info[1].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[1].course4;
+	 } else {
+	 //document.getElementsByName("course4")[0].value = "";
+	 }
+	 if (info[0].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[0].course5;
+	 } else if (info[1].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[1].course5;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 if (info[0].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[0].course6;
+	 } else if (info[1].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[1].course6;
+	 } else {
+	 //document.getElementsByName("course6")[0].value = "";
+	 }
+	 if (info[0].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[0].course7;
+	 } else if (info[1].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[1].course7;
+	 } else {
+	 //document.getElementsByName("course7")[0].value = "";
+	 }
+	 if (info[0].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[0].course8;
+	 } else if (info[1].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[1].course8;
+	 } else {
+	 //document.getElementsByName("course8")[0].value = "";
+	 }
+	 if (info[0].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[0].course9;
+	 } else if (info[1].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[1].course9;
+	 } else {
+	 //document.getElementsByName("course9")[0].value = "";
+	 }
+	 if (info[0].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[0].course10;
+	 } else if (info[1].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[1].course10;
+	 } else {
+	 //document.getElementsByName("course10")[0].value = "";
+	 }
+	 break;
+	 case 3:
+	 if (info[0].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[0].course1;
+	 } else if (info[1].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[1].course1;
+	 } else if (info[2].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[2].course1;
+	 } else {
+	 //document.getElementsByName("course1")[0].value = "";
+	 }
+	 if (info[0].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[0].course2;
+	 } else if (info[1].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[1].course2;
+	 } else if (info[2].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[2].course2;
+	 } else {
+	 //document.getElementsByName("course2")[0].value = "";
+	 }
+	 if (info[0].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[0].course3;
+	 } else if (info[1].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[1].course3;
+	 } else if (info[2].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[2].course3;
+	 } else {
+	 //document.getElementsByName("course3")[0].value = "";
+	 }
+	 if (info[0].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[0].course4;
+	 } else if (info[1].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[1].course4;
+	 } else if (info[2].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[2].course4;
+	 } else {
+	 //document.getElementsByName("course4")[0].value = "";
+	 }
+	 if (info[0].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[0].course5;
+	 } else if (info[1].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[1].course5;
+	 } else if (info[2].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[2].course5;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 if (info[0].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[0].course6;
+	 } else if (info[1].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[1].course6;
+	 } else if (info[2].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[2].course6;
+	 } else {
+	 //document.getElementsByName("course6")[0].value = "";
+	 }
+	 if (info[0].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[0].course7;
+	 } else if (info[1].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[1].course7;
+	 } else if (info[2].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[2].course7;
+	 } else {
+	 //document.getElementsByName("course7")[0].value = "";
+	 }
+	 if (info[0].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[0].course8;
+	 } else if (info[1].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[1].course8;
+	 } else if (info[2].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[2].course8;
+	 } else {
+	 //document.getElementsByName("course8")[0].value = "";
+	 }
+	 if (info[0].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[0].course9;
+	 } else if (info[1].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[1].course9;
+	 } else if (info[2].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[2].course9;
+	 } else {
+	 //document.getElementsByName("course9")[0].value = "";
+	 }
+	 if (info[0].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[0].course10;
+	 } else if (info[1].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[1].course10;
+	 } else if (info[2].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[2].course10;
+	 } else {
+	 //document.getElementsByName("course10")[0].value = "";
+	 }
+	 break;
+	 case 4:
+	 var courseNameIndex = new Array();
+	 for(var i=0;i<len;i++){
+	 if(info[i].course1 != ""){
+	 courseNameIndex[0] = i;
+	 }
+	 if(info[i].course2 != ""){
+	 courseNameIndex[1] = i;
+	 }
+	 if(info[i].course3 != ""){
+	 courseNameIndex[2] = i;
+	 }
+	 if(info[i].course4 != ""){
+	 courseNameIndex[3] = i;
+	 }
+	 if(info[i].course5 != ""){
+	 courseNameIndex[4] = i;
+	 }
+	 if(info[i].course6 != ""){
+	 courseNameIndex[5] = i;
+	 }
+	 if(info[i].course7 != ""){
+	 courseNameIndex[6] = i;
+	 }
+	 if(info[i].course8 != ""){
+	 courseNameIndex[7] = i;
+	 }
+	 if(info[i].course9 != ""){
+	 courseNameIndex[8] = i;
+	 }
+	 if(info[i].course10 != ""){
+	 courseNameIndex[9] = i;
+	 }
+	 }
+
+	 document.getElementsByName("course1")[0].value = info[courseNameIndex[0]].course1;
+	 document.getElementsByName("course2")[0].value = info[courseNameIndex[1]].course2;
+	 document.getElementsByName("course3")[0].value = info[courseNameIndex[2]].course3;
+	 document.getElementsByName("course4")[0].value = info[courseNameIndex[3]].course4;
+	 document.getElementsByName("course5")[0].value = info[courseNameIndex[4]].course5;
+	 document.getElementsByName("course6")[0].value = info[courseNameIndex[5]].course6;
+	 document.getElementsByName("course7")[0].value = info[courseNameIndex[6]].course7;
+	 document.getElementsByName("course8")[0].value = info[courseNameIndex[7]].course8;
+	 document.getElementsByName("course9")[0].value = info[courseNameIndex[8]].course9;
+	 document.getElementsByName("course10")[0].value = info[courseNameIndex[9]].course10;
+
+	 /*
+	 if (info[0].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[0].course1;
+	 } else if (info[1].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[1].course1;
+	 } else if (info[2].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[2].course1;
+	 } else if (info[3].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[3].course1;
+	 } else {
+	 //document.getElementsByName("course1")[0].value = "";
+	 }
+	 if (info[0].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[0].course2;
+	 } else if (info[1].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[1].course2;
+	 } else if (info[2].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[2].course2;
+	 } else if (info[3].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[3].course2;
+	 } else {
+	 //document.getElementsByName("course2")[0].value = "";
+	 }
+	 if (info[0].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[0].course3;
+	 } else if (info[1].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[1].course3;
+	 } else if (info[2].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[2].course3;
+	 } else if (info[3].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[3].course3;
+	 } else {
+	 //document.getElementsByName("course3")[0].value = "";
+	 }
+	 if (info[0].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[0].course4;
+	 } else if (info[1].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[1].course4;
+	 } else if (info[2].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[2].course4;
+	 } else if (info[3].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[3].course4;
+	 } else {
+	 //document.getElementsByName("course4")[0].value = "";
+	 }
+	 if (info[0].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[0].course5;
+	 } else if (info[1].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[1].course5;
+	 } else if (info[2].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[2].course5;
+	 } else if (info[3].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[3].course5;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 if (info[0].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[0].course6;
+	 } else if (info[1].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[1].course6;
+	 } else if (info[2].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[2].course6;
+	 } else if (info[3].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[3].course6;
+	 } else {
+	 //document.getElementsByName("course6")[0].value = "";
+	 }
+	 if (info[0].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[0].course7;
+	 } else if (info[1].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[1].course7;
+	 } else if (info[2].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[2].course7;
+	 } else if (info[3].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[3].course7;
+	 } else {
+	 //document.getElementsByName("course7")[0].value = "";
+	 }
+	 if (info[0].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[0].course8;
+	 } else if (info[1].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[1].course8;
+	 } else if (info[2].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[2].course8;
+	 } else if (info[3].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[3].course8;
+	 } else {
+	 //document.getElementsByName("course8")[0].value = "";
+	 }
+	 if (info[0].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[0].course9;
+	 } else if (info[1].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[1].course9;
+	 } else if (info[2].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[2].course9;
+	 } else if (info[3].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[3].course9;
+	 } else {
+	 //document.getElementsByName("course9")[0].value = "";
+	 }
+	 if (info[0].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[0].course10;
+	 } else if (info[1].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[1].course10;
+	 } else if (info[2].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[2].course10;
+	 } else if (info[3].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[3].course10;
+	 } else {
+	 //document.getElementsByName("course10")[0].value = "";
+	 }
+	 //
+	 break;
+	 case 5:
+	 if (info[0].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[0].course1;
+	 } else if (info[1].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[1].course1;
+	 } else if (info[2].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[2].course1;
+	 } else if (info[3].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[3].course1;
+	 } else if (info[4].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[4].course1;
+	 } else {
+	 //document.getElementsByName("course1")[0].value = "";
+	 }
+	 if (info[0].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[0].course2;
+	 } else if (info[1].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[1].course2;
+	 } else if (info[2].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[2].course2;
+	 } else if (info[3].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[3].course2;
+	 } else if (info[4].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[4].course2;
+	 } else {
+	 //document.getElementsByName("course2")[0].value = "";
+	 }
+	 if (info[0].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[0].course3;
+	 } else if (info[1].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[1].course3;
+	 } else if (info[2].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[2].course3;
+	 } else if (info[3].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[3].course3;
+	 } else if (info[4].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[4].course3;
+	 } else {
+	 //document.getElementsByName("course3")[0].value = "";
+	 }
+	 if (info[0].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[0].course4;
+	 } else if (info[1].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[1].course4;
+	 } else if (info[2].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[2].course4;
+	 } else if (info[3].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[3].course4;
+	 } else if (info[4].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[4].course4;
+	 } else {
+	 //document.getElementsByName("course4")[0].value = "";
+	 }
+	 if (info[0].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[0].course5;
+	 } else if (info[1].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[1].course5;
+	 } else if (info[2].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[2].course5;
+	 } else if (info[3].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[3].course5;
+	 } else if (info[4].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[4].course5;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 if (info[0].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[0].course6;
+	 } else if (info[1].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[1].course6;
+	 } else if (info[2].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[2].course6;
+	 } else if (info[3].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[3].course6;
+	 } else if (info[4].course6 != "") {
+	 document.getElementsByName("course6")[0].value = info[4].course6;
+	 } else {
+	 //document.getElementsByName("course6")[0].value = "";
+	 }
+	 if (info[0].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[0].course7;
+	 } else if (info[1].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[1].course7;
+	 } else if (info[2].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[2].course7;
+	 } else if (info[3].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[3].course7;
+	 } else if (info[4].course7 != "") {
+	 document.getElementsByName("course7")[0].value = info[4].course7;
+	 } else {
+	 //document.getElementsByName("course7")[0].value = "";
+	 }
+	 if (info[0].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[0].course8;
+	 } else if (info[1].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[1].course8;
+	 } else if (info[2].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[2].course8;
+	 } else if (info[3].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[3].course8;
+	 } else if (info[4].course8 != "") {
+	 document.getElementsByName("course8")[0].value = info[4].course8;
+	 } else {
+	 //document.getElementsByName("course8")[0].value = "";
+	 }
+	 if (info[0].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[0].course9;
+	 } else if (info[1].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[1].course9;
+	 } else if (info[2].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[2].course9;
+	 } else if (info[3].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[3].course9;
+	 } else if (info[4].course9 != "") {
+	 document.getElementsByName("course9")[0].value = info[4].course9;
+	 } else {
+	 //document.getElementsByName("course9")[0].value = "";
+	 }
+	 if (info[0].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[0].course10;
+	 } else if (info[1].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[1].course10;
+	 } else if (info[2].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[2].course10;
+	 } else if (info[3].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[3].course10;
+	 } else if (info[4].course10 != "") {
+	 document.getElementsByName("course10")[0].value = info[4].course10;
+	 } else {
+	 //document.getElementsByName("course10")[0].value = "";
+	 }
+	 break;
+	 case 6:
+	 if (info[0].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[0].course1;
+	 } else if (info[1].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[1].course1;
+	 } else if (info[2].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[2].course1;
+	 } else if (info[3].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[3].course1;
+	 } else if (info[4].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[4].course1;
+	 } else if (info[5].course1 != "") {
+	 document.getElementsByName("course1")[0].value = info[5].course1;
+	 }else {
+	 //document.getElementsByName("course1")[0].value = "";
+	 }
+	 if (info[0].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[0].course2;
+	 } else if (info[1].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[1].course2;
+	 } else if (info[2].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[2].course2;
+	 } else if (info[3].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[3].course2;
+	 } else if (info[4].course2 != "") {
+	 document.getElementsByName("course2")[0].value = info[4].course2;
+	 } else {
+	 //document.getElementsByName("course2")[0].value = "";
+	 }
+	 if (info[0].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[0].course3;
+	 } else if (info[1].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[1].course3;
+	 } else if (info[2].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[2].course3;
+	 } else if (info[3].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[3].course3;
+	 } else if (info[4].course3 != "") {
+	 document.getElementsByName("course3")[0].value = info[4].course3;
+	 } else {
+	 //document.getElementsByName("course3")[0].value = "";
+	 }
+	 if (info[0].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[0].course4;
+	 } else if (info[1].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[1].course4;
+	 } else if (info[2].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[2].course4;
+	 } else if (info[3].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[3].course4;
+	 } else if (info[4].course4 != "") {
+	 document.getElementsByName("course4")[0].value = info[4].course4;
+	 } else {
+	 //document.getElementsByName("course4")[0].value = "";
+	 }
+	 if (info[0].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[0].course5;
+	 } else if (info[1].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[1].course5;
+	 } else if (info[2].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[2].course5;
+	 } else if (info[3].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[3].course5;
+	 } else if (info[4].course5 != "") {
+	 document.getElementsByName("course5")[0].value = info[4].course5;
+	 } else {
+	 //document.getElementsByName("course5")[0].value = "";
+	 }
+	 break;
+	 default:
+	 break;
+	 }
+	 */
 }
 
 function setHour3() {

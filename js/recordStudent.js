@@ -5,32 +5,32 @@
 //var resultsIndex = 0;
 //var resultsLen = 0;
 
-function checkAndSubmit(){
-	if(document.getElementsByName("schoolZone1")[0].value==0){
+function checkAndSubmit() {
+	if (document.getElementsByName("schoolZone1")[0].value == 0) {
 		alert("请选择校区！");
 		return false;
 	}
-	if(document.getElementsByName("grade")[0].value==0){
+	if (document.getElementsByName("grade")[0].value == 0) {
 		alert("请选择年级！");
 		return false;
 	}
 	return true;
 }
 
-function clearOutTime(){
+function clearOutTime() {
 	document.getElementsByName("outTime")[0].value = "";
 }
 
 function getSchoolZone(index) {
 	var num = 0;
 	var text = "";
-	
+
 	// 多校区只有校长才能够设置，其它人不允许操作
 	if (GetCookie('role') != '9') {
 		document.getElementsByName("schoolZone2")[0].value = 0;
 		document.getElementsByName("schoolZone3")[0].value = 0;
 	}
-					
+
 	if (index == 1) {
 		num = document.getElementsByName("schoolZone1")[0].value;
 		if (num > 0) {
@@ -88,39 +88,39 @@ function sqlRecord() {
 					document.getElementsByName("submitDelete")[0].disabled = true;
 					document.getElementsByName("submitUpdate")[0].disabled = true;
 					alert("该学生姓名不存在，可以创建一个新学生信息！");
-				} 
-				/*
-				else if (ret == "2") {
-					document.getElementsByName("submitAdd")[0].disabled = true;
-					document.getElementsByName("submitUpdate")[0].disabled = true;
-					document.getElementsByName("submitDelete")[0].disabled = true;
-					alert("检查到该学生姓名有多条记录，请联系管理员！");
-				} */
-				else {	
+				}
+				/* else
+				  if (ret == "2") {
+				 document.getElementsByName("submitAdd")[0].disabled = true;
+				 document.getElementsByName("submitUpdate")[0].disabled = true;
+				 document.getElementsByName("submitDelete")[0].disabled = true;
+				 alert("检查到该学生姓名有多条记录，请联系管理员！");
+				 } */
+				else {
 					document.getElementsByName("submitAdd")[0].disabled = false;
 					document.getElementsByName("submitUpdate")[0].disabled = false;
-					document.getElementsByName("submitDelete")[0].disabled = false;	
+					document.getElementsByName("submitDelete")[0].disabled = false;
 					document.getElementsByName("previous")[0].disabled = true;
 					document.getElementsByName("next")[0].disabled = true;
-							
+
 					var info = eval(ret);
-		
+
 					resultsWithSomeRecord = info;
 					resultsIndex = 0;
 					resultsLen = 0;
-					for(var tmp in resultsWithSomeRecord){
+					for (var tmp in resultsWithSomeRecord) {
 						resultsLen++;
 					}
-					
-					if(resultsLen==1){
+
+					if (resultsLen == 1) {
 						document.getElementsByName("previous")[0].disabled = true;
 						document.getElementsByName("next")[0].disabled = true;
-					}else if(resultsLen>1){
+					} else if (resultsLen > 1) {
 						alert("查询到有多名同名学生存在，请使用“上一个”“下一个”进行选择！");
 						document.getElementsByName("previous")[0].disabled = false;
 						document.getElementsByName("next")[0].disabled = false;
 					}
-					
+
 					document.getElementsByName("userID")[0].value = 'x' + info[0].uid;
 					document.getElementsByName("userName1")[0].value = info[0].name1;
 					document.getElementsByName("userName2")[0].value = info[0].name2;
@@ -144,10 +144,10 @@ function sqlRecord() {
 					document.getElementsByName("school1")[0].value = info[0].school1;
 					document.getElementsByName("school2")[0].value = info[0].school2;
 					document.getElementsByName("grade")[0].value = info[0].grade;
-					if(parseInt(info[0].grade)>=13){
+					if (parseInt(info[0].grade) >= 13) {
 						document.getElementsByName("grade")[0].value = 13;
-					}		
-					document.getElementsByName("class")[0].value = info[0].class;								
+					}
+					document.getElementsByName("class")[0].value = info[0].class;
 					document.getElementsByName("studentWX")[0].value = info[0].studentWX;
 					document.getElementsByName("studentQQ")[0].value = info[0].studentQQ;
 					document.getElementsByName("studentTel")[0].value = info[0].studentTel;
@@ -161,7 +161,7 @@ function sqlRecord() {
 					document.getElementsByName("inTime")[0].value = inTime;
 					var outTime = dateJS("Y-M-d", info[0].outTime);
 					document.getElementsByName("outTime")[0].value = outTime;
-					if(info[0].outTime==""){
+					if (info[0].outTime == "") {
 						document.getElementsByName("outTime")[0].value = "";
 					}
 				}
@@ -183,19 +183,18 @@ function sqlRecord() {
 
 }
 
-
 function recordWithSameName(flag) {
-	
+
 	if (flag == 'next') {
-		if(resultsIndex< resultsLen -1){
+		if (resultsIndex < resultsLen - 1) {
 			resultsIndex++;
-		}else{
+		} else {
 			alert("已经是最后一位同名学生！");
 		}
 	} else if (flag == 'previous') {
-		if(resultsIndex > 0){
+		if (resultsIndex > 0) {
 			resultsIndex--;
-		}else{
+		} else {
 			alert("已经是第一位同名学生！");
 		}
 	}
@@ -234,7 +233,6 @@ function recordWithSameName(flag) {
 	var time = dateJS("Y-M-d", resultsWithSomeRecord[resultsIndex].time);
 	document.getElementsByName("time")[0].value = time;
 }
-
 
 function initPage() {
 	var xmlhttp;
@@ -291,7 +289,7 @@ function initPage() {
 					// obj.options.add(new Option(info[2].schoolZone, "value"));
 					// 默认填写当前日期
 					document.getElementsByName("inTime").value = getNowFormatDate();
-					
+
 					// 校区负责人只负责自己校区的事
 					if (GetCookie('role') == '8') {
 						// 先清除原来的
@@ -309,15 +307,15 @@ function initPage() {
 						schoolZone[4] = decodeURIComponent(GetCookie('schoolZone5'));
 						i = 0;
 						for (var tmp in info) {
-							for(var j=0;j<5;j++){
-								if(schoolZone[j] == info[i].schoolZone){
+							for (var j = 0; j < 5; j++) {
+								if (schoolZone[j] == info[i].schoolZone) {
 									document.getElementsByName("schoolZone1")[0].options.add(new Option(info[i].schoolZone, info[i].id));
-								}	
+								}
 							}
 							i++;
-						};											
+						};
 					}
-					
+
 				}
 
 			} else {

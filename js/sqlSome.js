@@ -12,14 +12,14 @@ function sqlSome() {
 
 function sqlClass(uid) {
 	// 顺序为：出勤次数－请假次数－旷课次数－扣费总额
-	var staticResultClass = new Array(0,0,0,0);
-	
+	var staticResultClass = new Array(0, 0, 0, 0);
+
 	var timeStart = document.getElementsByName("timeStart")[0].value;
-	if(timeStart ==""){
+	if (timeStart == "") {
 		timeStart = "%";
-	}	
+	}
 	var timeEnd = document.getElementsByName("timeEnd")[0].value;
-	if(timeEnd ==""){
+	if (timeEnd == "") {
 		timeEnd = "%";
 	}
 	var xmlhttp;
@@ -40,41 +40,41 @@ function sqlClass(uid) {
 				// 接收数据,得到服务器输出的XML数据
 
 				var ret = xmlhttp.responseText;
-				
+
 				removeRow('sqlClassTable');
-				
+
 				if (ret == "0") {
 					alert("该学生无上课记录，请核对查询条件！");
 				} else {
 					info = eval(ret);
-					
+
 					appendRowHeaderClass(sqlClassTable);
-					
+
 					var i = 0;
 					for (var tmp in info) {
-						appendRowClass(info[i],i);
-						
-						if(info[i].attendance=="出勤"){
+						appendRowClass(info[i], i);
+
+						if (info[i].attendance == "出勤") {
 							staticResultClass[0] += 1;
-						}else if(info[i].attendance=="请假"){
+						} else if (info[i].attendance == "请假") {
 							staticResultClass[1] += 1;
-						}else if(info[i].attendance=="旷课"){
+						} else if (info[i].attendance == "旷课") {
 							staticResultClass[2] += 1;
 						}
-						
+
 						// 扣费总额
-						if(info[i].product=="一对一"){
-							staticResultClass[3] += parseInt(info[i].price) * parseInt(info[i].period)/60.0;
-						}else if(info[i].product=="班课"){
-							staticResultClass[3] += parseInt(info[i].price);	
+						if (info[i].product == "一对一") {
+							staticResultClass[3] += parseInt(info[i].price) * parseInt(info[i].period) / 60.0;
+						} else if (info[i].product == "班课") {
+							staticResultClass[3] += parseInt(info[i].price);
 						}
-						
+
 						//staticResultClass[3] += parseInt(info[i].price);
-						
+
 						i++;
 					}
-					
-					appendRowStatisticClass(sqlClassTable,staticResultClass);
+
+					appendRowStatisticClass(sqlClassTable, staticResultClass);
 				}
 
 			} else {
@@ -83,12 +83,9 @@ function sqlClass(uid) {
 		}
 
 	};
-	// 3发出http请求		
+	// 3发出http请求
 	var url = "sqlSome.php";
-	url = url + "?sqlClass=1"
-			  + "&uid=" + uid.toString()
-			  + "&timeStart=" + timeStart
-			  + "&timeEnd="+ timeEnd;
+	url = url + "?sqlClass=1" + "&uid=" + uid.toString() + "&timeStart=" + timeStart + "&timeEnd=" + timeEnd;
 
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
@@ -98,14 +95,14 @@ function sqlClass(uid) {
 
 function sqlFee(uid) {
 	// 顺序为：记录条数－总费用－数学费用－语文费用－英语费用－物理费用－化学费用
-	var staticResultFee = new Array(0,0,0,0,0,0,0);
-	
+	var staticResultFee = new Array(0, 0, 0, 0, 0, 0, 0);
+
 	var timeStart = document.getElementsByName("timeStart")[0].value;
-	if(timeStart ==""){
+	if (timeStart == "") {
 		timeStart = "%";
-	}	
+	}
 	var timeEnd = document.getElementsByName("timeEnd")[0].value;
-	if(timeEnd ==""){
+	if (timeEnd == "") {
 		timeEnd = "%";
 	}
 	var xmlhttp;
@@ -126,32 +123,33 @@ function sqlFee(uid) {
 				// 接收数据,得到服务器输出的XML数据
 
 				var ret = xmlhttp.responseText;
-				
+
 				removeRow('sqlFeeTable');
-			
+
 				if (ret == "0") {
 					alert("该学生目前没有费用记录！");
 				} else {
 					info = eval(ret);
-					
-					appendRowHeaderFee(info[0],sqlFeeTable);
-					
+
+					appendRowHeaderFee(info[0], sqlFeeTable);
+
 					var i = 0;
 					for (var tmp in info) {
-						appendRowFee(info[i],i);
-						staticResultFee[0]= i+1;
-						staticResultFee[1]+= parseInt(info[i].feeSum);// 总额
-						staticResultFee[2]+= parseInt(info[i].Math);
-						staticResultFee[3]+= parseInt(info[i].Chinese);
-						staticResultFee[4]+= parseInt(info[i].English);
-						staticResultFee[5]+= parseInt(info[i].Physics);
-						staticResultFee[6]+= parseInt(info[i].Chemistry);
+						appendRowFee(info[i], i);
+						staticResultFee[0] = i + 1;
+						staticResultFee[1] += parseInt(info[i].feeSum);
+						// 总额
+						staticResultFee[2] += parseInt(info[i].Math);
+						staticResultFee[3] += parseInt(info[i].Chinese);
+						staticResultFee[4] += parseInt(info[i].English);
+						staticResultFee[5] += parseInt(info[i].Physics);
+						staticResultFee[6] += parseInt(info[i].Chemistry);
 						i++;
 					}
-					
-					appendRowStatisticFee(sqlFeeTable,info[0],staticResultFee);
-					
-					// 查询上课考勤内容 
+
+					appendRowStatisticFee(sqlFeeTable, info[0], staticResultFee);
+
+					// 查询上课考勤内容
 					sqlClass(uid);
 				}
 
@@ -161,13 +159,10 @@ function sqlFee(uid) {
 		}
 
 	};
-	// 3发出http请求		
+	// 3发出http请求
 	var url = "sqlSome.php";
-	url = url + "?sqlFee=1"
-			  + "&uid=" + uid.toString()
-			  + "&timeStart=" + timeStart
-			  + "&timeEnd="+ timeEnd;
-	
+	url = url + "?sqlFee=1" + "&uid=" + uid.toString() + "&timeStart=" + timeStart + "&timeEnd=" + timeEnd;
+
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
 	xmlhttp.open("GET", url, true);
@@ -195,57 +190,57 @@ function sqlBasic() {
 				var ret = xmlhttp.responseText;
 
 				removeRow("sqlBasicTable");
-				
+
 				if (ret == "0") {
 					alert("该学生信息不存在！请核对！");
 				} else {
 					resultBasicStudent = eval(ret);
-					
+
 					// 看是否有重名学生
 					resultsLen = 0;
-					for(var tmp in resultBasicStudent){
+					for (var tmp in resultBasicStudent) {
 						resultsLen++;
 					}
-					
-					if(resultsLen==1){
+
+					if (resultsLen == 1) {
 						document.getElementsByName("previous")[0].disabled = true;
 						document.getElementsByName("next")[0].disabled = true;
-					}else if(resultsLen>1){
+					} else if (resultsLen > 1) {
 						alert("查询到有多名同名学生存在，请使用“上一个”“下一个”进行选择！");
 						document.getElementsByName("previous")[0].disabled = false;
 						document.getElementsByName("next")[0].disabled = false;
-					}					
-					
+					}
+
 					// 载入一个学生信息
 					resultsIndex = 0;
 					var i = resultsIndex;
-					var schoolZoneStr1 = "",schoolZoneStr2 = "",schoolZoneStr3 = "";
+					var schoolZoneStr1 = "", schoolZoneStr2 = "", schoolZoneStr3 = "";
 					//for (var tmp in resultBasicStudent) {
 					uid = resultBasicStudent[i].uid;
-					if(resultBasicStudent[i].name2==""){
-						appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid,"姓名1", resultBasicStudent[i].name1,"姓名2", "/");
-					}else{
-						appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid,"姓名1", resultBasicStudent[i].name1,"姓名2", resultBasicStudent[i].name2);
+					if (resultBasicStudent[i].name2 == "") {
+						appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid, "姓名1", resultBasicStudent[i].name1, "姓名2", "/");
+					} else {
+						appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid, "姓名1", resultBasicStudent[i].name1, "姓名2", resultBasicStudent[i].name2);
 					}
-					
+
 					schoolZoneStr1 = resultBasicStudent[i].schoolZone1;
-					schoolZoneStr1 = schoolZoneStr1.substring(0,schoolZoneStr1.length-1);
-					
-					if(resultBasicStudent[i].schoolZone2==""){
+					schoolZoneStr1 = schoolZoneStr1.substring(0, schoolZoneStr1.length - 1);
+
+					if (resultBasicStudent[i].schoolZone2 == "") {
 						schoolZoneStr2 = "/";
-					}else{
+					} else {
 						schoolZoneStr2 = resultBasicStudent[i].schoolZone2;
-						schoolZoneStr2.substring(0,schoolZoneStr2.length-1);
+						schoolZoneStr2.substring(0, schoolZoneStr2.length - 1);
 					}
-					if(resultBasicStudent[i].schoolZone3==""){
+					if (resultBasicStudent[i].schoolZone3 == "") {
 						schoolZoneStr3 = "/";
-					}else{
+					} else {
 						schoolZoneStr3 = resultBasicStudent[i].schoolZone3;
-						schoolZoneStr3.substring(0,schoolZoneStr3.length-1);
+						schoolZoneStr3.substring(0, schoolZoneStr3.length - 1);
 					}
-					
-					appendRowBasic(sqlBasicTable, "校区1", schoolZoneStr1,"校区2", schoolZoneStr2, "校区3", schoolZoneStr3);
-					
+
+					appendRowBasic(sqlBasicTable, "校区1", schoolZoneStr1, "校区2", schoolZoneStr2, "校区3", schoolZoneStr3);
+
 					if (resultBasicStudent[i].school2 == "") {
 						if (resultBasicStudent[i].sex == "1") {
 							appendRowBasic(sqlBasicTable, "性别", "男", "学校1", resultBasicStudent[i].school1, "学校2", "/");
@@ -254,7 +249,7 @@ function sqlBasic() {
 						} else {
 							appendRowBasic(sqlBasicTable, "性别", "未填写", "学校1", resultBasicStudent[i].school1, "学校2", "/");
 						}
-					}else{
+					} else {
 						if (resultBasicStudent[i].sex == "1") {
 							appendRowBasic(sqlBasicTable, "性别", "男", "学校1", resultBasicStudent[i].school1, "学校2", resultBasicStudent[i].school2);
 						} else if (resultBasicStudent[i].sex == "2") {
@@ -263,17 +258,17 @@ function sqlBasic() {
 							appendRowBasic(sqlBasicTable, "性别", "未填写", "学校1", resultBasicStudent[i].school1, "学校2", resultBasicStudent[i].school2);
 						}
 					}
-					
+
 					var outTime = dateJS("Y-m-d", resultBasicStudent[i].outTime);
-					if(resultBasicStudent[i].outTime==""){
+					if (resultBasicStudent[i].outTime == "") {
 						outTime = "未退学";
 					}
-									
-					appendRowBasic(sqlBasicTable, "年级", resultBasicStudent[i].grade, "班级", resultBasicStudent[i].class,"家庭住址", resultBasicStudent[i].address);
-					appendRowBasic(sqlBasicTable, "学生电话", resultBasicStudent[i].studentTel, "学生微信", resultBasicStudent[i].studentWX,"学生QQ", resultBasicStudent[i].studentQQ);
+
+					appendRowBasic(sqlBasicTable, "年级", resultBasicStudent[i].grade, "班级", resultBasicStudent[i].class, "家庭住址", resultBasicStudent[i].address);
+					appendRowBasic(sqlBasicTable, "学生电话", resultBasicStudent[i].studentTel, "学生微信", resultBasicStudent[i].studentWX, "学生QQ", resultBasicStudent[i].studentQQ);
 					appendRowBasic(sqlBasicTable, "母亲电话", resultBasicStudent[i].motherTel, "母亲微信", resultBasicStudent[i].motherWX, "报名时间", dateJS("Y-m-d", resultBasicStudent[i].inTime));
-					appendRowBasic(sqlBasicTable, "父亲电话", resultBasicStudent[i].fatherTel, "父亲微信", resultBasicStudent[i].fatherWX,"退学时间", outTime);
-					
+					appendRowBasic(sqlBasicTable, "父亲电话", resultBasicStudent[i].fatherTel, "父亲微信", resultBasicStudent[i].fatherWX, "退学时间", outTime);
+
 					// 查询费用内容
 					sqlFee(resultBasicStudent[i].uid);
 					//i++;
@@ -288,13 +283,13 @@ function sqlBasic() {
 	};
 	// 3发出http请求
 	var url = "sqlSome.php";
-	
+
 	// 查询学生姓名为空时不能查询
 	if (document.getElementsByName('sqlName')[0].value == "") {
 		alert("请填写查询姓名先！");
 		return;
 	}
- 
+
 	url = url + "?sqlName=" + encodeURIComponent(document.getElementsByName('sqlName')[0].value);
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
@@ -304,50 +299,50 @@ function sqlBasic() {
 
 function recordWithSameName(flag) {
 	if (flag == 'next') {
-		if(resultsIndex< resultsLen -1){
+		if (resultsIndex < resultsLen - 1) {
 			resultsIndex++;
-		}else{
+		} else {
 			alert("已经是最后一位同名学生！");
 		}
 	} else if (flag == 'previous') {
-		if(resultsIndex > 0){
+		if (resultsIndex > 0) {
 			resultsIndex--;
-		}else{
+		} else {
 			alert("已经是第一位同名学生！");
 		}
 	}
-	
+
 	removeRow("sqlBasicTable");
-	
+
 	// 载入一个学生信息
 	var i = resultsIndex;
-	var schoolZoneStr1 = "",schoolZoneStr2 = "",schoolZoneStr3 = "";
+	var schoolZoneStr1 = "", schoolZoneStr2 = "", schoolZoneStr3 = "";
 	//for (var tmp in resultBasicStudent) {
 	uid = resultBasicStudent[i].uid;
-	if(resultBasicStudent[i].name2==""){
-		appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid,"姓名1", resultBasicStudent[i].name1,"姓名2", "/");
-	}else{
-		appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid,"姓名1", resultBasicStudent[i].name1,"姓名2", resultBasicStudent[i].name2);
+	if (resultBasicStudent[i].name2 == "") {
+		appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid, "姓名1", resultBasicStudent[i].name1, "姓名2", "/");
+	} else {
+		appendRowBasic(sqlBasicTable, "学生ID", resultBasicStudent[i].uid, "姓名1", resultBasicStudent[i].name1, "姓名2", resultBasicStudent[i].name2);
 	}
-	
+
 	schoolZoneStr1 = resultBasicStudent[i].schoolZone1;
-	schoolZoneStr1 = schoolZoneStr1.substring(0,schoolZoneStr1.length-1);
-	
-	if(resultBasicStudent[i].schoolZone2==""){
+	schoolZoneStr1 = schoolZoneStr1.substring(0, schoolZoneStr1.length - 1);
+
+	if (resultBasicStudent[i].schoolZone2 == "") {
 		schoolZoneStr2 = "/";
-	}else{
+	} else {
 		schoolZoneStr2 = resultBasicStudent[i].schoolZone2;
-		schoolZoneStr2.substring(0,schoolZoneStr2.length-1);
+		schoolZoneStr2.substring(0, schoolZoneStr2.length - 1);
 	}
-	if(resultBasicStudent[i].schoolZone3==""){
+	if (resultBasicStudent[i].schoolZone3 == "") {
 		schoolZoneStr3 = "/";
-	}else{
+	} else {
 		schoolZoneStr3 = resultBasicStudent[i].schoolZone3;
-		schoolZoneStr3.substring(0,schoolZoneStr3.length-1);
+		schoolZoneStr3.substring(0, schoolZoneStr3.length - 1);
 	}
-	
-	appendRowBasic(sqlBasicTable, "校区1", schoolZoneStr1,"校区2", schoolZoneStr2, "校区3", schoolZoneStr3);
-	
+
+	appendRowBasic(sqlBasicTable, "校区1", schoolZoneStr1, "校区2", schoolZoneStr2, "校区3", schoolZoneStr3);
+
 	if (resultBasicStudent[i].school2 == "") {
 		if (resultBasicStudent[i].sex == "1") {
 			appendRowBasic(sqlBasicTable, "性别", "男", "学校1", resultBasicStudent[i].school1, "学校2", "/");
@@ -356,7 +351,7 @@ function recordWithSameName(flag) {
 		} else {
 			appendRowBasic(sqlBasicTable, "性别", "未填写", "学校1", resultBasicStudent[i].school1, "学校2", "/");
 		}
-	}else{
+	} else {
 		if (resultBasicStudent[i].sex == "1") {
 			appendRowBasic(sqlBasicTable, "性别", "男", "学校1", resultBasicStudent[i].school1, "学校2", resultBasicStudent[i].school2);
 		} else if (resultBasicStudent[i].sex == "2") {
@@ -366,15 +361,15 @@ function recordWithSameName(flag) {
 		}
 	}
 
-						
-	appendRowBasic(sqlBasicTable, "年级", resultBasicStudent[i].grade, "班级", resultBasicStudent[i].class,"/","/");
-	appendRowBasic(sqlBasicTable, "学生电话", resultBasicStudent[i].studentTel, "学生微信", resultBasicStudent[i].studentWX,"学生QQ", resultBasicStudent[i].studentQQ);
+	appendRowBasic(sqlBasicTable, "年级", resultBasicStudent[i].grade, "班级", resultBasicStudent[i].class, "/", "/");
+	appendRowBasic(sqlBasicTable, "学生电话", resultBasicStudent[i].studentTel, "学生微信", resultBasicStudent[i].studentWX, "学生QQ", resultBasicStudent[i].studentQQ);
 	appendRowBasic(sqlBasicTable, "母亲电话", resultBasicStudent[i].motherTel, "母亲微信", resultBasicStudent[i].motherWX, "家庭住址", resultBasicStudent[i].address);
-	appendRowBasic(sqlBasicTable, "父亲电话", resultBasicStudent[i].fatherTel, "父亲微信", resultBasicStudent[i].fatherWX,"报名时间", dateJS("Y-m-d", resultBasicStudent[i].time));
-	
+	appendRowBasic(sqlBasicTable, "父亲电话", resultBasicStudent[i].fatherTel, "父亲微信", resultBasicStudent[i].fatherWX, "报名时间", dateJS("Y-m-d", resultBasicStudent[i].time));
+
 	sqlClass(resultBasicStudent[i].uid);
-	
+
 }
+
 // 插入班课查询结果
 function appendRowBasic(TableID, colName1, colValue1, colName2, colValue2, colName3, colValue3) {
 	// 添加一行
@@ -398,22 +393,22 @@ function appendRowBasic(TableID, colName1, colValue1, colName2, colValue2, colNa
 	newTd3.innerHTML = colValue2;
 	newTd4.innerHTML = colName3;
 	newTd5.innerHTML = colValue3;
-	
+
 	// 添加表格样式
-	$("#sqlBasicTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlBasicTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlBasicTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlBasicTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlBasicTable tr:odd").addClass("rowBgColorOdd");
 	$("#sqlBasicTable tr:even").addClass("rowBgColorEven");
 }
 
 // 插入查询结果表头
-function appendRowHeaderFee(obj,TableID){
+function appendRowHeaderFee(obj, TableID) {
 	// 添加一行
 	var newTr = TableID.insertRow(-1);
 	// 添加两列
@@ -460,48 +455,48 @@ function appendRowHeaderFee(obj,TableID){
 	var newTd40 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';
-	newTd22.align='center';
-	newTd23.align='center';
-	newTd24.align='center';
-	newTd25.align='center';
-	newTd26.align='center';
-	newTd27.align='center';
-	newTd28.align='center';
-	newTd29.align='center';
-	newTd30.align='center';
-	newTd31.align='center';
-	newTd32.align='center';
-	newTd33.align='center';
-	newTd34.align='center';
-	newTd35.align='center';
-	newTd36.align='center';
-	newTd37.align='center';
-	newTd38.align='center';
-	newTd39.align='center';
-	newTd40.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+	newTd37.align = 'center';
+	newTd38.align = 'center';
+	newTd39.align = 'center';
+	newTd40.align = 'center';
+
 	newTd0.innerHTML = "序号";
 	newTd1.innerHTML = "类别";
 	newTd2.innerHTML = "收据编号";
@@ -542,14 +537,14 @@ function appendRowHeaderFee(obj,TableID){
 	newTd37.innerHTML = obj.subFee2Name;
 	newTd38.innerHTML = obj.subFee3Name;
 	newTd39.innerHTML = obj.subFee4Name;
-	newTd40.innerHTML = obj.subFee5Name;		
+	newTd40.innerHTML = obj.subFee5Name;
 }
 
 // 插入班课表格相关函数
-function appendRowFee(obj,index){
+function appendRowFee(obj, index) {
 	// 序号从1开始
 	index = index + 1;
-	
+
 	var TableID = sqlFeeTable;
 
 	// 添加一行
@@ -598,196 +593,196 @@ function appendRowFee(obj,index){
 	var newTd40 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';
-	newTd22.align='center';
-	newTd23.align='center';
-	newTd24.align='center';
-	newTd25.align='center';
-	newTd26.align='center';
-	newTd27.align='center';
-	newTd28.align='center';
-	newTd29.align='center';
-	newTd30.align='center';
-	newTd31.align='center';
-	newTd32.align='center';
-	newTd33.align='center';
-	newTd34.align='center';
-	newTd35.align='center';
-	newTd36.align='center';
-	newTd37.align='center';
-	newTd38.align='center';
-	newTd39.align='center';
-	newTd40.align='center';		
-		
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+	newTd37.align = 'center';
+	newTd38.align = 'center';
+	newTd39.align = 'center';
+	newTd40.align = 'center';
+
 	newTd0.innerHTML = index;
-	if(obj.mode=="j"){
+	if (obj.mode == "j") {
 		newTd1.innerHTML = "交费";
-	}else if(obj.mode=="z"){
+	} else if (obj.mode == "z") {
 		newTd1.innerHTML = "转费";
-	}else if(obj.mode=="t"){
+	} else if (obj.mode == "t") {
 		newTd1.innerHTML = "退费";
 	}
 	newTd2.innerHTML = obj.receiptNum;
-	newTd3.innerHTML = obj.billNum;	
+	newTd3.innerHTML = obj.billNum;
 	newTd4.innerHTML = obj.feeSum;
-	newTd5.innerHTML = dateJS("Y-m-d",obj.time); 
-	if(obj.MathProduct==""){
+	newTd5.innerHTML = dateJS("Y-m-d", obj.time);
+	if (obj.MathProduct == "") {
 		newTd6.innerHTML = "/";
-	}else{
+	} else {
 		newTd6.innerHTML = obj.MathProduct;
-	}	
+	}
 	newTd7.innerHTML = obj.Math;
 	newTd8.innerHTML = obj.MathSubFee1;
 	newTd9.innerHTML = obj.MathSubFee2;
 	newTd10.innerHTML = obj.MathSubFee3;
 	newTd11.innerHTML = obj.MathSubFee4;
 	newTd12.innerHTML = obj.MathSubFee5;
-	if(obj.ChineseProduct==""){
+	if (obj.ChineseProduct == "") {
 		newTd13.innerHTML = "/";
-	}else{
+	} else {
 		newTd13.innerHTML = obj.ChineseProduct;
-	}	
+	}
 	newTd14.innerHTML = obj.Chinese;
 	newTd15.innerHTML = obj.ChineseSubFee1;
 	newTd16.innerHTML = obj.ChineseSubFee2;
 	newTd17.innerHTML = obj.ChineseSubFee3;
 	newTd18.innerHTML = obj.ChineseSubFee4;
 	newTd19.innerHTML = obj.ChineseSubFee5;
-	if(obj.EnglishProduct==""){
+	if (obj.EnglishProduct == "") {
 		newTd20.innerHTML = "/";
-	}else{
+	} else {
 		newTd20.innerHTML = obj.EnglishProduct;
-	}	
+	}
 	newTd21.innerHTML = obj.English;
 	newTd22.innerHTML = obj.EnglishSubFee1;
 	newTd23.innerHTML = obj.EnglishSubFee2;
 	newTd24.innerHTML = obj.EnglishSubFee3;
 	newTd25.innerHTML = obj.EnglishSubFee4;
 	newTd26.innerHTML = obj.EnglishSubFee5;
-	if(obj.PhysicsProduct==""){
+	if (obj.PhysicsProduct == "") {
 		newTd27.innerHTML = "/";
-	}else{
+	} else {
 		newTd27.innerHTML = obj.PhysicsProduct;
-	}	
+	}
 	newTd28.innerHTML = obj.Physics;
 	newTd29.innerHTML = obj.PhysicsSubFee1;
 	newTd30.innerHTML = obj.PhysicsSubFee2;
 	newTd31.innerHTML = obj.PhysicsSubFee3;
 	newTd32.innerHTML = obj.PhysicsSubFee4;
 	newTd33.innerHTML = obj.PhysicsSubFee5;
-	if(obj.ChemistryProduct==""){
+	if (obj.ChemistryProduct == "") {
 		newTd34.innerHTML = "/";
-	}else{
+	} else {
 		newTd34.innerHTML = obj.ChemistryProduct;
-	}	
+	}
 	newTd35.innerHTML = obj.Chemistry;
 	newTd36.innerHTML = obj.ChemistrySubFee1;
 	newTd37.innerHTML = obj.ChemistrySubFee2;
 	newTd38.innerHTML = obj.ChemistrySubFee3;
 	newTd39.innerHTML = obj.ChemistrySubFee4;
 	newTd40.innerHTML = obj.ChemistrySubFee5;
-	
+
 	// 对没有的扣费项目进行隐藏，
-	if(obj.subFee1Name=="费用1"){
-		setHiddenCol(sqlFeeTable,8);
-		setHiddenCol(sqlFeeTable,15);
-		setHiddenCol(sqlFeeTable,22);
-		setHiddenCol(sqlFeeTable,29);
-		setHiddenCol(sqlFeeTable,26);
+	if (obj.subFee1Name == "费用1") {
+		setHiddenCol(sqlFeeTable, 8);
+		setHiddenCol(sqlFeeTable, 15);
+		setHiddenCol(sqlFeeTable, 22);
+		setHiddenCol(sqlFeeTable, 29);
+		setHiddenCol(sqlFeeTable, 26);
 	}
-	if(obj.subFee2Name=="费用2"){
-		setHiddenCol(sqlFeeTable,9);
-		setHiddenCol(sqlFeeTable,16);
-		setHiddenCol(sqlFeeTable,23);
-		setHiddenCol(sqlFeeTable,30);
-		setHiddenCol(sqlFeeTable,37);
+	if (obj.subFee2Name == "费用2") {
+		setHiddenCol(sqlFeeTable, 9);
+		setHiddenCol(sqlFeeTable, 16);
+		setHiddenCol(sqlFeeTable, 23);
+		setHiddenCol(sqlFeeTable, 30);
+		setHiddenCol(sqlFeeTable, 37);
 	}
-	if(obj.subFee3Name=="费用3"){
-		setHiddenCol(sqlFeeTable,10);
-		setHiddenCol(sqlFeeTable,17);
-		setHiddenCol(sqlFeeTable,24);
-		setHiddenCol(sqlFeeTable,31);
-		setHiddenCol(sqlFeeTable,38);
+	if (obj.subFee3Name == "费用3") {
+		setHiddenCol(sqlFeeTable, 10);
+		setHiddenCol(sqlFeeTable, 17);
+		setHiddenCol(sqlFeeTable, 24);
+		setHiddenCol(sqlFeeTable, 31);
+		setHiddenCol(sqlFeeTable, 38);
 	}
-	if(obj.subFee4Name=="费用4"){
-		setHiddenCol(sqlFeeTable,11);
-		setHiddenCol(sqlFeeTable,18);
-		setHiddenCol(sqlFeeTable,25);
-		setHiddenCol(sqlFeeTable,32);
-		setHiddenCol(sqlFeeTable,39);
+	if (obj.subFee4Name == "费用4") {
+		setHiddenCol(sqlFeeTable, 11);
+		setHiddenCol(sqlFeeTable, 18);
+		setHiddenCol(sqlFeeTable, 25);
+		setHiddenCol(sqlFeeTable, 32);
+		setHiddenCol(sqlFeeTable, 39);
 	}
-	if(obj.subFee5Name=="费用5"){
-		setHiddenCol(sqlFeeTable,12);
-		setHiddenCol(sqlFeeTable,19);
-		setHiddenCol(sqlFeeTable,26);
-		setHiddenCol(sqlFeeTable,33);
-		setHiddenCol(sqlFeeTable,40);
+	if (obj.subFee5Name == "费用5") {
+		setHiddenCol(sqlFeeTable, 12);
+		setHiddenCol(sqlFeeTable, 19);
+		setHiddenCol(sqlFeeTable, 26);
+		setHiddenCol(sqlFeeTable, 33);
+		setHiddenCol(sqlFeeTable, 40);
 	}
-	
+
 	// 科目
 	/*
 	if(obj.MathProduct==""){
-		for(var i=6;i<=12;i++){
-			setHiddenCol(sqlFeeTable,i);
-		}
+	for(var i=6;i<=12;i++){
+	setHiddenCol(sqlFeeTable,i);
+	}
 	}
 	if(obj.ChinsesProduct==""){
-		for(var i=13;i<=19;i++){
-			setHiddenCol(sqlFeeTable,i);
-		}
+	for(var i=13;i<=19;i++){
+	setHiddenCol(sqlFeeTable,i);
+	}
 	}
 	if(obj.EnglishProduct==""){
-		for(var i=20;i<=26;i++){
-			setHiddenCol(sqlFeeTable,i);
-		}
+	for(var i=20;i<=26;i++){
+	setHiddenCol(sqlFeeTable,i);
+	}
 	}
 	if(obj.PhysicsProduct==""){
-		for(var i=27;i<=33;i++){
-			setHiddenCol(sqlFeeTable,i);
-		}
+	for(var i=27;i<=33;i++){
+	setHiddenCol(sqlFeeTable,i);
+	}
 	}
 	if(obj.ChemistryProduct==""){
-		for(var i=34;i<=40;i++){
-			setHiddenCol(sqlFeeTable,i);
-		}
-	}	
+	for(var i=34;i<=40;i++){
+	setHiddenCol(sqlFeeTable,i);
+	}
+	}
 	*/
 	// 添加表格样式
-	$("#sqlFeeTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlFeeTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlFeeTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlFeeTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlFeeTable tr:odd").addClass("rowBgColorOdd");
 	$("#sqlFeeTable tr:even").addClass("rowBgColorEven");
 }
 
 //插入查询统计结果
-function appendRowStatisticFee(TableID,obj,data){
+function appendRowStatisticFee(TableID, obj, data) {
 	// 添加一行
 	var newTr = TableID.insertRow(0);
 	// 添加两列
@@ -834,48 +829,48 @@ function appendRowStatisticFee(TableID,obj,data){
 	var newTd40 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	newTd10.align='center';
-	newTd11.align='center';
-	newTd12.align='center';
-	newTd13.align='center';
-	newTd14.align='center';
-	newTd15.align='center';
-	newTd16.align='center';
-	newTd17.align='center';
-	newTd18.align='center';
-	newTd19.align='center';
-	newTd20.align='center';
-	newTd21.align='center';
-	newTd22.align='center';
-	newTd23.align='center';
-	newTd24.align='center';
-	newTd25.align='center';
-	newTd26.align='center';
-	newTd27.align='center';
-	newTd28.align='center';
-	newTd29.align='center';
-	newTd30.align='center';
-	newTd31.align='center';
-	newTd32.align='center';
-	newTd33.align='center';
-	newTd34.align='center';
-	newTd35.align='center';
-	newTd36.align='center';
-	newTd37.align='center';
-	newTd38.align='center';
-	newTd39.align='center';
-	newTd40.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+	newTd10.align = 'center';
+	newTd11.align = 'center';
+	newTd12.align = 'center';
+	newTd13.align = 'center';
+	newTd14.align = 'center';
+	newTd15.align = 'center';
+	newTd16.align = 'center';
+	newTd17.align = 'center';
+	newTd18.align = 'center';
+	newTd19.align = 'center';
+	newTd20.align = 'center';
+	newTd21.align = 'center';
+	newTd22.align = 'center';
+	newTd23.align = 'center';
+	newTd24.align = 'center';
+	newTd25.align = 'center';
+	newTd26.align = 'center';
+	newTd27.align = 'center';
+	newTd28.align = 'center';
+	newTd29.align = 'center';
+	newTd30.align = 'center';
+	newTd31.align = 'center';
+	newTd32.align = 'center';
+	newTd33.align = 'center';
+	newTd34.align = 'center';
+	newTd35.align = 'center';
+	newTd36.align = 'center';
+	newTd37.align = 'center';
+	newTd38.align = 'center';
+	newTd39.align = 'center';
+	newTd40.align = 'center';
+
 	newTd0.innerHTML = "统计结果";
 	newTd1.innerHTML = "费用次数";
 	newTd2.innerHTML = data[0];
@@ -916,47 +911,47 @@ function appendRowStatisticFee(TableID,obj,data){
 	newTd37.innerHTML = "";
 	newTd38.innerHTML = "";
 	newTd39.innerHTML = "";
-	newTd40.innerHTML = "";	
-	
+	newTd40.innerHTML = "";
+
 	// 对没有的扣费项目进行隐藏，与appendRowFee中的一致
-	if(obj.subFee1Name=="费用1"){
-		setHiddenCol(sqlFeeTable,8);
-		setHiddenCol(sqlFeeTable,15);
-		setHiddenCol(sqlFeeTable,22);
-		setHiddenCol(sqlFeeTable,29);
-		setHiddenCol(sqlFeeTable,26);
+	if (obj.subFee1Name == "费用1") {
+		setHiddenCol(sqlFeeTable, 8);
+		setHiddenCol(sqlFeeTable, 15);
+		setHiddenCol(sqlFeeTable, 22);
+		setHiddenCol(sqlFeeTable, 29);
+		setHiddenCol(sqlFeeTable, 26);
 	}
-	if(obj.subFee2Name=="费用2"){
-		setHiddenCol(sqlFeeTable,9);
-		setHiddenCol(sqlFeeTable,16);
-		setHiddenCol(sqlFeeTable,23);
-		setHiddenCol(sqlFeeTable,30);
-		setHiddenCol(sqlFeeTable,37);
+	if (obj.subFee2Name == "费用2") {
+		setHiddenCol(sqlFeeTable, 9);
+		setHiddenCol(sqlFeeTable, 16);
+		setHiddenCol(sqlFeeTable, 23);
+		setHiddenCol(sqlFeeTable, 30);
+		setHiddenCol(sqlFeeTable, 37);
 	}
-	if(obj.subFee3Name=="费用3"){
-		setHiddenCol(sqlFeeTable,10);
-		setHiddenCol(sqlFeeTable,17);
-		setHiddenCol(sqlFeeTable,24);
-		setHiddenCol(sqlFeeTable,31);
-		setHiddenCol(sqlFeeTable,38);
+	if (obj.subFee3Name == "费用3") {
+		setHiddenCol(sqlFeeTable, 10);
+		setHiddenCol(sqlFeeTable, 17);
+		setHiddenCol(sqlFeeTable, 24);
+		setHiddenCol(sqlFeeTable, 31);
+		setHiddenCol(sqlFeeTable, 38);
 	}
-	if(obj.subFee4Name=="费用4"){
-		setHiddenCol(sqlFeeTable,11);
-		setHiddenCol(sqlFeeTable,18);
-		setHiddenCol(sqlFeeTable,25);
-		setHiddenCol(sqlFeeTable,32);
-		setHiddenCol(sqlFeeTable,39);
+	if (obj.subFee4Name == "费用4") {
+		setHiddenCol(sqlFeeTable, 11);
+		setHiddenCol(sqlFeeTable, 18);
+		setHiddenCol(sqlFeeTable, 25);
+		setHiddenCol(sqlFeeTable, 32);
+		setHiddenCol(sqlFeeTable, 39);
 	}
-	if(obj.subFee5Name=="费用5"){
-		setHiddenCol(sqlFeeTable,12);
-		setHiddenCol(sqlFeeTable,19);
-		setHiddenCol(sqlFeeTable,26);
-		setHiddenCol(sqlFeeTable,33);
-		setHiddenCol(sqlFeeTable,40);
+	if (obj.subFee5Name == "费用5") {
+		setHiddenCol(sqlFeeTable, 12);
+		setHiddenCol(sqlFeeTable, 19);
+		setHiddenCol(sqlFeeTable, 26);
+		setHiddenCol(sqlFeeTable, 33);
+		setHiddenCol(sqlFeeTable, 40);
 	}
 }
 
-function appendRowHeaderClass(TableID){
+function appendRowHeaderClass(TableID) {
 	// 添加一行
 	var newTr = TableID.insertRow(-1);
 	// 添加两列
@@ -972,17 +967,17 @@ function appendRowHeaderClass(TableID){
 	var newTd9 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+
 	newTd0.innerHTML = "序号";
 	newTd1.innerHTML = "科目";
 	newTd2.innerHTML = "产品";
@@ -995,7 +990,7 @@ function appendRowHeaderClass(TableID){
 	newTd9.innerHTML = "扣费";
 }
 
-function appendRowClass(obj,i){
+function appendRowClass(obj, i) {
 	var coursetmp = "";
 	// 添加一行
 	var newTr = sqlClassTable.insertRow(-1);
@@ -1012,63 +1007,62 @@ function appendRowClass(obj,i){
 	var newTd9 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	
-	newTd0.innerHTML = (i+1).toString();
-	if(obj.subFeeCourse=="1"){
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+
+	newTd0.innerHTML = (i + 1).toString();
+	if (obj.subFeeCourse == "1") {
 		coursetmp = "数学";
-	}else if(obj.subFeeCourse=="2"){
+	} else if (obj.subFeeCourse == "2") {
 		coursetmp = "语文";
-	}else if(obj.subFeeCourse=="3"){
+	} else if (obj.subFeeCourse == "3") {
 		coursetmp = "英语";
-	}else if(obj.subFeeCourse=="4"){
+	} else if (obj.subFeeCourse == "4") {
 		coursetmp = "物理";
-	}else if(obj.subFeeCourse=="5"){
+	} else if (obj.subFeeCourse == "5") {
 		coursetmp = "化学";
 	}
-	
+
 	newTd1.innerHTML = coursetmp;
 	newTd2.innerHTML = obj.product;
 	newTd3.innerHTML = obj.teacher;
 	newTd4.innerHTML = obj.className;
 	newTd5.innerHTML = dateJS("Y-M-d", obj.attandenceTime);
-	newTd6.innerHTML = dateJS("H:i", obj.attandenceTime).toString()+"~"+dateJS("H:i",parseInt(obj.attandenceTime)+parseInt(obj.period*60)).toString();
+	newTd6.innerHTML = dateJS("H:i", obj.attandenceTime).toString() + "~" + dateJS("H:i", parseInt(obj.attandenceTime) + parseInt(obj.period * 60)).toString();
 	newTd7.innerHTML = obj.attendance;
-	if(obj.notAttendanceReason==""){
+	if (obj.notAttendanceReason == "") {
 		newTd8.innerHTML = "/";
-	}else{
+	} else {
 		newTd8.innerHTML = obj.notAttendanceReason;
 	}
-	if(obj.product=="一对一"){
-		newTd9.innerHTML = parseInt(obj.price) * parseInt(obj.period)/60.0;
-	}else if(obj.product=="班课"){
-		newTd9.innerHTML = obj.price;	
+	if (obj.product == "一对一") {
+		newTd9.innerHTML = parseInt(obj.price) * parseInt(obj.period) / 60.0;
+	} else if (obj.product == "班课") {
+		newTd9.innerHTML = obj.price;
 	}
-	
-	
+
 	// 添加表格样式
-	$("#sqlClassTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlClassTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlClassTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlClassTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlClassTable tr:odd").addClass("rowBgColorOdd");
 	$("#sqlClassTable tr:even").addClass("rowBgColorEven");
 }
 
-function appendRowStatisticClass(TableID,data){
+function appendRowStatisticClass(TableID, data) {
 	// 添加一行
 	var newTr = TableID.insertRow(0);
 	// 添加两列
@@ -1084,17 +1078,17 @@ function appendRowStatisticClass(TableID,data){
 	var newTd9 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	newTd9.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+	newTd9.align = 'center';
+
 	newTd0.innerHTML = "统计结果";
 	newTd1.innerHTML = "";
 	newTd2.innerHTML = "出勤次数";
@@ -1140,39 +1134,36 @@ function initPage() {
 		document.getElementsByName("sqlName")[0].disabled = 'true';
 		sqlSome();
 	}
-	
+
 }
 
-
 //oTable为表的id，iRow和iCol是从0开始的，iRow=0表示的是第一行，iCol=0表示的是第一列。
-function setHiddenCol(oTable,iCol)
-{
-    for (var i=0;i < oTable.rows.length ; i++)
-    {    
-       oTable.rows[i].cells[iCol].style.display="none";
+function setHiddenCol(oTable, iCol) {
+	for (var i = 0; i < oTable.rows.length; i++) {
+		oTable.rows[i].cells[iCol].style.display = "none";
 		//如果该列隐藏则让其显示，反之则让其隐藏
 		//oTable.rows[i].cells[iCol].style.display=="none"?"block":"none";
 		//oTable.rows[i].deleteCell(iCol);
-    }
+	}
 }
 
-function showTable(flag){
-	if(flag==1){
+function showTable(flag) {
+	if (flag == 1) {
 		document.getElementById("sqlBasicTable").style.display = '';
 		document.getElementById("sqlClassTable").style.display = 'none';
 		document.getElementById("sqlFeeTable").style.display = 'none';
 	}
-	if(flag==2){
+	if (flag == 2) {
 		document.getElementById("sqlBasicTable").style.display = 'none';
 		document.getElementById("sqlClassTable").style.display = '';
 		document.getElementById("sqlFeeTable").style.display = 'none';
 	}
-	if(flag==3){
+	if (flag == 3) {
 		document.getElementById("sqlBasicTable").style.display = 'none';
 		document.getElementById("sqlClassTable").style.display = 'none';
 		document.getElementById("sqlFeeTable").style.display = 'block';
 	}
-	if(flag==4){
+	if (flag == 4) {
 		document.getElementById("sqlBasicTable").style.display = '';
 		document.getElementById("sqlClassTable").style.display = '';
 		document.getElementById("sqlFeeTable").style.display = 'block';
@@ -1180,7 +1171,7 @@ function showTable(flag){
 }
 
 // 导出表格到CSV
-function exportToCSVsqlSome(aLink){
+function exportToCSVsqlSome(aLink) {
 	// var str = "栏位1,栏位2,栏位3\n值1,值2,值3";
 	//var str = "报表类型,一对一查询,";
 	var str = GetInfoFromTableSqlSome();
@@ -1189,107 +1180,109 @@ function exportToCSVsqlSome(aLink){
 }
 
 // 获得整个表格的具体内容并返回字符串
-function GetInfoFromTableSqlSome(tableid){
-    var tableInfo = "";
-    var strtmp="";
-    var tableObj = document.getElementById("sqlBasicTable");
-    
-    // 基本信息表1
-    for (var i = 0; i < tableObj.rows.length; i++) {    //遍历Table的所有Row
-        for (var j = 0; j < tableObj.rows[i].cells.length; j++) {   //遍历Row中的每一列
-        	strtmp = tableObj.rows[i].cells[j].innerHTML;
-        	
-            tableInfo += strtmp;   //获取Table中单元格的内容
-           
-            tableInfo += ",";
-        }
-        
-        // 一行结束后要加换行，否则表格不换行
-        tableInfo += "\n";
-    }
-    tableInfo += "\n";
-    
-    // 考勤记录表2
-    tableObj = document.getElementById("sqlClassTable");
-    for (var i = 0; i < tableObj.rows.length; i++) {    //遍历Table的所有Row
-        for (var j = 0; j < tableObj.rows[i].cells.length; j++) {   //遍历Row中的每一列
-        	strtmp = tableObj.rows[i].cells[j].innerHTML;
-        	
-            tableInfo += strtmp;   //获取Table中单元格的内容
-           
-            tableInfo += ",";
-        }
-        
-        // 一行结束后要加换行，否则表格不换行
-        tableInfo += "\n";
-    }
-    tableInfo += "\n";
-    
-    // 费用表3
-    /*
-    tableObj = document.getElementById("sqlFeeTable");
-    for (var i = 0; i < tableObj.rows.length; i++) {    //遍历Table的所有Row
-        for (var j = 0; j < tableObj.rows[i].cells.length; j++) {   //遍历Row中的每一列
-        	strtmp = tableObj.rows[i].cells[j].innerHTML;
-        	
-            tableInfo += strtmp;   //获取Table中单元格的内容
-           
-            tableInfo += ",";
-        }
-        
-        // 一行结束后要加换行，否则表格不换行
-        tableInfo += "\n";
-    }
-    */
-   
-    var str = GetInfoFromTableFee("sqlFeeTable");
-    tableInfo += str;
-    //alert(tableInfo);
-    return tableInfo;
+function GetInfoFromTableSqlSome(tableid) {
+	var tableInfo = "";
+	var strtmp = "";
+	var tableObj = document.getElementById("sqlBasicTable");
+
+	// 基本信息表1
+	for (var i = 0; i < tableObj.rows.length; i++) {//遍历Table的所有Row
+		for (var j = 0; j < tableObj.rows[i].cells.length; j++) {//遍历Row中的每一列
+			strtmp = tableObj.rows[i].cells[j].innerHTML;
+
+			tableInfo += strtmp;
+			//获取Table中单元格的内容
+
+			tableInfo += ",";
+		}
+
+		// 一行结束后要加换行，否则表格不换行
+		tableInfo += "\n";
+	}
+	tableInfo += "\n";
+
+	// 考勤记录表2
+	tableObj = document.getElementById("sqlClassTable");
+	for (var i = 0; i < tableObj.rows.length; i++) {//遍历Table的所有Row
+		for (var j = 0; j < tableObj.rows[i].cells.length; j++) {//遍历Row中的每一列
+			strtmp = tableObj.rows[i].cells[j].innerHTML;
+
+			tableInfo += strtmp;
+			//获取Table中单元格的内容
+
+			tableInfo += ",";
+		}
+
+		// 一行结束后要加换行，否则表格不换行
+		tableInfo += "\n";
+	}
+	tableInfo += "\n";
+
+	// 费用表3
+	/*
+	 tableObj = document.getElementById("sqlFeeTable");
+	 for (var i = 0; i < tableObj.rows.length; i++) {    //遍历Table的所有Row
+	 for (var j = 0; j < tableObj.rows[i].cells.length; j++) {   //遍历Row中的每一列
+	 strtmp = tableObj.rows[i].cells[j].innerHTML;
+
+	 tableInfo += strtmp;   //获取Table中单元格的内容
+
+	 tableInfo += ",";
+	 }
+
+	 // 一行结束后要加换行，否则表格不换行
+	 tableInfo += "\n";
+	 }
+	 */
+
+	var str = GetInfoFromTableFee("sqlFeeTable");
+	tableInfo += str;
+	//alert(tableInfo);
+	return tableInfo;
 }
 
 // 获得非隐藏列的费用表格内容
-function GetInfoFromTableFee(tableid){
-    var tableInfo = "";
-    var strtmp="";
-    var str;
-    var index = new Array();
-    var k = -1;
-    var flagInArray = 0;
-    var tableObj = document.getElementById(tableid);
-    
-    // 获得隐藏列的列号保存到index数组中
-    for (var i = 0; i < tableObj.rows.length; i++) {    //遍历Table的所有Row
-        for (var j = 0; j < tableObj.rows[i].cells.length; j++) {   //遍历Row中的每一列
-        	str = tableObj.rows[i].cells[j].innerHTML;
-        	if((str.indexOf("费用1")==-1)&&(str.indexOf("费用2")==-1)&&(str.indexOf("费用3")==-1)&&(str.indexOf("费用4")==-1)&&(str.indexOf("费用5")==-1)){
-        		        		    		
-        	}else{        		
-        		k = k+1;
-           		index[k] = j;
-        	} 
-        }
+function GetInfoFromTableFee(tableid) {
+	var tableInfo = "";
+	var strtmp = "";
+	var str;
+	var index = new Array();
+	var k = -1;
+	var flagInArray = 0;
+	var tableObj = document.getElementById(tableid);
+
+	// 获得隐藏列的列号保存到index数组中
+	for (var i = 0; i < tableObj.rows.length; i++) {//遍历Table的所有Row
+		for (var j = 0; j < tableObj.rows[i].cells.length; j++) {//遍历Row中的每一列
+			str = tableObj.rows[i].cells[j].innerHTML;
+			if ((str.indexOf("费用1") == -1) && (str.indexOf("费用2") == -1) && (str.indexOf("费用3") == -1) && (str.indexOf("费用4") == -1) && (str.indexOf("费用5") == -1)) {
+
+			} else {
+				k = k + 1;
+				index[k] = j;
+			}
+		}
 	}
 
 	// 真正遍历table当遇到index中的列时不取其内容，即获得非隐藏列的表格内容
 	for (var i = 0; i < tableObj.rows.length; i++) {//遍历Table的所有Row
 		for (var j = 0; j < tableObj.rows[i].cells.length; j++) {//遍历Row中的每一列
 			flagInArray = 0;
-			for(var a=0;a<=k;a++){
-				if(j==index[a]){
+			for (var a = 0; a <= k; a++) {
+				if (j == index[a]) {
 					flagInArray = 1;
 					break;
-				}	
+				}
 			}
-			
-			if(flagInArray==0){
+
+			if (flagInArray == 0) {
 				strtmp = tableObj.rows[i].cells[j].innerHTML;
 
 				tableInfo += strtmp;
 				//获取Table中单元格的内容
-	
+
 				tableInfo += ",";
-			}		
+			}
 		}
 
 		// 一行结束后要加换行，否则表格不换行
@@ -1298,4 +1291,4 @@ function GetInfoFromTableFee(tableid){
 	// alert(index);
 	//alert(tableInfo);
 	return tableInfo;
-	}
+}

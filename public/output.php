@@ -1,13 +1,13 @@
 <?php
 header("Content-Type:text/html;charset=utf-8");
 
-include 'verifyID.php';					
+include 'verifyID.php';
 /*
-if (!(isset($_COOKIE['isLogin'])) || ($_COOKIE['isLogin'] == 0)) {
-	echo "请登录系统先！";
-	echo '<script>setTimeout(\'location="../index.php"\',2000)</script>';
-}
-*/
+ if (!(isset($_COOKIE['isLogin'])) || ($_COOKIE['isLogin'] == 0)) {
+ echo "请登录系统先！";
+ echo '<script>setTimeout(\'location="../index.php"\',2000)</script>';
+ }
+ */
 
 // ajax查询产出
 if (isset($_GET['sqlOut'])) {
@@ -20,24 +20,22 @@ if (isset($_GET['sqlOut'])) {
 
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
-	
+
 	//减一天是为了保证查询时间段为完全闭区间，因为默认为当日的0:0:0
 	date_default_timezone_set('PRC');
 	$timeStart = strtotime($_GET['timeStart']);
-	$timeEnd = strtotime($_GET['timeEnd']) + 24*60*60-1;
+	$timeEnd = strtotime($_GET['timeEnd']) + 24 * 60 * 60 - 1;
 
 	// 完好的，只是查询结果不带or后面的内容，行为是查询满足条件的学生，包括正常扣费的学生和试听的学生，没有考滤到试听成功后学生扣费产生的教师工资问题
 	// 条件是"上课考勤的时间"在开始时间和结束时间之内，还有别的条件。。。
 	//$sbmt = $pdo -> prepare("select * from subFeeTable where attandenceTime>=? and attandenceTime<=? and schoolZone like ? and grade like ? and subFeeCourse like ? and product like ? and teacher like ? and classInMLS like ? order by attandenceTime desc");
 	//$sbmt -> execute(array($timeStart,$timeEnd,$_GET['schoolZone'],$_GET['grade'],$_GET['course'],$_GET['product'],$_GET['teacher'],$_GET['classInMLS']));
-	
+
 	// 完好的，在上面的基础上多加了一个or条件，行为是在上面条件查询的基础上，考滤到试听成功后学生扣费产生的教师工资问题，
 	// 即当有试听成功的学生时，增加查询试听成功的学生，条件是“确定试听成功testResultTime的时间"在筛选的开始时间和结束时间之内
 	$sbmt = $pdo -> prepare("select * from subFeeTable where (attandenceTime>=? and attandenceTime<=? and schoolZone like ? and grade like ? and subFeeCourse like ? and product like ? and teacher like ? and classInMLS like ? and attendance like ?) or(schoolZone like ? and grade like ? and subFeeCourse like ? and product like ? and teacher like ? and classInMLS like ? and testResultTime>=? and testResultTime<=? and priceState like ? and attendance like ?) order by attandenceTime desc,convert(name1 using gbk) asc");
-	$sbmt -> execute(array($timeStart,$timeEnd,$_GET['schoolZone'],$_GET['grade'],$_GET['course'],$_GET['product'],$_GET['teacher'],$_GET['classInMLS'],"出勤",$_GET['schoolZone'],$_GET['grade'],$_GET['course'],$_GET['product'],$_GET['teacher'],$_GET['classInMLS'],$timeStart,$timeEnd,"1","出勤"));
-	
-	
-	
+	$sbmt -> execute(array($timeStart, $timeEnd, $_GET['schoolZone'], $_GET['grade'], $_GET['course'], $_GET['product'], $_GET['teacher'], $_GET['classInMLS'], "出勤", $_GET['schoolZone'], $_GET['grade'], $_GET['course'], $_GET['product'], $_GET['teacher'], $_GET['classInMLS'], $timeStart, $timeEnd, "1", "出勤"));
+
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
 		$allRows = $sbmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -154,7 +152,6 @@ if (isset($_GET['sqlClassNameBySchoolZone'])) {
 
 	return;
 }
-
 ?>
 
 <!DOCTYPE html>

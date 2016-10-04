@@ -12,38 +12,38 @@ var productLoad = new Array();
 var greadeSetResultLoad = new Array();
 var flagSubmitType = false;
 
-function checkGradeSetResult(){
+function checkGradeSetResult() {
 	return flagSubmitType;
 }
 
 // 检查班级名称设置是否有冲突
-function checkGradeSet(obj){
+function checkGradeSet(obj) {
 	// 只是填写停班时间时不检测班级设置是否有冲突
-	if(obj.name=="submitUpdate"){
-		if(document.getElementsByName("endTime")[0].value!=""){
+	if (obj.name == "submitUpdate") {
+		if (document.getElementsByName("endTime")[0].value != "") {
 			flagSubmitType = true;
 			return;
 		}
 	}
-	
+
 	// 增加班级时检查班级设置是否有冲突
 	var i = 0;
 	var gradeSetResultTmp = document.getElementsByName("greadeSetResult")[0].value;
-	gradeSetResultTmp = gradeSetResultTmp.replace(/[ ]/g,"");
-	for(i=0;i<greadeSetResultLoad.length;i++){
-		if(gradeSetResultTmp == greadeSetResultLoad[i]){
+	gradeSetResultTmp = gradeSetResultTmp.replace(/[ ]/g, "");
+	for ( i = 0; i < greadeSetResultLoad.length; i++) {
+		if (gradeSetResultTmp == greadeSetResultLoad[i]) {
 			alert('设置的"班级属性"已经被使用，请重新输入一个新的"班级名称"');
 			flagSubmitType = false;
 			break;
 		}
 	}
-	if(i==greadeSetResultLoad.length){
+	if (i == greadeSetResultLoad.length) {
 		flagSubmitType = true;
 	}
 }
 
 function checkHiddenValueGrade(value) {
-	switch(value){
+	switch(value) {
 	case 7:
 		document.getElementsByName("gradeCopy")[0].value = "初一";
 		break;
@@ -68,7 +68,7 @@ function checkHiddenValueGrade(value) {
 }
 
 function checkHiddenValueCourse(value) {
-	document.getElementsByName("courseCopy")[0].value = courseLoad[value-1];
+	document.getElementsByName("courseCopy")[0].value = courseLoad[value - 1];
 }
 
 function checkHiddenValueProduct(value) {
@@ -80,10 +80,10 @@ function updateResult() {
 	// var classNameTmp = document.getElementsByName("className")[0].value;
 	// classNameTmp = classNameTmp.replace(/[ ]/g,"");
 	// for(var i=0;i<greadeSetResultLoad.length;i++){
-		// if(classNameTmp == greadeSetResultLoad[i]){
-			// alert('输入的班级名称已经被使用，请重新输入一个新的"班级名称"');
-			// return;
-		// }
+	// if(classNameTmp == greadeSetResultLoad[i]){
+	// alert('输入的班级名称已经被使用，请重新输入一个新的"班级名称"');
+	// return;
+	// }
 	// }
 	document.getElementsByName("submitAdd")[0].disabled = "";
 	// 真正更新输入的内容
@@ -169,14 +169,14 @@ function updateResult() {
 }
 
 function loadPrincipalSetAndTeacher(flag) {
-	if(document.getElementsByName("schoolZone")[0].value > 0){
+	if (document.getElementsByName("schoolZone")[0].value > 0) {
 		var schoolZone = document.getElementsByName("schoolZone")[0].options[document.getElementsByName("schoolZone")[0].value].text;
 		loadPrincipalSet(schoolZone);
 		// ajax 获得教师信息，人工用鼠标选时载入教师设置，人工查询时不再加载教师信息，否则看似行得通，但实际有问题（教师姓名不更新显示）
-		if(flag==1){
+		if (flag == 1) {
 			loadTeacher(schoolZone);
 		}
-	
+
 		// 更新的隐藏域中的内容为校区名和value值
 		document.getElementsByName("schoolZoneCopy")[0].value = schoolZone;
 		// + document.getElementsByName("schoolZone")[0].value;
@@ -184,10 +184,10 @@ function loadPrincipalSetAndTeacher(flag) {
 		document.getElementsByName("gradeCopy")[0].value = "";
 		document.getElementsByName("courseCopy")[0].value = "";
 		document.getElementsByName("productCopy")[0].value = "";
-		// 获得班级ID，用于修改数据库，添加停班时间 
+		// 获得班级ID，用于修改数据库，添加停班时间
 		document.getElementsByName("gradeIDCopy")[0].value = document.getElementsByName("schoolZone")[0].value;
-		
-	}else{
+
+	} else {
 		location.reload();
 	}
 }
@@ -369,27 +369,27 @@ function sqlRecord() {
 					document.getElementsByName("previous")[0].disabled = true;
 					document.getElementsByName("next")[0].disabled = true;
 					alert("查询信息不存在！");
-				} else {					
+				} else {
 					//document.getElementsByName("submitAdd")[0].disabled = false;
 
 					var info = eval(ret);
-					
+
 					resultsWithSomeRecord = info;
 					resultsIndex = 0;
 					resultsLen = 0;
-					for(var tmp in resultsWithSomeRecord){
+					for (var tmp in resultsWithSomeRecord) {
 						resultsLen++;
-					}					
-					
-					if(resultsLen==1){
+					}
+
+					if (resultsLen == 1) {
 						document.getElementsByName("previous")[0].disabled = true;
 						document.getElementsByName("next")[0].disabled = true;
-					}else if(resultsLen>1){
+					} else if (resultsLen > 1) {
 						alert("检查到该校区有多个班级记录，请使用“上一个”“下一个”选择！");
 						document.getElementsByName("previous")[0].disabled = false;
 						document.getElementsByName("next")[0].disabled = false;
 					}
-					
+
 					var time;
 					if (info[0].startTime != "") {
 						time = dateJS("Y-M-d", info[0].startTime);
@@ -418,70 +418,70 @@ function sqlRecord() {
 					var str = "";
 
 					str = info[0].grade;
-					if(str =="初一"){
+					if (str == "初一") {
 						value = 7;
 					}
-					if(str =="初二"){
+					if (str == "初二") {
 						value = 8;
 					}
-					if(str =="初三"){
+					if (str == "初三") {
 						value = 9;
 					}
-					if(str =="高一"){
+					if (str == "高一") {
 						value = 10;
 					}
-					if(str =="高二"){
+					if (str == "高二") {
 						value = 11;
 					}
-					if(str =="高三"){
+					if (str == "高三") {
 						value = 12;
 					}
 					document.getElementById("grade" + value).checked = true;
 					checkHiddenValueGrade(value);
 					value = info[0].course;
-					
+
 					str = info[0].course;
-					if(str == courseLoad[0]){
+					if (str == courseLoad[0]) {
 						value = 1;
 					}
-					if(str == courseLoad[1]){
+					if (str == courseLoad[1]) {
 						value = 2;
 					}
-					if(str == courseLoad[2]){
+					if (str == courseLoad[2]) {
 						value = 3;
 					}
-					if(str == courseLoad[3]){
+					if (str == courseLoad[3]) {
 						value = 4;
 					}
-					if(str == courseLoad[4]){
+					if (str == courseLoad[4]) {
 						value = 5;
 					}
-					if(str == courseLoad[5]){
+					if (str == courseLoad[5]) {
 						value = 6;
 					}
-					if(str == courseLoad[6]){
+					if (str == courseLoad[6]) {
 						value = 7;
 					}
-					if(str == courseLoad[7]){
+					if (str == courseLoad[7]) {
 						value = 8;
 					}
-					if(str == courseLoad[8]){
+					if (str == courseLoad[8]) {
 						value = 9;
 					}
-					if(str == courseLoad[9]){
+					if (str == courseLoad[9]) {
 						value = 10;
 					}
 					document.getElementById("course" + value).checked = true;
 					checkHiddenValueCourse(value);
 					value = info[0].product;
-					var j =0;
-					for ( j = 1; j <= maxCourseNum; j++) {						
+					var j = 0;
+					for ( j = 1; j <= maxCourseNum; j++) {
 						if (productLoad[j - 1] == value) {
 							document.getElementById("product" + j.toString()).checked = true;
 							break;
 						}
 					}
-					
+
 					checkHiddenValueProduct(value);
 
 					document.getElementsByName("className")[0].value = info[0].class;
@@ -509,17 +509,17 @@ function sqlRecord() {
 }
 
 function recordWithSameName(flag) {
-	
+
 	if (flag == 'next') {
-		if(resultsIndex< resultsLen -1){
+		if (resultsIndex < resultsLen - 1) {
 			resultsIndex++;
-		}else{
+		} else {
 			alert("已经是该校区设置的最后一个班级！");
 		}
 	} else if (flag == 'previous') {
-		if(resultsIndex > 0){
+		if (resultsIndex > 0) {
 			resultsIndex--;
-		}else{			
+		} else {
 			alert("已经是该校区设置的第一个班级！");
 		}
 	}
@@ -528,35 +528,35 @@ function recordWithSameName(flag) {
 	loadPrincipalSetAndTeacher(0);
 	//alert("a");
 	/*
-	var schoolZone = document.getElementsByName("schoolZone")[0].options[document.getElementsByName("schoolZone")[0].value].text;
-	loadPrincipalSet(schoolZone);
-	// ajax 获得教师信息
-	loadTeacher(schoolZone);
+	 var schoolZone = document.getElementsByName("schoolZone")[0].options[document.getElementsByName("schoolZone")[0].value].text;
+	 loadPrincipalSet(schoolZone);
+	 // ajax 获得教师信息
+	 loadTeacher(schoolZone);
 
-	// 更新的隐藏域中的内容为校区名和value值
-	document.getElementsByName("schoolZoneCopy")[0].value = schoolZone;
-	// + document.getElementsByName("schoolZone")[0].value;
-	document.getElementsByName("teacherCopy")[0].value = "";
-	document.getElementsByName("gradeCopy")[0].value = "";
-	document.getElementsByName("courseCopy")[0].value = "";
-	document.getElementsByName("productCopy")[0].value = "";	
-	*/
-	
+	 // 更新的隐藏域中的内容为校区名和value值
+	 document.getElementsByName("schoolZoneCopy")[0].value = schoolZone;
+	 // + document.getElementsByName("schoolZone")[0].value;
+	 document.getElementsByName("teacherCopy")[0].value = "";
+	 document.getElementsByName("gradeCopy")[0].value = "";
+	 document.getElementsByName("courseCopy")[0].value = "";
+	 document.getElementsByName("productCopy")[0].value = "";
+	 */
+
 	var time;
 	if (resultsWithSomeRecord[resultsIndex].startTime != "") {
 		time = dateJS("Y-M-d", resultsWithSomeRecord[resultsIndex].startTime);
 		document.getElementsByName("startTime")[0].value = time;
-	}else{
+	} else {
 		document.getElementsByName("startTime")[0].value = "";
 	}
 
 	if (resultsWithSomeRecord[resultsIndex].endTime != "") {
 		time = dateJS("Y-M-d", resultsWithSomeRecord[resultsIndex].endTime);
 		document.getElementsByName("endTime")[0].value = time;
-	}else{
+	} else {
 		document.getElementsByName("endTime")[0].value = "";
 	}
-	
+
 	var objtmp = document.getElementsByName("teacher")[0];
 
 	for ( i = 0; i < objtmp.options.length; i++) {
@@ -566,10 +566,9 @@ function recordWithSameName(flag) {
 			break;
 		}
 	}
-	
-	// 加载教师个人设置 
+
+	// 加载教师个人设置
 	loadTeacherProperty();
-	
 
 	// 查询后，把相关隐藏或也相应更新，为先查询后修改部分内容再增加做准备，
 	// 否则就等于是没有点击相关checkBox，就会导致相关隐藏域内容为空的bug
@@ -577,76 +576,76 @@ function recordWithSameName(flag) {
 	var str = "";
 
 	str = resultsWithSomeRecord[resultsIndex].grade;
-	if(str =="初一"){
+	if (str == "初一") {
 		value = 7;
 	}
-	if(str =="初二"){
+	if (str == "初二") {
 		value = 8;
 	}
-	if(str =="初三"){
+	if (str == "初三") {
 		value = 9;
 	}
-	if(str =="高一"){
+	if (str == "高一") {
 		value = 10;
 	}
-	if(str =="高二"){
+	if (str == "高二") {
 		value = 11;
 	}
-	if(str =="高三"){
+	if (str == "高三") {
 		value = 12;
 	}
 
 	document.getElementById("grade" + value.toString()).checked = true;
 	checkHiddenValueGrade(value);
 	value = resultsWithSomeRecord[resultsIndex].course;
-	
+
 	str = resultsWithSomeRecord[resultsIndex].course;
-	if(str == courseLoad[0]){
+	if (str == courseLoad[0]) {
 		value = 1;
 	}
-	if(str == courseLoad[1]){
+	if (str == courseLoad[1]) {
 		value = 2;
 	}
-	if(str == courseLoad[2]){
+	if (str == courseLoad[2]) {
 		value = 3;
 	}
-	if(str == courseLoad[3]){
+	if (str == courseLoad[3]) {
 		value = 4;
 	}
-	if(str == courseLoad[4]){
+	if (str == courseLoad[4]) {
 		value = 5;
 	}
-	if(str == courseLoad[5]){
+	if (str == courseLoad[5]) {
 		value = 6;
 	}
-	if(str == courseLoad[6]){
+	if (str == courseLoad[6]) {
 		value = 7;
 	}
-	if(str == courseLoad[7]){
+	if (str == courseLoad[7]) {
 		value = 8;
 	}
-	if(str == courseLoad[8]){
+	if (str == courseLoad[8]) {
 		value = 9;
 	}
-	if(str == courseLoad[9]){
+	if (str == courseLoad[9]) {
 		value = 10;
 	}
 
 	document.getElementById("course" + value).checked = true;
 	checkHiddenValueCourse(value);
 	value = resultsWithSomeRecord[resultsIndex].product;
-	var j =0;
-	for ( j = 1; j < 6; j++) {						
+	var j = 0;
+	for ( j = 1; j < 6; j++) {
 		if (productLoad[j - 1] == value) {
 			document.getElementById("product" + j.toString()).checked = true;
 			break;
 		}
 	}
-	
+
 	checkHiddenValueProduct(value);
 
 	document.getElementsByName("className")[0].value = resultsWithSomeRecord[resultsIndex].class;
-	
+
 	updateResult();
 	// 查询时增加按钮为灰色
 	document.getElementsByName("submitAdd")[0].disabled = "true";
@@ -682,17 +681,17 @@ function loadTeacher(Name) {
 					var obj1 = document.getElementsByName("teacher")[0];
 
 					// 先清除所有以前选择加进来的，只保留第一个选择的内容，故意不加i++
-					for(i=1;i<obj1.options.length;){
+					for ( i = 1; i < obj1.options.length; ) {
 						obj1.removeChild(obj1.options[i]);
 					}
-					
+
 					// 再增加数据库中的教师姓名
 					i = 0;
 					for (var tmp in teacherInfo) {
 						obj1.options.add(new Option(teacherInfo[i].name, i + 1));
 						i++;
-					};		
-		
+					};
+
 				}
 
 			} else {
@@ -716,14 +715,14 @@ function loadTeacherProperty() {
 	loadPrincipalSet(schoolZone);
 
 	// 此函数以下所有代码是加载所有在校长设置和教师属性的交集显示到网页上，没交集的显示空
-	if(document.getElementsByName("teacher")[0].selectedIndex > 0){
+	if (document.getElementsByName("teacher")[0].selectedIndex > 0) {
 		var teacher = document.getElementsByName("teacher")[0].options[document.getElementsByName("teacher")[0].value].text;
-	
+
 		for ( i = 0; i < document.getElementsByName("teacher")[0].options.length; i++) {
 			if (teacher == teacherInfo[i].name) {
 				break;
 			}
-	
+
 		}
 
 		// 教师产品属性
@@ -757,7 +756,7 @@ function loadTeacherProperty() {
 		} else {
 			document.getElementsByName("productLabel")[4].innerHTML = "";
 		}
-	
+
 		// 教师年级属性
 		if ((teacherInfo[i].grade7 != "") && (document.getElementById("grade7"))) {
 			document.getElementsByName("gradeLabel")[0].innerHTML = '<input type="radio" name="grade" id="grade7" value="7" onclick="checkHiddenValueGrade(7)">' + '初一';
@@ -789,7 +788,7 @@ function loadTeacherProperty() {
 		} else {
 			document.getElementsByName("gradeLabel")[5].innerHTML = "";
 		}
-	
+
 		// 教师科目属性
 		if ((teacherInfo[i].course1 != "") && (document.getElementById("course1"))) {
 			document.getElementsByName("courseLabel")[0].innerHTML = '<input type="radio" name="course" id="course1" value="1" onclick="checkHiddenValueCourse(1)">' + courseLoad[0];
@@ -841,7 +840,7 @@ function loadTeacherProperty() {
 		} else {
 			document.getElementsByName("courseLabel")[9].innerHTML = "";
 		}
-	
+
 		// 更新的隐藏域中的内容为教师姓名和value值
 		document.getElementsByName("teacherCopy")[0].value = teacher;
 		// + document.getElementsByName("teacher")[0].value;
@@ -887,13 +886,13 @@ function initPage() {
 
 					// 默认填写当前日期
 					document.getElementById("dateStart").value = getNowFormatDate();
-					
+
 					// 载入所有设立的班级名称，为提示用户不能输入已经存在的班级名称使用
 					loadClassName();
-					
+
 					// 载入校长设置中科目名称
 					sqlCourse();
-					
+
 					// 校区负责人只负责自己校区的事
 					if (GetCookie('role') == '8') {
 						// 先清除原来的
@@ -911,20 +910,20 @@ function initPage() {
 						schoolZone[4] = decodeURIComponent(GetCookie('schoolZone5'));
 						i = 0;
 						for (var tmp in info) {
-							for(var j=0;j<5;j++){
-								if(schoolZone[j] == info[i].schoolZone){
+							for (var j = 0; j < 5; j++) {
+								if (schoolZone[j] == info[i].schoolZone) {
 									document.getElementsByName("schoolZone")[0].options.add(new Option(info[i].schoolZone, info[i].id));
-								}	
+								}
 							}
 							i++;
-						};											
-						
+						};
+
 						// 默认第一个,可能有多个
 						document.getElementsByName("schoolZone")[0].value = 1;
-																		
-						loadPrincipalSetAndTeacher(1);					
+
+						loadPrincipalSetAndTeacher(1);
 					}
-					
+
 				}
 
 			} else {
@@ -964,7 +963,7 @@ function loadClassName() {
 				var ret = xmlhttp.responseText;
 
 				if (ret == "0") {
-					
+
 				} else {
 					var greadeSetResultObj = eval(ret);
 
@@ -973,7 +972,7 @@ function loadClassName() {
 						greadeSetResultLoad[i] = greadeSetResultObj[i].greadeSetResult;
 						i++;
 					};
-					
+
 				}
 
 			} else {
@@ -1030,56 +1029,56 @@ function sqlCourse() {
 					for (var tmp in info) {
 						len++;
 					}
-								
+
 					// 根据所选校区自动加载相应的科目
 					// 根据所选校区自动加载相应的科目
 					var courseNameIndex = new Array();
-					for(var i=0;i<maxCourseNum;i++){
+					for (var i = 0; i < maxCourseNum; i++) {
 						courseNameIndex[i] = 0;
 					}
-						for(var i=0;i<len;i++){
-							if(info[i].course1 != ""){
-								courseNameIndex[0] = i;
-							}
-							if(info[i].course2 != ""){
-								courseNameIndex[1] = i;
-							}	
-							if(info[i].course3 != ""){
-								courseNameIndex[2] = i;
-							}	
-							if(info[i].course4 != ""){
-								courseNameIndex[3] = i;
-							}	
-							if(info[i].course5 != ""){
-								courseNameIndex[4] = i;
-							}
-							if(info[i].course6 != ""){
-								courseNameIndex[5] = i;
-							}
-							if(info[i].course7 != ""){
-								courseNameIndex[6] = i;
-							}	
-							if(info[i].course8 != ""){
-								courseNameIndex[7] = i;
-							}	
-							if(info[i].course9 != ""){
-								courseNameIndex[8] = i;
-							}	
-							if(info[i].course10 != ""){
-								courseNameIndex[9] = i;
-							}		
+					for (var i = 0; i < len; i++) {
+						if (info[i].course1 != "") {
+							courseNameIndex[0] = i;
 						}
-						
-						courseLoad[0] = info[courseNameIndex[0]].course1;
-						courseLoad[1] = info[courseNameIndex[1]].course2;
-						courseLoad[2] = info[courseNameIndex[2]].course3;
-						courseLoad[3] = info[courseNameIndex[3]].course4;
-						courseLoad[4] = info[courseNameIndex[4]].course5;
-						courseLoad[5] = info[courseNameIndex[5]].course6;
-						courseLoad[6] = info[courseNameIndex[6]].course7;
-						courseLoad[7] = info[courseNameIndex[7]].course8;
-						courseLoad[8] = info[courseNameIndex[8]].course9;
-						courseLoad[9] = info[courseNameIndex[9]].course10;
+						if (info[i].course2 != "") {
+							courseNameIndex[1] = i;
+						}
+						if (info[i].course3 != "") {
+							courseNameIndex[2] = i;
+						}
+						if (info[i].course4 != "") {
+							courseNameIndex[3] = i;
+						}
+						if (info[i].course5 != "") {
+							courseNameIndex[4] = i;
+						}
+						if (info[i].course6 != "") {
+							courseNameIndex[5] = i;
+						}
+						if (info[i].course7 != "") {
+							courseNameIndex[6] = i;
+						}
+						if (info[i].course8 != "") {
+							courseNameIndex[7] = i;
+						}
+						if (info[i].course9 != "") {
+							courseNameIndex[8] = i;
+						}
+						if (info[i].course10 != "") {
+							courseNameIndex[9] = i;
+						}
+					}
+
+					courseLoad[0] = info[courseNameIndex[0]].course1;
+					courseLoad[1] = info[courseNameIndex[1]].course2;
+					courseLoad[2] = info[courseNameIndex[2]].course3;
+					courseLoad[3] = info[courseNameIndex[3]].course4;
+					courseLoad[4] = info[courseNameIndex[4]].course5;
+					courseLoad[5] = info[courseNameIndex[5]].course6;
+					courseLoad[6] = info[courseNameIndex[6]].course7;
+					courseLoad[7] = info[courseNameIndex[7]].course8;
+					courseLoad[8] = info[courseNameIndex[8]].course9;
+					courseLoad[9] = info[courseNameIndex[9]].course10;
 				}
 
 			} else {

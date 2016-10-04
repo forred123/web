@@ -47,21 +47,21 @@ if (isset($_GET['sqlGrade'])) {
 
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
-	
+
 	date_default_timezone_set('PRC');
-	if($_GET['startTime']==""){
+	if ($_GET['startTime'] == "") {
 		$timeStart = strtotime("2010-01-01");
-	}else{
+	} else {
 		$timeStart = strtotime($_GET['startTime']);
 	}
-	if($_GET['endTime']==""){
+	if ($_GET['endTime'] == "") {
 		$timeEnd = strtotime(date("Y-m-d"));
-	}else{
-		$timeEnd = strtotime($_GET['endTime']) + 24*3600-1;
+	} else {
+		$timeEnd = strtotime($_GET['endTime']) + 24 * 3600 - 1;
 	}
-	
+
 	$sbmt = $pdo -> prepare("select * from gradeSetTable where startTime >= ? and startTime <= ? and schoolZone like ? and grade like ? and course like ? and product like ? and teacher like ? and class like ? order by convert (schoolZone using gbk) asc,convert (grade using gbk) asc,convert (course using gbk) asc,convert (product using gbk) asc,convert (teacher using gbk) asc,convert (class using gbk) asc");
-	$sbmt -> execute(array($timeStart,$timeEnd, $_GET['schoolZone'], $_GET['grade'], $_GET['course'], $_GET['product'], $_GET['teacher'], $_GET['class']));
+	$sbmt -> execute(array($timeStart, $timeEnd, $_GET['schoolZone'], $_GET['grade'], $_GET['course'], $_GET['product'], $_GET['teacher'], $_GET['class']));
 
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
@@ -146,7 +146,6 @@ if (isset($_GET['sqlClassNameBySchoolZone'])) {
 
 	return;
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -156,7 +155,7 @@ if (isset($_GET['sqlClassNameBySchoolZone'])) {
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>班级查询</title>
 
 		<link rel="stylesheet" type="text/css" href="../css/table.css" />
@@ -244,15 +243,15 @@ if (isset($_GET['sqlClassNameBySchoolZone'])) {
 
 		</style>
 		<!--end datepicker -->
-		
+
 		<!-- 		添加表格样式 -->
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$("tr").mouseover(function(){
-					$(this).css("background-color","#e9eaec");
+			$(document).ready(function() {
+				$("tr").mouseover(function() {
+					$(this).css("background-color", "#e9eaec");
 				});
-				$("tr").mouseout(function(){
-					$(this).css("background-color","");
+				$("tr").mouseout(function() {
+					$(this).css("background-color", "");
 				});
 				$("tr:odd").addClass("rowBgColorOdd");
 				$("tr:even").addClass("rowBgColorEven");
@@ -269,7 +268,7 @@ if (isset($_GET['sqlClassNameBySchoolZone'])) {
 			<tr>
 				<th>查询条件</th>
 				<td>校区
-				<select name="schoolZone" 
+				<select name="schoolZone"
 				onchange="loadPrincipalSetAndTeacher()">
 					<option value="0">-请选择-</option>
 				</select> 年级
@@ -291,20 +290,18 @@ if (isset($_GET['sqlClassNameBySchoolZone'])) {
 			</tr>
 			<tr>
 				<th style="width: 70px">开班时间</th>
-				<td>
-				开始时间
+				<td> 开始时间
 				<input type="text" class="date" style="width: 10ex" name="timeStart" readonly/>
 				结束时间
 				<input type="text" class="date" style="width: 10ex" name="timeEnd" readonly/>
-				<input type="button" name="sqlgradeInfo" value="查 询" onclick="sqlClassInfo()" />				
-				(提示：按时间为闭区间进行查询	)		
-				</td>
+				<input type="button" name="sqlgradeInfo" value="查 询" onclick="sqlClassInfo()" />
+				(提示：按时间为闭区间进行查询	) </td>
 			</tr>
 		</table>
 
 		<form id="sqlGradeForm" action="sqlGrade.php" method="post">
 			<table id="sqlGradeTable" align="center" width="90%" border="0" cellpadding="0" cellspacing="0">
-	
+
 			</table>
 		</form>
 	</body>

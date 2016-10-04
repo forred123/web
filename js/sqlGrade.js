@@ -27,19 +27,19 @@ function sqlClassInfo() {
 				// 接收数据,得到服务器输出的XML数据
 
 				var ret = xmlhttp.responseText;
-			
+
 				removeRow('sqlGradeTable');
 
 				if (ret == "0") {
 					alert("没有符合该条件的班级！");
 				} else {
 					var info = eval(ret);
-					
+
 					appendRowHeader(sqlGradeTable);
 					// 再增加数据库中的教师姓名
-					var i = 0;				
+					var i = 0;
 					for (var tmp in info) {
-						appendRow(sqlGradeTable,info[i],i);
+						appendRow(sqlGradeTable, info[i], i);
 						i++;
 					}
 				}
@@ -70,7 +70,7 @@ function sqlClassInfo() {
 		str3 = document.getElementsByName("course")[0].options[document.getElementsByName("course")[0].value].text;
 		str3 = encodeURIComponent(str3);
 	}
-	if (document.getElementsByName("product")[0].value != 0) {		
+	if (document.getElementsByName("product")[0].value != 0) {
 		str4 = document.getElementsByName("product")[0].options[document.getElementsByName("product")[0].value].text;
 		str4 = encodeURIComponent(str4);
 	}
@@ -87,7 +87,7 @@ function sqlClassInfo() {
 	var startTimeTmp = document.getElementsByName("timeStart")[0].value;
 	var endTimeTmp = document.getElementsByName("timeEnd")[0].value;
 	var url = "sqlGrade.php";
-	url = url + "?sqlGrade=1" +"&startTime=" + startTimeTmp + "&endTime=" + endTimeTmp +"&schoolZone=" + str1 + "&grade=" + str2 + "&course=" + str3 + "&product=" + str4 + "&teacher=" + str5 + "&class=" + str6;
+	url = url + "?sqlGrade=1" + "&startTime=" + startTimeTmp + "&endTime=" + endTimeTmp + "&schoolZone=" + str1 + "&grade=" + str2 + "&course=" + str3 + "&product=" + str4 + "&teacher=" + str5 + "&class=" + str6;
 	// 很重要，必须有的
 	url = url + "&sid=" + Math.random();
 	//alert(url);
@@ -283,8 +283,8 @@ function loadProduct(schoolZone) {
 	for ( i = 1; i < obj.options.length; ) {
 		obj.removeChild(obj.options[i]);
 	}
-	
-	i=1;
+
+	i = 1;
 	if (info[index].product1 != "") {
 		obj.options.add(new Option(productLoad[0], i));
 		i++;
@@ -426,7 +426,7 @@ function initPage() {
 }
 
 // 插入查询结果表头
-function appendRowHeader(TableID){
+function appendRowHeader(TableID) {
 	// 添加一行
 	var newTr = TableID.insertRow(-1);
 	// 添加两列
@@ -441,16 +441,16 @@ function appendRowHeader(TableID){
 	var newTd8 = newTr.insertCell(-1);
 
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-	
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+
 	newTd0.innerHTML = "序号";
 	newTd1.innerHTML = "开班时间";
 	newTd2.innerHTML = "停班时间";
@@ -460,24 +460,24 @@ function appendRowHeader(TableID){
 	newTd6.innerHTML = "产品名称";
 	newTd7.innerHTML = "任课教师";
 	newTd8.innerHTML = "班级名称";
-	
+
 	//添加表格样式
-	$("#sqlGradeTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlGradeTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlGradeTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlGradeTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlGradeTable tr:odd").addClass("rowBgColorOdd");
-	$("#sqlGradeTable tr:even").addClass("rowBgColorEven");		
+	$("#sqlGradeTable tr:even").addClass("rowBgColorEven");
 }
 
 // 插入表格相关函数
-function appendRow(TableID,obj,index){
+function appendRow(TableID, obj, index) {
 	// 序号从1开始
-	index = index +1;
+	index = index + 1;
 
 	//alert(product);
 	// 添加一行
@@ -493,26 +493,26 @@ function appendRow(TableID,obj,index){
 	var newTd7 = newTr.insertCell(-1);
 	var newTd8 = newTr.insertCell(-1);
 	// 设置列内容和属性
-	newTd0.align='center';
-	newTd1.align='center';
-	newTd2.align='center';
-	newTd3.align='center';
-	newTd4.align='center';
-	newTd5.align='center';
-	newTd6.align='center';
-	newTd7.align='center';
-	newTd8.align='center';
-										
+	newTd0.align = 'center';
+	newTd1.align = 'center';
+	newTd2.align = 'center';
+	newTd3.align = 'center';
+	newTd4.align = 'center';
+	newTd5.align = 'center';
+	newTd6.align = 'center';
+	newTd7.align = 'center';
+	newTd8.align = 'center';
+
 	newTd0.innerHTML = index;
-	if(obj.startTime==""){
+	if (obj.startTime == "") {
 		newTd1.innerHTML = "/";
-	}else{
+	} else {
 		newTd1.innerHTML = dateJS("Y-M-d", obj.startTime);
 	}
-	
-	if(obj.endTime==""){
+
+	if (obj.endTime == "") {
 		newTd2.innerHTML = "/";
-	}else{
+	} else {
 		newTd2.innerHTML = dateJS("Y-M-d", obj.endTime);
 	}
 	newTd3.innerHTML = obj.schoolZone;
@@ -521,18 +521,18 @@ function appendRow(TableID,obj,index){
 	newTd6.innerHTML = obj.product;
 	newTd7.innerHTML = obj.teacher;
 	newTd8.innerHTML = obj.class;
-	
+
 	//添加表格样式
-	$("#sqlGradeTable tr").mouseover(function(){
-		$(this).css("background-color","#e9eaec");
-		$(this).css("line-height","49px");
+	$("#sqlGradeTable tr").mouseover(function() {
+		$(this).css("background-color", "#e9eaec");
+		$(this).css("line-height", "49px");
 	});
-	$("#sqlGradeTable tr").mouseout(function(){
-		$(this).css("background-color","");
-		$(this).css("line-height","19px");
+	$("#sqlGradeTable tr").mouseout(function() {
+		$(this).css("background-color", "");
+		$(this).css("line-height", "19px");
 	});
 	$("#sqlGradeTable tr:odd").addClass("rowBgColorOdd");
-	$("#sqlGradeTable tr:even").addClass("rowBgColorEven");	
+	$("#sqlGradeTable tr:even").addClass("rowBgColorEven");
 }
 
 // 窗口表格删除一行

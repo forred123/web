@@ -247,13 +247,12 @@ if (isset($_POST['submitType'])) {
 	$outTime = strtotime($_POST['outTime']);
 
 	// 权限
-	if($_POST['role']=="0"){
+	if ($_POST['role'] == "0") {
 		$role = 1;
-	}else if($_POST['role']=="1"){
+	} else if ($_POST['role'] == "1") {
 		$role = 8;
 	}
-	
-	
+
 	$strtmp = "";
 	// 设置数据库查询的汉字编码也为utf-8
 	$pdo -> query('set names utf8');
@@ -263,31 +262,31 @@ if (isset($_POST['submitType'])) {
 					course1,course2,course3,course4,course5,course6,course7,course8,course9,course10,grade7,grade8,grade9,grade10,grade11,grade12,	
 					school,	teacherWX,teacherQQ,teacherTel,teacherEmail,address,idCardNum,workCondition,
 					workTime,inTime,outTime,role) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'],str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5],$course[6],$course[7],$course[8],$course[9],$grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime, $role));
+		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5], $course[6], $course[7], $course[8], $course[9], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime, $role));
 
 		// 修改头像姓名
-		if(file_exists('../uploadImg/tmp.jpg')){
-			$flagRename = rename( '../uploadImg/tmp.jpg', '../uploadImg/'. str_replace(' ', '', $_POST['userName']) . '.jpg' ); 
-		}else{
+		if (file_exists('../uploadImg/tmp.jpg')) {
+			$flagRename = rename('../uploadImg/tmp.jpg', '../uploadImg/' . str_replace(' ', '', $_POST['userName']) . '.jpg');
+		} else {
 			$flagRename = false;
 		}
-		
+
 		if ($flag) {
-			if($flagRename){
+			if ($flagRename) {
 				$strtmp = "教师信息添加成功!</br>教师头像添加成功！";
-			}else{
+			} else {
 				$strtmp = "教师信息添加成功!</br>教师头像添加失败,原因是没有上传教师头像！";
-			}		
+			}
 			echo "<html>";
 			echo "<head>";
 			echo '<meta http-equiv="refresh" content=2;url=recordTeacher.php>';
 			echo "</head>";
 			echo "<body>";
-			echo $strtmp."</br></br>";
+			echo $strtmp . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="recordTeacher.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 	
+			echo "</html>";
 			return TRUE;
 		} else {
 			$strtmp = "添加失败";
@@ -296,11 +295,11 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=recordTeacher.php>';
 			echo "</head>";
 			echo "<body>";
-			echo $strtmp."</br></br>";
+			echo $strtmp . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="recordTeacher.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return FALSE;
 		}
 	}
@@ -310,31 +309,31 @@ if (isset($_POST['submitType'])) {
 					course1=?,course2=?,course3=?,course4=?,course5=?,course6=?,course7=?,course8=?,course9=?,course10=?,grade7=?,grade8=?,grade9=?,grade10=?,grade11=?,grade12=?,	
 					school=?,	teacherWX=?,teacherQQ=?,teacherTel=?,teacherEmail=?,address=?,idCardNum=?,workCondition=?,
 					workTime=?,inTime=?,outTime=?,role=? where name=?");
-		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5], $course[6], $course[7], $course[8], $course[9], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime,$role, str_replace(' ', '', $_POST['userName'])));
+		$flag = $sbmt -> execute(array(str_replace(' ', '', $_POST['userName']), $_POST['sex'], str_replace(' ', '', $_POST['password']), $url, $schoolZone[0], $schoolZone[1], $schoolZone[2], $schoolZone[3], $schoolZone[4], str_replace(' ', '', $_POST['bankCardNumber']), str_replace(' ', '', $_POST['bank']), str_replace(' ', '', $_POST['bankCardUser']), str_replace(' ', '', $_POST['requireCondition']), $product[0], $product[1], $product[2], $product[3], $product[4], $course[0], $course[1], $course[2], $course[3], $course[4], $course[5], $course[6], $course[7], $course[8], $course[9], $grade[0], $grade[1], $grade[2], $grade[3], $grade[4], $grade[5], str_replace(' ', '', $_POST['school']), str_replace(' ', '', $_POST['teacherWX']), str_replace(' ', '', $_POST['teacherQQ']), str_replace(' ', '', $_POST['teacherTel']), str_replace(' ', '', $_POST['teacherEmail']), str_replace(' ', '', $_POST['address']), str_replace(' ', '', $_POST['idCardNum']), $_POST['workCondition'], $_POST['workTime'], $inTime, $outTime, $role, str_replace(' ', '', $_POST['userName'])));
 
 		// 修改头像姓名
-		if(file_exists('../uploadImg/tmp.jpg')){
-			$flagRename = rename( '../uploadImg/tmp.jpg', '../uploadImg/'. str_replace(' ', '', $_POST['userName']) . '.jpg' ); 
-		}else{
+		if (file_exists('../uploadImg/tmp.jpg')) {
+			$flagRename = rename('../uploadImg/tmp.jpg', '../uploadImg/' . str_replace(' ', '', $_POST['userName']) . '.jpg');
+		} else {
 			$flagRename = false;
 		}
-		
+
 		if ($flag) {
-			if($flagRename){
+			if ($flagRename) {
 				$strtmp = "教师信息修改成功!</br>教师头像修改成功！";
-			}else{
+			} else {
 				$strtmp = "教师信息修改成功!</br>教师头像修改失败,原因是没有上传新的教师头像！即使用教师原来头像！";
-			}	
+			}
 			echo "<html>";
 			echo "<head>";
 			echo '<meta http-equiv="refresh" content=2;url=recordTeacher.php>';
 			echo "</head>";
 			echo "<body>";
-			echo $strtmp."</br></br>";
+			echo $strtmp . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="recordTeacher.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return TRUE;
 		} else {
 			$strtmp = "修改失败";
@@ -343,11 +342,11 @@ if (isset($_POST['submitType'])) {
 			echo '<meta http-equiv="refresh" content=2;url=recordTeacher.php>';
 			echo "</head>";
 			echo "<body>";
-			echo $strtmp."</br></br>";
+			echo $strtmp . "</br></br>";
 			echo "页面将在2秒后自动跳转...</br>";
 			echo '<a href="recordTeacher.php">如果没有跳转，请点这里跳转</a>';
 			echo "</body>";
-			echo "</html>"; 
+			echo "</html>";
 			return FALSE;
 		}
 	}
@@ -355,7 +354,7 @@ if (isset($_POST['submitType'])) {
 	if (isset($_POST['submitDelete'])) {
 		$str = $_POST['userID'];
 		$uid = substr($str, 1);
-		
+
 		$sbmt = $pdo -> prepare("delete * from recordTeacherTable where uid = ?");
 		$flag = $sbmt -> execute(array($uid));
 
@@ -367,7 +366,7 @@ if (isset($_POST['submitType'])) {
 			return FALSE;
 		}
 	}
-	
+
 }
 ?>
 
@@ -379,7 +378,7 @@ if (isset($_POST['submitType'])) {
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>
 		<meta http-equiv="expires" content="0"/>
-		
+
 		<title>教师档案</title>
 
 		<link rel="stylesheet" type="text/css" href="../css/table.css" />
@@ -457,15 +456,15 @@ if (isset($_POST['submitType'])) {
 
 			});
 		</script>
-		
+
 		<!-- 		添加表格样式 -->
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$("tr").mouseover(function(){
-					$(this).css("background-color","#e9eaec");
+			$(document).ready(function() {
+				$("tr").mouseover(function() {
+					$(this).css("background-color", "#e9eaec");
 				});
-				$("tr").mouseout(function(){
-					$(this).css("background-color","");
+				$("tr").mouseout(function() {
+					$(this).css("background-color", "");
 				});
 				$("tr:odd").addClass("rowBgColorOdd");
 				$("tr:even").addClass("rowBgColorEven");
@@ -500,15 +499,14 @@ if (isset($_POST['submitType'])) {
 					(提示：此项为即时提交)
 				</form></td>
 			</tr>
-			
+
 			<form name="form1" action="recordTeacher.php" method="post">
 				<tr>
 					<th>教师ID：</th>
 					<td>
 					<input type="text" name="userID" size="18" style="height: 20px" readonly />
 					(保留，不填写)</td>
-					<td id="Img0" rowspan="5" width="150px">
-						<img id="Img" alt="照片 (小于3M) ＊.png *.jpg *.jpeg 150px*200px " src='<?php echo $url ?>' width="150px" height="200px" /> 
+					<td id="Img0" rowspan="5" width="150px"><img id="Img" alt="照片 (小于3M) ＊.png *.jpg *.jpeg 150px*200px " src='<?php echo $url ?>' width="150px" height="200px" />
 					<br>
 					</td>
 				</tr>
@@ -516,8 +514,8 @@ if (isset($_POST['submitType'])) {
 				<tr>
 					<th>姓 名：</th>
 					<td>
-					<input type="text" name="userName" size="18" onblur="sqlRecord()" required="true" />(查询关键字)
-					</td>
+					<input type="text" name="userName" size="18" onblur="sqlRecord()" required="true" />
+					(查询关键字) </td>
 				</tr>
 
 				<tr>
@@ -529,22 +527,21 @@ if (isset($_POST['submitType'])) {
 						<option value="2">女</option>
 					</select></td>
 				</tr>
-				
+
 				<tr>
 					<th>登录密码：</th>
 					<td>
 					<input type="password" name="password" size="18" value="mlsfdb" required="true" />
 					</td>
 				</tr>
-				
+
 				<tr>
 					<th>角色：</th>
 					<td>
-						<select name="role" style="width: 170px" onchange="checkPrinciple()">
-							<option value="0">授课教师</option>
-							<option value="1">校区负责人</option>
-						</select>
-					</td>
+					<select name="role" style="width: 170px" onchange="checkPrinciple()">
+						<option value="0">授课教师</option>
+						<option value="1">校区负责人</option>
+					</select></td>
 				</tr>
 
 				<tr>
@@ -679,7 +676,8 @@ if (isset($_POST['submitType'])) {
 					for="course8">
 						<input type="checkbox" name="course[]" id="course8">
 						科目8</label>
-					<input type="hidden" name=course8copy value="" /><br />
+					<input type="hidden" name=course8copy value="" />
+					<br />
 					<label name="courseLabel"
 					for="course9">
 						<input type="checkbox" name="course[]" id="course9">
@@ -810,10 +808,10 @@ if (isset($_POST['submitType'])) {
 					<th>离职时间：</th>
 					<td colspan="2">
 					<input type="text" class="date" size="18"
-					name="outTime" readonly="true" />(提示：离职时填写)
-					</td>
+					name="outTime" readonly="true" />
+					(提示：离职时填写) </td>
 				</tr>
-				
+
 				<tr>
 					<th></th>
 					<td colspan="2">&nbsp;</td>
