@@ -31,48 +31,168 @@ use mlsJYDB;
     subFee3Name varchar(20) not null default '费用3',
     subFee4Name varchar(20) not null default '费用4',
     subFee5Name varchar(20) not null default '费用5',
-    MathProduct varchar(20) not null default '未选择', 
-    Math int not null default '0',
-    MathSubFee1 int unsigned not null default '0',
-    MathSubFee2 int unsigned not null default '0',
-    MathSubFee3 int unsigned not null default '0',
-    MathSubFee4 int unsigned not null default '0',
-    MathSubFee5 int unsigned not null default '0',
-    ChineseProduct varchar(20) not null default '未选择',
-    Chinese int not null default '0',
-    ChineseSubFee1 int unsigned not null default '0',
-    ChineseSubFee2 int unsigned not null default '0',
-    ChineseSubFee3 int unsigned not null default '0',
-    ChineseSubFee4 int unsigned not null default '0',
-    ChineseSubFee5 int unsigned not null default '0',
-    EnglishProduct varchar(20) not null default '未选择',
-    English int not null default '0',
-    EnglishSubFee1 int unsigned not null default '0',
-    EnglishSubFee2 int unsigned not null default '0',
-    EnglishSubFee3 int unsigned not null default '0',
-    EnglishSubFee4 int unsigned not null default '0',
-    EnglishSubFee5 int unsigned not null default '0',
-    PhysicsProduct varchar(20) not null default '未选择',
-    Physics int not null default '0',
-    PhysicsSubFee1 int unsigned not null default '0',
-    PhysicsSubFee2 int unsigned not null default '0',
-    PhysicsSubFee3 int unsigned not null default '0',
-    PhysicsSubFee4 int unsigned not null default '0',
-    PhysicsSubFee5 int unsigned not null default '0',
-    ChemistryProduct varchar(20) not null default '未选择',
-    Chemistry int not null default '0',
-    ChemistrySubFee1 int unsigned not null default '0',
-    ChemistrySubFee2 int unsigned not null default '0',
-    ChemistrySubFee3 int unsigned not null default '0',
-    ChemistrySubFee4 int unsigned not null default '0',
-    ChemistrySubFee5 int unsigned not null default '0',
-    
+    course1Product varchar(20) not null default '未选择', 
+    course1 int not null default '0',
+    course1SubFee1 int unsigned not null default '0',
+    course1SubFee2 int unsigned not null default '0',
+    course1SubFee3 int unsigned not null default '0',
+    course1SubFee4 int unsigned not null default '0',
+    course1SubFee5 int unsigned not null default '0',
+    course2Product varchar(20) not null default '未选择',
+    course2 int not null default '0',
+    course2SubFee1 int unsigned not null default '0',
+    course2SubFee2 int unsigned not null default '0',
+    course2SubFee3 int unsigned not null default '0',
+    course2SubFee4 int unsigned not null default '0',
+    course2SubFee5 int unsigned not null default '0',
+    course3Product varchar(20) not null default '未选择',
+    course3 int not null default '0',
+    course3SubFee1 int unsigned not null default '0',
+    course3SubFee2 int unsigned not null default '0',
+    course3SubFee3 int unsigned not null default '0',
+    course3SubFee4 int unsigned not null default '0',
+    course3SubFee5 int unsigned not null default '0',
+    course4Product varchar(20) not null default '未选择',
+    course4 int not null default '0',
+    course4SubFee1 int unsigned not null default '0',
+    course4SubFee2 int unsigned not null default '0',
+    course4SubFee3 int unsigned not null default '0',
+    course4SubFee4 int unsigned not null default '0',
+    course4SubFee5 int unsigned not null default '0',
+    course5Product varchar(20) not null default '未选择',
+    course5 int not null default '0',
+    course5SubFee1 int unsigned not null default '0',
+    course5SubFee2 int unsigned not null default '0',
+    course5SubFee3 int unsigned not null default '0',
+    course5SubFee4 int unsigned not null default '0',
+    course5SubFee5 int unsigned not null default '0',
+    course6Product varchar(20) not null default '未选择',
+    course6 int not null default '0',
+    course6SubFee1 int unsigned not null default '0',
+    course6SubFee2 int unsigned not null default '0',
+    course6SubFee3 int unsigned not null default '0',
+    course6SubFee4 int unsigned not null default '0',
+    course6SubFee5 int unsigned not null default '0',
+    course7Product varchar(20) not null default '未选择',
+    course7 int not null default '0',
+    course7SubFee1 int unsigned not null default '0',
+    course7SubFee2 int unsigned not null default '0',
+    course7SubFee3 int unsigned not null default '0',
+    course7SubFee4 int unsigned not null default '0',
+    course7SubFee5 int unsigned not null default '0',
+    course8Product varchar(20) not null default '未选择',
+    course8 int not null default '0',
+    course8SubFee1 int unsigned not null default '0',
+    course8SubFee2 int unsigned not null default '0',
+    course8SubFee3 int unsigned not null default '0',
+    course8SubFee4 int unsigned not null default '0',
+    course8SubFee5 int unsigned not null default '0',
+    course9Product varchar(20) not null default '未选择',
+    course9 int not null default '0',
+    course9SubFee1 int unsigned not null default '0',
+    course9SubFee2 int unsigned not null default '0',
+    course9SubFee3 int unsigned not null default '0',
+    course9SubFee4 int unsigned not null default '0',
+    course9SubFee5 int unsigned not null default '0',
+    course10Product varchar(20) not null default '未选择',
+    course10 int not null default '0',
+    course10SubFee1 int unsigned not null default '0',
+    course10SubFee2 int unsigned not null default '0',
+    course10SubFee3 int unsigned not null default '0',
+    course10SubFee4 int unsigned not null default '0',
+    course10SubFee5 int unsigned not null default '0',    
     primary key(id)
     );
     
     truncate addFeeTable;
 	// 修改某一列名称
-	alter table addFeeTable change column product MathProduct varchar(20) not null default '未选择';
+	//
+	alter table addFeeTable change column MathProduct course1Product varchar(20) not null default '未选择';
+	alter table addFeeTable change column ChineseProduct course2Product varchar(20) not null default '未选择';
+	alter table addFeeTable change column EnglishProduct course3Product varchar(20) not null default '未选择';
+	alter table addFeeTable change column PhysicsProduct course4Product varchar(20) not null default '未选择';
+	alter table addFeeTable change column ChemistryProduct course5Product varchar(20) not null default '未选择';
+	
+	alter table addFeeTable change column Math course1 int not null default '0';
+	alter table addFeeTable change column Chinese course2 int not null default '0';
+	alter table addFeeTable change column English course3 int not null default '0';
+	alter table addFeeTable change column Physics course4 int not null default '0';
+	alter table addFeeTable change column Chemistry course5 int not null default '0';
+	
+	alter table addFeeTable change column MathSubFee1 course1SubFee1 int unsigned not null default '0';
+	alter table addFeeTable change column MathSubFee2 course1SubFee2 int unsigned not null default '0';
+	alter table addFeeTable change column MathSubFee3 course1SubFee3 int unsigned not null default '0'; 
+	alter table addFeeTable change column MathSubFee4 course1SubFee4 int unsigned not null default '0';
+	alter table addFeeTable change column MathSubFee5 course1SubFee5 int unsigned not null default '0';
+	
+	alter table addFeeTable change column ChineseSubFee1 course2SubFee1 int unsigned not null default '0';
+	alter table addFeeTable change column ChineseSubFee2 course2SubFee2 int unsigned not null default '0';
+	alter table addFeeTable change column ChineseSubFee3 course2SubFee3 int unsigned not null default '0'; 
+	alter table addFeeTable change column ChineseSubFee4 course2SubFee4 int unsigned not null default '0';
+	alter table addFeeTable change column ChineseSubFee5 course2SubFee5 int unsigned not null default '0';
+	
+	alter table addFeeTable change column EnglishSubFee1 course3SubFee1 int unsigned not null default '0';
+	alter table addFeeTable change column EnglishSubFee2 course3SubFee2 int unsigned not null default '0';
+	alter table addFeeTable change column EnglishSubFee3 course3SubFee3 int unsigned not null default '0'; 
+	alter table addFeeTable change column EnglishSubFee4 course3SubFee4 int unsigned not null default '0';
+	alter table addFeeTable change column EnglishSubFee5 course3SubFee5 int unsigned not null default '0';
+	
+	alter table addFeeTable change column PhysicsSubFee1 course4SubFee1 int unsigned not null default '0';
+	alter table addFeeTable change column PhysicsSubFee2 course4SubFee2 int unsigned not null default '0';
+	alter table addFeeTable change column PhysicsSubFee3 course4SubFee3 int unsigned not null default '0'; 
+	alter table addFeeTable change column PhysicsSubFee4 course4SubFee4 int unsigned not null default '0';
+	alter table addFeeTable change column PhysicsSubFee5 course4SubFee5 int unsigned not null default '0';
+	
+	alter table addFeeTable change column ChemistrySubFee1 course5SubFee1 int unsigned not null default '0';
+	alter table addFeeTable change column ChemistrySubFee2 course5SubFee2 int unsigned not null default '0';
+	alter table addFeeTable change column ChemistrySubFee3 course5SubFee3 int unsigned not null default '0'; 
+	alter table addFeeTable change column ChemistrySubFee4 course5SubFee4 int unsigned not null default '0';
+	alter table addFeeTable change column ChemistrySubFee5 course5SubFee5 int unsigned not null default '0';
+	
+	
+	alter table addFeeTable add course6Product varchar(20) not null default '未选择' after course5SubFee5;
+	alter table addFeeTable add course6 int not null default '0' after course6Product;
+    alter table addFeeTable add course6SubFee1 int unsigned not null default '0' after course6;
+    alter table addFeeTable add course6SubFee2 int unsigned not null default '0' after course6SubFee1;
+    alter table addFeeTable add course6SubFee3 int unsigned not null default '0' after course6SubFee2;
+    alter table addFeeTable add course6SubFee4 int unsigned not null default '0' after course6SubFee3;
+    alter table addFeeTable add course6SubFee5 int unsigned not null default '0' after course6SubFee4;
+    
+    alter table addFeeTable add course7Product varchar(20) not null default '未选择' after course6SubFee5;
+	alter table addFeeTable add course7 int not null default '0' after course7Product;
+    alter table addFeeTable add course7SubFee1 int unsigned not null default '0' after course7;
+    alter table addFeeTable add course7SubFee2 int unsigned not null default '0' after course7SubFee1;
+    alter table addFeeTable add course7SubFee3 int unsigned not null default '0' after course7SubFee2;
+    alter table addFeeTable add course7SubFee4 int unsigned not null default '0' after course7SubFee3;
+    alter table addFeeTable add course7SubFee5 int unsigned not null default '0' after course7SubFee4;
+    
+    alter table addFeeTable add course8Product varchar(20) not null default '未选择' after course7SubFee5;
+	alter table addFeeTable add course8 int not null default '0' after course8Product;
+    alter table addFeeTable add course8SubFee1 int unsigned not null default '0' after course8;
+    alter table addFeeTable add course8SubFee2 int unsigned not null default '0' after course8SubFee1;
+    alter table addFeeTable add course8SubFee3 int unsigned not null default '0' after course8SubFee2;
+    alter table addFeeTable add course8SubFee4 int unsigned not null default '0' after course8SubFee3;
+    alter table addFeeTable add course8SubFee5 int unsigned not null default '0' after course8SubFee4;
+    
+    alter table addFeeTable add course9Product varchar(20) not null default '未选择' after course8SubFee5;
+	alter table addFeeTable add course9 int not null default '0' after course9Product;
+    alter table addFeeTable add course9SubFee1 int unsigned not null default '0' after course9;
+    alter table addFeeTable add course9SubFee2 int unsigned not null default '0' after course9SubFee1;
+    alter table addFeeTable add course9SubFee3 int unsigned not null default '0' after course9SubFee2;
+    alter table addFeeTable add course9SubFee4 int unsigned not null default '0' after course9SubFee3;
+    alter table addFeeTable add course9SubFee5 int unsigned not null default '0' after course9SubFee4;
+    
+    alter table addFeeTable add course10Product varchar(20) not null default '未选择' after course9SubFee5;
+	alter table addFeeTable add course10 int not null default '0' after course10Product;
+    alter table addFeeTable add course10SubFee1 int unsigned not null default '0' after course10;
+    alter table addFeeTable add course10SubFee2 int unsigned not null default '0' after course10SubFee1;
+    alter table addFeeTable add course10SubFee3 int unsigned not null default '0' after course10SubFee2;
+    alter table addFeeTable add course10SubFee4 int unsigned not null default '0' after course10SubFee3;
+    alter table addFeeTable add course10SubFee5 int unsigned not null default '0' after course10SubFee4;
+	
+	
+	
+	//
 	alter table addFeeTable change column name name1 varchar(20) not null default '';
 	alter table addFeeTable change column feeSum feeSum int not null default '0';
 	
@@ -95,8 +215,8 @@ use mlsJYDB;
 	alter table addFeeTable add hour3 int unsigned not null default '100' after priceHour2YDY;
 	
 	alter table addFeeTable add ChineseProduct varchar(20) not null default '未选择' after MathSubFee5;
-	alter table addFeeTable add EnglishProduct varchar(20) not null default '未选择' after ChineseSubFee5;
-	alter table addFeeTable add PhysicsProduct varchar(20) not null default '未选择' after EnglishSubFee5;
+	alter table addFeeTable add course3Product varchar(20) not null default '未选择' after ChineseSubFee5;
+	alter table addFeeTable add PhysicsProduct varchar(20) not null default '未选择' after course3SubFee5;
 	alter table addFeeTable add ChemistryProduct varchar(20) not null default '未选择' after PhysicsSubFee5;
 	
 	

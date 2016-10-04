@@ -271,46 +271,7 @@ include 'verifyIDAdmin.php';
 					</tr>
 					-->
 				</table></td>
-				<!-- 
-				<td>
-				<table align="center" width="400" border="2" cellpadding="0" cellspacing="0">
-						<tr>
-							<th>班课单价设置</th>
-
-							<td>
-							<input type="number" style="width: 6em" size="18" name="priceBK"  />
-							(元/节课)</td>
-						</tr>
-						<tr>
-							<th>一对一单价设置</th>
-
-							<td>
-							<input type="number" style="width: 3em" name="hour1" readonly/>
-							小时以下
-							<input type="number" style="width: 3em" name="price1YDY" />
-							(元/小时)
-							<br />
-							<input type="number" style="width: 3em" name="hour2" onchange="setHour3()" readonly/>
-							小时以下
-							<input type="number" style="width: 3em" name="price2YDY" />
-							(元/小时)
-							<br />
-							<input type="number" style="width: 3em" name="hour3" onchange="setHour2()" readonly/>
-							小时以上
-							<input type="number" style="width: 3em" name="price3YDY" />
-							(元/小时)
-							<br />
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center">
-							<input type="hidden" name="submitTypePrice" />
-							<input type="submit" class="btn" name="submitUpdatePrice" value="修改"/>
-							</td>
-						</tr>
-				</table></td>
-				-->
-				
+								
 			<tr>
 				<!-- <td>
 				12
@@ -416,44 +377,106 @@ include 'verifyIDAdmin.php';
 							<input type="hidden" name="remainFee4Hide" step="0.1" />
 							<input type="hidden" name="remainFee5Hide" step="0.1" />
 							
-							<span id="RemainFee1Label">	数学
+							<span id="RemainFee1Label">	
+								<!--course1
 								<input type="number" name="remainFee1" readonly="true" />
 								元 <label for="remainFee1"><input type="checkbox" style="width: 1em" id="remainFee1" name="remainFee1CheckBox"/>
 									退费</label>
+								-->
 								<br />
 							</span>
 							<span id="RemainFee2Label">
-							语文
+								<!--
+							course2
 							<input type="number" name="remainFee2" readonly="true"  />
 							元 <label for="remainFee2">
 								<input type="checkbox" style="width: 1em" id="remainFee2" name="remainFee2CheckBox"/>
 								退费</label>
+							-->
 							<br />
 							</span>
 							<span id="RemainFee3Label">
-							英语
+								<!--
+							course3
 							<input type="number" name="remainFee3" readonly="true"  />
 							元 <label for="remainFee3">
 								<input type="checkbox" style="width: 1em" id="remainFee3" name="remainFee3CheckBox" />
 								退费</label>
+							-->
 							<br />
 							</span>
 							<span id="RemainFee4Label">
-							物理
+								<!--
+							course4
 							<input type="number" name="remainFee4" readonly="true"  />
 							元 <label for="remainFee4">
 								<input type="checkbox" style="width: 1em" id="remainFee4" name="remainFee4CheckBox" />
 								退费</label>
+							-->
 							<br />
 							</span>
 							<span id="RemainFee5Label">
-							化学
+								<!--
+							course5
 							<input type="number" name="remainFee5"  readonly="true" />
 							元 <label for="remainFee5">
 								<input type="checkbox" style="width: 1em" id="remainFee5" name="remainFee5CheckBox" />
 								退费</label>
 							<br />
+							-->
 							</span>
+							<span id="RemainFee6Label">
+								<!--
+							course6
+							<input type="number" name="remainFee6"  readonly="true" />
+							元 <label for="remainFee6">
+								<input type="checkbox" style="width: 1em" id="remainFee6" name="remainFee6CheckBox" />
+								退费</label>
+							-->
+							<br />
+							</span>
+							<span id="RemainFee7Label">
+								<!--
+							course7
+							<input type="number" name="remainFee7"  readonly="true" />
+							元 <label for="remainFee7">
+								<input type="checkbox" style="width: 1em" id="remainFee7" name="remainFee7CheckBox" />
+								退费</label>
+							-->
+							<br />
+							</span>
+				
+							<span id="RemainFee8Label">
+								<!--
+							course8
+							<input type="number" name="remainFee8"  readonly="true" />
+							元 <label for="remainFee8">
+								<input type="checkbox" style="width: 1em" id="remainFee8" name="remainFee8CheckBox" />
+								退费</label>
+							-->
+							<br />
+							</span>
+							<span id="RemainFee9Label">
+								<!--
+							course9
+							<input type="number" name="remainFee9"  readonly="true" />
+							元 <label for="remainFee9">
+								<input type="checkbox" style="width: 1em" id="remainFee9" name="remainFee9CheckBox" />
+								退费</label>
+							-->
+							<br />
+							</span>
+							<span id="RemainFee10Label">
+								<!--
+							course10
+							<input type="number" name="remainFee10"  readonly="true" />
+							元 <label for="remainFee10">
+								<input type="checkbox" style="width: 1em" id="remainFee10" name="remainFee10CheckBox" />
+								退费</label>
+							-->
+							<br />
+							</span>
+							
 							</td>
 						</tr>
 
@@ -559,7 +582,7 @@ include 'verifyIDAdmin.php';
 					</tr>
 					<tr>
 						<td colspan="6">	
-						<span id="MathLabelAddFee">
+						<span id="course1LabelAddFee">
 						<!--
 						数学
 						<select name = "MathProduct" onchange="checkHiddenValueProduct(1)">
@@ -570,179 +593,331 @@ include 'verifyIDAdmin.php';
 						元		
 						-->				
 						</span>											
-						<span id="subFee1MathLabel">
+						<span id="subFee1Course1Label">
 							<!--费用1
-							<input type="number" style="width: 4em" name="MathSubFee1" />元
+							<input type="number" style="width: 4em" name="Course1SubFee1" />元
 							-->
 						</span>
-						<span id="subFee2MathLabel">
+						<span id="subFee2Course1Label">
 							<!--费用2
-							<input type="number" style="width: 4em" name="MathSubFee2" />元
+							<input type="number" style="width: 4em" name="Course1SubFee2" />元
 							-->
 						</span>
-						<span id="subFee3MathLabel">
+						<span id="subFee3Course1Label">
 							<!--费用3
-							<input type="number" style="width: 4em" name="MathSubFee3" />元
+							<input type="number" style="width: 4em" name="Course1SubFee3" />元
 							-->
 						</span>
-						<span id="subFee4MathLabel">
+						<span id="subFee4Course1Label">
 							<!--费用4
-							<input type="number" style="width: 4em" name="MathSubFee4" />元
+							<input type="number" style="width: 4em" name="Course1SubFee4" />元
 							-->
 						</span>
-						<span id="subFee5MathLabel">
+						<span id="subFee5Course1Label">
 							<!--费用5
-							<input type="number" style="width: 4em" name="MathSubFee5" />元
+							<input type="number" style="width: 4em" name="Course1SubFee5" />元
 							-->
 						</span>
 						<br />
-						<span id="ChineseLabelAddFee">
+						<span id="course2LabelAddFee">
 						<!--语文
-						<select name = "ChineseProduct" onchange="checkHiddenValueProduct(2)">
+						<select name = "course2Product" onchange="checkHiddenValueProduct(2)">
 								<option value=0>--请选择--</option>
 							</select>
-						<input type="text" name="ChineseProductCopy" />
-						<input type="number" style="width: 4em" name="Chinese" />
+						<input type="text" name="course2ProductCopy" />
+						<input type="number" style="width: 4em" name="course2" />
 						元
 						-->
 						</span>
 						
-						<span id="subFee1ChineseLabel">
+						<span id="subFee1Course2Label">
 							<!--费用1
-							<input type="number" style="width: 4em" name="ChineseSubFee1" />元
+							<input type="number" style="width: 4em" name="Course2SubFee1" />元
 							-->
 						</span>
-						<span id="subFee2ChineseLabel">
+						<span id="subFee2Course2Label">
 							<!--费用2
-							<input type="number" style="width: 4em" name="ChineseSubFee2" />元
+							<input type="number" style="width: 4em" name="Course2SubFee2" />元
 							-->
 						</span>
-						<span id="subFee3ChineseLabel">
+						<span id="subFee3Course2Label">
 							<!--费用3
-							<input type="number" style="width: 4em" name="ChineseSubFee3" />元
+							<input type="number" style="width: 4em" name="Course2SubFee3" />元
 							-->
 						</span>
-						<span id="subFee4ChineseLabel">
+						<span id="subFee4Course2Label">
 							<!--费用4
-							<input type="number" style="width: 4em" name="ChineseSubFee4" />元
+							<input type="number" style="width: 4em" name="Course2SubFee4" />元
 							-->
 						</span>
-						<span id="subFee5ChineseLabel">
+						<span id="subFee5Course2Label">
 							<!--费用5
-							<input type="number" style="width: 4em" name="ChineseSubFee5" />元
+							<input type="number" style="width: 4em" name="Course2SubFee5" />元
 							-->
 						</span>
 						<br />
-						<span id="EnglishLabelAddFee">
+						<span id="course3LabelAddFee">
 							<!--
 						英语
-						<select name = "EnglishProduct" onchange="checkHiddenValueProduct(3)">
+						<select name = "Course3Product" onchange="checkHiddenValueProduct(3)">
 								<option value=0>--请选择--</option>
 							</select>
-						<input type="text" name="EnglishProductCopy" />
-						<input type="number" style="width: 4em"  name="English" />
+						<input type="text" name="Course3ProductCopy" />
+						<input type="number" style="width: 4em"  name="Course3" />
 						元
 						-->
 						</span>
-						<span id="subFee1EnglishLabel">
+						<span id="subFee1Course3Label">
 							<!--费用1
-							<input type="number" style="width: 4em" name="EnglishSubFee1" />元
+							<input type="number" style="width: 4em" name="Course3SubFee1" />元
 							-->
 						</span>
-						<span id="subFee2EnglishLabel">
+						<span id="subFee2Course3Label">
 							<!--费用2
-							<input type="number" style="width: 4em" name="EnglishSubFee2" />元
+							<input type="number" style="width: 4em" name="Course3SubFee2" />元
 							-->
 						</span>
-						<span id="subFee3EnglishLabel">
+						<span id="subFee3Course3Label">
 							<!--费用3
-							<input type="number" style="width: 4em" name="EnglishSubFee3" />元
+							<input type="number" style="width: 4em" name="Course3SubFee3" />元
 							-->
 						</span>
-						<span id="subFee4EnglishLabel">
+						<span id="subFee4Course3Label">
 							<!--费用4
-							<input type="number" style="width: 4em" name="EnglishSubFee4" />元
+							<input type="number" style="width: 4em" name="Course3SubFee4" />元
 							-->
 						</span>
-						<span id="subFee5EnglishLabel">
+						<span id="subFee5Course3Label">
 							<!--费用5
-							<input type="number" style="width: 4em" name="EnglishSubFee5" />元
+							<input type="number" style="width: 4em" name="Course3SubFee5" />元
 							-->
 						</span>
 						<br />
-						<span id="PhysicsLabelAddFee">
+						<span id="course4LabelAddFee">
 							<!--
 						物理
-						<select name = "PhysicsProduct" onchange="checkHiddenValueProduct(4)">
+						<select name = "course4Product" onchange="checkHiddenValueProduct(4)">
 								<option value=0>--请选择--</option>
 							</select>
-						<input type="text" name="PhysicsProductCopy" />
-						<input type="number" style="width: 4em" name="Physics" />
+						<input type="text" name="course4ProductCopy" />
+						<input type="number" style="width: 4em" name="course4" />
 						元
 						-->
 						</span>
-						<span id="subFee1PhysicsLabel">
+						<span id="subFee1Course4Label">
 							<!--费用1
-							<input type="number" style="width: 4em" name="PhysicsSubFee1" />元
+							<input type="number" style="width: 4em" name="Course4SubFee1" />元
 							-->
 						</span>
-						<span id="subFee2PhysicsLabel">
+						<span id="subFee2Course4Label">
 							<!--费用2
-							<input type="number" style="width: 4em" name="PhysicsSubFee2" />元
+							<input type="number" style="width: 4em" name="Course4SubFee2" />元
 							-->
 						</span>
-						<span id="subFee3PhysicsLabel">
+						<span id="subFee3Course4Label">
 							<!--费用3
-							<input type="number" style="width: 4em" name="PhysicsSubFee3" />元
+							<input type="number" style="width: 4em" name="Course4SubFee3" />元
 							-->
 						</span>
-						<span id="subFee4PhysicsLabel">
+						<span id="subFee4Course4Label">
 							<!--费用4
-							<input type="number" style="width: 4em" name="PhysicsSubFee4" />元
+							<input type="number" style="width: 4em" name="Course4SubFee4" />元
 							-->
 						</span>
-						<span id="subFee5PhysicsLabel">
+						<span id="subFee5Course4Label">
 							<!--费用5
-							<input type="number" style="width: 4em" name="PhysicsSubFee5" />元
+							<input type="number" style="width: 4em" name="Course4SubFee5" />元
 							-->
 						</span>
 						<br />
-						<span id="ChemistryLabelAddFee">
+						
+						<span id="course5LabelAddFee">
 							<!--
 						化学
-						<select name = "ChemistryProduct" onchange="checkHiddenValueProduct(5)">
+						<select name = "Course5Product" onchange="checkHiddenValueProduct(5)">
 								<option value=0>--请选择--</option>
 							</select>
-						<input type="text" name="ChemistryProductCopy" />
-						<input type="number" style="width: 4em" name="Chemistry" />
+						<input type="text" name="Course5ProductCopy" />
+						<input type="number" style="width: 4em" name="Course5" />
 						元
 						-->
 						</span>
-						<span id="subFee1ChemistryLabel">
+						<span id="subFee1Course5Label">
 							<!--费用1
-							<input type="number" style="width: 4em" name="ChemistrySubFee1" />元
+							<input type="number" style="width: 4em" name="Course5SubFee1" />元
 							-->
 						</span>
-						<span id="subFee2ChemistryLabel">
+						<span id="subFee2Course5Label">
 							<!--费用2
-							<input type="number" style="width: 4em" name="ChemistrySubFee2" />元
+							<input type="number" style="width: 4em" name="Course5SubFee2" />元
 							-->
 						</span>
-						<span id="subFee3ChemistryLabel">
+						<span id="subFee3Course5Label">
 							<!--费用3
-							<input type="number" style="width: 4em" name="ChemistrySubFee3" />元
+							<input type="number" style="width: 4em" name="Course5SubFee3" />元
 							-->
 						</span>
-						<span id="subFee4ChemistryLabel">
+						<span id="subFee4Course5Label">
 							<!--费用4
-							<input type="number" style="width: 4em" name="ChemistrySubFee4" />元
+							<input type="number" style="width: 4em" name="Course5SubFee4" />元
 							-->
 						</span>
-						<span id="subFee5ChemistryLabel">
+						<span id="subFee5Course5Label">
 							<!--费用5
-							<input type="number" style="width: 4em" name="ChemistrySubFee5" />元
+							<input type="number" style="width: 4em" name="Course5SubFee5" />元
 							-->
 						</span>
+						<br />
+						
+						<span id="course6LabelAddFee">
+							
+						</span>
+						<span id="subFee1Course6Label">
+							<!--费用1
+							<input type="number" style="width: 4em" name="Course6SubFee1" />元
+							-->
+						</span>
+						<span id="subFee2Course6Label">
+							<!--费用2
+							<input type="number" style="width: 4em" name="Course6SubFee2" />元
+							-->
+						</span>
+						<span id="subFee3Course6Label">
+							<!--费用3
+							<input type="number" style="width: 4em" name="Course6SubFee3" />元
+							-->
+						</span>
+						<span id="subFee4Course6Label">
+							<!--费用4
+							<input type="number" style="width: 4em" name="Course6SubFee4" />元
+							-->
+						</span>
+						<span id="subFee5Course6Label">
+							<!--费用5
+							<input type="number" style="width: 4em" name="Course6SubFee5" />元
+							-->
+						</span>
+						<br />
+						
+						<span id="course7LabelAddFee">
+							
+						</span>
+						<span id="subFee1Course7Label">
+							<!--费用1
+							<input type="number" style="width: 4em" name="Course7SubFee1" />元
+							-->
+						</span>
+						<span id="subFee2Course7Label">
+							<!--费用2
+							<input type="number" style="width: 4em" name="Course7SubFee2" />元
+							-->
+						</span>
+						<span id="subFee3Course7Label">
+							<!--费用3
+							<input type="number" style="width: 4em" name="Course7SubFee3" />元
+							-->
+						</span>
+						<span id="subFee4Course7Label">
+							<!--费用4
+							<input type="number" style="width: 4em" name="Course7SubFee4" />元
+							-->
+						</span>
+						<span id="subFee5Course7Label">
+							<!--费用5
+							<input type="number" style="width: 4em" name="Course7SubFee5" />元
+							-->
+						</span>
+						<br />
+						
+						<span id="course8LabelAddFee">
+							
+						</span>
+						<span id="subFee1Course8Label">
+							<!--费用1
+							<input type="number" style="width: 4em" name="Course8SubFee1" />元
+							-->
+						</span>
+						<span id="subFee2Course8Label">
+							<!--费用2
+							<input type="number" style="width: 4em" name="Course8SubFee2" />元
+							-->
+						</span>
+						<span id="subFee3Course8Label">
+							<!--费用3
+							<input type="number" style="width: 4em" name="Course8SubFee3" />元
+							-->
+						</span>
+						<span id="subFee4Course8Label">
+							<!--费用4
+							<input type="number" style="width: 4em" name="Course8SubFee4" />元
+							-->
+						</span>
+						<span id="subFee5Course8Label">
+							<!--费用5
+							<input type="number" style="width: 4em" name="Course8SubFee5" />元
+							-->
+						</span>
+						<br />
+						
+						<span id="course9LabelAddFee">
+							
+						</span>
+						<span id="subFee1Course9Label">
+							<!--费用1
+							<input type="number" style="width: 4em" name="Course9SubFee1" />元
+							-->
+						</span>
+						<span id="subFee2Course9Label">
+							<!--费用2
+							<input type="number" style="width: 4em" name="Course9SubFee2" />元
+							-->
+						</span>
+						<span id="subFee3Course9Label">
+							<!--费用3
+							<input type="number" style="width: 4em" name="Course9SubFee3" />元
+							-->
+						</span>
+						<span id="subFee4Course9Label">
+							<!--费用4
+							<input type="number" style="width: 4em" name="Course9SubFee4" />元
+							-->
+						</span>
+						<span id="subFee5Course9Label">
+							<!--费用5
+							<input type="number" style="width: 4em" name="Course9SubFee5" />元
+							-->
+						</span>
+						<br />
+						
+						<span id="course10LabelAddFee">
+							
+						</span>
+						<span id="subFee1Course10Label">
+							<!--费用1
+							<input type="number" style="width: 4em" name="Course10SubFee1" />元
+							-->
+						</span>
+						<span id="subFee2Course10Label">
+							<!--费用2
+							<input type="number" style="width: 4em" name="Course10SubFee2" />元
+							-->
+						</span>
+						<span id="subFee3Course10Label">
+							<!--费用3
+							<input type="number" style="width: 4em" name="Course10SubFee3" />元
+							-->
+						</span>
+						<span id="subFee4Course10Label">
+							<!--费用4
+							<input type="number" style="width: 4em" name="Course10SubFee4" />元
+							-->
+						</span>
+						<span id="subFee5Course10Label">
+							<!--费用5
+							<input type="number" style="width: 4em" name="Course6SubFee5" />元
+							-->
+						</span>
+						
 						<br />
 						</td>
 					</tr>

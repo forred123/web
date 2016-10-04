@@ -6,6 +6,9 @@ var objRecordAddFee;
 var lenRecordAddFee = 0;
 var indexRecordAddFee = 0;
 var remainFeeSum = 0;
+var maxCourseNum = 10;
+var courseLoad = new Array();
+
 // product[1][2],第一维为数学语文等学科标志，第二维为数学语文等学科对应的产品名称
 // 用于转费和退费中载入产品类型
 var product = new Array();
@@ -32,9 +35,7 @@ function checkAndSubmit() {
 		} else {
 			return false;
 		}
-		
 	}
-	
 	
 	// 退费
 	if (document.getElementsByName("submitBtnType")[0].value == "t") {
@@ -56,6 +57,7 @@ function checkAndSubmit() {
 				}
 			}
 		}
+		
 		if(typeof(document.getElementsByName('remainFee2CheckBox')[0])!="undefined"){
 			if(document.getElementsByName('remainFee2CheckBox')[0].checked){
 				remainFee = parseFloat(document.getElementsByName('remainFee2')[0].value);
@@ -70,6 +72,7 @@ function checkAndSubmit() {
 				}
 			}
 		}
+		
 		if(typeof(document.getElementsByName('remainFee3CheckBox')[0])!="undefined"){
 			if(document.getElementsByName('remainFee3CheckBox')[0].checked){
 				remainFee = parseFloat(document.getElementsByName('remainFee3')[0].value);
@@ -84,6 +87,7 @@ function checkAndSubmit() {
 				}
 			}
 		}
+		
 		if(typeof(document.getElementsByName('remainFee4CheckBox')[0])!="undefined"){
 			if(document.getElementsByName('remainFee4CheckBox')[0].checked){
 				remainFee = parseFloat(document.getElementsByName('remainFee4')[0].value);
@@ -98,6 +102,7 @@ function checkAndSubmit() {
 				}
 			}
 		}
+		
 		if(typeof(document.getElementsByName('remainFee5CheckBox')[0])!="undefined"){
 			if(document.getElementsByName('remainFee5CheckBox')[0].checked){
 				remainFee = parseFloat(document.getElementsByName('remainFee5')[0].value);
@@ -124,201 +129,384 @@ function checkAndSubmit() {
 			return false;
 		}
 	}
-
 	
 	// 交费
 	if (document.getElementsByName("submitBtnType")[0].value == "j") {
 		var feeSum = parseInt(document.getElementsByName("feeSum")[0].value);
-		/*
-		if(feeSum<=0){
-			alert("交费金额必须为正数！");
-			return false;
-		}
-		*/
 
-		var Math = 0;
-		if (document.getElementsByName("Math")[0]) {
-			if (document.getElementsByName("Math")[0].value != "") {
-				Math = parseInt(document.getElementsByName("Math")[0].value);
+		var course1 = 0;
+		if (document.getElementsByName("course1")[0]) {
+			if (document.getElementsByName("course1")[0].value != "") {
+				course1 = parseInt(document.getElementsByName("course1")[0].value);
 			}
 		}
 
-		var MathSubFee1 = 0;
-		if (document.getElementsByName("MathSubFee1")[0]) {
-			if (document.getElementsByName("MathSubFee1")[0].value != "") {
-				MathSubFee1 = parseInt(document.getElementsByName("MathSubFee1")[0].value);
+		var course1SubFee1 = 0;
+		if (document.getElementsByName("course1SubFee1")[0]) {
+			if (document.getElementsByName("course1SubFee1")[0].value != "") {
+				course1SubFee1 = parseInt(document.getElementsByName("course1SubFee1")[0].value);
 			}
 		}
-		var MathSubFee2 = 0;
-		if (document.getElementsByName("MathSubFee2")[0]) {
-			if (document.getElementsByName("MathSubFee2")[0].value != "") {
-				MathSubFee2 = parseInt(document.getElementsByName("MathSubFee2")[0].value);
+		var course1SubFee2 = 0;
+		if (document.getElementsByName("course1SubFee2")[0]) {
+			if (document.getElementsByName("course1SubFee2")[0].value != "") {
+				course1SubFee2 = parseInt(document.getElementsByName("course1SubFee2")[0].value);
 			}
 		}
-		var MathSubFee3 = 0;
-		if (document.getElementsByName("MathSubFee3")[0]) {
-			if (document.getElementsByName("MathSubFee3")[0].value != "") {
-				MathSubFee3 = parseInt(document.getElementsByName("MathSubFee3")[0].value);
+		var course1SubFee3 = 0;
+		if (document.getElementsByName("course1SubFee3")[0]) {
+			if (document.getElementsByName("course1SubFee3")[0].value != "") {
+				course1SubFee3 = parseInt(document.getElementsByName("course1SubFee3")[0].value);
 			}
 		}
-		var MathSubFee4 = 0;
-		if (document.getElementsByName("MathSubFee4")[0]) {
-			if (document.getElementsByName("MathSubFee4")[0].value != "") {
-				MathSubFee4 = parseInt(document.getElementsByName("MathSubFee4")[0].value);
+		var course1SubFee4 = 0;
+		if (document.getElementsByName("course1SubFee4")[0]) {
+			if (document.getElementsByName("course1SubFee4")[0].value != "") {
+				course1SubFee4 = parseInt(document.getElementsByName("course1SubFee4")[0].value);
 			}
 		}
-		var MathSubFee5 = 0;
-		if (document.getElementsByName("MathSubFee5")[0]) {
-			if (document.getElementsByName("MathSubFee5")[0].value != "") {
-				MathSubFee5 = parseInt(document.getElementsByName("MathSubFee5")[0].value);
+		var course1SubFee5 = 0;
+		if (document.getElementsByName("course1SubFee5")[0]) {
+			if (document.getElementsByName("course1SubFee5")[0].value != "") {
+				course1SubFee5 = parseInt(document.getElementsByName("course1SubFee5")[0].value);
 			}
 		}
-		var Chinese = 0;
-		if (document.getElementsByName("Chinese")[0]) {
-			if (document.getElementsByName("Chinese")[0].value != "") {
-				Chinese = parseInt(document.getElementsByName("Chinese")[0].value);
+		var course2 = 0;
+		if (document.getElementsByName("course2")[0]) {
+			if (document.getElementsByName("course2")[0].value != "") {
+				course2 = parseInt(document.getElementsByName("course2")[0].value);
 			}
 		}
-		var ChineseSubFee1 = 0;
-		if (document.getElementsByName("ChineseSubFee1")[0]) {
-			if (document.getElementsByName("ChineseSubFee1")[0].value != "") {
-				ChineseSubFee1 = parseInt(document.getElementsByName("ChineseSubFee1")[0].value);
+		var course2SubFee1 = 0;
+		if (document.getElementsByName("course2SubFee1")[0]) {
+			if (document.getElementsByName("course2SubFee1")[0].value != "") {
+				course2SubFee1 = parseInt(document.getElementsByName("course2SubFee1")[0].value);
 			}
 		}
-		var ChineseSubFee2 = 0;
-		if (document.getElementsByName("ChineseSubFee2")[0]) {
-			if (document.getElementsByName("ChineseSubFee2")[0].value != "") {
-				ChineseSubFee2 = parseInt(document.getElementsByName("ChineseSubFee2")[0].value);
+		var course2SubFee2 = 0;
+		if (document.getElementsByName("course2SubFee2")[0]) {
+			if (document.getElementsByName("course2SubFee2")[0].value != "") {
+				course2SubFee2 = parseInt(document.getElementsByName("course2SubFee2")[0].value);
 			}
 		}
-		var ChineseSubFee3 = 0;
-		if (document.getElementsByName("ChineseSubFee3")[0]) {
-			if (document.getElementsByName("ChineseSubFee3")[0].value != "") {
-				ChineseSubFee3 = parseInt(document.getElementsByName("ChineseSubFee3")[0].value);
+		var course2SubFee3 = 0;
+		if (document.getElementsByName("course2SubFee3")[0]) {
+			if (document.getElementsByName("course2SubFee3")[0].value != "") {
+				course2SubFee3 = parseInt(document.getElementsByName("course2SubFee3")[0].value);
 			}
 		}
-		var ChineseSubFee4 = 0;
-		if (document.getElementsByName("ChiChineseSubFee4")[0]) {
-			if (document.getElementsByName("ChineseSubFee4")[0].value != "") {
-				ChineseSubFee4 = parseInt(document.getElementsByName("ChineseSubFee4")[0].value);
+		var course2SubFee4 = 0;
+		if (document.getElementsByName("Chicourse2SubFee4")[0]) {
+			if (document.getElementsByName("course2SubFee4")[0].value != "") {
+				course2SubFee4 = parseInt(document.getElementsByName("course2SubFee4")[0].value);
 			}
 		}
-		var ChineseSubFee5 = 0;
-		if (document.getElementsByName("ChineseSubFee5")[0]) {
-			if (document.getElementsByName("ChineseSubFee5")[0].value != "") {
-				ChineseSubFee5 = parseInt(document.getElementsByName("ChineseSubFee5")[0].value);
+		var course2SubFee5 = 0;
+		if (document.getElementsByName("course2SubFee5")[0]) {
+			if (document.getElementsByName("course2SubFee5")[0].value != "") {
+				course2SubFee5 = parseInt(document.getElementsByName("course2SubFee5")[0].value);
 			}
 		}
-		var English = 0;
-		if (document.getElementsByName("English")[0]) {
-			if (document.getElementsByName("English")[0].value != "") {
-				English = parseInt(document.getElementsByName("English")[0].value);
+		var course3 = 0;
+		if (document.getElementsByName("course3")[0]) {
+			if (document.getElementsByName("course3")[0].value != "") {
+				course3 = parseInt(document.getElementsByName("course3")[0].value);
 			}
 		}
-		var EnglishSubFee1 = 0;
-		if (document.getElementsByName("EnglishSubFee1")[0]) {
-			if (document.getElementsByName("EnglishSubFee1")[0].value != "") {
-				EnglishSubFee1 = parseInt(document.getElementsByName("EnglishSubFee1")[0].value);
+		var course3SubFee1 = 0;
+		if (document.getElementsByName("course3SubFee1")[0]) {
+			if (document.getElementsByName("course3SubFee1")[0].value != "") {
+				course3SubFee1 = parseInt(document.getElementsByName("course3SubFee1")[0].value);
 			}
 		}
-		var EnglishSubFee2 = 0;
-		if (document.getElementsByName("EnglishSubFee2")[0]) {
-			if (document.getElementsByName("EnglishSubFee2")[0].value != "") {
-				EnglishSubFee2 = parseInt(document.getElementsByName("EnglishSubFee2")[0].value);
+		var course3SubFee2 = 0;
+		if (document.getElementsByName("course3SubFee2")[0]) {
+			if (document.getElementsByName("course3SubFee2")[0].value != "") {
+				course3SubFee2 = parseInt(document.getElementsByName("course3SubFee2")[0].value);
 			}
 		}
-		var EnglishSubFee3 = 0;
-		if (document.getElementsByName("EnglishSubFee3")[0]) {
-			if (document.getElementsByName("EnglishSubFee3")[0].value != "") {
-				EnglishSubFee3 = parseInt(document.getElementsByName("EnglishSubFee3")[0].value);
+		var course3SubFee3 = 0;
+		if (document.getElementsByName("course3SubFee3")[0]) {
+			if (document.getElementsByName("course3SubFee3")[0].value != "") {
+				course3SubFee3 = parseInt(document.getElementsByName("course3SubFee3")[0].value);
 			}
 		}
-		var EnglishSubFee4 = 0;
-		if (document.getElementsByName("EnglishSubFee4")[0]) {
-			if (document.getElementsByName("EnglishSubFee4")[0].value != "") {
-				EnglishSubFee4 = parseInt(document.getElementsByName("EnglishSubFee4")[0].value);
+		var course3SubFee4 = 0;
+		if (document.getElementsByName("course3SubFee4")[0]) {
+			if (document.getElementsByName("course3SubFee4")[0].value != "") {
+				course3SubFee4 = parseInt(document.getElementsByName("course3SubFee4")[0].value);
 			}
 		}
-		var EnglishSubFee5 = 0;
-		if (document.getElementsByName("EnglishSubFee5")[0]) {
-			if (document.getElementsByName("EnglishSubFee5")[0].value != "") {
-				EnglishSubFee5 = parseInt(document.getElementsByName("EnglishSubFee5")[0].value);
+		var course3SubFee5 = 0;
+		if (document.getElementsByName("course3SubFee5")[0]) {
+			if (document.getElementsByName("course3SubFee5")[0].value != "") {
+				course3SubFee5 = parseInt(document.getElementsByName("course3SubFee5")[0].value);
 			}
 		}
-		var Physics = 0;
-		if (document.getElementsByName("Physics")[0]) {
-			if (document.getElementsByName("Physics")[0].value != "") {
-				Physics = parseInt(document.getElementsByName("Physics")[0].value);
+		var course4 = 0;
+		if (document.getElementsByName("course4")[0]) {
+			if (document.getElementsByName("course4")[0].value != "") {
+				course4 = parseInt(document.getElementsByName("course4")[0].value);
 			}
 		}
-		var PhysicsSubFee1 = 0;
-		if (document.getElementsByName("PhysicsSubFee1")[0]) {
-			if (document.getElementsByName("PhysicsSubFee1")[0].value != "") {
-				PhysicsSubFee1 = parseInt(document.getElementsByName("PhysicsSubFee1")[0].value);
+		var course4SubFee1 = 0;
+		if (document.getElementsByName("course4SubFee1")[0]) {
+			if (document.getElementsByName("course4SubFee1")[0].value != "") {
+				course4SubFee1 = parseInt(document.getElementsByName("course4SubFee1")[0].value);
 			}
 		}
-		var PhysicsSubFee2 = 0;
-		if (document.getElementsByName("PhysicsSubFee2")[0]) {
-			if (document.getElementsByName("PhysicsSubFee2")[0].value != "") {
-				PhysicsSubFee2 = parseInt(document.getElementsByName("PhysicsSubFee2")[0].value);
+		var course4SubFee2 = 0;
+		if (document.getElementsByName("course4SubFee2")[0]) {
+			if (document.getElementsByName("course4SubFee2")[0].value != "") {
+				course4SubFee2 = parseInt(document.getElementsByName("course4SubFee2")[0].value);
 			}
 		}
-		var PhysicsSubFee3 = 0;
-		if (document.getElementsByName("PhysicsSubFee3")[0]) {
-			if (document.getElementsByName("PhysicsSubFee3")[0].value != "") {
-				PhysicsSubFee3 = parseInt(document.getElementsByName("PhysicsSubFee3")[0].value);
+		var course4SubFee3 = 0;
+		if (document.getElementsByName("course4SubFee3")[0]) {
+			if (document.getElementsByName("course4SubFee3")[0].value != "") {
+				course4SubFee3 = parseInt(document.getElementsByName("course4SubFee3")[0].value);
 			}
 		}
-		var PhysicsSubFee4 = 0;
-		if (document.getElementsByName("PhysicsSubFee4")[0]) {
-			if (document.getElementsByName("PhysicsSubFee4")[0].value != "") {
-				PhysicsSubFee4 = parseInt(document.getElementsByName("PhysicsSubFee4")[0].value);
+		var course4SubFee4 = 0;
+		if (document.getElementsByName("course4SubFee4")[0]) {
+			if (document.getElementsByName("course4SubFee4")[0].value != "") {
+				course4SubFee4 = parseInt(document.getElementsByName("course4SubFee4")[0].value);
 			}
 		}
-		var PhysicsSubFee5 = 0;
-		if (document.getElementsByName("PhysicsSubFee5")[0]) {
-			if (document.getElementsByName("PhysicsSubFee5")[0].value != "") {
-				PhysicsSubFee5 = parseInt(document.getElementsByName("PhysicsSubFee5")[0].value);
+		var course4SubFee5 = 0;
+		if (document.getElementsByName("course4SubFee5")[0]) {
+			if (document.getElementsByName("course4SubFee5")[0].value != "") {
+				course4SubFee5 = parseInt(document.getElementsByName("course4SubFee5")[0].value);
 			}
 		}
-		var Chemistry = 0;
-		if (document.getElementsByName("Chemistry")[0]) {
-			if (document.getElementsByName("Chemistry")[0].value != "") {
-				Chemistry = parseInt(document.getElementsByName("Chemistry")[0].value);
+		var course5 = 0;
+		if (document.getElementsByName("course5")[0]) {
+			if (document.getElementsByName("course5")[0].value != "") {
+				course5 = parseInt(document.getElementsByName("course5")[0].value);
 			}
 		}
-		var ChemistrySubFee1 = 0;
-		if (document.getElementsByName("ChemistrySubFee1")[0]) {
-			if (document.getElementsByName("ChemistrySubFee1")[0].value != "") {
-				ChemistrySubFee1 = parseInt(document.getElementsByName("ChemistrySubFee1")[0].value);
+		var course5SubFee1 = 0;
+		if (document.getElementsByName("course5SubFee1")[0]) {
+			if (document.getElementsByName("course5SubFee1")[0].value != "") {
+				course5SubFee1 = parseInt(document.getElementsByName("course5SubFee1")[0].value);
 			}
 		}
-		var ChemistrySubFee2 = 0;
-		if (document.getElementsByName("ChemistrySubFee2")[0]) {
-			if (document.getElementsByName("ChemistrySubFee2")[0].value != "") {
-				ChemistrySubFee2 = parseInt(document.getElementsByName("ChemistrySubFee2")[0].value);
+		var course5SubFee2 = 0;
+		if (document.getElementsByName("course5SubFee2")[0]) {
+			if (document.getElementsByName("course5SubFee2")[0].value != "") {
+				course5SubFee2 = parseInt(document.getElementsByName("course5SubFee2")[0].value);
 			}
 		}
-		var ChemistrySubFee3 = 0;
-		if (document.getElementsByName("ChemistrySubFee3")[0]) {
-			if (document.getElementsByName("ChemistrySubFee3")[0].value != "") {
-				ChemistrySubFee3 = parseInt(document.getElementsByName("ChemistrySubFee3")[0].value);
+		var course5SubFee3 = 0;
+		if (document.getElementsByName("course5SubFee3")[0]) {
+			if (document.getElementsByName("course5SubFee3")[0].value != "") {
+				course5SubFee3 = parseInt(document.getElementsByName("course5SubFee3")[0].value);
 			}
 		}
-		var ChemistrySubFee4 = 0;
-		if (document.getElementsByName("ChemistrySubFee4")[0]) {
-			if (document.getElementsByName("ChemistrySubFee4")[0].value != "") {
-				ChemistrySubFee4 = parseInt(document.getElementsByName("ChemistrySubFee4")[0].value);
+		var course5SubFee4 = 0;
+		if (document.getElementsByName("course5SubFee4")[0]) {
+			if (document.getElementsByName("course5SubFee4")[0].value != "") {
+				course5SubFee4 = parseInt(document.getElementsByName("course5SubFee4")[0].value);
 			}
 		}
-		var ChemistrySubFee5 = 0;
-		if (document.getElementsByName("ChemistrySubFee5")[0]) {
-			if (document.getElementsByName("ChemistrySubFee5")[0].value != "") {
-				ChemistrySubFee5 = parseInt(document.getElementsByName("ChemistrySubFee5")[0].value);
+		var course5SubFee5 = 0;
+		if (document.getElementsByName("course5SubFee5")[0]) {
+			if (document.getElementsByName("course5SubFee5")[0].value != "") {
+				course5SubFee5 = parseInt(document.getElementsByName("course5SubFee5")[0].value);
+			}
+		}
+		
+		var course6 = 0;
+		if (document.getElementsByName("course6")[0]) {
+			if (document.getElementsByName("course6")[0].value != "") {
+				course6 = parseInt(document.getElementsByName("course6")[0].value);
+			}
+		}
+		var course6SubFee1 = 0;
+		if (document.getElementsByName("course6SubFee1")[0]) {
+			if (document.getElementsByName("course6SubFee1")[0].value != "") {
+				course6SubFee1 = parseInt(document.getElementsByName("course6SubFee1")[0].value);
+			}
+		}
+		var course6SubFee2 = 0;
+		if (document.getElementsByName("course6SubFee2")[0]) {
+			if (document.getElementsByName("course6SubFee2")[0].value != "") {
+				course6SubFee2 = parseInt(document.getElementsByName("course6SubFee2")[0].value);
+			}
+		}
+		var course6SubFee3 = 0;
+		if (document.getElementsByName("course6SubFee3")[0]) {
+			if (document.getElementsByName("course6SubFee3")[0].value != "") {
+				course6SubFee3 = parseInt(document.getElementsByName("course6SubFee3")[0].value);
+			}
+		}
+		var course6SubFee4 = 0;
+		if (document.getElementsByName("course6SubFee4")[0]) {
+			if (document.getElementsByName("course6SubFee4")[0].value != "") {
+				course6SubFee4 = parseInt(document.getElementsByName("course6SubFee4")[0].value);
+			}
+		}
+		var course6SubFee5 = 0;
+		if (document.getElementsByName("course6SubFee5")[0]) {
+			if (document.getElementsByName("course6SubFee5")[0].value != "") {
+				course6SubFee5 = parseInt(document.getElementsByName("course6SubFee5")[0].value);
+			}
+		}
+		
+		var course7 = 0;
+		if (document.getElementsByName("course7")[0]) {
+			if (document.getElementsByName("course7")[0].value != "") {
+				course7 = parseInt(document.getElementsByName("course7")[0].value);
+			}
+		}
+		var course7SubFee1 = 0;
+		if (document.getElementsByName("course7SubFee1")[0]) {
+			if (document.getElementsByName("course7SubFee1")[0].value != "") {
+				course7SubFee1 = parseInt(document.getElementsByName("course7SubFee1")[0].value);
+			}
+		}
+		var course7SubFee2 = 0;
+		if (document.getElementsByName("course7SubFee2")[0]) {
+			if (document.getElementsByName("course7SubFee2")[0].value != "") {
+				course7SubFee2 = parseInt(document.getElementsByName("course7SubFee2")[0].value);
+			}
+		}
+		var course7SubFee3 = 0;
+		if (document.getElementsByName("course7SubFee3")[0]) {
+			if (document.getElementsByName("course7SubFee3")[0].value != "") {
+				course7SubFee3 = parseInt(document.getElementsByName("course7SubFee3")[0].value);
+			}
+		}
+		var course7SubFee4 = 0;
+		if (document.getElementsByName("course7SubFee4")[0]) {
+			if (document.getElementsByName("course7SubFee4")[0].value != "") {
+				course7SubFee4 = parseInt(document.getElementsByName("course7SubFee4")[0].value);
+			}
+		}
+		var course7SubFee5 = 0;
+		if (document.getElementsByName("course7SubFee5")[0]) {
+			if (document.getElementsByName("course7SubFee5")[0].value != "") {
+				course7SubFee5 = parseInt(document.getElementsByName("course7SubFee5")[0].value);
+			}
+		}
+		
+		var course8 = 0;
+		if (document.getElementsByName("course8")[0]) {
+			if (document.getElementsByName("course8")[0].value != "") {
+				course8 = parseInt(document.getElementsByName("course8")[0].value);
+			}
+		}
+		var course8SubFee1 = 0;
+		if (document.getElementsByName("course8SubFee1")[0]) {
+			if (document.getElementsByName("course8SubFee1")[0].value != "") {
+				course8SubFee1 = parseInt(document.getElementsByName("course8SubFee1")[0].value);
+			}
+		}
+		var course8SubFee2 = 0;
+		if (document.getElementsByName("course8SubFee2")[0]) {
+			if (document.getElementsByName("course8SubFee2")[0].value != "") {
+				course8SubFee2 = parseInt(document.getElementsByName("course8SubFee2")[0].value);
+			}
+		}
+		var course8SubFee3 = 0;
+		if (document.getElementsByName("course8SubFee3")[0]) {
+			if (document.getElementsByName("course8SubFee3")[0].value != "") {
+				course8SubFee3 = parseInt(document.getElementsByName("course8SubFee3")[0].value);
+			}
+		}
+		var course8SubFee4 = 0;
+		if (document.getElementsByName("course8SubFee4")[0]) {
+			if (document.getElementsByName("course8SubFee4")[0].value != "") {
+				course8SubFee4 = parseInt(document.getElementsByName("course8SubFee4")[0].value);
+			}
+		}
+		var course8SubFee5 = 0;
+		if (document.getElementsByName("course8SubFee5")[0]) {
+			if (document.getElementsByName("course8SubFee5")[0].value != "") {
+				course8SubFee5 = parseInt(document.getElementsByName("course8SubFee5")[0].value);
+			}
+		}
+		
+		var course9 = 0;
+		if (document.getElementsByName("course9")[0]) {
+			if (document.getElementsByName("course9")[0].value != "") {
+				course9 = parseInt(document.getElementsByName("course9")[0].value);
+			}
+		}
+		var course9SubFee1 = 0;
+		if (document.getElementsByName("course9SubFee1")[0]) {
+			if (document.getElementsByName("course9SubFee1")[0].value != "") {
+				course9SubFee1 = parseInt(document.getElementsByName("course9SubFee1")[0].value);
+			}
+		}
+		var course9SubFee2 = 0;
+		if (document.getElementsByName("course9SubFee2")[0]) {
+			if (document.getElementsByName("course9SubFee2")[0].value != "") {
+				course9SubFee2 = parseInt(document.getElementsByName("course9SubFee2")[0].value);
+			}
+		}
+		var course9SubFee3 = 0;
+		if (document.getElementsByName("course9SubFee3")[0]) {
+			if (document.getElementsByName("course9SubFee3")[0].value != "") {
+				course9SubFee3 = parseInt(document.getElementsByName("course9SubFee3")[0].value);
+			}
+		}
+		var course9SubFee4 = 0;
+		if (document.getElementsByName("course9SubFee4")[0]) {
+			if (document.getElementsByName("course9SubFee4")[0].value != "") {
+				course9SubFee4 = parseInt(document.getElementsByName("course9SubFee4")[0].value);
+			}
+		}
+		var course9SubFee5 = 0;
+		if (document.getElementsByName("course9SubFee5")[0]) {
+			if (document.getElementsByName("course9SubFee5")[0].value != "") {
+				course9SubFee5 = parseInt(document.getElementsByName("course9SubFee5")[0].value);
+			}
+		}
+		
+		var course10 = 0;
+		if (document.getElementsByName("course10")[0]) {
+			if (document.getElementsByName("course10")[0].value != "") {
+				course10 = parseInt(document.getElementsByName("course10")[0].value);
+			}
+		}
+		var course10SubFee1 = 0;
+		if (document.getElementsByName("course10SubFee1")[0]) {
+			if (document.getElementsByName("course10SubFee1")[0].value != "") {
+				course10SubFee1 = parseInt(document.getElementsByName("course10SubFee1")[0].value);
+			}
+		}
+		var course10SubFee2 = 0;
+		if (document.getElementsByName("course10SubFee2")[0]) {
+			if (document.getElementsByName("course10SubFee2")[0].value != "") {
+				course10SubFee2 = parseInt(document.getElementsByName("course10SubFee2")[0].value);
+			}
+		}
+		var course10SubFee3 = 0;
+		if (document.getElementsByName("course10SubFee3")[0]) {
+			if (document.getElementsByName("course10SubFee3")[0].value != "") {
+				course10SubFee3 = parseInt(document.getElementsByName("course10SubFee3")[0].value);
+			}
+		}
+		var course10SubFee4 = 0;
+		if (document.getElementsByName("course10SubFee4")[0]) {
+			if (document.getElementsByName("course10SubFee4")[0].value != "") {
+				course10SubFee4 = parseInt(document.getElementsByName("course10SubFee4")[0].value);
+			}
+		}
+		var course10SubFee5 = 0;
+		if (document.getElementsByName("course10SubFee5")[0]) {
+			if (document.getElementsByName("course10SubFee5")[0].value != "") {
+				course10SubFee5 = parseInt(document.getElementsByName("course10SubFee5")[0].value);
 			}
 		}
 
-		var feeCalSum = Math + MathSubFee1 + MathSubFee2 + MathSubFee3 + MathSubFee4 + MathSubFee5 + Chinese + ChineseSubFee1 + ChineseSubFee2 + ChineseSubFee3 + ChineseSubFee4 + ChineseSubFee5 + English + EnglishSubFee1 + EnglishSubFee2 + EnglishSubFee3 + EnglishSubFee4 + EnglishSubFee5 + Physics + PhysicsSubFee1 + PhysicsSubFee2 + PhysicsSubFee3 + PhysicsSubFee4 + PhysicsSubFee5 + Chemistry + ChemistrySubFee1 + ChemistrySubFee2 + ChemistrySubFee3 + ChemistrySubFee4 + ChemistrySubFee5;
+		var feeCalSum = course1 + course1SubFee1 + course1SubFee2 + course1SubFee3 + course1SubFee4 + course1SubFee5 + course2 + course2SubFee1 + course2SubFee2 + course2SubFee3 + course2SubFee4 + course2SubFee5 + course3 + course3SubFee1 + course3SubFee2 + course3SubFee3 + course3SubFee4 + course3SubFee5 + course4 + course4SubFee1 + course4SubFee2 + course4SubFee3 + course4SubFee4 + course4SubFee5 + course5 + course5SubFee1 + course5SubFee2 + course5SubFee3 + course5SubFee4 + course5SubFee5
+					  + course6 + course6SubFee1 + course6SubFee2 + course6SubFee3 + course6SubFee4 + course6SubFee5 
+					  + course7 + course7SubFee1 + course7SubFee2 + course7SubFee3 + course7SubFee4 + course7SubFee5
+					  + course8 + course8SubFee1 + course8SubFee2 + course8SubFee3 + course8SubFee4 + course8SubFee5
+					  + course9 + course9SubFee1 + course9SubFee2 + course9SubFee3 + course9SubFee4 + course9SubFee5
+					  + course10 + course10SubFee1 + course10SubFee2 + course10SubFee3 + course10SubFee4 + course10SubFee5;
 
 		if (feeCalSum == feeSum) {
 			var strtmp = "请确认交费内容正确再提交！\n\n";
@@ -380,7 +568,7 @@ function sqlStudentRemainFee(uid,courseIndex) {
 							document.getElementsByName("remainFee1Hide")[0].value = info[0].remainFee;
 	
 							for (var i = 0; i < product[0].length; i++) {
-								document.getElementsByName("MathProductRemainFee")[0].options.add(new Option(product[0][i], i));
+								document.getElementsByName("course1ProductRemainFee")[0].options.add(new Option(product[0][i], i));
 							};
 
 						}
@@ -391,7 +579,7 @@ function sqlStudentRemainFee(uid,courseIndex) {
 							document.getElementsByName("remainFee2Hide")[0].value = info[0].remainFee;
 							
 							for (var i = 0; i < product[1].length; i++) {
-								document.getElementsByName("ChineseProductRemainFee")[0].options.add(new Option(product[1][i], i));
+								document.getElementsByName("course2ProductRemainFee")[0].options.add(new Option(product[1][i], i));
 							};
 						}
 						break;
@@ -400,7 +588,7 @@ function sqlStudentRemainFee(uid,courseIndex) {
 							document.getElementsByName("remainFee3")[0].value = info[0].remainFee;
 							document.getElementsByName("remainFee3Hide")[0].value = info[0].remainFee;
 							for (var i = 0; i < product[2].length; i++) {
-								document.getElementsByName("EnglishProductRemainFee")[0].options.add(new Option(product[2][i], i));
+								document.getElementsByName("course3ProductRemainFee")[0].options.add(new Option(product[2][i], i));
 							};
 						}
 						break;
@@ -409,7 +597,7 @@ function sqlStudentRemainFee(uid,courseIndex) {
 							document.getElementsByName("remainFee4")[0].value = info[0].remainFee;
 							document.getElementsByName("remainFee4Hide")[0].value = info[0].remainFee;
 							for (var i = 0; i < product[3].length; i++) {
-								document.getElementsByName("PhysicsProductRemainFee")[0].options.add(new Option(product[3][i], i));
+								document.getElementsByName("course4ProductRemainFee")[0].options.add(new Option(product[3][i], i));
 							};
 						}
 						break;
@@ -418,7 +606,52 @@ function sqlStudentRemainFee(uid,courseIndex) {
 							document.getElementsByName("remainFee5")[0].value = info[0].remainFee;
 							document.getElementsByName("remainFee5Hide")[0].value = info[0].remainFee;
 							for (var i = 0; i < product[4].length; i++) {
-								document.getElementsByName("ChemistryProductRemainFee")[0].options.add(new Option(product[4][i], i));
+								document.getElementsByName("course5ProductRemainFee")[0].options.add(new Option(product[4][i], i));
+							};
+						}
+						break;
+					case 6:
+						if (document.getElementsByName("remainFee6")[0]) {
+							document.getElementsByName("remainFee6")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee6Hide")[0].value = info[0].remainFee;
+							for (var i = 0; i < product[5].length; i++) {
+								document.getElementsByName("course6ProductRemainFee")[0].options.add(new Option(product[5][i], i));
+							};
+						}
+						break;
+					case 7:
+						if (document.getElementsByName("remainFee7")[0]) {
+							document.getElementsByName("remainFee7")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee7Hide")[0].value = info[0].remainFee;
+							for (var i = 0; i < product[6].length; i++) {
+								document.getElementsByName("course7ProductRemainFee")[0].options.add(new Option(product[6][i], i));
+							};
+						}
+						break;
+					case 8:
+						if (document.getElementsByName("remainFee8")[0]) {
+							document.getElementsByName("remainFee8")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee8Hide")[0].value = info[0].remainFee;
+							for (var i = 0; i < product[7].length; i++) {
+								document.getElementsByName("course8ProductRemainFee")[0].options.add(new Option(product[7][i], i));
+							};
+						}
+						break;
+					case 9:
+						if (document.getElementsByName("remainFee9")[0]) {
+							document.getElementsByName("remainFee9")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee9Hide")[0].value = info[0].remainFee;
+							for (var i = 0; i < product[8].length; i++) {
+								document.getElementsByName("course9ProductRemainFee")[0].options.add(new Option(product[8][i], i));
+							};
+						}
+						break;
+					case 10:
+						if (document.getElementsByName("remainFee10")[0]) {
+							document.getElementsByName("remainFee10")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee10Hide")[0].value = info[0].remainFee;
+							for (var i = 0; i < product[9].length; i++) {
+								document.getElementsByName("course10ProductRemainFee")[0].options.add(new Option(product[9][i], i));
 							};
 						}
 						break;
@@ -501,7 +734,9 @@ function sqlRecordAddFee() {
 					document.getElementsByName("receiptNum")[0].value = info[lenRecordAddFee-1].receiptNum;
 					document.getElementsByName("billNum")[0].value = info[lenRecordAddFee-1].billNum;
 
-					var grade = parseInt(document.getElementsByName("grade")[0].value);
+					//var str = document.getElementsByName("grade")[0].value;
+					//alert(str);
+					//var grade = parseInt(document.getElementsByName("grade")[0].value);
 					// 班课价格
 					document.getElementsByName("priceBK")[0].value = info[lenRecordAddFee-1].priceBK;
 					// 一对一单价
@@ -515,172 +750,336 @@ function sqlRecordAddFee() {
 					// 产品名称
 					var objtmp;
 					
-					objtmp = document.getElementsByName("MathProduct")[0];
+					objtmp = document.getElementsByName("course1Product")[0];
 					if(objtmp){
 						for ( i = 0; i < objtmp.options.length; i++) {
-							if (objtmp.options[i].text == info[lenRecordAddFee-1].MathProduct) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course1Product) {
 								objtmp.options[i].selected = true;
-								document.getElementsByName("MathProductCopy")[0].value = info[lenRecordAddFee-1].MathProduct;
+								document.getElementsByName("course1ProductCopy")[0].value = info[lenRecordAddFee-1].course1Product;
 								break;
 							}
 						}
 					}
 
-					objtmp = document.getElementsByName("ChineseProduct")[0];
+					objtmp = document.getElementsByName("course2Product")[0];
 					if(objtmp){						
 						for ( i = 0; i < objtmp.options.length; i++) {
-							if (objtmp.options[i].text == info[lenRecordAddFee-1].ChineseProduct) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course2Product) {
 								objtmp.options[i].selected = true;
-								document.getElementsByName("ChineseProductCopy")[0].value = info[lenRecordAddFee-1].ChineseProduct;
+								document.getElementsByName("course2ProductCopy")[0].value = info[lenRecordAddFee-1].course2Product;
 								break;
 							}
 						}
 					}
 					
-					objtmp = document.getElementsByName("EnglishProduct")[0];
+					objtmp = document.getElementsByName("course3Product")[0];
 					if(objtmp){
 						for ( i = 0; i < objtmp.options.length; i++) {
-							if (objtmp.options[i].text == info[lenRecordAddFee-1].EnglishProduct) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course3Product) {
 								objtmp.options[i].selected = true;
-								document.getElementsByName("EnglishProductCopy")[0].value = info[lenRecordAddFee-1].EnglishProduct;
+								document.getElementsByName("course3ProductCopy")[0].value = info[lenRecordAddFee-1].course3Product;
 								break;
 							}
 						}
 					}
 					
-					objtmp = document.getElementsByName("PhysicsProduct")[0];
+					objtmp = document.getElementsByName("course4Product")[0];
 					if(objtmp){
 						for ( i = 0; i < objtmp.options.length; i++) {
-							if (objtmp.options[i].text == info[lenRecordAddFee-1].PhysicsProduct) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course4Product) {
 								objtmp.options[i].selected = true;
-								document.getElementsByName("PhysicsProductCopy")[0].value = info[lenRecordAddFee-1].PhysicsProduct;
+								document.getElementsByName("course4ProductCopy")[0].value = info[lenRecordAddFee-1].course4Product;
 								break;
 							}
 						}
 					}
 					
-					objtmp = document.getElementsByName("ChemistryProduct")[0];
+					objtmp = document.getElementsByName("course5Product")[0];
 					if(objtmp){
 						for ( i = 0; i < objtmp.options.length; i++) {
-							if (objtmp.options[i].text == info[lenRecordAddFee-1].ChemistryProduct) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course5Product) {
 								objtmp.options[i].selected = true;
-								document.getElementsByName("ChemistryProductCopy")[0].value = info[lenRecordAddFee-1].ChemistryProduct;
+								document.getElementsByName("course5ProductCopy")[0].value = info[lenRecordAddFee-1].course5Product;
 								break;
 							}
 						}
 					}
 					
+					objtmp = document.getElementsByName("course6Product")[0];
+					if(objtmp){
+						for ( i = 0; i < objtmp.options.length; i++) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course6Product) {
+								objtmp.options[i].selected = true;
+								document.getElementsByName("course6ProductCopy")[0].value = info[lenRecordAddFee-1].course6Product;
+								break;
+							}
+						}
+					}
+					
+					objtmp = document.getElementsByName("course7Product")[0];
+					if(objtmp){
+						for ( i = 0; i < objtmp.options.length; i++) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course7Product) {
+								objtmp.options[i].selected = true;
+								document.getElementsByName("course7ProductCopy")[0].value = info[lenRecordAddFee-1].course7Product;
+								break;
+							}
+						}
+					}
+					
+					objtmp = document.getElementsByName("course8Product")[0];
+					if(objtmp){
+						for ( i = 0; i < objtmp.options.length; i++) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course8Product) {
+								objtmp.options[i].selected = true;
+								document.getElementsByName("course8ProductCopy")[0].value = info[lenRecordAddFee-1].course8Product;
+								break;
+							}
+						}
+					}
+					objtmp = document.getElementsByName("course9Product")[0];
+					if(objtmp){
+						for ( i = 0; i < objtmp.options.length; i++) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course9Product) {
+								objtmp.options[i].selected = true;
+								document.getElementsByName("course9ProductCopy")[0].value = info[lenRecordAddFee-1].course9Product;
+								break;
+							}
+						}
+					}
+					
+					objtmp = document.getElementsByName("course10Product")[0];
+					if(objtmp){
+						for ( i = 0; i < objtmp.options.length; i++) {
+							if (objtmp.options[i].text == info[lenRecordAddFee-1].course10Product) {
+								objtmp.options[i].selected = true;
+								document.getElementsByName("course10ProductCopy")[0].value = info[lenRecordAddFee-1].course10Product;
+								break;
+							}
+						}
+					}
 
 					// 数学 费用分配
-					if((document.getElementsByName("MathProduct")[0])&&(document.getElementsByName("MathProduct")[0].value!=0)) {
-						//if ((document.getElementsByName("Math")[0]) && (info[lenRecordAddFee-1].Math != 0)) {
-						if ((document.getElementsByName("Math")[0])&&(document.getElementsByName("MathProduct")[0].value!=0)) {
-							document.getElementsByName("Math")[0].value = info[lenRecordAddFee-1].Math;
+					if((document.getElementsByName("course1Product")[0])&&(document.getElementsByName("course1Product")[0].value!=0)) {
+						//if ((document.getElementsByName("course1")[0]) && (info[lenRecordAddFee-1].course1 != 0)) {
+						//if ((document.getElementsByName("course1")[0])&&(document.getElementsByName("course1Product")[0].value!=0)) {
+						if (document.getElementsByName("course1")[0]){
+							document.getElementsByName("course1")[0].value = info[lenRecordAddFee-1].course1;
 						}
-						//if ((document.getElementsByName("MathSubFee1")[0]) && (info[lenRecordAddFee-1].Math != 0)) {//.MathSubFee1
-						if (document.getElementsByName("MathSubFee1")[0]) {//.MathSubFee1
-							document.getElementsByName("MathSubFee1")[0].value = info[lenRecordAddFee-1].MathSubFee1;
+						//if ((document.getElementsByName("course1SubFee1")[0]) && (info[lenRecordAddFee-1].course1 != 0)) {//.course1SubFee1
+						if (document.getElementsByName("course1SubFee1")[0]) {//.course1SubFee1
+							document.getElementsByName("course1SubFee1")[0].value = info[lenRecordAddFee-1].course1SubFee1;
 						}
-						if (document.getElementsByName("MathSubFee2")[0]) {
-							document.getElementsByName("MathSubFee2")[0].value = info[lenRecordAddFee-1].MathSubFee2;
+						if (document.getElementsByName("course1SubFee2")[0]) {
+							document.getElementsByName("course1SubFee2")[0].value = info[lenRecordAddFee-1].course1SubFee2;
 						}
-						if (document.getElementsByName("MathSubFee3")[0]) {
-							document.getElementsByName("MathSubFee3")[0].value = info[lenRecordAddFee-1].MathSubFee3;
+						if (document.getElementsByName("course1SubFee3")[0]) {
+							document.getElementsByName("course1SubFee3")[0].value = info[lenRecordAddFee-1].course1SubFee3;
 						}
-						if (document.getElementsByName("MathSubFee4")[0]) {
-							document.getElementsByName("MathSubFee4")[0].value = info[lenRecordAddFee-1].MathSubFee4;
+						if (document.getElementsByName("course1SubFee4")[0]) {
+							document.getElementsByName("course1SubFee4")[0].value = info[lenRecordAddFee-1].course1SubFee4;
 						}
-						if (document.getElementsByName("MathSubFee5")[0]) {
-							document.getElementsByName("MathSubFee5")[0].value = info[lenRecordAddFee-1].MathSubFee5;
+						if (document.getElementsByName("course1SubFee5")[0]) {
+							document.getElementsByName("course1SubFee5")[0].value = info[lenRecordAddFee-1].course1SubFee5;
 						}
 					}
 
 					// 语文 费用分配
-					//if ((document.getElementsByName("Chinese")[0]) && (info[lenRecordAddFee-1].Chinese != 0)) {
-					if((document.getElementsByName("ChineseProduct")[0])&&(document.getElementsByName("ChineseProduct")[0].value!=0)){
-						if (document.getElementsByName("Chinese")[0]){
-							document.getElementsByName("Chinese")[0].value = info[lenRecordAddFee-1].Chinese;
+					//if ((document.getElementsByName("course2")[0]) && (info[lenRecordAddFee-1].course2 != 0)) {
+					if((document.getElementsByName("course2Product")[0])&&(document.getElementsByName("course2Product")[0].value!=0)){
+						if (document.getElementsByName("course2")[0]){
+							document.getElementsByName("course2")[0].value = info[lenRecordAddFee-1].course2;
 						}
-						if (document.getElementsByName("ChineseSubFee1")[0]){//.ChineseSubFee1
-							document.getElementsByName("ChineseSubFee1")[0].value = info[lenRecordAddFee-1].ChineseSubFee1;
+						if (document.getElementsByName("course2SubFee1")[0]){//.course2SubFee1
+							document.getElementsByName("course2SubFee1")[0].value = info[lenRecordAddFee-1].course2SubFee1;
 						}
-						if (document.getElementsByName("ChineseSubFee2")[0]){
-							document.getElementsByName("ChineseSubFee2")[0].value = info[lenRecordAddFee-1].ChineseSubFee2;
+						if (document.getElementsByName("course2SubFee2")[0]){
+							document.getElementsByName("course2SubFee2")[0].value = info[lenRecordAddFee-1].course2SubFee2;
 						}
-						if (document.getElementsByName("ChineseSubFee3")[0]){
-							document.getElementsByName("ChineseSubFee3")[0].value = info[lenRecordAddFee-1].ChineseSubFee3;
+						if (document.getElementsByName("course2SubFee3")[0]){
+							document.getElementsByName("course2SubFee3")[0].value = info[lenRecordAddFee-1].course2SubFee3;
 						}
-						if (document.getElementsByName("ChineseSubFee4")[0]){
-							document.getElementsByName("ChineseSubFee4")[0].value = info[lenRecordAddFee-1].ChineseSubFee4;
+						if (document.getElementsByName("course2SubFee4")[0]){
+							document.getElementsByName("course2SubFee4")[0].value = info[lenRecordAddFee-1].course2SubFee4;
 						}
-						if (document.getElementsByName("ChineseSubFee5")[0]){
-							document.getElementsByName("ChineseSubFee5")[0].value = info[lenRecordAddFee-1].ChineseSubFee5;
+						if (document.getElementsByName("course2SubFee5")[0]){
+							document.getElementsByName("course2SubFee5")[0].value = info[lenRecordAddFee-1].course2SubFee5;
 						}
 					}
 
 					// 英语 费用分配
-					if((document.getElementsByName("EnglishProduct")[0])&&(document.getElementsByName("EnglishProduct")[0].value!=0)){
-						if (document.getElementsByName("English")[0]) {
-							document.getElementsByName("English")[0].value = info[lenRecordAddFee-1].English;
+					if((document.getElementsByName("course3Product")[0])&&(document.getElementsByName("course3Product")[0].value!=0)){
+						if (document.getElementsByName("course3")[0]) {
+							document.getElementsByName("course3")[0].value = info[lenRecordAddFee-1].course3;
 						}
-						if (document.getElementsByName("EnglishSubFee1")[0]){//.EnglishSubFee1
-							document.getElementsByName("EnglishSubFee1")[0].value = info[lenRecordAddFee-1].EnglishSubFee1;
+						if (document.getElementsByName("course3SubFee1")[0]){//.course3SubFee1
+							document.getElementsByName("course3SubFee1")[0].value = info[lenRecordAddFee-1].course3SubFee1;
 						}
-						if (document.getElementsByName("EnglishSubFee2")[0]){
-							document.getElementsByName("EnglishSubFee2")[0].value = info[lenRecordAddFee-1].EnglishSubFee2;
+						if (document.getElementsByName("course3SubFee2")[0]){
+							document.getElementsByName("course3SubFee2")[0].value = info[lenRecordAddFee-1].course3SubFee2;
 						}
-						if (document.getElementsByName("EnglishSubFee3")[0]){
-							document.getElementsByName("EnglishSubFee3")[0].value = info[lenRecordAddFee-1].EnglishSubFee3;
+						if (document.getElementsByName("course3SubFee3")[0]){
+							document.getElementsByName("course3SubFee3")[0].value = info[lenRecordAddFee-1].course3SubFee3;
 						}
-						if (document.getElementsByName("EnglishSubFee4")[0]){
-							document.getElementsByName("EnglishSubFee4")[0].value = info[lenRecordAddFee-1].EnglishSubFee4;
+						if (document.getElementsByName("course3SubFee4")[0]){
+							document.getElementsByName("course3SubFee4")[0].value = info[lenRecordAddFee-1].course3SubFee4;
 						}
-						if (document.getElementsByName("EnglishSubFee5")[0]){
-							document.getElementsByName("EnglishSubFee5")[0].value = info[lenRecordAddFee-1].EnglishSubFee5;
+						if (document.getElementsByName("course3SubFee5")[0]){
+							document.getElementsByName("course3SubFee5")[0].value = info[lenRecordAddFee-1].course3SubFee5;
 						}
 					}
 
 					// 物理 费用分配
-					if((document.getElementsByName("PhysicsProduct")[0])&&(document.getElementsByName("PhysicsProduct")[0].value!=0)){
-						if (document.getElementsByName("Physics")[0]){
-							document.getElementsByName("Physics")[0].value = info[lenRecordAddFee-1].Physics;
+					if((document.getElementsByName("course4Product")[0])&&(document.getElementsByName("course4Product")[0].value!=0)){
+						if (document.getElementsByName("course4")[0]){
+							document.getElementsByName("course4")[0].value = info[lenRecordAddFee-1].course4;
 						}
-						if (document.getElementsByName("PhysicsSubFee1")[0]) {//.PhysicsSubFee1
-							document.getElementsByName("PhysicsSubFee1")[0].value = info[lenRecordAddFee-1].PhysicsSubFee1;
+						if (document.getElementsByName("course4SubFee1")[0]) {//.course4SubFee1
+							document.getElementsByName("course4SubFee1")[0].value = info[lenRecordAddFee-1].course4SubFee1;
 						}
-						if (document.getElementsByName("PhysicsSubFee2")[0]){
-							document.getElementsByName("PhysicsSubFee2")[0].value = info[lenRecordAddFee-1].PhysicsSubFee2;
+						if (document.getElementsByName("course4SubFee2")[0]){
+							document.getElementsByName("course4SubFee2")[0].value = info[lenRecordAddFee-1].course4SubFee2;
 						}
-						if (document.getElementsByName("PhysicsSubFee3")[0]){
-							document.getElementsByName("PhysicsSubFee3")[0].value = info[lenRecordAddFee-1].PhysicsSubFee3;
+						if (document.getElementsByName("course4SubFee3")[0]){
+							document.getElementsByName("course4SubFee3")[0].value = info[lenRecordAddFee-1].course4SubFee3;
 						}
-						if (document.getElementsByName("PhysicsSubFee4")[0]){
-							document.getElementsByName("PhysicsSubFee4")[0].value = info[lenRecordAddFee-1].PhysicsSubFee4;
+						if (document.getElementsByName("course4SubFee4")[0]){
+							document.getElementsByName("course4SubFee4")[0].value = info[lenRecordAddFee-1].course4SubFee4;
 						}
-						if (document.getElementsByName("PhysicsSubFee5")[0]){
-							document.getElementsByName("PhysicsSubFee5")[0].value = info[lenRecordAddFee-1].PhysicsSubFee5;
+						if (document.getElementsByName("course4SubFee5")[0]){
+							document.getElementsByName("course4SubFee5")[0].value = info[lenRecordAddFee-1].course4SubFee5;
 						}
 					}
 
 					// 化学 费用分配
-					if((document.getElementsByName("ChemistryProduct")[0])&&(document.getElementsByName("ChemistryProduct")[0].value!=0)){
-						if (document.getElementsByName("Chemistry")[0]){
-							document.getElementsByName("Chemistry")[0].value = info[lenRecordAddFee-1].Chemistry;
+					if((document.getElementsByName("course5Product")[0])&&(document.getElementsByName("course5Product")[0].value!=0)){
+						if (document.getElementsByName("course5")[0]){
+							document.getElementsByName("course5")[0].value = info[lenRecordAddFee-1].course5;
 						}
-						if (document.getElementsByName("ChemistrySubFee1")[0]){//.ChemistrySubFee1
-							document.getElementsByName("ChemistrySubFee1")[0].value = info[lenRecordAddFee-1].ChemistrySubFee1;
+						if (document.getElementsByName("course5SubFee1")[0]){//.course5SubFee1
+							document.getElementsByName("course5SubFee1")[0].value = info[lenRecordAddFee-1].course5SubFee1;
 						}
-						if (document.getElementsByName("ChemistrySubFee2")[0]){
-							document.getElementsByName("ChemistrySubFee2")[0].value = info[lenRecordAddFee-1].ChemistrySubFee2;
+						if (document.getElementsByName("course5SubFee2")[0]){
+							document.getElementsByName("course5SubFee2")[0].value = info[lenRecordAddFee-1].course5SubFee2;
 						}
-						if (document.getElementsByName("ChemistrySubFee3")[0]){
-							document.getElementsByName("ChemistrySubFee3")[0].value = info[lenRecordAddFee-1].ChemistrySubFee3;
+						if (document.getElementsByName("course5SubFee3")[0]){
+							document.getElementsByName("course5SubFee3")[0].value = info[lenRecordAddFee-1].course5SubFee3;
 						}
-						if (document.getElementsByName("ChemistrySubFee4")[0]){
-							document.getElementsByName("ChemistrySubFee4")[0].value = info[lenRecordAddFee-1].ChemistrySubFee4;
+						if (document.getElementsByName("course5SubFee4")[0]){
+							document.getElementsByName("course5SubFee4")[0].value = info[lenRecordAddFee-1].course5SubFee4;
 						}
-						if (document.getElementsByName("ChemistrySubFee5")[0]){
-							document.getElementsByName("ChemistrySubFee5")[0].value = info[lenRecordAddFee-1].ChemistrySubFee5;
+						if (document.getElementsByName("course5SubFee5")[0]){
+							document.getElementsByName("course5SubFee5")[0].value = info[lenRecordAddFee-1].course5SubFee5;
+						}
+					}
+					
+					// course6 费用分配
+					if((document.getElementsByName("course6Product")[0])&&(document.getElementsByName("course6Product")[0].value!=0)){
+						if (document.getElementsByName("course6")[0]){
+							document.getElementsByName("course6")[0].value = info[lenRecordAddFee-1].course6;
+						}
+						if (document.getElementsByName("course6SubFee1")[0]){//.course6SubFee1
+							document.getElementsByName("course6SubFee1")[0].value = info[lenRecordAddFee-1].course6SubFee1;
+						}
+						if (document.getElementsByName("course6SubFee2")[0]){
+							document.getElementsByName("course6SubFee2")[0].value = info[lenRecordAddFee-1].course6SubFee2;
+						}
+						if (document.getElementsByName("course6SubFee3")[0]){
+							document.getElementsByName("course6SubFee3")[0].value = info[lenRecordAddFee-1].course6SubFee3;
+						}
+						if (document.getElementsByName("course6SubFee4")[0]){
+							document.getElementsByName("course6SubFee4")[0].value = info[lenRecordAddFee-1].course6SubFee4;
+						}
+						if (document.getElementsByName("course6SubFee5")[0]){
+							document.getElementsByName("course6SubFee5")[0].value = info[lenRecordAddFee-1].course6SubFee5;
+						}
+					}
+					
+					// course7 费用分配
+					if((document.getElementsByName("course7Product")[0])&&(document.getElementsByName("course7Product")[0].value!=0)){
+						if (document.getElementsByName("course7")[0]){
+							document.getElementsByName("course7")[0].value = info[lenRecordAddFee-1].course7;
+						}
+						if (document.getElementsByName("course7SubFee1")[0]){//.course7SubFee1
+							document.getElementsByName("course7SubFee1")[0].value = info[lenRecordAddFee-1].course7SubFee1;
+						}
+						if (document.getElementsByName("course7SubFee2")[0]){
+							document.getElementsByName("course7SubFee2")[0].value = info[lenRecordAddFee-1].course7SubFee2;
+						}
+						if (document.getElementsByName("course7SubFee3")[0]){
+							document.getElementsByName("course7SubFee3")[0].value = info[lenRecordAddFee-1].course7SubFee3;
+						}
+						if (document.getElementsByName("course7SubFee4")[0]){
+							document.getElementsByName("course7SubFee4")[0].value = info[lenRecordAddFee-1].course7SubFee4;
+						}
+						if (document.getElementsByName("course7SubFee5")[0]){
+							document.getElementsByName("course7SubFee5")[0].value = info[lenRecordAddFee-1].course7SubFee5;
+						}
+					}
+					
+					// course8 费用分配
+					if((document.getElementsByName("course8Product")[0])&&(document.getElementsByName("course8Product")[0].value!=0)){
+						if (document.getElementsByName("course8")[0]){
+							document.getElementsByName("course8")[0].value = info[lenRecordAddFee-1].course8;
+						}
+						if (document.getElementsByName("course8SubFee1")[0]){//.course8SubFee1
+							document.getElementsByName("course8SubFee1")[0].value = info[lenRecordAddFee-1].course8SubFee1;
+						}
+						if (document.getElementsByName("course8SubFee2")[0]){
+							document.getElementsByName("course8SubFee2")[0].value = info[lenRecordAddFee-1].course8SubFee2;
+						}
+						if (document.getElementsByName("course8SubFee3")[0]){
+							document.getElementsByName("course8SubFee3")[0].value = info[lenRecordAddFee-1].course8SubFee3;
+						}
+						if (document.getElementsByName("course8SubFee4")[0]){
+							document.getElementsByName("course8SubFee4")[0].value = info[lenRecordAddFee-1].course8SubFee4;
+						}
+						if (document.getElementsByName("course8SubFee5")[0]){
+							document.getElementsByName("course8SubFee5")[0].value = info[lenRecordAddFee-1].course8SubFee5;
+						}
+					}
+					
+					// course9 费用分配
+					if((document.getElementsByName("course9Product")[0])&&(document.getElementsByName("course9Product")[0].value!=0)){
+						if (document.getElementsByName("course9")[0]){
+							document.getElementsByName("course9")[0].value = info[lenRecordAddFee-1].course9;
+						}
+						if (document.getElementsByName("course9SubFee1")[0]){//.course9SubFee1
+							document.getElementsByName("course9SubFee1")[0].value = info[lenRecordAddFee-1].course9SubFee1;
+						}
+						if (document.getElementsByName("course9SubFee2")[0]){
+							document.getElementsByName("course9SubFee2")[0].value = info[lenRecordAddFee-1].course9SubFee2;
+						}
+						if (document.getElementsByName("course9SubFee3")[0]){
+							document.getElementsByName("course9SubFee3")[0].value = info[lenRecordAddFee-1].course9SubFee3;
+						}
+						if (document.getElementsByName("course9SubFee4")[0]){
+							document.getElementsByName("course9SubFee4")[0].value = info[lenRecordAddFee-1].course9SubFee4;
+						}
+						if (document.getElementsByName("course9SubFee5")[0]){
+							document.getElementsByName("course9SubFee5")[0].value = info[lenRecordAddFee-1].course9SubFee5;
+						}
+					}
+					
+					// course10 费用分配
+					if((document.getElementsByName("course10Product")[0])&&(document.getElementsByName("course10Product")[0].value!=0)){
+						if (document.getElementsByName("course10")[0]){
+							document.getElementsByName("course10")[0].value = info[lenRecordAddFee-1].course10;
+						}
+						if (document.getElementsByName("course10SubFee1")[0]){//.course10SubFee1
+							document.getElementsByName("course10SubFee1")[0].value = info[lenRecordAddFee-1].course10SubFee1;
+						}
+						if (document.getElementsByName("course10SubFee2")[0]){
+							document.getElementsByName("course10SubFee2")[0].value = info[lenRecordAddFee-1].course10SubFee2;
+						}
+						if (document.getElementsByName("course10SubFee3")[0]){
+							document.getElementsByName("course10SubFee3")[0].value = info[lenRecordAddFee-1].course10SubFee3;
+						}
+						if (document.getElementsByName("course10SubFee4")[0]){
+							document.getElementsByName("course10SubFee4")[0].value = info[lenRecordAddFee-1].course10SubFee4;
+						}
+						if (document.getElementsByName("course10SubFee5")[0]){
+							document.getElementsByName("course10SubFee5")[0].value = info[lenRecordAddFee-1].course10SubFee5;
 						}
 					}
 				}
@@ -722,7 +1121,7 @@ function sqlAddFeeRecord(flag){
 	document.getElementsByName("receiptNum")[0].value = objRecordAddFee[indexRecordAddFee].receiptNum;
 	document.getElementsByName("billNum")[0].value = objRecordAddFee[indexRecordAddFee].billNum;
 	
-	var grade = parseInt(document.getElementsByName("grade")[0].value);
+	//var grade = parseInt(document.getElementsByName("grade")[0].value);
 	// 班课价格
 	document.getElementsByName("priceBK")[0].value = objRecordAddFee[indexRecordAddFee].priceBK;
 	// 一对一单价
@@ -736,260 +1135,513 @@ function sqlAddFeeRecord(flag){
 	// 产品名称
 	var objtmp;
 	
-	objtmp = document.getElementsByName("MathProduct")[0];
+	objtmp = document.getElementsByName("course1Product")[0];
 	if(objtmp){
 		for ( i = 0; i < objtmp.options.length; i++) {
-			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].MathProduct) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course1Product) {
 				objtmp.options[i].selected = true;
-				document.getElementsByName("MathProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].MathProduct;
+				document.getElementsByName("course1ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course1Product;
 				break;
 			}
 		}
 	}
 	
-	objtmp = document.getElementsByName("ChineseProduct")[0];
+	objtmp = document.getElementsByName("course2Product")[0];
 	if(objtmp){						
 		for ( i = 0; i < objtmp.options.length; i++) {
-			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].ChineseProduct) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course2Product) {
 				objtmp.options[i].selected = true;
-				document.getElementsByName("ChineseProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].ChineseProduct;
+				document.getElementsByName("course2ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course2Product;
 				break;
 			}
 		}
 	}
 	
-	objtmp = document.getElementsByName("EnglishProduct")[0];
+	objtmp = document.getElementsByName("course3Product")[0];
 	if(objtmp){
 		for ( i = 0; i < objtmp.options.length; i++) {
-			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].EnglishProduct) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course3Product) {
 				objtmp.options[i].selected = true;
-				document.getElementsByName("EnglishProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].EnglishProduct;
+				document.getElementsByName("course3ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course3Product;
 				break;
 			}
 		}
 	}
 	
-	objtmp = document.getElementsByName("PhysicsProduct")[0];
+	objtmp = document.getElementsByName("course4Product")[0];
 	if(objtmp){
 		for ( i = 0; i < objtmp.options.length; i++) {
-			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].PhysicsProduct) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course4Product) {
 				objtmp.options[i].selected = true;
-				document.getElementsByName("PhysicsProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].PhysicsProduct;
+				document.getElementsByName("course4ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course4Product;
 				break;
 			}
 		}
 	}
 	
-	objtmp = document.getElementsByName("ChemistryProduct")[0];
+	objtmp = document.getElementsByName("course5Product")[0];
 	if(objtmp){
 		for ( i = 0; i < objtmp.options.length; i++) {
-			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].ChemistryProduct) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course5Product) {
 				objtmp.options[i].selected = true;
-				document.getElementsByName("ChemistryProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].ChemistryProduct;
+				document.getElementsByName("course5ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course5Product;
 				break;
 			}
 		}
 	}
 	
+	objtmp = document.getElementsByName("course6Product")[0];
+	if(objtmp){
+		for ( i = 0; i < objtmp.options.length; i++) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course6Product) {
+				objtmp.options[i].selected = true;
+				document.getElementsByName("course6ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course6Product;
+				break;
+			}
+		}
+	}
 	
-	// 数学 费用分配
-	if ((document.getElementsByName("Math")[0]) && (objRecordAddFee[indexRecordAddFee].Math != 0)) {
-		document.getElementsByName("Math")[0].value = objRecordAddFee[indexRecordAddFee].Math;
+	objtmp = document.getElementsByName("course7Product")[0];
+	if(objtmp){
+		for ( i = 0; i < objtmp.options.length; i++) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course7Product) {
+				objtmp.options[i].selected = true;
+				document.getElementsByName("course7ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course7Product;
+				break;
+			}
+		}
 	}
-	if ((document.getElementsByName("MathSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].Math != 0)) { //.MathSubFee1
-		document.getElementsByName("MathSubFee1")[0].value = objRecordAddFee[indexRecordAddFee].MathSubFee1;
+	objtmp = document.getElementsByName("course8Product")[0];
+	if(objtmp){
+		for ( i = 0; i < objtmp.options.length; i++) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course8Product) {
+				objtmp.options[i].selected = true;
+				document.getElementsByName("course8ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course8Product;
+				break;
+			}
+		}
 	}
-	if ((document.getElementsByName("MathSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].Math != 0)) {
-		document.getElementsByName("MathSubFee2")[0].value = objRecordAddFee[indexRecordAddFee].MathSubFee2;
+	
+	objtmp = document.getElementsByName("course9Product")[0];
+	if(objtmp){
+		for ( i = 0; i < objtmp.options.length; i++) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course9Product) {
+				objtmp.options[i].selected = true;
+				document.getElementsByName("course9ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course9Product;
+				break;
+			}
+		}
 	}
-	if ((document.getElementsByName("MathSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].Math != 0)) {
-		document.getElementsByName("MathSubFee3")[0].value = objRecordAddFee[indexRecordAddFee].MathSubFee3;
+	
+	objtmp = document.getElementsByName("course10Product")[0];
+	if(objtmp){
+		for ( i = 0; i < objtmp.options.length; i++) {
+			if (objtmp.options[i].text == objRecordAddFee[indexRecordAddFee].course10Product) {
+				objtmp.options[i].selected = true;
+				document.getElementsByName("course10ProductCopy")[0].value = objRecordAddFee[indexRecordAddFee].course10Product;
+				break;
+			}
+		}
 	}
-	if ((document.getElementsByName("MathSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].Math != 0)) {
-		document.getElementsByName("MathSubFee4")[0].value = objRecordAddFee[indexRecordAddFee].MathSubFee4;
+	
+	// course1 费用分配
+	if ((document.getElementsByName("course1")[0]) && (objRecordAddFee[indexRecordAddFee].course1 != 0)) {
+		document.getElementsByName("course1")[0].value = objRecordAddFee[indexRecordAddFee].course1;
 	}
-	if ((document.getElementsByName("MathSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].Math != 0)) {
-		document.getElementsByName("MathSubFee5")[0].value = objRecordAddFee[indexRecordAddFee].MathSubFee5;
+	if ((document.getElementsByName("course1SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course1 != 0)) { //.course1SubFee1
+		document.getElementsByName("course1SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course1SubFee1;
+	}
+	if ((document.getElementsByName("course1SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course1 != 0)) {
+		document.getElementsByName("course1SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course1SubFee2;
+	}
+	if ((document.getElementsByName("course1SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course1 != 0)) {
+		document.getElementsByName("course1SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course1SubFee3;
+	}
+	if ((document.getElementsByName("course1SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course1 != 0)) {
+		document.getElementsByName("course1SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course1SubFee4;
+	}
+	if ((document.getElementsByName("course1SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course1 != 0)) {
+		document.getElementsByName("course1SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course1SubFee5;
 	}
 	
 	// 如果数学存在，但交费为0，则显示空白
-	if ((document.getElementsByName("Math")[0]) && (objRecordAddFee[indexRecordAddFee].Math == 0)) {
-		document.getElementsByName("Math")[0].value="";
+	if ((document.getElementsByName("course1")[0]) && (objRecordAddFee[indexRecordAddFee].course1 == 0)) {
+		document.getElementsByName("course1")[0].value="";
 	}
-	if ((document.getElementsByName("MathSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].MathSubFee1 == 0)) {
-		document.getElementsByName("MathSubFee1")[0].value = "";
+	if ((document.getElementsByName("course1SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course1SubFee1 == 0)) {
+		document.getElementsByName("course1SubFee1")[0].value = "";
 	}
-	if ((document.getElementsByName("MathSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].MathSubFee2 == 0)) {
-		document.getElementsByName("MathSubFee2")[0].value = "";
+	if ((document.getElementsByName("course1SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course1SubFee2 == 0)) {
+		document.getElementsByName("course1SubFee2")[0].value = "";
 	}
-	if ((document.getElementsByName("MathSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].MathSubFee3 == 0)) {
-		document.getElementsByName("MathSubFee3")[0].value = "";
+	if ((document.getElementsByName("course1SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course1SubFee3 == 0)) {
+		document.getElementsByName("course1SubFee3")[0].value = "";
 	}
-	if ((document.getElementsByName("MathSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].MathSubFee4 == 0)) {
-		document.getElementsByName("MathSubFee4")[0].value = "";
+	if ((document.getElementsByName("course1SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course1SubFee4 == 0)) {
+		document.getElementsByName("course1SubFee4")[0].value = "";
 	}
-	if ((document.getElementsByName("MathSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].MathSubFee5 == 0)) {
-		document.getElementsByName("MathSubFee5")[0].value = "";
+	if ((document.getElementsByName("course1SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course1SubFee5 == 0)) {
+		document.getElementsByName("course1SubFee5")[0].value = "";
 	}
 	
-	// 语文 费用分配
-	if ((document.getElementsByName("Chinese")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {
-		document.getElementsByName("Chinese")[0].value = objRecordAddFee[indexRecordAddFee].Chinese;
+	// course2 费用分配
+	if ((document.getElementsByName("course2")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {
+		document.getElementsByName("course2")[0].value = objRecordAddFee[indexRecordAddFee].course2;
 	}
-	if ((document.getElementsByName("ChineseSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {//.ChineseSubFee1
-		document.getElementsByName("ChineseSubFee1")[0].value = objRecordAddFee[indexRecordAddFee].ChineseSubFee1;
+	if ((document.getElementsByName("course2SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {//.course2SubFee1
+		document.getElementsByName("course2SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course2SubFee1;
 	}
-	if ((document.getElementsByName("ChineseSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {
-		document.getElementsByName("ChineseSubFee2")[0].value = objRecordAddFee[indexRecordAddFee].ChineseSubFee2;
+	if ((document.getElementsByName("course2SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {
+		document.getElementsByName("course2SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course2SubFee2;
 	}
-	if ((document.getElementsByName("ChineseSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {
-		document.getElementsByName("ChineseSubFee3")[0].value = objRecordAddFee[indexRecordAddFee].ChineseSubFee3;
+	if ((document.getElementsByName("course2SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {
+		document.getElementsByName("course2SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course2SubFee3;
 	}
-	if ((document.getElementsByName("ChineseSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {
-		document.getElementsByName("ChineseSubFee4")[0].value = objRecordAddFee[indexRecordAddFee].ChineseSubFee4;
+	if ((document.getElementsByName("course2SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {
+		document.getElementsByName("course2SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course2SubFee4;
 	}
-	if ((document.getElementsByName("ChineseSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {
-		document.getElementsByName("ChineseSubFee5")[0].value = objRecordAddFee[indexRecordAddFee].ChineseSubFee5;
+	if ((document.getElementsByName("course2SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {
+		document.getElementsByName("course2SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course2SubFee5;
 	}
 	
 	// 如果语文存在，但交费为0，则显示空白
-	if ((document.getElementsByName("Chinese")[0]) && (objRecordAddFee[indexRecordAddFee].Chinese != 0)) {
-		document.getElementsByName("Chinese")[0].value = "";
+	if ((document.getElementsByName("course2")[0]) && (objRecordAddFee[indexRecordAddFee].course2 != 0)) {
+		document.getElementsByName("course2")[0].value = "";
 	}
-	if ((document.getElementsByName("ChineseSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].ChineseSubFee1 == 0)) {
-		document.getElementsByName("ChineseSubFee1")[0].value = "";
+	if ((document.getElementsByName("course2SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course2SubFee1 == 0)) {
+		document.getElementsByName("course2SubFee1")[0].value = "";
 	}
-	if ((document.getElementsByName("ChineseSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].ChineseSubFee2 == 0)) {
-		document.getElementsByName("ChineseSubFee2")[0].value = "";
+	if ((document.getElementsByName("course2SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course2SubFee2 == 0)) {
+		document.getElementsByName("course2SubFee2")[0].value = "";
 	}
-	if ((document.getElementsByName("ChineseSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].ChineseSubFee3 == 0)) {
-		document.getElementsByName("ChineseSubFee3")[0].value = "";
+	if ((document.getElementsByName("course2SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course2SubFee3 == 0)) {
+		document.getElementsByName("course2SubFee3")[0].value = "";
 	}
-	if ((document.getElementsByName("ChineseSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].ChineseSubFee4 == 0)) {
-		document.getElementsByName("ChineseSubFee4")[0].value = "";
+	if ((document.getElementsByName("course2SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course2SubFee4 == 0)) {
+		document.getElementsByName("course2SubFee4")[0].value = "";
 	}
-	if ((document.getElementsByName("ChineseSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].ChineseSubFee5 == 0)) {
-		document.getElementsByName("ChineseSubFee5")[0].value = "";
+	if ((document.getElementsByName("course2SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course2SubFee5 == 0)) {
+		document.getElementsByName("course2SubFee5")[0].value = "";
 	}
 	
-	// 英语 费用分配
-	if ((document.getElementsByName("English")[0]) && (objRecordAddFee[indexRecordAddFee].English != 0)) {
-		document.getElementsByName("English")[0].value = objRecordAddFee[indexRecordAddFee].English;
+	// course3 费用分配
+	if ((document.getElementsByName("course3")[0]) && (objRecordAddFee[indexRecordAddFee].course3 != 0)) {
+		document.getElementsByName("course3")[0].value = objRecordAddFee[indexRecordAddFee].course3;
 	}
-	if ((document.getElementsByName("EnglishSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].English != 0)) {
-		document.getElementsByName("EnglishSubFee1")[0].value = objRecordAddFee[indexRecordAddFee].EnglishSubFee1;
+	if ((document.getElementsByName("course3SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course3 != 0)) {
+		document.getElementsByName("course3SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course3SubFee1;
 	}
-	if ((document.getElementsByName("EnglishSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].English != 0)) {
-		document.getElementsByName("EnglishSubFee2")[0].value = objRecordAddFee[indexRecordAddFee].EnglishSubFee2;
+	if ((document.getElementsByName("course3SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course3 != 0)) {
+		document.getElementsByName("course3SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course3SubFee2;
 	}
-	if ((document.getElementsByName("EnglishSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].English != 0)) {
-		document.getElementsByName("EnglishSubFee3")[0].value = objRecordAddFee[indexRecordAddFee].EnglishSubFee3;
+	if ((document.getElementsByName("course3SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course3 != 0)) {
+		document.getElementsByName("course3SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course3SubFee3;
 	}
-	if ((document.getElementsByName("EnglishSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].English != 0)) {
-		document.getElementsByName("EnglishSubFee4")[0].value = objRecordAddFee[indexRecordAddFee].EnglishSubFee4;
+	if ((document.getElementsByName("course3SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course3 != 0)) {
+		document.getElementsByName("course3SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course3SubFee4;
 	}
-	if ((document.getElementsByName("EnglishSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].English != 0)) {
-		document.getElementsByName("EnglishSubFee5")[0].value = objRecordAddFee[indexRecordAddFee].EnglishSubFee5;
+	if ((document.getElementsByName("course3SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course3 != 0)) {
+		document.getElementsByName("course3SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course3SubFee5;
 	}
 
 	// 如果英语存在，但交费为0，则显示空白
-	if ((document.getElementsByName("English")[0]) && (objRecordAddFee[indexRecordAddFee].English == 0)) {
-		document.getElementsByName("English")[0].value = "";
+	if ((document.getElementsByName("course3")[0]) && (objRecordAddFee[indexRecordAddFee].course3 == 0)) {
+		document.getElementsByName("course3")[0].value = "";
 	}
-	if ((document.getElementsByName("EnglishSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].EnglishSubFee1 == 0)) {
-		document.getElementsByName("EnglishSubFee1")[0].value = "";
+	if ((document.getElementsByName("course3SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course3SubFee1 == 0)) {
+		document.getElementsByName("course3SubFee1")[0].value = "";
 	}
-	if ((document.getElementsByName("EnglishSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].EnglishSubFee2 == 0)) {
-		document.getElementsByName("EnglishSubFee2")[0].value = "";
+	if ((document.getElementsByName("course3SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course3SubFee2 == 0)) {
+		document.getElementsByName("course3SubFee2")[0].value = "";
 	}
-	if ((document.getElementsByName("EnglishSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].EnglishSubFee3 == 0)) {
-		document.getElementsByName("EnglishSubFee3")[0].value = "";
+	if ((document.getElementsByName("course3SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course3SubFee3 == 0)) {
+		document.getElementsByName("course3SubFee3")[0].value = "";
 	}
-	if ((document.getElementsByName("EnglishSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].EnglishSubFee4 == 0)) {
-		document.getElementsByName("EnglishSubFee4")[0].value = "";
+	if ((document.getElementsByName("course3SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course3SubFee4 == 0)) {
+		document.getElementsByName("course3SubFee4")[0].value = "";
 	}
-	if ((document.getElementsByName("EnglishSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].EnglishSubFee5 == 0)) {
-		document.getElementsByName("EnglishSubFee5")[0].value = "";
+	if ((document.getElementsByName("course3SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course3SubFee5 == 0)) {
+		document.getElementsByName("course3SubFee5")[0].value = "";
 	}
 	
-	// 物理 费用分配
-	if ((document.getElementsByName("Physics")[0]) && (objRecordAddFee[indexRecordAddFee].Physics != 0)) {
-		document.getElementsByName("Physics")[0].value = objRecordAddFee[indexRecordAddFee].Physics;
+	// course4 费用分配
+	if ((document.getElementsByName("course4")[0]) && (objRecordAddFee[indexRecordAddFee].course4 != 0)) {
+		document.getElementsByName("course4")[0].value = objRecordAddFee[indexRecordAddFee].course4;
 	}
-	if ((document.getElementsByName("PhysicsSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].Physics != 0)) {//.PhysicsSubFee1
-		document.getElementsByName("PhysicsSubFee1")[0].value = objRecordAddFee[indexRecordAddFee].PhysicsSubFee1;
+	if ((document.getElementsByName("course4SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course4 != 0)) {//.course4SubFee1
+		document.getElementsByName("course4SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course4SubFee1;
 	}
-	if ((document.getElementsByName("PhysicsSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].Physics != 0)) {
-		document.getElementsByName("PhysicsSubFee2")[0].value = objRecordAddFee[indexRecordAddFee].PhysicsSubFee2;
+	if ((document.getElementsByName("course4SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course4 != 0)) {
+		document.getElementsByName("course4SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course4SubFee2;
 	}
-	if ((document.getElementsByName("PhysicsSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].Physics != 0)) {
-		document.getElementsByName("PhysicsSubFee3")[0].value = objRecordAddFee[indexRecordAddFee].PhysicsSubFee3;
+	if ((document.getElementsByName("course4SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course4 != 0)) {
+		document.getElementsByName("course4SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course4SubFee3;
 	}
-	if ((document.getElementsByName("PhysicsSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].Physics != 0)) {
-		document.getElementsByName("PhysicsSubFee4")[0].value = objRecordAddFee[indexRecordAddFee].PhysicsSubFee4;
+	if ((document.getElementsByName("course4SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course4 != 0)) {
+		document.getElementsByName("course4SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course4SubFee4;
 	}
-	if ((document.getElementsByName("PhysicsSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].Physics != 0)) {
-		document.getElementsByName("PhysicsSubFee5")[0].value = objRecordAddFee[indexRecordAddFee].PhysicsSubFee5;
+	if ((document.getElementsByName("course4SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course4 != 0)) {
+		document.getElementsByName("course4SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course4SubFee5;
 	}
 
 	// 如果物理存在，但交费为0，则显示空白
-	if ((document.getElementsByName("Physics")[0]) && (objRecordAddFee[indexRecordAddFee].Physics == 0)) {
-		document.getElementsByName("Physics")[0].value = "";
+	if ((document.getElementsByName("course4")[0]) && (objRecordAddFee[indexRecordAddFee].course4 == 0)) {
+		document.getElementsByName("course4")[0].value = "";
 	}
-	if ((document.getElementsByName("PhysicsSubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].PhysicsSubFee1 == 0)) {
-		document.getElementsByName("PhysicsSubFee1")[0].value = "";
+	if ((document.getElementsByName("course4SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course4SubFee1 == 0)) {
+		document.getElementsByName("course4SubFee1")[0].value = "";
 	}
-	if ((document.getElementsByName("PhysicsSubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].PhysicsSubFee2 == 0)) {
-		document.getElementsByName("PhysicsSubFee2")[0].value = "";
+	if ((document.getElementsByName("course4SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course4SubFee2 == 0)) {
+		document.getElementsByName("course4SubFee2")[0].value = "";
 	}
-	if ((document.getElementsByName("PhysicsSubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].PhysicsSubFee3 == 0)) {
-		document.getElementsByName("PhysicsSubFee3")[0].value = "";
+	if ((document.getElementsByName("course4SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course4SubFee3 == 0)) {
+		document.getElementsByName("course4SubFee3")[0].value = "";
 	}
-	if ((document.getElementsByName("PhysicsSubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].PhysicsSubFee4 == 0)) {
-		document.getElementsByName("PhysicsSubFee4")[0].value = "";
+	if ((document.getElementsByName("course4SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course4SubFee4 == 0)) {
+		document.getElementsByName("course4SubFee4")[0].value = "";
 	}
-	if ((document.getElementsByName("PhysicsSubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].PhysicsSubFee5 == 0)) {
-		document.getElementsByName("PhysicsSubFee5")[0].value = "";
+	if ((document.getElementsByName("course4SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course4SubFee5 == 0)) {
+		document.getElementsByName("course4SubFee5")[0].value = "";
 	}
 	
-	// 化学 费用分配
-	if ((document.getElementsByName("Chemistry")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry != 0)) {
-		document.getElementsByName("Chemistry")[0].value = objRecordAddFee[indexRecordAddFee].Chemistry;
+	// course5 费用分配
+	if ((document.getElementsByName("course5")[0]) && (objRecordAddFee[indexRecordAddFee].course5 != 0)) {
+		document.getElementsByName("course5")[0].value = objRecordAddFee[indexRecordAddFee].course5;
 	}
-	if ((document.getElementsByName("ChemistrySubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry != 0)) {//.ChemistrySubFee1
-		document.getElementsByName("ChemistrySubFee1")[0].value = objRecordAddFee[indexRecordAddFee].ChemistrySubFee1;
+	if ((document.getElementsByName("course5SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course5 != 0)) {//.course5SubFee1
+		document.getElementsByName("course5SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course5SubFee1;
 	}
-	if ((document.getElementsByName("ChemistrySubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry != 0)) {
-		document.getElementsByName("ChemistrySubFee2")[0].value = objRecordAddFee[indexRecordAddFee].ChemistrySubFee2;
+	if ((document.getElementsByName("course5SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course5 != 0)) {
+		document.getElementsByName("course5SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course5SubFee2;
 	}
-	if ((document.getElementsByName("ChemistrySubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry != 0)) {
-		document.getElementsByName("ChemistrySubFee3")[0].value = objRecordAddFee[indexRecordAddFee].ChemistrySubFee3;
+	if ((document.getElementsByName("course5SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course5 != 0)) {
+		document.getElementsByName("course5SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course5SubFee3;
 	}
-	if ((document.getElementsByName("ChemistrySubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry != 0)) {
-		document.getElementsByName("ChemistrySubFee4")[0].value = objRecordAddFee[indexRecordAddFee].ChemistrySubFee4;
+	if ((document.getElementsByName("course5SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course5 != 0)) {
+		document.getElementsByName("course5SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course5SubFee4;
 	}
-	if ((document.getElementsByName("ChemistrySubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry != 0)) {
-		document.getElementsByName("ChemistrySubFee5")[0].value = objRecordAddFee[indexRecordAddFee].ChemistrySubFee5;
+	if ((document.getElementsByName("course5SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course5 != 0)) {
+		document.getElementsByName("course5SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course5SubFee5;
 	}
 	
 	// 如果化学存在，但交费为0，则显示空白
-	if ((document.getElementsByName("Chemistry")[0]) && (objRecordAddFee[indexRecordAddFee].Chemistry == 0)) {
-		document.getElementsByName("Chemistry")[0].value = "";
+	if ((document.getElementsByName("course5")[0]) && (objRecordAddFee[indexRecordAddFee].course5 == 0)) {
+		document.getElementsByName("course5")[0].value = "";
 	}
-	if ((document.getElementsByName("ChemistrySubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].ChemistrySubFee1 == 0)) {//.ChemistrySubFee1
-		document.getElementsByName("ChemistrySubFee1")[0].value = "";
+	if ((document.getElementsByName("course5SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course5SubFee1 == 0)) {//.course5SubFee1
+		document.getElementsByName("course5SubFee1")[0].value = "";
 	}
-	if ((document.getElementsByName("ChemistrySubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].ChemistrySubFee2 == 0)) {//.ChemistrySubFee1
-		document.getElementsByName("ChemistrySubFee2")[0].value = "";
+	if ((document.getElementsByName("course5SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course5SubFee2 == 0)) {//.course5SubFee1
+		document.getElementsByName("course5SubFee2")[0].value = "";
 	}
-	if ((document.getElementsByName("ChemistrySubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].ChemistrySubFee3 == 0)) {//.ChemistrySubFee1
-		document.getElementsByName("ChemistrySubFee3")[0].value = "";
+	if ((document.getElementsByName("course5SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course5SubFee3 == 0)) {//.course5SubFee1
+		document.getElementsByName("course5SubFee3")[0].value = "";
 	}
-	if ((document.getElementsByName("ChemistrySubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].ChemistrySubFee4 == 0)) {//.ChemistrySubFee1
-		document.getElementsByName("ChemistrySubFee4")[0].value = "";
+	if ((document.getElementsByName("course5SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course5SubFee4 == 0)) {//.course5SubFee1
+		document.getElementsByName("course5SubFee4")[0].value = "";
 	}
-	if ((document.getElementsByName("ChemistrySubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].ChemistrySubFee5 == 0)) {//.ChemistrySubFee1
-		document.getElementsByName("ChemistrySubFee5")[0].value = "";
+	if ((document.getElementsByName("course5SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course5SubFee5 == 0)) {//.course5SubFee1
+		document.getElementsByName("course5SubFee5")[0].value = "";
+	}
+	
+	// course6 费用分配
+	if ((document.getElementsByName("course6")[0]) && (objRecordAddFee[indexRecordAddFee].course6 != 0)) {
+		document.getElementsByName("course6")[0].value = objRecordAddFee[indexRecordAddFee].course6;
+	}
+	if ((document.getElementsByName("course6SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course6 != 0)) {//.course6SubFee1
+		document.getElementsByName("course6SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course6SubFee1;
+	}
+	if ((document.getElementsByName("course6SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course6 != 0)) {
+		document.getElementsByName("course6SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course6SubFee2;
+	}
+	if ((document.getElementsByName("course6SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course6 != 0)) {
+		document.getElementsByName("course6SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course6SubFee3;
+	}
+	if ((document.getElementsByName("course6SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course6 != 0)) {
+		document.getElementsByName("course6SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course6SubFee4;
+	}
+	if ((document.getElementsByName("course6SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course6 != 0)) {
+		document.getElementsByName("course6SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course6SubFee5;
+	}
+	
+	// 如果course6存在，但交费为0，则显示空白
+	if ((document.getElementsByName("course6")[0]) && (objRecordAddFee[indexRecordAddFee].course6 == 0)) {
+		document.getElementsByName("course6")[0].value = "";
+	}
+	if ((document.getElementsByName("course6SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course6SubFee1 == 0)) {//.course6SubFee1
+		document.getElementsByName("course6SubFee1")[0].value = "";
+	}
+	if ((document.getElementsByName("course6SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course6SubFee2 == 0)) {//.course6SubFee1
+		document.getElementsByName("course6SubFee2")[0].value = "";
+	}
+	if ((document.getElementsByName("course6SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course6SubFee3 == 0)) {//.course6SubFee1
+		document.getElementsByName("course6SubFee3")[0].value = "";
+	}
+	if ((document.getElementsByName("course6SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course6SubFee4 == 0)) {//.course6SubFee1
+		document.getElementsByName("course6SubFee4")[0].value = "";
+	}
+	if ((document.getElementsByName("course6SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course6SubFee5 == 0)) {//.course6SubFee1
+		document.getElementsByName("course6SubFee5")[0].value = "";
+	}
+	
+	// course7 费用分配
+	if ((document.getElementsByName("course7")[0]) && (objRecordAddFee[indexRecordAddFee].course7 != 0)) {
+		document.getElementsByName("course7")[0].value = objRecordAddFee[indexRecordAddFee].course7;
+	}
+	if ((document.getElementsByName("course7SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course7 != 0)) {//.course7SubFee1
+		document.getElementsByName("course7SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course7SubFee1;
+	}
+	if ((document.getElementsByName("course7SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course7 != 0)) {
+		document.getElementsByName("course7SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course7SubFee2;
+	}
+	if ((document.getElementsByName("course7SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course7 != 0)) {
+		document.getElementsByName("course7SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course7SubFee3;
+	}
+	if ((document.getElementsByName("course7SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course7 != 0)) {
+		document.getElementsByName("course7SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course7SubFee4;
+	}
+	if ((document.getElementsByName("course7SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course7 != 0)) {
+		document.getElementsByName("course7SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course7SubFee5;
+	}
+	
+	// 如果course7存在，但交费为0，则显示空白
+	if ((document.getElementsByName("course7")[0]) && (objRecordAddFee[indexRecordAddFee].course7 == 0)) {
+		document.getElementsByName("course7")[0].value = "";
+	}
+	if ((document.getElementsByName("course7SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course7SubFee1 == 0)) {//.course7SubFee1
+		document.getElementsByName("course7SubFee1")[0].value = "";
+	}
+	if ((document.getElementsByName("course7SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course7SubFee2 == 0)) {//.course7SubFee1
+		document.getElementsByName("course7SubFee2")[0].value = "";
+	}
+	if ((document.getElementsByName("course7SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course7SubFee3 == 0)) {//.course7SubFee1
+		document.getElementsByName("course7SubFee3")[0].value = "";
+	}
+	if ((document.getElementsByName("course7SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course7SubFee4 == 0)) {//.course7SubFee1
+		document.getElementsByName("course7SubFee4")[0].value = "";
+	}
+	if ((document.getElementsByName("course7SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course7SubFee5 == 0)) {//.course7SubFee1
+		document.getElementsByName("course7SubFee5")[0].value = "";
+	}
+	
+	// course8 费用分配
+	if ((document.getElementsByName("course8")[0]) && (objRecordAddFee[indexRecordAddFee].course8 != 0)) {
+		document.getElementsByName("course8")[0].value = objRecordAddFee[indexRecordAddFee].course8;
+	}
+	if ((document.getElementsByName("course8SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course8 != 0)) {//.course8SubFee1
+		document.getElementsByName("course8SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course8SubFee1;
+	}
+	if ((document.getElementsByName("course8SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course8 != 0)) {
+		document.getElementsByName("course8SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course8SubFee2;
+	}
+	if ((document.getElementsByName("course8SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course8 != 0)) {
+		document.getElementsByName("course8SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course8SubFee3;
+	}
+	if ((document.getElementsByName("course8SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course8 != 0)) {
+		document.getElementsByName("course8SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course8SubFee4;
+	}
+	if ((document.getElementsByName("course8SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course8 != 0)) {
+		document.getElementsByName("course8SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course8SubFee5;
+	}
+	
+	// 如果course8存在，但交费为0，则显示空白
+	if ((document.getElementsByName("course8")[0]) && (objRecordAddFee[indexRecordAddFee].course8 == 0)) {
+		document.getElementsByName("course8")[0].value = "";
+	}
+	if ((document.getElementsByName("course8SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course8SubFee1 == 0)) {//.course8SubFee1
+		document.getElementsByName("course8SubFee1")[0].value = "";
+	}
+	if ((document.getElementsByName("course8SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course8SubFee2 == 0)) {//.course8SubFee1
+		document.getElementsByName("course8SubFee2")[0].value = "";
+	}
+	if ((document.getElementsByName("course8SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course8SubFee3 == 0)) {//.course8SubFee1
+		document.getElementsByName("course8SubFee3")[0].value = "";
+	}
+	if ((document.getElementsByName("course8SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course8SubFee4 == 0)) {//.course8SubFee1
+		document.getElementsByName("course8SubFee4")[0].value = "";
+	}
+	if ((document.getElementsByName("course8SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course8SubFee5 == 0)) {//.course8SubFee1
+		document.getElementsByName("course8SubFee5")[0].value = "";
+	}
+	
+	// course9 费用分配
+	if ((document.getElementsByName("course9")[0]) && (objRecordAddFee[indexRecordAddFee].course9 != 0)) {
+		document.getElementsByName("course9")[0].value = objRecordAddFee[indexRecordAddFee].course9;
+	}
+	if ((document.getElementsByName("course9SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course9 != 0)) {//.course9SubFee1
+		document.getElementsByName("course9SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course9SubFee1;
+	}
+	if ((document.getElementsByName("course9SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course9 != 0)) {
+		document.getElementsByName("course9SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course9SubFee2;
+	}
+	if ((document.getElementsByName("course9SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course9 != 0)) {
+		document.getElementsByName("course9SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course9SubFee3;
+	}
+	if ((document.getElementsByName("course9SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course9 != 0)) {
+		document.getElementsByName("course9SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course9SubFee4;
+	}
+	if ((document.getElementsByName("course9SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course9 != 0)) {
+		document.getElementsByName("course9SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course9SubFee5;
+	}
+	
+	// 如果course9存在，但交费为0，则显示空白
+	if ((document.getElementsByName("course9")[0]) && (objRecordAddFee[indexRecordAddFee].course9 == 0)) {
+		document.getElementsByName("course9")[0].value = "";
+	}
+	if ((document.getElementsByName("course9SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course9SubFee1 == 0)) {//.course9SubFee1
+		document.getElementsByName("course9SubFee1")[0].value = "";
+	}
+	if ((document.getElementsByName("course9SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course9SubFee2 == 0)) {//.course9SubFee1
+		document.getElementsByName("course9SubFee2")[0].value = "";
+	}
+	if ((document.getElementsByName("course9SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course9SubFee3 == 0)) {//.course9SubFee1
+		document.getElementsByName("course9SubFee3")[0].value = "";
+	}
+	if ((document.getElementsByName("course9SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course9SubFee4 == 0)) {//.course9SubFee1
+		document.getElementsByName("course9SubFee4")[0].value = "";
+	}
+	if ((document.getElementsByName("course9SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course9SubFee5 == 0)) {//.course9SubFee1
+		document.getElementsByName("course9SubFee5")[0].value = "";
+	}
+	
+	// course10 费用分配
+	if ((document.getElementsByName("course10")[0]) && (objRecordAddFee[indexRecordAddFee].course10 != 0)) {
+		document.getElementsByName("course10")[0].value = objRecordAddFee[indexRecordAddFee].course10;
+	}
+	if ((document.getElementsByName("course10SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course10 != 0)) {//.course10SubFee1
+		document.getElementsByName("course10SubFee1")[0].value = objRecordAddFee[indexRecordAddFee].course10SubFee1;
+	}
+	if ((document.getElementsByName("course10SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course10 != 0)) {
+		document.getElementsByName("course10SubFee2")[0].value = objRecordAddFee[indexRecordAddFee].course10SubFee2;
+	}
+	if ((document.getElementsByName("course10SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course10 != 0)) {
+		document.getElementsByName("course10SubFee3")[0].value = objRecordAddFee[indexRecordAddFee].course10SubFee3;
+	}
+	if ((document.getElementsByName("course10SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course10 != 0)) {
+		document.getElementsByName("course10SubFee4")[0].value = objRecordAddFee[indexRecordAddFee].course10SubFee4;
+	}
+	if ((document.getElementsByName("course10SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course10 != 0)) {
+		document.getElementsByName("course10SubFee5")[0].value = objRecordAddFee[indexRecordAddFee].course10SubFee5;
+	}
+	
+	// 如果course10存在，但交费为0，则显示空白
+	if ((document.getElementsByName("course10")[0]) && (objRecordAddFee[indexRecordAddFee].course10 == 0)) {
+		document.getElementsByName("course10")[0].value = "";
+	}
+	if ((document.getElementsByName("course10SubFee1")[0]) && (objRecordAddFee[indexRecordAddFee].course10SubFee1 == 0)) {//.course10SubFee1
+		document.getElementsByName("course10SubFee1")[0].value = "";
+	}
+	if ((document.getElementsByName("course10SubFee2")[0]) && (objRecordAddFee[indexRecordAddFee].course10SubFee2 == 0)) {//.course10SubFee1
+		document.getElementsByName("course10SubFee2")[0].value = "";
+	}
+	if ((document.getElementsByName("course10SubFee3")[0]) && (objRecordAddFee[indexRecordAddFee].course10SubFee3 == 0)) {//.course10SubFee1
+		document.getElementsByName("course10SubFee3")[0].value = "";
+	}
+	if ((document.getElementsByName("course10SubFee4")[0]) && (objRecordAddFee[indexRecordAddFee].course10SubFee4 == 0)) {//.course10SubFee1
+		document.getElementsByName("course10SubFee4")[0].value = "";
+	}
+	if ((document.getElementsByName("course10SubFee5")[0]) && (objRecordAddFee[indexRecordAddFee].course10SubFee5 == 0)) {//.course10SubFee1
+		document.getElementsByName("course10SubFee5")[0].value = "";
 	}
 	
 }
@@ -1025,15 +1677,7 @@ function sqlInfoByName() {
 					document.getElementsByName("previous")[0].disabled = true;
 					document.getElementsByName("next")[0].disabled = true;
 					alert("该姓名学生不存在于系统中，请核对！");
-				} 
-				/*
-				else if (ret == "2") {
-					document.getElementsByName("submitAdd")[0].disabled = true;
-					document.getElementsByName("btnPrevious")[0].disabled = false;
-					document.getElementsByName("btnNext")[0].disabled = false;
-				} 
-				*/
-				else {					
+				}else {					
 					document.getElementsByName("submitAddAddFee")[0].disabled = true;
 					document.getElementsByName("submitAddRefund")[0].disabled = true;
 					document.getElementsByName("submitAddTrans")[0].disabled = true;
@@ -1064,8 +1708,6 @@ function sqlInfoByName() {
 						document.getElementsByName("sex")[0].value = "女";
 					}
 					
-					
-					
 					switch(parseInt(info[0].grade)) {
 					case 7:
 						strtmp = "初一";
@@ -1088,7 +1730,6 @@ function sqlInfoByName() {
 					default:
 						break;
 					}
-
 					
 					document.getElementsByName("grade")[0].value = strtmp;
 					
@@ -1290,6 +1931,9 @@ function initPage() {
 		document.getElementsByName("submitAddRefund")[0].disabled = "true";
 		document.getElementsByName("submitAddTrans")[0].disabled = "true";
 	}
+	
+	// 载入校长设置中的所有科目
+	sqlCourse();
 }
 
 // ajax 查询各科不同产品的余额
@@ -1352,6 +1996,36 @@ function sqlProductRemainFee(courseIndex) {
 							document.getElementsByName("remainFee5Hide")[0].value = info[0].remainFee;
 						}
 						break;
+					case 6:
+						if (document.getElementsByName("remainFee6")[0]) {
+							document.getElementsByName("remainFee6")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee6Hide")[0].value = info[0].remainFee;
+						}
+						break;
+					case 7:
+						if (document.getElementsByName("remainFee7")[0]) {
+							document.getElementsByName("remainFee7")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee7Hide")[0].value = info[0].remainFee;
+						}
+						break;
+					case 8:
+						if (document.getElementsByName("remainFee8")[0]) {
+							document.getElementsByName("remainFee8")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee8Hide")[0].value = info[0].remainFee;
+						}
+						break;
+					case 9:
+						if (document.getElementsByName("remainFee9")[0]) {
+							document.getElementsByName("remainFee9")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee9Hide")[0].value = info[0].remainFee;
+						}
+						break;
+					case 10:
+						if (document.getElementsByName("remainFee10")[0]) {
+							document.getElementsByName("remainFee10")[0].value = info[0].remainFee;
+							document.getElementsByName("remainFee10Hide")[0].value = info[0].remainFee;
+						}
+						break;
 					default:
 						break;
 					}
@@ -1373,9 +2047,9 @@ function sqlProductRemainFee(courseIndex) {
 	// 显示学生余额
 	switch(courseIndex) {
 	case 1:
-		objtemp = document.getElementsByName("MathProductRemainFee")[0];
+		objtemp = document.getElementsByName("course1ProductRemainFee")[0];
 		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
-		document.getElementsByName("refundMathProduct")[0].value = sqlProduct;
+		document.getElementsByName("refundCourse1Product")[0].value = sqlProduct;
 		document.getElementsByName("remainFee1CheckBox")[0].checked="";
 		if(sqlProduct=="总余额"){
 			document.getElementsByName("remainFee1CheckBox")[0].disabled="true";
@@ -1384,9 +2058,9 @@ function sqlProductRemainFee(courseIndex) {
 		}
 		break;
 	case 2:
-		objtemp = document.getElementsByName("ChineseProductRemainFee")[0];
+		objtemp = document.getElementsByName("course2ProductRemainFee")[0];
 		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
-		document.getElementsByName("refundChineseProduct")[0].value = sqlProduct;
+		document.getElementsByName("refundCourse2Product")[0].value = sqlProduct;
 		document.getElementsByName("remainFee2CheckBox")[0].checked="";
 		if(sqlProduct=="总余额"){
 			document.getElementsByName("remainFee2CheckBox")[0].disabled="true";
@@ -1394,9 +2068,9 @@ function sqlProductRemainFee(courseIndex) {
 			document.getElementsByName("remainFee2CheckBox")[0].disabled="";
 		}
 	case 3:
-		objtemp = document.getElementsByName("EnglishProductRemainFee")[0];
+		objtemp = document.getElementsByName("course3ProductRemainFee")[0];
 		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
-		document.getElementsByName("refundEnglishProduct")[0].value = sqlProduct;
+		document.getElementsByName("refundCourse3Product")[0].value = sqlProduct;
 		document.getElementsByName("remainFee3CheckBox")[0].checked="";
 		if(sqlProduct=="总余额"){
 			document.getElementsByName("remainFee3CheckBox")[0].disabled="true";
@@ -1405,9 +2079,9 @@ function sqlProductRemainFee(courseIndex) {
 		}
 		break;
 	case 4:
-		objtemp = document.getElementsByName("PhysicsProductRemainFee")[0];
+		objtemp = document.getElementsByName("course4ProductRemainFee")[0];
 		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
-		document.getElementsByName("refundPhysicsProduct")[0].value = sqlProduct;
+		document.getElementsByName("refundCourse4Product")[0].value = sqlProduct;
 		document.getElementsByName("remainFee4CheckBox")[0].checked="";
 		if(sqlProduct=="总余额"){
 			document.getElementsByName("remainFee4CheckBox")[0].disabled="true";
@@ -1416,14 +2090,69 @@ function sqlProductRemainFee(courseIndex) {
 		}
 		break;
 	case 5:
-		objtemp = document.getElementsByName("ChemistryProductRemainFee")[0];
+		objtemp = document.getElementsByName("course5ProductRemainFee")[0];
 		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
-		document.getElementsByName("refundChemistrProduct")[0].value = sqlProduct;
+		document.getElementsByName("refundCourse5Product")[0].value = sqlProduct;
 		document.getElementsByName("remainFee5CheckBox")[0].checked="";
 		if(sqlProduct=="总余额"){
 			document.getElementsByName("remainFee5CheckBox")[0].disabled="true";
 		}else{
 			document.getElementsByName("remainFee5CheckBox")[0].disabled="";
+		}
+		break;
+	case 6:
+		objtemp = document.getElementsByName("course6ProductRemainFee")[0];
+		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
+		document.getElementsByName("refundCourse6Product")[0].value = sqlProduct;
+		document.getElementsByName("remainFee6CheckBox")[0].checked="";
+		if(sqlProduct=="总余额"){
+			document.getElementsByName("remainFee6CheckBox")[0].disabled="true";
+		}else{
+			document.getElementsByName("remainFee6CheckBox")[0].disabled="";
+		}
+		break;
+	case 7:
+		objtemp = document.getElementsByName("course7ProductRemainFee")[0];
+		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
+		document.getElementsByName("refundCourse7Product")[0].value = sqlProduct;
+		document.getElementsByName("remainFee7CheckBox")[0].checked="";
+		if(sqlProduct=="总余额"){
+			document.getElementsByName("remainFee7CheckBox")[0].disabled="true";
+		}else{
+			document.getElementsByName("remainFee7CheckBox")[0].disabled="";
+		}
+		break;
+	case 8:
+		objtemp = document.getElementsByName("course8ProductRemainFee")[0];
+		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
+		document.getElementsByName("refundCourse8Product")[0].value = sqlProduct;
+		document.getElementsByName("remainFee8CheckBox")[0].checked="";
+		if(sqlProduct=="总余额"){
+			document.getElementsByName("remainFee8CheckBox")[0].disabled="true";
+		}else{
+			document.getElementsByName("remainFee8CheckBox")[0].disabled="";
+		}
+		break;
+	case 9:
+		objtemp = document.getElementsByName("course9ProductRemainFee")[0];
+		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
+		document.getElementsByName("refundCourse9Product")[0].value = sqlProduct;
+		document.getElementsByName("remainFee9CheckBox")[0].checked="";
+		if(sqlProduct=="总余额"){
+			document.getElementsByName("remainFee9CheckBox")[0].disabled="true";
+		}else{
+			document.getElementsByName("remainFee9CheckBox")[0].disabled="";
+		}
+		break;
+	case 10:
+		objtemp = document.getElementsByName("course10ProductRemainFee")[0];
+		sqlProduct = objtemp.options[objtemp.selectedIndex].text;
+		document.getElementsByName("refundCourse10Product")[0].value = sqlProduct;
+		document.getElementsByName("remainFee10CheckBox")[0].checked="";
+		if(sqlProduct=="总余额"){
+			document.getElementsByName("remainFee10CheckBox")[0].disabled="true";
+		}else{
+			document.getElementsByName("remainFee10CheckBox")[0].disabled="";
 		}
 		break;
 	default:
@@ -1483,6 +2212,11 @@ function sqlFeeCourse(uid) {
 					document.getElementById("RemainFee3Label").innerHTML = "";
 					document.getElementById("RemainFee4Label").innerHTML = "";
 					document.getElementById("RemainFee5Label").innerHTML = "";
+					document.getElementById("RemainFee6Label").innerHTML = "";
+					document.getElementById("RemainFee7Label").innerHTML = "";
+					document.getElementById("RemainFee8Label").innerHTML = "";
+					document.getElementById("RemainFee9Label").innerHTML = "";
+					document.getElementById("RemainFee10Label").innerHTML = "";
 
 					// 再增加数据库中的教师姓名
 					//i = 0;
@@ -1491,57 +2225,107 @@ function sqlFeeCourse(uid) {
 					for (var tmp in info) {
 						//alert(info[j].sumMath);
 
-						if (info[j].sumMath > 0) {
-							objFrom.options.add(new Option("数学", 1));
-							objTo.options.add(new Option("数学", 1));
+						if (info[j].sumCourse1 > 0) {
+							objFrom.options.add(new Option(courseLoad[0], 1));
+							objTo.options.add(new Option(courseLoad[0], 1));
 							//i++;
 						}
-						if (info[j].sumChinese > 0) {
-							objFrom.options.add(new Option("语文", 2));
-							objTo.options.add(new Option("语文", 2));
+						if (info[j].sumCourse2 > 0) {
+							objFrom.options.add(new Option(courseLoad[1], 2));
+							objTo.options.add(new Option(courseLoad[1], 2));
 							//i++;
 						}
-						if (info[j].sumEnglish > 0) {
-							objFrom.options.add(new Option("英语", 3));
-							objTo.options.add(new Option("英语", 3));
+						if (info[j].sumCourse3 > 0) {
+							objFrom.options.add(new Option(courseLoad[2], 3));
+							objTo.options.add(new Option(courseLoad[2], 3));
 							//i++;
 						}
-						if (info[j].sumPhysics > 0) {
-							objFrom.options.add(new Option("物理", 4));
-							objTo.options.add(new Option("物理", 4));
+						if (info[j].sumCourse4 > 0) {
+							objFrom.options.add(new Option(courseLoad[3], 4));
+							objTo.options.add(new Option(courseLoad[3], 4));
 							//i++;
 						}
-						if (info[j].sumChemistry > 0) {
-							objFrom.options.add(new Option("化学", 5));
-							objTo.options.add(new Option("化学", 5));
+						if (info[j].sumCourse5 > 0) {
+							objFrom.options.add(new Option(courseLoad[4], 5));
+							objTo.options.add(new Option(courseLoad[4], 5));
+							//i++;
+						}
+						if (info[j].sumCourse6 > 0) {
+							objFrom.options.add(new Option(courseLoad[5], 6));
+							objTo.options.add(new Option(courseLoad[5], 6));
+							//i++;
+						}
+						if (info[j].sumCourse7 > 0) {
+							objFrom.options.add(new Option(courseLoad[6], 7));
+							objTo.options.add(new Option(courseLoad[6], 7));
+							//i++;
+						}
+						if (info[j].sumCourse8 > 0) {
+							objFrom.options.add(new Option(courseLoad[7], 8));
+							objTo.options.add(new Option(courseLoad[7], 8));
+							//i++;
+						}
+						if (info[j].sumCourse9 > 0) {
+							objFrom.options.add(new Option(courseLoad[8], 9));
+							objTo.options.add(new Option(courseLoad[8], 9));
+							//i++;
+						}
+						if (info[j].sumCourse10 > 0) {
+							objFrom.options.add(new Option(courseLoad[9], 10));
+							objTo.options.add(new Option(courseLoad[9], 10));
 							//i++;
 						}
 
 						// 退费里的余额
-						if (info[j].sumMath > 0) {
-							document.getElementById("RemainFee1Label").innerHTML = '数学' + " " + '<input type="number" name="remainFee1" step="0.1" />' + " " + '元' + '<label for="remainFee1"><select name="MathProductRemainFee" onchange="sqlProductRemainFee(1)"><option value="0">总余额</option></select><input type="hidden" name="refundMathProduct" value="" /><input type="checkbox" style="width: 1em" id="remainFee1"  name="remainFee1CheckBox" disabled="true" />退费</label>' + '<br />';
+						if (info[j].sumCourse1 > 0) {
+							document.getElementById("RemainFee1Label").innerHTML = courseLoad[0] + " " + '<input type="number" name="remainFee1" step="0.1" />' + " " + '元' + '<label for="remainFee1"><select name="course1ProductRemainFee" onchange="sqlProductRemainFee(1)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse1Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee1"  name="remainFee1CheckBox" disabled="true" />退费</label>' + '<br />';
 						} else {
 							//document.getElementById("RemainFee1Label").innerHTML = "";
 						}
-						if (info[j].sumChinese > 0) {
-							document.getElementById("RemainFee2Label").innerHTML = '语文' + " " + '<input type="number" name="remainFee2" step="0.1" />' + " " + '元' + '<label for="remainFee2"><select name="ChineseProductRemainFee" onchange="sqlProductRemainFee(2)"><option value="0">总余额</option></select><input type="hidden" name="refundChineseProduct" value="" /><input type="checkbox" style="width: 1em" id="remainFee2"  name="remainFee2CheckBox" disabled="true" />退费</label>' + '<br />';
+						if (info[j].sumCourse2 > 0) {
+							document.getElementById("RemainFee2Label").innerHTML = courseLoad[1] + " " + '<input type="number" name="remainFee2" step="0.1" />' + " " + '元' + '<label for="remainFee2"><select name="course2ProductRemainFee" onchange="sqlProductRemainFee(2)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse2Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee2"  name="remainFee2CheckBox" disabled="true" />退费</label>' + '<br />';
 						} else {
 							//document.getElementById("RemainFee2Label").innerHTML = "";
 						}
-						if (info[j].sumEnglish > 0) {
-							document.getElementById("RemainFee3Label").innerHTML = '英语' + " " + '<input type="number" name="remainFee3" step="0.1" />' + " " + '元' + '<label for="remainFee3"><select name="EnglishProductRemainFee" onchange="sqlProductRemainFee(3)"><option value="0">总余额</option></select><input type="hidden" name="refundEnglishProduct" value="" /><input type="checkbox" style="width: 1em" id="remainFee3"  name="remainFee3CheckBox" disabled="true" />退费</label>' + '<br />';
+						if (info[j].sumCourse3 > 0) {
+							document.getElementById("RemainFee3Label").innerHTML = courseLoad[2] + " " + '<input type="number" name="remainFee3" step="0.1" />' + " " + '元' + '<label for="remainFee3"><select name="course3ProductRemainFee" onchange="sqlProductRemainFee(3)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse3Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee3"  name="remainFee3CheckBox" disabled="true" />退费</label>' + '<br />';
 						} else {
 							//document.getElementById("RemainFee3Label").innerHTML = "";
 						}
-						if (info[j].sumPhysics > 0) {
-							document.getElementById("RemainFee4Label").innerHTML = '物理' + " " + '<input type="number" name="remainFee4" step="0.1" />' + " " + '元' + '<label for="remainFee4"><select name="PhysicsProductRemainFee" onchange="sqlProductRemainFee(4)"><option value="0">总余额</option></select><input type="hidden" name="refundPhysicsProduct" value="" /><input type="checkbox" style="width: 1em" id="remainFee4"  name="remainFee4CheckBox" disabled="true" />退费</label>' + '<br />';
+						if (info[j].sumCourse4 > 0) {
+							document.getElementById("RemainFee4Label").innerHTML = courseLoad[3] + " " + '<input type="number" name="remainFee4" step="0.1" />' + " " + '元' + '<label for="remainFee4"><select name="course4ProductRemainFee" onchange="sqlProductRemainFee(4)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse4Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee4"  name="remainFee4CheckBox" disabled="true" />退费</label>' + '<br />';
 						} else {
 							//document.getElementById("RemainFee4Label").innerHTML = "";
 						}
-						if (info[j].sumChemistry > 0) {
-							document.getElementById("RemainFee5Label").innerHTML = '化学' + " " + '<input type="number" name="remainFee5" step="0.1" />' + " " + '元' + '<label for="remainFee5"><select name="ChemistryProductRemainFee" onchange="sqlProductRemainFee(5)"><option value="0">总余额</option></select><input type="hidden" name="refundChemistryProduct" value="" /><input type="checkbox" style="width: 1em" id="remainFee5"  name="remainFee5CheckBox" disabled="true" />退费</label>' + '<br />';
+						if (info[j].sumCourse5 > 0) {
+							document.getElementById("RemainFee5Label").innerHTML = courseLoad[4] + " " + '<input type="number" name="remainFee5" step="0.1" />' + " " + '元' + '<label for="remainFee5"><select name="course5ProductRemainFee" onchange="sqlProductRemainFee(5)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse5Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee5"  name="remainFee5CheckBox" disabled="true" />退费</label>' + '<br />';
 						} else {
 							//document.getElementById("RemainFee5Label").innerHTML = "";
+						}
+						if (info[j].sumCourse6 > 0) {
+							document.getElementById("RemainFee6Label").innerHTML = courseLoad[5] + " " + '<input type="number" name="remainFee6" step="0.1" />' + " " + '元' + '<label for="remainFee6"><select name="course6ProductRemainFee" onchange="sqlProductRemainFee(6)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse6Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee6"  name="remainFee6CheckBox" disabled="true" />退费</label>' + '<br />';
+						} else {
+							//document.getElementById("RemainFee6Label").innerHTML = "";
+						}
+						if (info[j].sumCourse7 > 0) {
+							document.getElementById("RemainFee7Label").innerHTML = courseLoad[6] + " " + '<input type="number" name="remainFee7" step="0.1" />' + " " + '元' + '<label for="remainFee7"><select name="course7ProductRemainFee" onchange="sqlProductRemainFee(7)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse7Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee7"  name="remainFee7CheckBox" disabled="true" />退费</label>' + '<br />';
+						} else {
+							//document.getElementById("RemainFee7Label").innerHTML = "";
+						}
+						if (info[j].sumCourse8 > 0) {
+							document.getElementById("RemainFee8Label").innerHTML = courseLoad[7] + " " + '<input type="number" name="remainFee8" step="0.1" />' + " " + '元' + '<label for="remainFee8"><select name="course8ProductRemainFee" onchange="sqlProductRemainFee(8)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse8Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee8"  name="remainFee8CheckBox" disabled="true" />退费</label>' + '<br />';
+						} else {
+							//document.getElementById("RemainFee8Label").innerHTML = "";
+						}
+						if (info[j].sumCourse9 > 0) {
+							document.getElementById("RemainFee9Label").innerHTML = courseLoad[8] + " " + '<input type="number" name="remainFee9" step="0.1" />' + " " + '元' + '<label for="remainFee9"><select name="course9ProductRemainFee" onchange="sqlProductRemainFee(9)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse9Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee9"  name="remainFee9CheckBox" disabled="true" />退费</label>' + '<br />';
+						} else {
+							//document.getElementById("RemainFee9Label").innerHTML = "";
+						}
+						if (info[j].sumCourse10 > 0) {
+							document.getElementById("RemainFee10Label").innerHTML = courseLoad[9] + " " + '<input type="number" name="remainFee10" step="0.1" />' + " " + '元' + '<label for="remainFee10"><select name="course10ProductRemainFee" onchange="sqlProductRemainFee(10)"><option value="0">总余额</option></select><input type="hidden" name="refundCourse10Product" value="" /><input type="checkbox" style="width: 1em" id="remainFee10"  name="remainFee10CheckBox" disabled="true" />退费</label>' + '<br />';
+						} else {
+							//document.getElementById("RemainFee10Label").innerHTML = "";
 						}
 						j++;
 					}
@@ -1564,6 +2348,21 @@ function sqlFeeCourse(uid) {
 					}
 					if(document.getElementsByName("remainFee5")[0]){
 						sqlStudentRemainFee(uid,5);
+					}
+					if(document.getElementsByName("remainFee6")[0]){
+						sqlStudentRemainFee(uid,6);
+					}
+					if(document.getElementsByName("remainFee7")[0]){
+						sqlStudentRemainFee(uid,7);
+					}
+					if(document.getElementsByName("remainFee8")[0]){
+						sqlStudentRemainFee(uid,8);
+					}
+					if(document.getElementsByName("remainFee9")[0]){
+						sqlStudentRemainFee(uid,9);
+					}
+					if(document.getElementsByName("remainFee10")[0]){
+						sqlStudentRemainFee(uid,10);
 					}
 				}
 
@@ -1621,14 +2420,14 @@ function sqlFeeCourseProduct(uid) {
 						
 					// 载入所有记录的所有产品
 					var loadProduct = new Array();
-					for ( i = 0; i < 5; i++) {
+					for ( i = 0; i < maxCourseNum; i++) {
 						loadProduct[i] = new Array();
 					}
 					var j = 0;
 					i = 0;
 					for (var tmp in info) {
-						if(info[j].MathProduct != ""){
-							loadProduct[0][i] = info[j].MathProduct;							
+						if(info[j].course1Product != ""){
+							loadProduct[0][i] = info[j].course1Product;							
 							i++;
 						}
 						j++;
@@ -1636,8 +2435,8 @@ function sqlFeeCourseProduct(uid) {
 					i = 0;
 					j = 0;
 					for (var tmp in info) {
-						if(info[0].ChineseProduct != ""){
-							loadProduct[1][i] = info[j].ChineseProduct;							
+						if(info[j].course2Product != ""){
+							loadProduct[1][i] = info[j].course2Product;							
 							i++;
 						}
 						j++;
@@ -1645,8 +2444,8 @@ function sqlFeeCourseProduct(uid) {
 					i = 0;
 					j = 0;
 					for (var tmp in info) {
-						if(info[0].EnglishProduct != ""){
-							loadProduct[2][i] = info[j].EnglishProduct;							
+						if(info[j].course3Product != ""){
+							loadProduct[2][i] = info[j].course3Product;							
 							i++;
 						}
 						j++;
@@ -1654,8 +2453,8 @@ function sqlFeeCourseProduct(uid) {
 					i = 0;
 					j = 0;
 					for (var tmp in info) {
-						if(info[0].PhysicsProduct != ""){
-							loadProduct[3][i] = info[j].PhysicsProduct;							
+						if(info[j].course4Product != ""){
+							loadProduct[3][i] = info[j].course4Product;							
 							i++;
 						}
 						j++;
@@ -1663,12 +2462,58 @@ function sqlFeeCourseProduct(uid) {
 					i = 0;
 					j = 0;
 					for (var tmp in info) {
-						if(info[0].ChemistryProduct != ""){
-							loadProduct[4][i] = info[j].ChemistryProduct;							
+						if(info[j].course5Product != ""){
+							loadProduct[4][i] = info[j].course5Product;							
 							i++;
 						}
 						j++;
 					}
+					i = 0;
+					j = 0;
+					for (var tmp in info) {
+						if(info[j].course6Product != ""){
+							loadProduct[5][i] = info[j].course6Product;							
+							i++;
+						}
+						j++;
+					}
+					i = 0;
+					j = 0;
+					for (var tmp in info) {
+						if(info[j].course7Product != ""){
+							loadProduct[6][i] = info[j].course7Product;							
+							i++;
+						}
+						j++;
+					}
+					i = 0;
+					j = 0;
+					for (var tmp in info) {
+						if(info[j].course8Product != ""){
+							loadProduct[7][i] = info[j].course8Product;							
+							i++;
+						}
+						j++;
+					}
+					i = 0;
+					j = 0;
+					for (var tmp in info) {
+						if(info[j].course9Product != ""){
+							loadProduct[8][i] = info[j].course9Product;							
+							i++;
+						}
+						j++;
+					}
+					i = 0;
+					j = 0;
+					for (var tmp in info) {
+						if(info[j].course10Product != ""){
+							loadProduct[9][i] = info[j].course10Product;							
+							i++;
+						}
+						j++;
+					}
+					
 					// 去除所有重复产品记录，留下实际产品名称
 					for(i=0;i<5;i++){
 						product[i]=[];
@@ -1721,6 +2566,112 @@ function classifyProduct(loadProduct) {
 }
 
 
+function sqlCourse() {
+	var xmlhttp;
+
+	// 1创建AJAX对象
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	// 2指定回调函数
+	xmlhttp.onreadystatechange = function() {
+		// 4接收响应数据，处理服务器返回的信息
+		// 判断对象状态是否交互完成，如果为4则交互完成
+		if (xmlhttp.readyState == 4) {
+			// 判断对象状态是否交互成功,如果成功则为200
+
+			if (xmlhttp.status == 200) {
+				// 接收数据,得到服务器输出的XML数据
+
+				var ret = xmlhttp.responseText;
+
+				if (ret == "0") {
+					// alert("");
+				} else if (ret == "2") {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+					// alert("检查到该校区名有多条记录，请联系管理员！");
+				} else {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+
+					// var info = eval(ret);
+					info = eval(ret);
+
+					// var len = 0;
+					len = 0;
+					for (var tmp in info) {
+						len++;
+					}
+								
+					// 根据所选校区自动加载相应的科目
+					// 根据所选校区自动加载相应的科目
+					var courseNameIndex = new Array();
+					for(var i=0;i<maxCourseNum;i++){
+						courseNameIndex[i] = 0;
+					}
+						for(var i=0;i<len;i++){
+							if(info[i].course1 != ""){
+								courseNameIndex[0] = i;
+							}
+							if(info[i].course2 != ""){
+								courseNameIndex[1] = i;
+							}	
+							if(info[i].course3 != ""){
+								courseNameIndex[2] = i;
+							}	
+							if(info[i].course4 != ""){
+								courseNameIndex[3] = i;
+							}	
+							if(info[i].course5 != ""){
+								courseNameIndex[4] = i;
+							}
+							if(info[i].course6 != ""){
+								courseNameIndex[5] = i;
+							}
+							if(info[i].course7 != ""){
+								courseNameIndex[6] = i;
+							}	
+							if(info[i].course8 != ""){
+								courseNameIndex[7] = i;
+							}	
+							if(info[i].course9 != ""){
+								courseNameIndex[8] = i;
+							}	
+							if(info[i].course10 != ""){
+								courseNameIndex[9] = i;
+							}		
+						}
+						
+						courseLoad[0] = info[courseNameIndex[0]].course1;
+						courseLoad[1] = info[courseNameIndex[1]].course2;
+						courseLoad[2] = info[courseNameIndex[2]].course3;
+						courseLoad[3] = info[courseNameIndex[3]].course4;
+						courseLoad[4] = info[courseNameIndex[4]].course5;
+						courseLoad[5] = info[courseNameIndex[5]].course6;
+						courseLoad[6] = info[courseNameIndex[6]].course7;
+						courseLoad[7] = info[courseNameIndex[7]].course8;
+						courseLoad[8] = info[courseNameIndex[8]].course9;
+						courseLoad[9] = info[courseNameIndex[9]].course10;
+				}
+
+			} else {
+				alert("错误，请求页面异常！");
+			}
+		}
+
+	};
+	// 3发出http请求
+	var url = "principalSet.php";
+	url = url + '?noValue=""';
+	// 很重要，必须有的
+	url = url + "&sid=" + Math.random();
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send(null);
+}
+
 // 载入相应科目的产品名称
 function loadCourseProduct(obj) {
 	if (obj.name == "feeFrom") {
@@ -1764,6 +2715,7 @@ function loadFeeToProduct(){
 	var obj = document.getElementsByName("feeToWay")[0];
 	document.getElementsByName("feeToProduct")[0].value = obj.options[obj.selectedIndex].text;
 }
+
 function sqlPriceAndSubFeeAndProduct(schoolZone) {
 	var xmlhttp;
 
@@ -1911,236 +2863,407 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 					// ajax
 					sqlRecordAddFee();
 					//
-
-					/*
-					// 退费里的余额，这个是根据校长设置查询出来的，太粗了，有可能学生没有报其中一门课，更细的在sqlFeeCourse函数中
-					if(info[0].course1 !=""){
-					document.getElementById("RemainFee1Label").innerHTML ='数学'+ " " + '<input type="number" name="remainFee1" readonly="true" />'+ " "  +	'元' + '<label for="remainFee1"><input type="checkbox" style="width: 1em" id="remainFee1" />退费</label>'+'<br />';
-					}else{
-					document.getElementById("RemainFee1Label").innerHTML = "";
-					}
-					if(info[0].course2 !=""){
-					document.getElementById("RemainFee2Label").innerHTML ='语文'+ " " + '<input type="number" name="remainFee2" readonly="true" />'+ " "  +	'元' + '<label for="remainFee2"><input type="checkbox" style="width: 1em" id="remainFee2" />退费</label>'+'<br />';
-					}else{
-					document.getElementById("RemainFee2Label").innerHTML = "";
-					}
-					if(info[0].course3 !=""){
-					document.getElementById("RemainFee3Label").innerHTML ='英语'+ " " + '<input type="number" name="remainFee3" readonly="true" />'+ " "  +	'元' + '<label for="remainFee3"><input type="checkbox" style="width: 1em" id="remainFee3" />退费 </label>'+'<br />';
-					}else{
-					document.getElementById("RemainFee3Label").innerHTML = "";
-					}
-					if(info[0].course4 !=""){
-					document.getElementById("RemainFee4Label").innerHTML ='物理'+ " " + '<input type="number" name="remainFee4" readonly="true" />'+ " "  +	'元' + '<label for="remainFee4"><input type="checkbox" style="width: 1em" id="remainFee4" />退费</label>'+'<br />';
-					}else{
-					document.getElementById("RemainFee4Label").innerHTML = "";
-					}
-					if(info[0].course5 !=""){
-					document.getElementById("RemainFee5Label").innerHTML ='化学'+ " " + '<input type="number" name="remainFee5" readonly="true" />'+ " "  +	'元' + '<label for="remainFee5"><input type="checkbox" style="width: 1em" id="remainFee5" />退费</label>'+'<br />';
-					}else{
-					document.getElementById("RemainFee5Label").innerHTML = "";
-					}
-					*/
+					
 					// 费用分配
 					if (info[0].course1 != "") {
-						document.getElementById("MathLabelAddFee").innerHTML = '数学'+ '<select name = "MathProduct" onchange="checkHiddenValueProduct(1)">'
+						document.getElementById("course1LabelAddFee").innerHTML = courseLoad[0]+ '<select name = "course1Product" onchange="checkHiddenValueProduct(1)">'
 								+ '<option value=0>--请选择--</option>'
 							   + '</select>'							   						   
-							   + '<input type="hidden" name="MathProductCopy" />' 
-							   + '<input type="number" style="width: 4em" name="Math" />' + '元';
+							   + '<input type="hidden" name="course1ProductCopy" />'
+							   + '<input type="number" style="width: 4em" name="course1" />' + '元';
 						if (info[0].subFeeItem1 != "") {
-							document.getElementById("subFee1MathLabel").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="MathSubFee1" />元';
+							document.getElementById("subFee1Course1Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course1SubFee1" />元';
 						} else {
-							document.getElementById("subFee1MathLabel").innerHTML = "";
+							document.getElementById("subFee1Course1Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem2 != "") {
-							document.getElementById("subFee2MathLabel").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="MathSubFee2" />元';
+							document.getElementById("subFee2Course1Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course1SubFee2" />元';
 						} else {
-							document.getElementById("subFee2MathLabel").innerHTML = "";
+							document.getElementById("subFee2Course1Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem3 != "") {
-							document.getElementById("subFee3MathLabel").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="MathSubFee3" />元';
+							document.getElementById("subFee3Course1Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course1SubFee3" />元';
 						} else {
-							document.getElementById("subFee3MathLabel").innerHTML = "";
+							document.getElementById("subFee3Course1Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem4 != "") {
-							document.getElementById("subFee4MathLabel").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="MathSubFee4" />元';
+							document.getElementById("subFee4Course1Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course1SubFee4" />元';
 						} else {
-							document.getElementById("subFee4MathLabel").innerHTML = "";
+							document.getElementById("subFee4Course1Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem5 != "") {
-							document.getElementById("subFee5MathLabel").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="MathSubFee5" />元';
+							document.getElementById("subFee5Course1Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course1SubFee5" />元';
 						} else {
-							document.getElementById("subFee5MathLabel").innerHTML = "";
+							document.getElementById("subFee5Course1Label").innerHTML = "";
 						}
 					} else {
-						document.getElementById("MathLabelAddFee").innerHTML = "";
-						document.getElementById("subFee1MathLabel").innerHTML = "";
-						document.getElementById("subFee2MathLabel").innerHTML = "";
-						document.getElementById("subFee3MathLabel").innerHTML = "";
-						document.getElementById("subFee4MathLabel").innerHTML = "";
-						document.getElementById("subFee5MathLabel").innerHTML = "";
+						document.getElementById("course1LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course1Label").innerHTML = "";
+						document.getElementById("subFee2Course1Label").innerHTML = "";
+						document.getElementById("subFee3Course1Label").innerHTML = "";
+						document.getElementById("subFee4Course1Label").innerHTML = "";
+						document.getElementById("subFee5Course1Label").innerHTML = "";
 					}
 
 					if (info[0].course2 != "") {
-						document.getElementById("ChineseLabelAddFee").innerHTML = '语文' + '<select name = "ChineseProduct" onchange="checkHiddenValueProduct(2)">'
+						document.getElementById("course2LabelAddFee").innerHTML = courseLoad[1] + '<select name = "course2Product" onchange="checkHiddenValueProduct(2)">'
 							+ '<option value=0>--请选择--</option>'
 						   + '</select>'
-						   + '<input type="hidden" name="ChineseProductCopy" />' 
-							+ '<input type="number" style="width: 4em" name="Chinese" />' + '元';
+						   + '<input type="hidden" name="course2ProductCopy" />' 
+							+ '<input type="number" style="width: 4em" name="course2" />' + '元';
 						if (info[0].subFeeItem1 != "") {
-							document.getElementById("subFee1ChineseLabel").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChineseSubFee1" />元';
+							document.getElementById("subFee1Course2Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course2SubFee1" />元';
 						} else {
-							document.getElementById("subFee1ChineseLabel").innerHTML = "";
+							document.getElementById("subFee1Course2Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem2 != "") {
-							document.getElementById("subFee2ChineseLabel").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChineseSubFee2" />元';
+							document.getElementById("subFee2Course2Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course2SubFee2" />元';
 						} else {
-							document.getElementById("subFee2ChineseLabel").innerHTML = "";
+							document.getElementById("subFee2Course2Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem3 != "") {
-							document.getElementById("subFee3ChineseLabel").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChineseSubFee3" />元';
+							document.getElementById("subFee3Course2Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course2SubFee3" />元';
 						} else {
-							document.getElementById("subFee3ChineseLabel").innerHTML = "";
+							document.getElementById("subFee3Course2Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem4 != "") {
-							document.getElementById("subFee4ChineseLabel").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChineseSubFee4" />元';
+							document.getElementById("subFee4Course2Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course2SubFee4" />元';
 						} else {
-							document.getElementById("subFee4ChineseLabel").innerHTML = "";
+							document.getElementById("subFee4Course2Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem5 != "") {
-							document.getElementById("subFee5ChineseLabel").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChineseSubFee5" />元';
+							document.getElementById("subFee5Course2Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course2SubFee5" />元';
 						} else {
-							document.getElementById("subFee5ChineseLabel").innerHTML = "";
+							document.getElementById("subFee5Course2Label").innerHTML = "";
 						}
 					} else {
-						document.getElementById("ChineseLabelAddFee").innerHTML = "";
-						document.getElementById("subFee1ChineseLabel").innerHTML = "";
-						document.getElementById("subFee2ChineseLabel").innerHTML = "";
-						document.getElementById("subFee3ChineseLabel").innerHTML = "";
-						document.getElementById("subFee4ChineseLabel").innerHTML = "";
-						document.getElementById("subFee5ChineseLabel").innerHTML = "";
+						document.getElementById("course2LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course2Label").innerHTML = "";
+						document.getElementById("subFee2Course2Label").innerHTML = "";
+						document.getElementById("subFee3Course2Label").innerHTML = "";
+						document.getElementById("subFee4Course2Label").innerHTML = "";
+						document.getElementById("subFee5Course2Label").innerHTML = "";
 					}
 
 					if (info[0].course3 != "") {
-						document.getElementById("EnglishLabelAddFee").innerHTML = '英语'+ '<select name = "EnglishProduct" onchange="checkHiddenValueProduct(3)">'
+						document.getElementById("course3LabelAddFee").innerHTML = courseLoad[2]+ '<select name = "course3Product" onchange="checkHiddenValueProduct(3)">'
 							+ '<option value=0>--请选择--</option>'
 						   + '</select>'
-						   + '<input type="hidden" name="EnglishProductCopy" />' 
-						   + '<input type="number" style="width: 4em" name="English" />' + '元';
+						   + '<input type="hidden" name="course3ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course3" />' + '元';
 						if (info[0].subFeeItem1 != "") {
-							document.getElementById("subFee1EnglishLabel").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="EnglishSubFee1" />元';
+							document.getElementById("subFee1Course3Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course3SubFee1" />元';
 						} else {
-							document.getElementById("subFee1EnglishLabel").innerHTML = "";
+							document.getElementById("subFee1Course3Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem2 != "") {
-							document.getElementById("subFee2EnglishLabel").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="EnglishSubFee2" />元';
+							document.getElementById("subFee2Course3Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="course3SubFee2" />元';
 						} else {
-							document.getElementById("subFee2EnglishLabel").innerHTML = "";
+							document.getElementById("subFee2Course3Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem3 != "") {
-							document.getElementById("subFee3EnglishLabel").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="EnglishSubFee3" />元';
+							document.getElementById("subFee3Course3Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="course3SubFee3" />元';
 						} else {
-							document.getElementById("subFee3EnglishLabel").innerHTML = "";
+							document.getElementById("subFee3Course3Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem4 != "") {
-							document.getElementById("subFee4EnglishLabel").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="EnglishSubFee4" />元';
+							document.getElementById("subFee4Course3Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="course3SubFee4" />元';
 						} else {
-							document.getElementById("subFee4EnglishLabel").innerHTML = "";
+							document.getElementById("subFee4Course3Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem5 != "") {
-							document.getElementById("subFee5EnglishLabel").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="EnglishSubFee5" />元';
+							document.getElementById("subFee5Course3Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="course3SubFee5" />元';
 						} else {
-							document.getElementById("subFee5EnglishLabel").innerHTML = "";
+							document.getElementById("subFee5Course3Label").innerHTML = "";
 						}
 					} else {
-						document.getElementById("EnglishLabelAddFee").innerHTML = "";
-						document.getElementById("subFee1EnglishLabel").innerHTML = "";
-						document.getElementById("subFee2EnglishLabel").innerHTML = "";
-						document.getElementById("subFee3EnglishLabel").innerHTML = "";
-						document.getElementById("subFee4EnglishLabel").innerHTML = "";
-						document.getElementById("subFee5EnglishLabel").innerHTML = "";
+						document.getElementById("course3LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course3Label").innerHTML = "";
+						document.getElementById("subFee2Course3Label").innerHTML = "";
+						document.getElementById("subFee3Course3Label").innerHTML = "";
+						document.getElementById("subFee4Course3Label").innerHTML = "";
+						document.getElementById("subFee5Course3Label").innerHTML = "";
 					}
 
 					if (info[0].course4 != "") {
-						document.getElementById("PhysicsLabelAddFee").innerHTML = '物理'+ '<select name = "PhysicsProduct" onchange="checkHiddenValueProduct(4)">'
+						document.getElementById("course4LabelAddFee").innerHTML = courseLoad[3]+ '<select name = "course4Product" onchange="checkHiddenValueProduct(4)">'
 						+ '<option value=0>--请选择--</option>'
 						   + '</select>'
-						   + '<input type="hidden" name="PhysicsProductCopy" />' 
-						   + '<input type="number" style="width: 4em" name="Physics" />' + '元';
+						   + '<input type="hidden" name="course4ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course4" />' + '元';
 						if (info[0].subFeeItem1 != "") {
-							document.getElementById("subFee1PhysicsLabel").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="PhysicsSubFee1" />元';
+							document.getElementById("subFee1Course4Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="course4SubFee1" />元';
 						} else {
-							document.getElementById("subFee1PhysicsLabel").innerHTML = "";
+							document.getElementById("subFee1Course4Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem2 != "") {
-							document.getElementById("subFee2PhysicsLabel").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="PhysicsSubFee2" />元';
+							document.getElementById("subFee2Course4Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course4SubFee2" />元';
 						} else {
-							document.getElementById("subFee2PhysicsLabel").innerHTML = "";
+							document.getElementById("subFee2Course4Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem3 != "") {
-							document.getElementById("subFee3PhysicsLabel").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="PhysicsSubFee3" />元';
+							document.getElementById("subFee3Course4Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course4SubFee3" />元';
 						} else {
-							document.getElementById("subFee3PhysicsLabel").innerHTML = "";
+							document.getElementById("subFee3Course4Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem4 != "") {
-							document.getElementById("subFee4PhysicsLabel").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="PhysicsSubFee4" />元';
+							document.getElementById("subFee4Course4Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />'  + '<input type="number" style="width: 4em" name="course4SubFee4" />元';
 						} else {
-							document.getElementById("subFee4PhysicsLabel").innerHTML = "";
+							document.getElementById("subFee4Course4Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem5 != "") {
-							document.getElementById("subFee5PhysicsLabel").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="PhysicsSubFee5" />元';
+							document.getElementById("subFee5Course4Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course4SubFee5" />元';
 						} else {
-							document.getElementById("subFee5PhysicsLabel").innerHTML = "";
+							document.getElementById("subFee5Course4Label").innerHTML = "";
 						}
 					} else {
-						document.getElementById("PhysicsLabelAddFee").innerHTML = "";
-						document.getElementById("subFee1PhysicsLabel").innerHTML = "";
-						document.getElementById("subFee2PhysicsLabel").innerHTML = "";
-						document.getElementById("subFee3PhysicsLabel").innerHTML = "";
-						document.getElementById("subFee4PhysicsLabel").innerHTML = "";
-						document.getElementById("subFee5PhysicsLabel").innerHTML = "";
+						document.getElementById("course4LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course4Label").innerHTML = "";
+						document.getElementById("subFee2Course4Label").innerHTML = "";
+						document.getElementById("subFee3Course4Label").innerHTML = "";
+						document.getElementById("subFee4Course4Label").innerHTML = "";
+						document.getElementById("subFee5Course4Label").innerHTML = "";
 					}
 
 					if (info[0].course5 != "") {
-						document.getElementById("ChemistryLabelAddFee").innerHTML = '化学' + '<select name = "ChemistryProduct" onchange="checkHiddenValueProduct(5)">'
+						document.getElementById("course5LabelAddFee").innerHTML = courseLoad[4] + '<select name = "course5Product" onchange="checkHiddenValueProduct(5)">'
 						+ '<option value=0>--请选择--</option>'
 						   + '</select>'
-						   + '<input type="hidden" name="ChemistryProductCopy" />' 
-						   + '<input type="number" style="width: 4em" name="Chemistry" />' + '元';
+						   + '<input type="hidden" name="course5ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course5" />' + '元';
 						if (info[0].subFeeItem1 != "") {
-							document.getElementById("subFee1ChemistryLabel").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChemistrySubFee1" />元';
+							document.getElementById("subFee1Course5Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course5SubFee1" />元';
 						} else {
-							document.getElementById("subFee1ChemistryLabel").innerHTML = "";
+							document.getElementById("subFee1Course5Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem2 != "") {
-							document.getElementById("subFee2ChemistryLabel").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChemistrySubFee2" />元';
+							document.getElementById("subFee2Course5Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course5SubFee2" />元';
 						} else {
-							document.getElementById("subFee2ChemistryLabel").innerHTML = "";
+							document.getElementById("subFee2Course5Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem3 != "") {
-							document.getElementById("subFee3ChemistryLabel").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChemistrySubFee3" />元';
+							document.getElementById("subFee3Course5Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course5SubFee3" />元';
 						} else {
-							document.getElementById("subFee3ChemistryLabel").innerHTML = "";
+							document.getElementById("subFee3Course5Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem4 != "") {
-							document.getElementById("subFee4ChemistryLabel").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChemistrySubFee4" />元';
+							document.getElementById("subFee4Course5Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course5SubFee4" />元';
 						} else {
-							document.getElementById("subFee4ChemistryLabel").innerHTML = "";
+							document.getElementById("subFee4Course5Label").innerHTML = "";
 						}
 						if (info[0].subFeeItem5 != "") {
-							document.getElementById("subFee5ChemistryLabel").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="ChemistrySubFee5" />元';
+							document.getElementById("subFee5Course5Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course5SubFee5" />元';
 						} else {
-							document.getElementById("subFee5ChemistryLabel").innerHTML = "";
+							document.getElementById("subFee5Course5Label").innerHTML = "";
 						}
 					} else {
-						document.getElementById("ChemistryLabelAddFee").innerHTML = "";
-						document.getElementById("subFee1ChemistryLabel").innerHTML = "";
-						document.getElementById("subFee2ChemistryLabel").innerHTML = "";
-						document.getElementById("subFee3ChemistryLabel").innerHTML = "";
-						document.getElementById("subFee4ChemistryLabel").innerHTML = "";
-						document.getElementById("subFee5ChemistryLabel").innerHTML = "";
+						document.getElementById("course5LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course5Label").innerHTML = "";
+						document.getElementById("subFee2Course5Label").innerHTML = "";
+						document.getElementById("subFee3Course5Label").innerHTML = "";
+						document.getElementById("subFee4Course5Label").innerHTML = "";
+						document.getElementById("subFee5Course5Label").innerHTML = "";
 					}
 					
+					if (info[0].course6 != "") {
+						document.getElementById("course6LabelAddFee").innerHTML = courseLoad[5] + '<select name = "course6Product" onchange="checkHiddenValueProduct(6)">'
+						+ '<option value=0>--请选择--</option>'
+						   + '</select>'
+						   + '<input type="hidden" name="course6ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course6" />' + '元';
+						if (info[0].subFeeItem1 != "") {
+							document.getElementById("subFee1Course6Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course6SubFee1" />元';
+						} else {
+							document.getElementById("subFee1Course6Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem2 != "") {
+							document.getElementById("subFee2Course6Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course6SubFee2" />元';
+						} else {
+							document.getElementById("subFee2Course6Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem3 != "") {
+							document.getElementById("subFee3Course6Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course6SubFee3" />元';
+						} else {
+							document.getElementById("subFee3Course6Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem4 != "") {
+							document.getElementById("subFee4Course6Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course6SubFee4" />元';
+						} else {
+							document.getElementById("subFee4Course6Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem5 != "") {
+							document.getElementById("subFee5Course6Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course6SubFee5" />元';
+						} else {
+							document.getElementById("subFee5Course6Label").innerHTML = "";
+						}
+					} else {
+						document.getElementById("course6LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course6Label").innerHTML = "";
+						document.getElementById("subFee2Course6Label").innerHTML = "";
+						document.getElementById("subFee3Course6Label").innerHTML = "";
+						document.getElementById("subFee4Course6Label").innerHTML = "";
+						document.getElementById("subFee5Course6Label").innerHTML = "";
+					}
+					
+					if (info[0].course7 != "") {
+						document.getElementById("course7LabelAddFee").innerHTML = courseLoad[6] + '<select name = "course7Product" onchange="checkHiddenValueProduct(7)">'
+						+ '<option value=0>--请选择--</option>'
+						   + '</select>'
+						   + '<input type="hidden" name="course7ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course7" />' + '元';
+						if (info[0].subFeeItem1 != "") {
+							document.getElementById("subFee1Course7Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course7SubFee1" />元';
+						} else {
+							document.getElementById("subFee1Course7Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem2 != "") {
+							document.getElementById("subFee2Course7Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course7SubFee2" />元';
+						} else {
+							document.getElementById("subFee2Course7Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem3 != "") {
+							document.getElementById("subFee3Course7Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course7SubFee3" />元';
+						} else {
+							document.getElementById("subFee3Course7Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem4 != "") {
+							document.getElementById("subFee4Course7Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course7SubFee4" />元';
+						} else {
+							document.getElementById("subFee4Course7Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem5 != "") {
+							document.getElementById("subFee5Course7Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course7SubFee5" />元';
+						} else {
+							document.getElementById("subFee5Course7Label").innerHTML = "";
+						}
+					} else {
+						document.getElementById("course7LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course7Label").innerHTML = "";
+						document.getElementById("subFee2Course7Label").innerHTML = "";
+						document.getElementById("subFee3Course7Label").innerHTML = "";
+						document.getElementById("subFee4Course7Label").innerHTML = "";
+						document.getElementById("subFee5Course7Label").innerHTML = "";
+					}
+					
+					if (info[0].course8 != "") {
+						document.getElementById("course8LabelAddFee").innerHTML = courseLoad[7] + '<select name = "course8Product" onchange="checkHiddenValueProduct(8)">'
+						+ '<option value=0>--请选择--</option>'
+						   + '</select>'
+						   + '<input type="hidden" name="course8ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course8" />' + '元';
+						if (info[0].subFeeItem1 != "") {
+							document.getElementById("subFee1Course8Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course8SubFee1" />元';
+						} else {
+							document.getElementById("subFee1Course8Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem2 != "") {
+							document.getElementById("subFee2Course8Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course8SubFee2" />元';
+						} else {
+							document.getElementById("subFee2Course8Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem3 != "") {
+							document.getElementById("subFee3Course8Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course8SubFee3" />元';
+						} else {
+							document.getElementById("subFee3Course8Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem4 != "") {
+							document.getElementById("subFee4Course8Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course8SubFee4" />元';
+						} else {
+							document.getElementById("subFee4Course8Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem5 != "") {
+							document.getElementById("subFee5Course8Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course8SubFee5" />元';
+						} else {
+							document.getElementById("subFee5Course8Label").innerHTML = "";
+						}
+					} else {
+						document.getElementById("course8LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course8Label").innerHTML = "";
+						document.getElementById("subFee2Course8Label").innerHTML = "";
+						document.getElementById("subFee3Course8Label").innerHTML = "";
+						document.getElementById("subFee4Course8Label").innerHTML = "";
+						document.getElementById("subFee5Course8Label").innerHTML = "";
+					}
+					
+					if (info[0].course9 != "") {
+						document.getElementById("course9LabelAddFee").innerHTML = courseLoad[8] + '<select name = "course9Product" onchange="checkHiddenValueProduct(9)">'
+						+ '<option value=0>--请选择--</option>'
+						   + '</select>'
+						   + '<input type="hidden" name="course9ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course9" />' + '元';
+						if (info[0].subFeeItem1 != "") {
+							document.getElementById("subFee1Course9Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course9SubFee1" />元';
+						} else {
+							document.getElementById("subFee1Course9Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem2 != "") {
+							document.getElementById("subFee2Course9Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course9SubFee2" />元';
+						} else {
+							document.getElementById("subFee2Course9Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem3 != "") {
+							document.getElementById("subFee3Course9Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course9SubFee3" />元';
+						} else {
+							document.getElementById("subFee3Course9Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem4 != "") {
+							document.getElementById("subFee4Course9Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course9SubFee4" />元';
+						} else {
+							document.getElementById("subFee4Course9Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem5 != "") {
+							document.getElementById("subFee5Course9Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course9SubFee5" />元';
+						} else {
+							document.getElementById("subFee5Course9Label").innerHTML = "";
+						}
+					} else {
+						document.getElementById("course9LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course9Label").innerHTML = "";
+						document.getElementById("subFee2Course9Label").innerHTML = "";
+						document.getElementById("subFee3Course9Label").innerHTML = "";
+						document.getElementById("subFee4Course9Label").innerHTML = "";
+						document.getElementById("subFee5Course9Label").innerHTML = "";
+					}
+					
+					if (info[0].course10 != "") {
+						document.getElementById("course10LabelAddFee").innerHTML = courseLoad[9] + '<select name = "course10Product" onchange="checkHiddenValueProduct(10)">'
+						+ '<option value=0>--请选择--</option>'
+						   + '</select>'
+						   + '<input type="hidden" name="course10ProductCopy" />' 
+						   + '<input type="number" style="width: 4em" name="course10" />' + '元';
+						if (info[0].subFeeItem1 != "") {
+							document.getElementById("subFee1Course10Label").innerHTML = '<input type="text" style="width:4em" name=subFee1Name[] value=' + info[0].subFeeItem1 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course10SubFee1" />元';
+						} else {
+							document.getElementById("subFee1Course10Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem2 != "") {
+							document.getElementById("subFee2Course10Label").innerHTML = '<input type="text" style="width:4em" name=subFee2Name[] value=' + info[0].subFeeItem2 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course10SubFee2" />元';
+						} else {
+							document.getElementById("subFee2Course10Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem3 != "") {
+							document.getElementById("subFee3Course10Label").innerHTML = '<input type="text" style="width:4em" name=subFee3Name[] value=' + info[0].subFeeItem3 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course10SubFee3" />元';
+						} else {
+							document.getElementById("subFee3Course10Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem4 != "") {
+							document.getElementById("subFee4Course10Label").innerHTML = '<input type="text" style="width:4em" name=subFee4Name[] value=' + info[0].subFeeItem4 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course10SubFee4" />元';
+						} else {
+							document.getElementById("subFee4Course10Label").innerHTML = "";
+						}
+						if (info[0].subFeeItem5 != "") {
+							document.getElementById("subFee5Course10Label").innerHTML = '<input type="text" style="width:4em" name=subFee5Name[] value=' + info[0].subFeeItem5 +' readOnly="true" />' + '<input type="number" style="width: 4em" name="course10SubFee5" />元';
+						} else {
+							document.getElementById("subFee5Course10Label").innerHTML = "";
+						}
+					} else {
+						document.getElementById("course10LabelAddFee").innerHTML = "";
+						document.getElementById("subFee1Course10Label").innerHTML = "";
+						document.getElementById("subFee2Course10Label").innerHTML = "";
+						document.getElementById("subFee3Course10Label").innerHTML = "";
+						document.getElementById("subFee4Course10Label").innerHTML = "";
+						document.getElementById("subFee5Course10Label").innerHTML = "";
+					}
 					/*
 					var obj = document.getElementsByName("MathProduct")[0];
 					obj.options.add(new Option(info[0].product1, 1));	
@@ -2148,11 +3271,16 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 					alert(obj);
 					*/
 					
-				    var obj1 = document.getElementsByName("MathProduct")[0];
-					var obj2 = document.getElementsByName("ChineseProduct")[0];
-					var obj3 = document.getElementsByName("EnglishProduct")[0];
-					var obj4 = document.getElementsByName("PhysicsProduct")[0];
-					var obj5 = document.getElementsByName("ChemistryProduct")[0];
+				    var obj1 = document.getElementsByName("course1Product")[0];
+					var obj2 = document.getElementsByName("course2Product")[0];
+					var obj3 = document.getElementsByName("course3Product")[0];
+					var obj4 = document.getElementsByName("course4Product")[0];
+					var obj5 = document.getElementsByName("course5Product")[0];
+					var obj6 = document.getElementsByName("course6Product")[0];
+					var obj7 = document.getElementsByName("course7Product")[0];
+					var obj8 = document.getElementsByName("course8Product")[0];
+					var obj9 = document.getElementsByName("course9Product")[0];
+					var obj10 = document.getElementsByName("course10Product")[0];
 					// 产品名称
 					
 					if(obj1){
@@ -2180,6 +3308,31 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 							obj5.removeChild(obj5.options[i]);
 						}						
 					}
+					if(obj6){
+						for(var i=1;i<obj6.options.length;){
+							obj6.removeChild(obj6.options[i]);
+						}						
+					}
+					if(obj7){
+						for(var i=1;i<obj7.options.length;){
+							obj7.removeChild(obj7.options[i]);
+						}						
+					}
+					if(obj8){
+						for(var i=1;i<obj8.options.length;){
+							obj8.removeChild(obj8.options[i]);
+						}						
+					}
+					if(obj9){
+						for(var i=1;i<obj9.options.length;){
+							obj9.removeChild(obj9.options[i]);
+						}						
+					}
+					if(obj10){
+						for(var i=1;i<obj10.options.length;){
+							obj10.removeChild(obj10.options[i]);
+						}						
+					}
 															
 					
 					if(info[0].product1 !=""){
@@ -2197,6 +3350,21 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 						}
 						if(obj5){
 							obj5.options.add(new Option(info[0].product1, 1));	
+						}
+						if(obj6){
+							obj6.options.add(new Option(info[0].product1, 1));	
+						}
+						if(obj7){
+							obj7.options.add(new Option(info[0].product1, 1));	
+						}
+						if(obj8){
+							obj8.options.add(new Option(info[0].product1, 1));	
+						}
+						if(obj9){
+							obj9.options.add(new Option(info[0].product1, 1));	
+						}
+						if(obj10){
+							obj10.options.add(new Option(info[0].product1, 1));	
 						}
 					}
 										
@@ -2216,6 +3384,21 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 						if(obj5){
 						obj5.options.add(new Option(info[0].product2, 1));	
 						}
+						if(obj6){
+						obj6.options.add(new Option(info[0].product2, 1));	
+						}
+						if(obj7){
+						obj7.options.add(new Option(info[0].product2, 1));	
+						}
+						if(obj8){
+						obj8.options.add(new Option(info[0].product2, 1));	
+						}
+						if(obj9){
+						obj9.options.add(new Option(info[0].product2, 1));	
+						}
+						if(obj10){
+						obj10.options.add(new Option(info[0].product2, 1));	
+						}
 					}
 					if(info[0].product3!=""){
 						if(obj1){
@@ -2232,6 +3415,21 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 						}
 						if(obj5){
 						obj5.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj6){
+						obj6.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj7){
+						obj7.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj8){
+						obj8.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj9){
+						obj9.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj10){
+						obj10.options.add(new Option(info[0].product3, 1));	
 						}
 					}
 					if(info[0].product4 !=""){
@@ -2250,6 +3448,21 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 						if(obj5){
 						obj5.options.add(new Option(info[0].product4, 1));	
 						}
+						if(obj6){
+						obj6.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj7){
+						obj7.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj8){
+						obj8.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj9){
+						obj9.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj10){
+						obj10.options.add(new Option(info[0].product3, 1));	
+						}
 					}
 					if(info[0].product5 !=""){
 						if(obj1){
@@ -2267,37 +3480,22 @@ function sqlPriceAndSubFeeAndProduct(schoolZone) {
 						if(obj5){
 						obj5.options.add(new Option(info[0].product5, 1));	
 						}
+						if(obj6){
+						obj6.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj7){
+						obj7.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj8){
+						obj8.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj9){
+						obj9.options.add(new Option(info[0].product3, 1));	
+						}
+						if(obj10){
+						obj10.options.add(new Option(info[0].product3, 1));	
+						}
 					}
-					
-
-					/*
-					 // 根据所选校区自动加载相应的科目
-					 if (info[0].course1 != "") {
-					 document.getElementsByName("courseLabel")[0].innerHTML = '<input type="radio" name="course" id="course1" value="1">' + '数学';
-					 } else {
-					 document.getElementsByName("courseLabel")[0].innerHTML = "";
-					 }
-					 if (info[0].course2 != "") {
-					 document.getElementsByName("courseLabel")[1].innerHTML = '<input type="radio" name="course" id="course2" value="2">' + '语文';
-					 } else {
-					 document.getElementsByName("courseLabel")[1].innerHTML = "";
-					 }
-					 if (info[0].course3 != "") {
-					 document.getElementsByName("courseLabel")[2].innerHTML = '<input type="radio" name="course" id="course3"  value="3">' + '英语';
-					 } else {
-					 document.getElementsByName("courseLabel")[2].innerHTML = "";
-					 }
-					 if (info[0].course4 != "") {
-					 document.getElementsByName("courseLabel")[3].innerHTML = '<input type="radio" name="course" id="course4"  value="4">' + '物理';
-					 } else {
-					 document.getElementsByName("courseLabel")[3].innerHTML = "";
-					 }
-					 if (info[0].course5 != "") {
-					 document.getElementsByName("courseLabel")[4].innerHTML = '<input type="radio" name="course" id="course5"  value="5">' + '化学';
-					 } else {
-					 document.getElementsByName("courseLabel")[4].innerHTML = "";
-					 }
-					 */
 				}
 
 			} else {
@@ -2320,49 +3518,94 @@ function checkHiddenValueProduct(flag) {
 	var strtmp="";
 	switch(flag){
 	case 1:
-		obj = document.getElementsByName("MathProduct")[0];
+		obj = document.getElementsByName("course1Product")[0];
 		if(obj.value>0){
 			strtmp=obj.options[obj.selectedIndex].text;
 		}else{
 			strtmp="";
 		}
-		document.getElementsByName("MathProductCopy")[0].value = strtmp;
+		document.getElementsByName("course1ProductCopy")[0].value = strtmp;
 		break;
 	case 2:
-		obj = document.getElementsByName("ChineseProduct")[0];
+		obj = document.getElementsByName("course2Product")[0];
 		if(obj.value>0){
 			strtmp=obj.options[obj.selectedIndex].text;
 		}else{
 			strtmp="";
 		}
-		document.getElementsByName("ChineseProductCopy")[0].value = strtmp;
+		document.getElementsByName("course2ProductCopy")[0].value = strtmp;
 		break;
 	case 3:
-		obj = document.getElementsByName("EnglishProduct")[0];
+		obj = document.getElementsByName("course3Product")[0];
 		if(obj.value>0){
 			strtmp=obj.options[obj.selectedIndex].text;
 		}else{
 			strtmp="";
 		}
-		document.getElementsByName("EnglishProductCopy")[0].value = strtmp;
+		document.getElementsByName("course3ProductCopy")[0].value = strtmp;
 		break;
 	case 4:
-		obj = document.getElementsByName("PhysicsProduct")[0];
+		obj = document.getElementsByName("course4Product")[0];
 		if(obj.value>0){
 			strtmp=obj.options[obj.selectedIndex].text;
 		}else{
 			strtmp="";
 		}
-		document.getElementsByName("PhysicsProductCopy")[0].value = strtmp;
+		document.getElementsByName("course4ProductCopy")[0].value = strtmp;
 		break;
 	case 5:
-		obj = document.getElementsByName("ChemistryProduct")[0];
+		obj = document.getElementsByName("course5Product")[0];
 		if(obj.value>0){
 			strtmp=obj.options[obj.selectedIndex].text;
 		}else{
 			strtmp="";
 		}
-		document.getElementsByName("ChemistryProductCopy")[0].value = strtmp;
+		document.getElementsByName("course5ProductCopy")[0].value = strtmp;
+		break;
+	case 6:
+		obj = document.getElementsByName("course6Product")[0];
+		if(obj.value>0){
+			strtmp=obj.options[obj.selectedIndex].text;
+		}else{
+			strtmp="";
+		}
+		document.getElementsByName("course6ProductCopy")[0].value = strtmp;
+		break;
+	case 7:
+		obj = document.getElementsByName("course7Product")[0];
+		if(obj.value>0){
+			strtmp=obj.options[obj.selectedIndex].text;
+		}else{
+			strtmp="";
+		}
+		document.getElementsByName("course7ProductCopy")[0].value = strtmp;
+		break;
+	case 8:
+		obj = document.getElementsByName("course8Product")[0];
+		if(obj.value>0){
+			strtmp=obj.options[obj.selectedIndex].text;
+		}else{
+			strtmp="";
+		}
+		document.getElementsByName("course8ProductCopy")[0].value = strtmp;
+		break;
+	case 9:
+		obj = document.getElementsByName("course9Product")[0];
+		if(obj.value>0){
+			strtmp=obj.options[obj.selectedIndex].text;
+		}else{
+			strtmp="";
+		}
+		document.getElementsByName("course9ProductCopy")[0].value = strtmp;
+		break;
+	case 10:
+		obj = document.getElementsByName("course10Product")[0];
+		if(obj.value>0){
+			strtmp=obj.options[obj.selectedIndex].text;
+		}else{
+			strtmp="";
+		}
+		document.getElementsByName("course10ProductCopy")[0].value = strtmp;
 		break;
 	default:
 		break;
