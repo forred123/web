@@ -2,96 +2,226 @@ create database mlsJYDB default character set utf8;
 use mlsJYDB;
 
 create table recordStudentTable(
-	uid int unsigned not null auto_increment,
-	passWD char(32) not null default 'hhxx',#mls123 好好学习
-	name1 varchar(20) not null default '',
-	name2 varchar(20) not null default '',
-	sex char(4) not null default '',
-	schoolZone1 char(32) not null default '',
-	schoolZone2 char(32) not null default '',
-	schoolZone3 char(32) not null default '',
-	
-	MathClassIdInMLS int unsigned not null default '0',#班级ID
-	#0和4为不在班状态，可以重新分班，1，2，3为在班状态，不能重新分班（即除非有退班操作）
-	MathStateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的（试听失败）,5为退学
-	MathProduct char(5) not null default '',
-	MathOutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
-	MathOutGradeReason varchar(20) not null default '', #
-	
-	MathAttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
-	MathAttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间 
-	
-	ChineseClassIdInMLS int unsigned not null default '0',#班级ID
-	ChineseStateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
-	ChineseOutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
-	ChineseOutGradeReason varchar(20) not null default '', #
-	
-	ChineseAttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
-	ChineseAttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间 
-	
-	EnglishClassIdInMLS int unsigned not null default '0',#班级ID
-	EnglishStateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
-	EnglishOutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
-	EnglishOutGradeReason varchar(20) not null default '', #
-	
-	EnglishAttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
-	EnglishAttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间 
-	
-	PhysicsClassIdInMLS int unsigned not null default '0',#班级ID
-	PhysicsStateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
-	PhysicsOutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
-	PhysicsOutGradeReason varchar(20) not null default '', #
-	
-	PhysicsAttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
-	PhysicsAttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间 
-	
-	ChemistryClassIdInMLS int unsigned not null default '0',#班级ID
-	ChemistryStateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
-	ChemistryOutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
-	ChemistryOutGradeReason varchar(20) not null default '', #
-	
-	ChemistryAttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
-	ChemistryAttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间 
-	
-	priceBK float unsigned not null default '0',
-    hour1 int unsigned not null default '50',
-    priceHour1YDY int unsigned not null default '0',
-    pay1 int unsigned not null default '0',
-	hour2 int unsigned not null default '100',
-    priceHour2YDY int unsigned not null default '0', 
-    pay2 int unsigned not null default '0',
-	hour3 int unsigned not null default '100',
-    priceHour3YDY int unsigned not null default '0',
-    pay3 int unsigned not null default '0',	
-    
-	lastPrice float unsigned not null default '0',	#学生考勤扣费时的真实价格，扣费表中的价格本质上是扣的钱数，不一定是真实价格，因为有请假和旷课的情况
-	#attendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
-	#attendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间 	
-	school1 char(32) default '',
-	school2 char(32) default '',
-	grade char(4) not null default '',
-	class char(20) not null default '',
-	studentWX char(16) default '',
-	studentQQ char(16) default '',
-	studentTel char(16) default '',
-	motherTel char(16) default '',
-	motherWX char(16) default '',
-	fatherTel char(16) default '',
-	fatherWX char(16) default '',
-	address Text default '',
-	inTime varchar(20) not null default '000000',	
-	outTime varchar(20) not null default '000000',
-	
-	role int not null default 0,#权限，校长是9，校区负责人是8，教师是1，学生是0
-	primary key(uid)
+uid int unsigned not null auto_increment,
+passWD char(32) not null default 'hhxx',#mls123 好好学习
+name1 varchar(20) not null default '',
+name2 varchar(20) not null default '',
+sex char(4) not null default '',
+schoolZone1 char(32) not null default '',
+schoolZone2 char(32) not null default '',
+schoolZone3 char(32) not null default '',
+
+course1ClassIdInMLS int unsigned not null default '0',#班级ID
+#0和4为不在班状态，可以重新分班，1，2，3为在班状态，不能重新分班（即除非有退班操作）
+course1StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的（试听失败）,5为退学
+course1Product char(5) not null default '',
+course1OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course1OutGradeReason varchar(20) not null default '', #
+
+course1AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course1AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course2ClassIdInMLS int unsigned not null default '0',#班级ID
+course2StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course2Product char(5) not null default '',
+course2OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course2OutGradeReason varchar(20) not null default '', #
+
+course2AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course2AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course3ClassIdInMLS int unsigned not null default '0',#班级ID
+course3StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course3Product char(5) not null default '',
+course3OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course3OutGradeReason varchar(20) not null default '', #
+
+course3AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course3AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course4ClassIdInMLS int unsigned not null default '0',#班级ID
+course4StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course4Product char(5) not null default '',
+course4OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course4OutGradeReason varchar(20) not null default '', #
+
+course4AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course4AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course5ClassIdInMLS int unsigned not null default '0',#班级ID
+course5StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course5Product char(5) not null default '',
+course5OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course5OutGradeReason varchar(20) not null default '', #
+
+course6AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course6AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course6ClassIdInMLS int unsigned not null default '0',#班级ID
+course6StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course6Product char(5) not null default '',
+course6OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course6OutGradeReason varchar(20) not null default '', #
+course6AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course6AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course7ClassIdInMLS int unsigned not null default '0',#班级ID
+course7StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course7Product char(5) not null default '',
+course7OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course7OutGradeReason varchar(20) not null default '', #
+course7AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course7AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course8ClassIdInMLS int unsigned not null default '0',#班级ID
+course8StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course8Product char(5) not null default '',
+course8OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course8OutGradeReason varchar(20) not null default '', #
+course8AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course8AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course9ClassIdInMLS int unsigned not null default '0',#班级ID
+course9StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course9Product char(5) not null default '',
+course9OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course9OutGradeReason varchar(20) not null default '', #
+course9AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course9AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+course10ClassIdInMLS int unsigned not null default '0',#班级ID
+course10StateInGrade int unsigned not null default '0', # 是否在班，0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听，3为试听后留班的，4为试听后出班的,5为退学
+course10Product char(5) not null default '',
+course10OutOrBackGradeTime varchar(20) not null default '0', # 退班或回班时间
+course10OutGradeReason varchar(20) not null default '', #
+course10AttendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+course10AttendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+
+priceBK float unsigned not null default '0',
+hour1 int unsigned not null default '50',
+priceHour1YDY int unsigned not null default '0',
+pay1 int unsigned not null default '0',
+hour2 int unsigned not null default '100',
+priceHour2YDY int unsigned not null default '0',
+pay2 int unsigned not null default '0',
+hour3 int unsigned not null default '100',
+priceHour3YDY int unsigned not null default '0',
+pay3 int unsigned not null default '0',
+
+lastPrice float unsigned not null default '0',	#学生考勤扣费时的真实价格，扣费表中的价格本质上是扣的钱数，不一定是真实价格，因为有请假和旷课的情况
+#attendanceStartTime varchar(20) not null default '000000', #上次考勤的开时时间
+#attendanceEndTime varchar(20) not null default '000000',  #上次考勤的结束时间
+school1 char(32) default '',
+school2 char(32) default '',
+grade char(4) not null default '',
+class char(20) not null default '',
+studentWX char(16) default '',
+studentQQ char(16) default '',
+studentTel char(16) default '',
+motherTel char(16) default '',
+motherWX char(16) default '',
+fatherTel char(16) default '',
+fatherWX char(16) default '',
+address Text default '',
+inTime varchar(20) not null default '000000',
+outTime varchar(20) not null default '000000',
+
+role int not null default 0,#权限，校长是9，校区负责人是8，教师是1，学生是0
+primary key(uid)
 );
+
+//修改
+alter table recordStudentTable change MathClassIdInMLS course1ClassIdInMLS int unsigned not null default '0';
+alter table recordStudentTable change ChineseClassIdInMLS course2ClassIdInMLS int unsigned not null default '0';
+alter table recordStudentTable change EnglishClassIdInMLS course3ClassIdInMLS int unsigned not null default '0';
+alter table recordStudentTable change PhysicsClassIdInMLS course4ClassIdInMLS int unsigned not null default '0';
+alter table recordStudentTable change ChemistryClassIdInMLS course5ClassIdInMLS int unsigned not null default '0';
+
+alter table recordStudentTable change MathStateInGrade course1StateInGrade int unsigned not null default '0';
+alter table recordStudentTable change ChineseStateInGrade course2StateInGrade int unsigned not null default '0';
+alter table recordStudentTable change EnglishStateInGrade course3StateInGrade int unsigned not null default '0';
+alter table recordStudentTable change PhysicsStateInGrade course4StateInGrade int unsigned not null default '0';
+alter table recordStudentTable change ChemistryStateInGrade course5StateInGrade int unsigned not null default '0';
+
+alter table recordStudentTable change MathOutOrBackGradeTime course1OutOrBackGradeTime varchar(20) not null default '0';
+alter table recordStudentTable change ChineseOutOrBackGradeTime course2OutOrBackGradeTime varchar(20) not null default '0';
+alter table recordStudentTable change EnglishOutOrBackGradeTime course3OutOrBackGradeTime varchar(20) not null default '0';
+alter table recordStudentTable change PhysicsOutOrBackGradeTime course4OutOrBackGradeTime varchar(20) not null default '0';
+alter table recordStudentTable change ChemistryOutOrBackGradeTime course5OutOrBackGradeTime varchar(20) not null default '0';
+
+alter table recordStudentTable change MathOutGradeReason course1OutGradeReason varchar(20) not null default '';
+alter table recordStudentTable change ChineseOutGradeReason course2OutGradeReason varchar(20) not null default '';
+alter table recordStudentTable change EnglishOutGradeReason course3OutGradeReason varchar(20) not null default '';
+alter table recordStudentTable change PhysicsOutGradeReason course4OutGradeReason varchar(20) not null default '';
+alter table recordStudentTable change ChemistryOutGradeReason course5OutGradeReason varchar(20) not null default '';
+
+alter table recordStudentTable change MathAttendanceStartTime course1AttendanceStartTime varchar(20) not null default '000000';
+alter table recordStudentTable change ChineseAttendanceStartTime course2AttendanceStartTime varchar(20) not null default '000000';
+alter table recordStudentTable change EnglishAttendanceStartTime course3AttendanceStartTime varchar(20) not null default '000000';
+alter table recordStudentTable change PhysicsAttendanceStartTime course4AttendanceStartTime varchar(20) not null default '000000';
+alter table recordStudentTable change ChemistryAttendanceStartTime course5AttendanceStartTime varchar(20) not null default '000000';
+
+alter table recordStudentTable change MathAttendanceEndTime course1AttendanceEndTime varchar(20) not null default '000000';
+alter table recordStudentTable change ChineseAttendanceEndTime course2AttendanceEndTime varchar(20) not null default '000000';
+alter table recordStudentTable change EnglishAttendanceEndTime course3AttendanceEndTime varchar(20) not null default '000000';
+alter table recordStudentTable change PhysicsAttendanceEndTime course4AttendanceEndTime varchar(20) not null default '000000';
+alter table recordStudentTable change ChemistryAttendanceEndTime course5AttendanceEndTime varchar(20) not null default '000000';
+
+alter table recordStudentTable add course6ClassIdInMLS int unsigned not null default '0' after course5AttendanceEndTime;
+alter table recordStudentTable add course6StateInGrade int unsigned not null default '0'after course6ClassIdInMLS;
+alter table recordStudentTable add course6OutOrBackGradeTime varchar(20) not null default '0' after course6StateInGrade;
+alter table recordStudentTable add course6OutGradeReason varchar(20) not null default '' after course6OutOrBackGradeTime;
+alter table recordStudentTable add course6AttendanceStartTime varchar(20) not null default '000000' after course6OutGradeReason;
+alter table recordStudentTable add course6AttendanceEndTime varchar(20) not null default '000000' after course6AttendanceStartTime;
+
+alter table recordStudentTable add course7ClassIdInMLS int unsigned not null default '0' after course6AttendanceEndTime;
+alter table recordStudentTable add course7StateInGrade int unsigned not null default '0'after course7ClassIdInMLS;
+alter table recordStudentTable add course7OutOrBackGradeTime varchar(20) not null default '0' after course7StateInGrade;
+alter table recordStudentTable add course7OutGradeReason varchar(20) not null default '' after course7OutOrBackGradeTime;
+alter table recordStudentTable add course7AttendanceStartTime varchar(20) not null default '000000' after course7OutGradeReason;
+alter table recordStudentTable add course7AttendanceEndTime varchar(20) not null default '000000' after course7AttendanceStartTime;
+
+alter table recordStudentTable add course8ClassIdInMLS int unsigned not null default '0' after course7AttendanceEndTime;
+alter table recordStudentTable add course8StateInGrade int unsigned not null default '0'after course8ClassIdInMLS;
+alter table recordStudentTable add course8OutOrBackGradeTime varchar(20) not null default '0' after course8StateInGrade;
+alter table recordStudentTable add course8OutGradeReason varchar(20) not null default '' after course8OutOrBackGradeTime;
+alter table recordStudentTable add course8AttendanceStartTime varchar(20) not null default '000000' after course8OutGradeReason;
+alter table recordStudentTable add course8AttendanceEndTime varchar(20) not null default '000000' after course8AttendanceStartTime;
+
+alter table recordStudentTable add course9ClassIdInMLS int unsigned not null default '0' after course8AttendanceEndTime;
+alter table recordStudentTable add course9StateInGrade int unsigned not null default '0'after course9ClassIdInMLS;
+alter table recordStudentTable add course9OutOrBackGradeTime varchar(20) not null default '0' after course9StateInGrade;
+alter table recordStudentTable add course9OutGradeReason varchar(20) not null default '' after course9OutOrBackGradeTime;
+alter table recordStudentTable add course9AttendanceStartTime varchar(20) not null default '000000' after course9OutGradeReason;
+alter table recordStudentTable add course9AttendanceEndTime varchar(20) not null default '000000' after course9AttendanceStartTime;
+
+alter table recordStudentTable add course10ClassIdInMLS int unsigned not null default '0' after course9AttendanceEndTime;
+alter table recordStudentTable add course10StateInGrade int unsigned not null default '0'after course10ClassIdInMLS;
+alter table recordStudentTable add course10OutOrBackGradeTime varchar(20) not null default '0' after course10StateInGrade;
+alter table recordStudentTable add course10OutGradeReason varchar(20) not null default '' after course10OutOrBackGradeTime;
+alter table recordStudentTable add course10AttendanceStartTime varchar(20) not null default '000000' after course10OutGradeReason;
+alter table recordStudentTable add course10AttendanceEndTime varchar(20) not null default '000000' after course10AttendanceStartTime;
+
+alter table recordStudentTable change MathProduct course1Product char(5) not null default '';
+alter table recordStudentTable change ChineseProduct course2Product char(5) not null default '';
+alter table recordStudentTable change EnglishProduct course3Product char(5) not null default '';
+alter table recordStudentTable change PhysicsProduct course4Product char(5) not null default '';
+alter table recordStudentTable change ChemistryProduct course5Product char(5) not null default '';
+
+alter table recordStudentTable add course6Product char(5) not null default '' after course6StateInGrade;
+alter table recordStudentTable add course7Product char(5) not null default '' after course7StateInGrade;
+alter table recordStudentTable add course8Product char(5) not null default '' after course8StateInGrade;
+alter table recordStudentTable add course9Product char(5) not null default '' after course9StateInGrade;
+alter table recordStudentTable add course10Product char(5) not null default '' after course10StateInGrade;
+
+
+//
 
 // 所有学生年级升级一年
 update recordStudentTable set grade=grade+1;
 
 // 让学生ID从1001开始自动增长，1000以内是教师ID，已作废
 alter table recordStudent AUTO_INCREMENT=1001;
-
 
 //alter table user change passWD passWD char(32) not null default '';
 //默认密码为mls123
@@ -102,6 +232,13 @@ alter table recordStudentTable change passWD passWD char(32) not null default 'h
 update recordStudentTable set passWD="hhxx";
 
 // 修改一列
+alter table recordStudentTable drop column course6ClassIdInMLS;
+alter table recordStudentTable drop column course6StateInGrade;
+alter table recordStudentTable drop column course6OutOrBackGradeTime;
+alter table recordStudentTable drop column course6AttendanceStartTime;
+alter table recordStudentTable drop column course6AttendanceEndTime;
+alter table recordStudentTable drop column course6OutGradeReason;
+
 alter table recordStudentTable change priceBK priceBK float unsigned not null default '0';
 alter table recordStudentTable change lastPrice lastPrice float unsigned not null default '0';
 
@@ -110,7 +247,6 @@ alter table recordStudentTable change time inTime varchar(20) not null default '
 alter table recordStudentTable add outTime varchar(20) not null default '000000' after inTime;
 update recordStudentTable set outtime="" where outTime=000000;
 //
-
 
 // 删除一列
 alter table recordStudentTable drop column attendanceStartTime;
@@ -136,14 +272,11 @@ alter table recordStudentTable add PhysicsAttendanceEndTime varchar(20) not null
 alter table recordStudentTable add ChemistryAttendanceStartTime varchar(20) not null default '000000' after ChemistryOutGradeReason;
 alter table recordStudentTable add ChemistryAttendanceEndTime varchar(20) not null default '000000' after ChemistryAttendanceStartTime;
 
-
-
 alter table recordStudentTable add MathProduct char(5) not null default '' after MathStateInGrade;
 alter table recordStudentTable add ChineseProduct char(5) not null default '' after ChineseStateInGrade;
 alter table recordStudentTable add EnglishProduct char(5) not null default '' after EnglishStateInGrade;
 alter table recordStudentTable add PhysicsProduct char(5) not null default '' after PhysicsStateInGrade;
 alter table recordStudentTable add ChemistryProduct char(5) not null default '' after ChemistryStateInGrade;
-
 
 insert into user (name,sex,passWD,role) values("admin","男",md5("admin"),1);
 insert into user (name,sex,passWD) values("张三","女",md5("123"));
@@ -157,4 +290,4 @@ alter table recordStudentTable add priceHour1YDY int unsigned not null default '
 alter table recordStudentTable add hour2 int unsigned not null default '100' after priceHour1YDY;
 alter table recordStudentTable add priceHour2YDY int unsigned not null default '0' after hour2;
 alter table recordStudentTable add hour3 int unsigned not null default '100' after priceHour2YDY;
-alter table recordStudentTable add priceHour3YDY int unsigned not null default '0' after hour3;	
+alter table recordStudentTable add priceHour3YDY int unsigned not null default '0' after hour3;

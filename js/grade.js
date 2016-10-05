@@ -7,6 +7,8 @@ var i = 0;
 var len = 0;
 var tableRowCount = 0;
 var productLoad = new Array;
+var maxCourseNum = 10;
+var courseLoad = new Array();
 
 //根据筛选条件进行查找班级，然后添加到班级查询结果中
 function sqlClassInfo() {
@@ -195,23 +197,43 @@ function loadCourse(schoolZone) {
 	}
 	i = 1;
 	if (info[index].course1 != "") {
-		obj.options.add(new Option("数学", i));
+		obj.options.add(new Option(courseLoad[0], i));
 		i++;
 	}
 	if (info[index].course2 != "") {
-		obj.options.add(new Option("语文", i));
+		obj.options.add(new Option(courseLoad[1], i));
 		i++;
 	}
 	if (info[index].course3 != "") {
-		obj.options.add(new Option("英语", i));
+		obj.options.add(new Option(courseLoad[2], i));
 		i++;
 	}
 	if (info[index].course4 != "") {
-		obj.options.add(new Option("物理", i));
+		obj.options.add(new Option(courseLoad[3], i));
 		i++;
 	}
 	if (info[index].course5 != "") {
-		obj.options.add(new Option("化学", i));
+		obj.options.add(new Option(courseLoad[4], i));
+		i++;
+	}
+	if (info[index].course6 != "") {
+		obj.options.add(new Option(courseLoad[5], i));
+		i++;
+	}
+	if (info[index].course7 != "") {
+		obj.options.add(new Option(courseLoad[6], i));
+		i++;
+	}
+	if (info[index].course8 != "") {
+		obj.options.add(new Option(courseLoad[7], i));
+		i++;
+	}
+	if (info[index].course9 != "") {
+		obj.options.add(new Option(courseLoad[8], i));
+		i++;
+	}
+	if (info[index].course10 != "") {
+		obj.options.add(new Option(courseLoad[9], i));
 		i++;
 	}
 }
@@ -405,9 +427,6 @@ function loadNotInClassStudent(flag, schoolZone, product) {
 					i = 0;
 					//alert(ret);
 					for (var tmp in info) {
-						//						loadstudentNotInGrade(info[i].uid,flag);
-						//alert(info[i].MathClassIdInMLS);
-						//alert(ret);
 						loadstudentNotInGrade(info[i], flag, product);
 						i++;
 					}
@@ -469,55 +488,105 @@ function loadstudentNotInGrade(recordStudentObj, flag, product) {
 					// 例如某个学生交了两科学费，未分班前显示两个待分班结果，一个一个分班，如果其中一个分完班，则以后不显示这个学科的待分班记录，直到第二个也分班后则不显示有该学生的待分班信息
 					for (var tmp in info) {
 						if (flag == 0) {
-							if ((info[i].MathProduct != "") && ((recordStudentObj.MathStateInGrade == "0") || (recordStudentObj.MathStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "数学", tableRowCount);
+							if ((info[i].course1Product != "") && ((recordStudentObj.course1StateInGrade == "0") || (recordStudentObj.course1StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[0], tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].ChineseProduct != "") && ((recordStudentObj.ChineseStateInGrade == "0") || (recordStudentObj.ChineseStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "语文", tableRowCount);
+							if ((info[i].course2Product != "") && ((recordStudentObj.course2StateInGrade == "0") || (recordStudentObj.course2StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[1], tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].EnglishProduct != "") && ((recordStudentObj.EnglishStateInGrade == "0") || (recordStudentObj.EnglishStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "英语", tableRowCount);
+							if ((info[i].course3Product != "") && ((recordStudentObj.course3StateInGrade == "0") || (recordStudentObj.course3StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[2], tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].PhysicsProduct != "") && ((recordStudentObj.PhysicsStateInGrade == "0") || (recordStudentObj.PhysicsStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "物理", tableRowCount);
+							if ((info[i].course4Product != "") && ((recordStudentObj.course4StateInGrade == "0") || (recordStudentObj.course4StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[3], tableRowCount);
 								tableRowCount++;
 							}
-							if ((info[i].ChemistryProduct != "") && ((recordStudentObj.ChemistryStateInGrade == "0") || (recordStudentObj.ChemistryStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "化学", tableRowCount);
+							if ((info[i].course5Product != "") && ((recordStudentObj.course5StateInGrade == "0") || (recordStudentObj.course5StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[4], tableRowCount);
+								tableRowCount++;
+							}
+							if ((info[i].course6Product != "") && ((recordStudentObj.course6StateInGrade == "0") || (recordStudentObj.course6StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[5], tableRowCount);
+								tableRowCount++;
+							}
+							if ((info[i].course7Product != "") && ((recordStudentObj.course7StateInGrade == "0") || (recordStudentObj.course7StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[6], tableRowCount);
+								tableRowCount++;
+							}
+							if ((info[i].course8Product != "") && ((recordStudentObj.course8StateInGrade == "0") || (recordStudentObj.course8StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[7], tableRowCount);
+								tableRowCount++;
+							}
+							if ((info[i].course9Product != "") && ((recordStudentObj.course9StateInGrade == "0") || (recordStudentObj.course9StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[8], tableRowCount);
+								tableRowCount++;
+							}
+							if ((info[i].course10Product != "") && ((recordStudentObj.course10StateInGrade == "0") || (recordStudentObj.course10StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[9], tableRowCount);
 								tableRowCount++;
 							}
 
 						}
 						if (flag == 1) {
-							if ((info[i].MathProduct != "") && ((recordStudentObj.MathStateInGrade == "0") || (recordStudentObj.MathStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "数学", tableRowCount);
+							if ((info[i].course1Product != "") && ((recordStudentObj.course1StateInGrade == "0") || (recordStudentObj.course1StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[0], tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 2) {
-							if ((info[i].ChineseProduct != "") && ((recordStudentObj.ChineseStateInGrade == "0") || (recordStudentObj.ChineseStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "语文", tableRowCount);
+							if ((info[i].course2Product != "") && ((recordStudentObj.course2StateInGrade == "0") || (recordStudentObj.course2StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[1], tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 3) {
-							if ((info[i].EnglishProduct != "") && ((recordStudentObj.EnglishStateInGrade == "0") || (recordStudentObj.EnglishStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "英语", tableRowCount);
+							if ((info[i].course3Product != "") && ((recordStudentObj.course3StateInGrade == "0") || (recordStudentObj.course3StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[2], tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 4) {
-							if ((info[i].PhysicsProduct != "") && ((recordStudentObj.PhysicsStateInGrade == "0") || (recordStudentObj.PhysicsStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "物理", tableRowCount);
+							if ((info[i].course4Product != "") && ((recordStudentObj.course4StateInGrade == "0") || (recordStudentObj.course4StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[3], tableRowCount);
 								tableRowCount++;
 							}
 						}
 						if (flag == 5) {
-							if ((info[i].ChemistryProduct != "") && ((recordStudentObj.ChemistryStateInGrade == "0") || (recordStudentObj.ChemistryStateInGrade == "4"))) {
-								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], "化学", tableRowCount);
+							if ((info[i].course5Product != "") && ((recordStudentObj.course5StateInGrade == "0") || (recordStudentObj.course5StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[4], tableRowCount);
+								tableRowCount++;
+							}
+						}
+						if (flag == 6) {
+							if ((info[i].course6Product != "") && ((recordStudentObj.course6StateInGrade == "0") || (recordStudentObj.course6StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[5], tableRowCount);
+								tableRowCount++;
+							}
+						}
+						if (flag == 7) {
+							if ((info[i].course7Product != "") && ((recordStudentObj.course7StateInGrade == "0") || (recordStudentObj.course7StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[6], tableRowCount);
+								tableRowCount++;
+							}
+						}
+						if (flag == 8) {
+							if ((info[i].course8Product != "") && ((recordStudentObj.course8StateInGrade == "0") || (recordStudentObj.course8StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[7], tableRowCount);
+								tableRowCount++;
+							}
+						}
+						if (flag == 9) {
+							if ((info[i].course9Product != "") && ((recordStudentObj.course9StateInGrade == "0") || (recordStudentObj.course9StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[8], tableRowCount);
+								tableRowCount++;
+							}
+						}
+						if (flag == 10) {
+							if ((info[i].course10Product != "") && ((recordStudentObj.course10StateInGrade == "0") || (recordStudentObj.course10StateInGrade == "4"))) {
+								appendRow(studentNotGradeTable, recordStudentObj.uid, info[i], courseLoad[9], tableRowCount);
 								tableRowCount++;
 							}
 						}
@@ -618,6 +687,9 @@ function initPage() {
 
 					// ajax 加载交过费还未分班的所有学科学生
 					loadNotInClassStudent(0, "%");
+
+					// 查询校长设置中的所有科目，用于载入查询条件中的科目
+					sqlCourse();
 				}
 
 			} else {
@@ -679,47 +751,92 @@ function appendRow(TableID, studentID, obj, course, index) {
 	 }
 	 */
 
-	if (course == "数学") {
-		if (obj.MathProduct == "班课") {
+	if (course == courseLoad[0]) {
+		if (obj.course1Product == "班课") {
 			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
 			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		} else if (obj.MathProduct == "一对一") {
+		} else if (obj.course1Product == "一对一") {
 			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
 
-	if (course == "语文") {
-		if (obj.ChineseProduct == "班课") {
+	if (course == courseLoad[1]) {
+		if (obj.course2Product == "班课") {
 			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
 			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		} else if (obj.ChineseProduct == "一对一") {
+		} else if (obj.course2Product == "一对一") {
 			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
 
-	if (course == "英语") {
-		if (obj.EnglishProduct == "班课") {
+	if (course == courseLoad[2]) {
+		if (obj.course3Product == "班课") {
 			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
 			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		} else if (obj.EnglishProduct == "一对一") {
+		} else if (obj.course3Product == "一对一") {
 			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
 
-	if (course == "物理") {
-		if (obj.PhysicsProduct == "班课") {
+	if (course == courseLoad[3]) {
+		if (obj.course4Product == "班课") {
 			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
 			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		} else if (obj.PhysicsProduct == "一对一") {
+		} else if (obj.course4Product == "一对一") {
 			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
 
-	if (course == "化学") {
-		if (obj.ChemistryProduct == "班课") {
+	if (course == courseLoad[4]) {
+		if (obj.course5Product == "班课") {
 			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
 			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
-		} else if (obj.ChemistryProduct == "一对一") {
+		} else if (obj.course5Product == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
+		}
+	}
+
+	if (course == courseLoad[5]) {
+		if (obj.course6Product == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.course6Product == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
+		}
+	}
+
+	if (course == courseLoad[6]) {
+		if (obj.course7Product == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.course7Product == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
+		}
+	}
+
+	if (course == courseLoad[7]) {
+		if (obj.course8Product == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.course8Product == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
+		}
+	}
+
+	if (course == courseLoad[8]) {
+		if (obj.course9Product == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.course9Product == "一对一") {
+			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
+		}
+	}
+
+	if (course == courseLoad[9]) {
+		if (obj.course10Product == "班课") {
+			newTd4.innerHTML = '班课：<input type="number" style="width: 6em"' + 'name=' + "priceBK" + index + ' ' + 'value=' + obj.priceBK + ' />元';
+			//'班课：<input type="number" style="width: 6em" name="priceBK" value=' + obj.priceBK + ' />元';
+		} else if (obj.course10Product == "一对一") {
 			newTd4.innerHTML = '一对一' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour1_" + index + ' ' + 'value=' + obj.hour1 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour1YDY" + index + ' ' + 'value=' + obj.priceHour1YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay1" + index + ' ' + 'value=' + obj.pay1 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour2_" + index + ' ' + 'value=' + obj.hour2 + ' readonly/>' + '小时以内' + '<input type="number" style="width:4em"' + 'name=' + "priceHour2YDY" + index + ' ' + 'value=' + obj.priceHour2YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay2" + index + ' ' + 'value=' + obj.pay2 + ' />' + '<br/>' + '<input type="number" style="width:4em"' + 'name=' + "hour3_" + index + ' ' + 'value=' + obj.hour3 + ' readonly/>' + '小时以外' + '<input type="number" style="width:4em"' + 'name=' + "priceHour3YDY" + index + ' ' + 'value=' + obj.priceHour3YDY + ' />元' + '，工资<input type="number" style="width: 4em"' + 'name=' + "pay3" + index + ' ' + 'value=' + obj.pay3 + ' />';
 		}
 	}
@@ -757,16 +874,26 @@ function copyConditionToHidden() {
 
 		var str = obj.options[obj.selectedIndex].text;
 		var courseIndex = 0;
-		if (str.indexOf("数学") != -1) {
+		if (str.indexOf(courseLoad[0]) != -1) {
 			courseIndex = 1;
-		} else if (str.indexOf("语文") != -1) {
+		} else if (str.indexOf(courseLoad[1]) != -1) {
 			courseIndex = 2;
-		} else if (str.indexOf("英语") != -1) {
+		} else if (str.indexOf(courseLoad[2]) != -1) {
 			courseIndex = 3;
-		} else if (str.indexOf("物理") != -1) {
+		} else if (str.indexOf(courseLoad[3]) != -1) {
 			courseIndex = 4;
-		} else if (str.indexOf("化学") != -1) {
+		} else if (str.indexOf(courseLoad[4]) != -1) {
 			courseIndex = 5;
+		} else if (str.indexOf(courseLoad[5]) != -1) {
+			courseIndex = 6;
+		} else if (str.indexOf(courseLoad[6]) != -1) {
+			courseIndex = 7;
+		} else if (str.indexOf(courseLoad[7]) != -1) {
+			courseIndex = 8;
+		} else if (str.indexOf(courseLoad[8]) != -1) {
+			courseIndex = 9;
+		} else if (str.indexOf(courseLoad[9]) != -1) {
+			courseIndex = 10;
 		} else {
 			courseIndex = 0;
 		}
@@ -966,4 +1093,110 @@ function GetCookie(sName) {
 			return (aCrumb[1]);
 	}
 	return null;
+}
+
+function sqlCourse() {
+	var xmlhttp;
+
+	// 1创建AJAX对象
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	// 2指定回调函数
+	xmlhttp.onreadystatechange = function() {
+		// 4接收响应数据，处理服务器返回的信息
+		// 判断对象状态是否交互完成，如果为4则交互完成
+		if (xmlhttp.readyState == 4) {
+			// 判断对象状态是否交互成功,如果成功则为200
+
+			if (xmlhttp.status == 200) {
+				// 接收数据,得到服务器输出的XML数据
+
+				var ret = xmlhttp.responseText;
+
+				if (ret == "0") {
+					// alert("");
+				} else if (ret == "2") {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+					// alert("检查到该校区名有多条记录，请联系管理员！");
+				} else {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+
+					// var info = eval(ret);
+					info = eval(ret);
+
+					// var len = 0;
+					len = 0;
+					for (var tmp in info) {
+						len++;
+					}
+
+					// 根据所选校区自动加载相应的科目
+					// 根据所选校区自动加载相应的科目
+					var courseNameIndex = new Array();
+					for (var i = 0; i < maxCourseNum; i++) {
+						courseNameIndex[i] = 0;
+					}
+					for (var i = 0; i < len; i++) {
+						if (info[i].course1 != "") {
+							courseNameIndex[0] = i;
+						}
+						if (info[i].course2 != "") {
+							courseNameIndex[1] = i;
+						}
+						if (info[i].course3 != "") {
+							courseNameIndex[2] = i;
+						}
+						if (info[i].course4 != "") {
+							courseNameIndex[3] = i;
+						}
+						if (info[i].course5 != "") {
+							courseNameIndex[4] = i;
+						}
+						if (info[i].course6 != "") {
+							courseNameIndex[5] = i;
+						}
+						if (info[i].course7 != "") {
+							courseNameIndex[6] = i;
+						}
+						if (info[i].course8 != "") {
+							courseNameIndex[7] = i;
+						}
+						if (info[i].course9 != "") {
+							courseNameIndex[8] = i;
+						}
+						if (info[i].course10 != "") {
+							courseNameIndex[9] = i;
+						}
+					}
+
+					courseLoad[0] = info[courseNameIndex[0]].course1;
+					courseLoad[1] = info[courseNameIndex[1]].course2;
+					courseLoad[2] = info[courseNameIndex[2]].course3;
+					courseLoad[3] = info[courseNameIndex[3]].course4;
+					courseLoad[4] = info[courseNameIndex[4]].course5;
+					courseLoad[5] = info[courseNameIndex[5]].course6;
+					courseLoad[6] = info[courseNameIndex[6]].course7;
+					courseLoad[7] = info[courseNameIndex[7]].course8;
+					courseLoad[8] = info[courseNameIndex[8]].course9;
+					courseLoad[9] = info[courseNameIndex[9]].course10;
+				}
+
+			} else {
+				alert("错误，请求页面异常！");
+			}
+		}
+
+	};
+	// 3发出http请求
+	var url = "principalSet.php";
+	url = url + '?noValue=""';
+	// 很重要，必须有的
+	url = url + "&sid=" + Math.random();
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send(null);
 }

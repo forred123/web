@@ -51,12 +51,6 @@ if (isset($_GET['noValueA'])) {
 	$sbmt = $pdo -> prepare("select * from gradeSetTable where schoolZone like ? and grade like ? and course like ? and product like ? and teacher like ? and class like ? and endTime like ? order by convert (schoolZone using gbk) asc,convert (grade using gbk) asc,convert (course using gbk) asc,convert (product using gbk) asc,convert (teacher using gbk) asc,convert (class using gbk) asc");
 	$sbmt -> execute(array($_GET['schoolZone'], $_GET['grade'], $_GET['course'], $_GET['product'], $_GET['teacher'], $_GET['class'], ""));
 
-	// $sbmt = $pdo -> prepare('select * from gradeSetTable where grade like ?');
-	// $sbmt -> execute(array($_GET['grade']));
-
-	// $sbmt = $pdo -> prepare('select * from gradeSetTable where schoolZone like ? and course like ? and product like ? and class like ?');
-	// $sbmt -> execute(array($_GET['schoolZone'],$_GET['course'],$_GET['product'],$_GET['class']));
-
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
 		$allRows = $sbmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -89,7 +83,7 @@ if (isset($_GET['stateInGrade'])) {
 	$pdo -> query('set names utf8');
 
 	// 先从学生表中查询分班状态为未分班的学生的ID，然后再去交费表中查询该ID的学生的信息
-	//$sbmt = $pdo -> prepare("select * from recordStudentTable where MathStateInGrade=? or ChineseStateInGrade=? or EnglishStateInGrade=? or PhysicsStateInGrade=? or ChemistryStateInGrade=?");
+	//$sbmt = $pdo -> prepare("select * from recordStudentTable where course1StateInGrade=? or course2StateInGrade=? or course3StateInGrade=? or course4StateInGrade=? or course5StateInGrade=?");
 	//$sbmt -> execute(array("0","0","0","0","0"));
 	if ($_GET['schoolZone'] != "%") {
 		$schoolZone = $_GET['schoolZone'] . "_";
@@ -97,8 +91,8 @@ if (isset($_GET['stateInGrade'])) {
 		$schoolZone = "%";
 	}
 
-	$sbmt = $pdo -> prepare("select * from recordStudentTable where (MathStateInGrade=? or MathStateInGrade=? or ChineseStateInGrade=? or ChineseStateInGrade=? or EnglishStateInGrade=? or EnglishStateInGrade=? or PhysicsStateInGrade=? or PhysicsStateInGrade=? or ChemistryStateInGrade=? or ChemistryStateInGrade=?) and (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) order by convert (name1 using gbk) asc");
-	$sbmt -> execute(array("0", "4", "0", "4", "0", "4", "0", "4", "0", "4", $schoolZone, $schoolZone, $schoolZone));
+	$sbmt = $pdo -> prepare("select * from recordStudentTable where (course1StateInGrade=? or course1StateInGrade=? or course2StateInGrade=? or course2StateInGrade=? or course3StateInGrade=? or course3StateInGrade=? or course4StateInGrade=? or course4StateInGrade=? or course5StateInGrade=? or course5StateInGrade=? or course6StateInGrade=? or course6StateInGrade=? or course7StateInGrade=? or course7StateInGrade=? or course8StateInGrade=? or course8StateInGrade=? or course9StateInGrade=? or course9StateInGrade=? or course10StateInGrade=? or course10StateInGrade=?) and (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) order by convert (name1 using gbk) asc");
+	$sbmt -> execute(array("0", "4","0", "4", "0", "4", "0", "4", "0", "4", "0", "4", "0", "4", "0", "4", "0", "4", "0", "4", $schoolZone, $schoolZone, $schoolZone));
 
 	$row = array();
 	if ($sbmt -> rowCount() >= 1) {
@@ -131,22 +125,37 @@ if (isset($_GET['loadstudentDataInFeeTable'])) {
 	$pdo -> query('set names utf8');
 
 	if ($_GET['operateCourse'] == "1") {
-		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and MathProduct =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course1Product =? and grade = ? order by convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
 	} else if ($_GET['operateCourse'] == "2") {
-		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and ChineseProduct =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course2Product =? and grade = ? order by convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
 	} else if ($_GET['operateCourse'] == "3") {
-		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and EnglishProduct =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course3Product =? and grade = ? order by convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
 	} else if ($_GET['operateCourse'] == "4") {
-		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and PhysicsProduct =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course4Product =? and grade = ? order by convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
 	} else if ($_GET['operateCourse'] == "5") {
-		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and ChemistryProduct =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course5Product =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
+	} else if ($_GET['operateCourse'] == "6") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course6Product =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
+	} else if ($_GET['operateCourse'] == "7") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course7Product =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
+	} else if ($_GET['operateCourse'] == "8") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course8Product =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
+	} else if ($_GET['operateCourse'] == "9") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course9Product =? and grade = ? order by convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
+	} else if ($_GET['operateCourse'] == "10") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and course10Product =? and grade = ? order by convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], $_GET["operateProduct"], $_GET["operateGrade"]));
 	} else {
-		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and (MathProduct !=? or ChineseProduct !=? or EnglishProduct !=? or PhysicsProduct !=? or ChemistryProduct !=?)");
+		$sbmt = $pdo -> prepare("select * from addFeeTable where uid=? and (course1Product !=? or course2Product !=? or course3Product !=? or course4Product !=? or course5Product !=?)");
 		$sbmt -> execute(array($_GET['loadstudentDataInFeeTable'], "未选择", "未选择", "未选择", "未选择", "未选择"));
 	}
 
@@ -245,19 +254,34 @@ if (isset($_GET['submitGrade'])) {
 	$pdo -> query('set names utf8');
 
 	if ($_GET['operateCourse'] == "1") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set MathClassIdInMLS=?, MathStateInGrade=? ,MathProduct=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course1ClassIdInMLS=?, course1StateInGrade=? ,course1Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=? where uid=?");
 	}
 	if ($_GET['operateCourse'] == "2") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChineseClassIdInMLS=?, ChineseStateInGrade=? ,ChineseProduct=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course2ClassIdInMLS=?, course2StateInGrade=? ,course2Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
 	}
 	if ($_GET['operateCourse'] == "3") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set EnglishClassIdInMLS=?, EnglishStateInGrade=? ,EnglishProduct=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course3ClassIdInMLS=?, course3StateInGrade=? ,course3Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
 	}
 	if ($_GET['operateCourse'] == "4") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set PhysicsClassIdInMLS=?, PhysicsStateInGrade=? ,PhysicsProduct=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course4ClassIdInMLS=?, course4StateInGrade=? ,course4Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
 	}
 	if ($_GET['operateCourse'] == "5") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChemistryClassIdInMLS=?, ChemistryStateInGrade=? ,ChemistryProduct=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course5ClassIdInMLS=?, course5StateInGrade=? ,course5Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+	}
+	if ($_GET['operateCourse'] == "6") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course6ClassIdInMLS=?, course6StateInGrade=? ,course6Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+	}
+	if ($_GET['operateCourse'] == "7") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course7ClassIdInMLS=?, course7StateInGrade=? ,course7Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+	}
+	if ($_GET['operateCourse'] == "8") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course8ClassIdInMLS=?, course8StateInGrade=? ,course8Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+	}
+	if ($_GET['operateCourse'] == "9") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course9ClassIdInMLS=?, course9StateInGrade=? ,course9Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
+	}
+	if ($_GET['operateCourse'] == "10") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course10ClassIdInMLS=?, course10StateInGrade=? ,course10Product=?,priceBK=?, hour1=?, priceHour1YDY=?,pay1=?, hour2=?, priceHour2YDY=?,pay2=?, Hour3=?, priceHour3YDY=?,pay3=?  where uid=?");
 	}
 
 	$flag = $sbmt -> execute(array($_GET['operateGradeID'], $_GET['testType'], $_GET['productCopy'], str_replace(' ', '', $_GET['priceBKCopy']), str_replace(' ', '', $_GET['hour1Copy']), str_replace(' ', '', $_GET['priceHour1YDYCopy']), str_replace(' ', '', $_GET['pay1Copy']), str_replace(' ', '', $_GET['hour2Copy']), str_replace(' ', '', $_GET['priceHour2YDYCopy']), str_replace(' ', '', $_GET['pay2Copy']), str_replace(' ', '', $_GET['hour3Copy']), str_replace(' ', '', $_GET['priceHour3YDYCopy']), str_replace(' ', '', $_GET['pay3Copy']), $_GET['operateStudentID']));
@@ -274,6 +298,7 @@ if (isset($_GET['submitGrade'])) {
 
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -489,35 +514,6 @@ if (isset($_GET['submitGrade'])) {
 					<input type="hidden" name="operateGrade" />
 					<!-- <input type="hidden" name="operateSchoolZone" /> -->
 				</tr>
-				<!-- </thead>
-				<tbody> -->
-
-				<!--
-				<tr>
-				<td name="test">学生ID</td>
-
-				<td>学生姓名</td>
-
-				<td>
-				<input type="number" style="width: 6em" name="price" value="" />
-				</td>
-				<td><label for="inGrade">
-				<input type="checkbox" id="inGrade"
-				name="GradeOperate" />
-				入班 </label></td>
-				<td>
-				<input type="submit" class="btn" name="submitaa" value="提交">
-				</td>
-				</tr>
-
-				-->
-
-				<!--
-				<tr>
-				<td colspan="5">&nbsp;</td>
-				</tr>
-				-->
-				<!-- </tbody> -->
 
 			</table>
 		</form>
