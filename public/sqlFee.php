@@ -62,41 +62,71 @@ if (isset($_GET['sqlFee'])) {
 
 	if ($_GET['course'] == "1") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-					and grade like ? and Math !=? and MathProduct like ?
+					and grade like ? and course1 !=? and course1Product like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
 	} else if ($_GET['course'] == "2") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-					and grade like ? and Chinese !=? and ChineseProduct like ?
+					and grade like ? and course2 !=? and course2Product like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
 	} else if ($_GET['course'] == "3") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-					and grade like ? and English !=? and EnglishProduct like ?
+					and grade like ? and course3 !=? and course3Product like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
 	} else if ($_GET['course'] == "4") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-					and grade like ? and Physics !=? and PhysicsProduct like ?
+					and grade like ? and course4 !=? and course4Product like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
 	} else if ($_GET['course'] == "5") {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-					and grade like ? and Chemistry !=? and ChemistryProduct like ?
+					and grade like ? and course5 !=? and course5Product like ?
+					and (name1 like ? or name2 like ?) and receiptNum like ?
+					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "6") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+					and grade like ? and course6 !=? and course6Product like ?
+					and (name1 like ? or name2 like ?) and receiptNum like ?
+					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "7") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+					and grade like ? and course7 !=? and course7Product like ?
+					and (name1 like ? or name2 like ?) and receiptNum like ?
+					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "8") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+					and grade like ? and course8 !=? and course8Product like ?
+					and (name1 like ? or name2 like ?) and receiptNum like ?
+					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "9") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+					and grade like ? and course9 !=? and course9Product like ?
+					and (name1 like ? or name2 like ?) and receiptNum like ?
+					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
+	} else if ($_GET['course'] == "10") {
+		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+					and grade like ? and course10 !=? and course10Product like ?
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and mode like ? and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], "0", $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $_GET['mode'], $timeStart, $timeEnd));
 	} else {
 		$sbmt = $pdo -> prepare("select * from addFeeTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
 					and grade like ? and mode like ? 
-					and (MathProduct like ? or ChineseProduct like ? or EnglishProduct like ? or PhysicsProduct like ? or ChemistryProduct like ?)
+					and (course1Product like ? or course2Product like ? or course3Product like ? or course4Product like ? or course5Product like ? or course6Product like ? or course7Product like ? or course8Product like ? or course9Product like ? or course10Product like ?)
 					and (name1 like ? or name2 like ?) and receiptNum like ?
 					and time >= ? and time <= ? order by convert(receiptNum ,SIGNED) asc,convert(billNum ,SIGNED) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], $_GET['mode'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $timeStart, $timeEnd));
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], $_GET['mode'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name']), $_GET['receiptNum'], $timeStart, $timeEnd));
 	}
 
 	$row = array();
@@ -205,7 +235,7 @@ if (isset($_GET['sqlFee'])) {
 	</head>
 	<body onload="initPage()">
 		<form action="sqlteacher.php" method="post">
-			<table align="center" width="3000px" border="0" cellpadding="0" cellspacing="0">
+			<table align="center" width="4000px" border="0" cellpadding="0" cellspacing="0">
 				<!-- <caption align="left"> -->
 				<h3>费用记录查询</h3>
 				<!-- </caption> -->
@@ -248,7 +278,7 @@ if (isset($_GET['sqlFee'])) {
 		</form>
 
 		<!--  查询结果表 -->
-		<table id="sqlFeeTable" align="center" width="3000px" border="0" cellpadding="0" cellspacing="0">
+		<table id="sqlFeeTable" align="center" width="4000px" border="0" cellpadding="0" cellspacing="0">
 
 		</table>
 		<!--  end查询结果表 -->
