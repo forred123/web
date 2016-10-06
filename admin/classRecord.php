@@ -187,83 +187,168 @@ if (isset($_GET['classIdInMLS'])) {
 
 	if ($_GET['course'] == "1") {
 		if ($_GET['stateInGrade'] == "0") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,MathAttendanceStartTime,MathAttendanceEndTime,MathStateInGrade,MathOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where MathClassIdInMLS like ? and (MathStateInGrade like ? or MathStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course1AttendanceStartTime,course1AttendanceEndTime,course1StateInGrade,course1OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course1ClassIdInMLS like ? and (course1StateInGrade like ? or course1StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
 		} else if ($_GET['stateInGrade'] == "1") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,MathAttendanceStartTime,MathAttendanceEndTime,MathStateInGrade,MathOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where MathClassIdInMLS like ? and (MathStateInGrade like ? or MathStateInGrade like ? or MathStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course1AttendanceStartTime,course1AttendanceEndTime,course1StateInGrade,course1OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course1ClassIdInMLS like ? and (course1StateInGrade like ? or course1StateInGrade like ? or course1StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
 		} else {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,MathAttendanceStartTime,MathAttendanceEndTime,MathStateInGrade,MathOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where MathClassIdInMLS like ? and MathStateInGrade like ? order by convert(name1 using gbk) asc");
-			//asc desc MathStateInGrade
-			//$sbmt = $pdo -> prepare("select * from recordStudentTable where MathClassIdInMLS like ? and MathStateInGrade like ? order by MathStateInGrade desc"); //asc desc
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course1AttendanceStartTime,course1AttendanceEndTime,course1StateInGrade,course1OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course1ClassIdInMLS like ? and course1StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc course1StateInGrade
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course1ClassIdInMLS like ? and course1StateInGrade like ? order by course1StateInGrade desc"); //asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
 		}
 	}
 
 	if ($_GET['course'] == "2") {
 		if ($_GET['stateInGrade'] == "0") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,ChineseAttendanceStartTime,ChineseAttendanceEndTime,ChineseStateInGrade,ChineseOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where ChineseClassIdInMLS like ? and (ChineseStateInGrade like ? or ChineseStateInGrade like ?) order by convert(name1 using gbk) asc");
-			//asc desc ChineseStateInGrade
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course2AttendanceStartTime,course2AttendanceEndTime,course2StateInGrade,course2OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course2ClassIdInMLS like ? and (course2StateInGrade like ? or course2StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc course2StateInGrade
 			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
 		} else if ($_GET['stateInGrade'] == "1") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,ChineseAttendanceStartTime,ChineseAttendanceEndTime,ChineseStateInGrade,ChineseOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where ChineseClassIdInMLS like ? and (ChineseStateInGrade like ? or ChineseStateInGrade like ? or ChineseStateInGrade like ?) order by convert(name1 using gbk) asc");
-			//asc desc ChineseStateInGrade
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course2AttendanceStartTime,course2AttendanceEndTime,course2StateInGrade,course2OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course2ClassIdInMLS like ? and (course2StateInGrade like ? or course2StateInGrade like ? or course2StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc course2StateInGrade
 			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
 		} else {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,ChineseAttendanceStartTime,ChineseAttendanceEndTime,ChineseStateInGrade,ChineseOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where ChineseClassIdInMLS like ? and ChineseStateInGrade like ? order by convert(name1 using gbk) asc");
-			//asc desc ChineseStateInGrade
-			//$sbmt = $pdo -> prepare("select * from recordStudentTable where ChineseClassIdInMLS like ? and ChineseStateInGrade like ? order by ChineseStateInGrade desc"); //asc desc
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course2AttendanceStartTime,course2AttendanceEndTime,course2StateInGrade,course2OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course2ClassIdInMLS like ? and course2StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc course2StateInGrade
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course2ClassIdInMLS like ? and course2StateInGrade like ? order by course2StateInGrade desc"); //asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
 		}
 	}
 
 	if ($_GET['course'] == "3") {
 		if ($_GET['stateInGrade'] == "0") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,EnglishAttendanceStartTime,EnglishAttendanceEndTime,EnglishStateInGrade,EnglishOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where EnglishClassIdInMLS like ? and (EnglishStateInGrade like ? or EnglishStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course3AttendanceStartTime,course3AttendanceEndTime,course3StateInGrade,course3OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course3ClassIdInMLS like ? and (course3StateInGrade like ? or course3StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
 		} else if ($_GET['stateInGrade'] == "1") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,EnglishAttendanceStartTime,EnglishAttendanceEndTime,EnglishStateInGrade,EnglishOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where EnglishClassIdInMLS like ? and (EnglishStateInGrade like ? or EnglishStateInGrade like ? or EnglishStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course3AttendanceStartTime,course3AttendanceEndTime,course3StateInGrade,course3OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course3ClassIdInMLS like ? and (course3StateInGrade like ? or course3StateInGrade like ? or course3StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
 		} else {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,EnglishAttendanceStartTime,EnglishAttendanceEndTime,EnglishStateInGrade,EnglishOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where EnglishClassIdInMLS like ? and EnglishStateInGrade like ? order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course3AttendanceStartTime,course3AttendanceEndTime,course3StateInGrade,course3OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course3ClassIdInMLS like ? and course3StateInGrade like ? order by convert(name1 using gbk) asc");
 			//asc desc
-			//$sbmt = $pdo -> prepare("select * from recordStudentTable where EnglishClassIdInMLS like ? and EnglishStateInGrade like ? order by EnglishStateInGrade desc"); //asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course3ClassIdInMLS like ? and course3StateInGrade like ? order by course3StateInGrade desc"); //asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
 		}
 	}
 	if ($_GET['course'] == "4") {
 		if ($_GET['stateInGrade'] == "0") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,PhysicsAttendanceStartTime,PhysicsAttendanceEndTime,PhysicsStateInGrade,PhysicsOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where PhysicsClassIdInMLS like ? and (PhysicsStateInGrade like ? or PhysicsStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course4AttendanceStartTime,course4AttendanceEndTime,course4StateInGrade,course4OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course4ClassIdInMLS like ? and (course4StateInGrade like ? or course4StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
 		} else if ($_GET['stateInGrade'] == "1") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,PhysicsAttendanceStartTime,PhysicsAttendanceEndTime,PhysicsStateInGrade,PhysicsOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where PhysicsClassIdInMLS like ? and (PhysicsStateInGrade like ? or PhysicsStateInGrade like ? or PhysicsStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course4AttendanceStartTime,course4AttendanceEndTime,course4StateInGrade,course4OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course4ClassIdInMLS like ? and (course4StateInGrade like ? or course4StateInGrade like ? or course4StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
 		} else {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,PhysicsAttendanceStartTime,PhysicsAttendanceEndTime,PhysicsStateInGrade,PhysicsOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where PhysicsClassIdInMLS like ? and PhysicsStateInGrade like ? order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course4AttendanceStartTime,course4AttendanceEndTime,course4StateInGrade,course4OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course4ClassIdInMLS like ? and course4StateInGrade like ? order by convert(name1 using gbk) asc");
 			//asc desc
-			//$sbmt = $pdo -> prepare("select * from recordStudentTable where PhysicsClassIdInMLS like ? and PhysicsStateInGrade like ? order by PhysicsStateInGrade desc"); //asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course4ClassIdInMLS like ? and course4StateInGrade like ? order by course4StateInGrade desc"); //asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
 		}
 	}
 	if ($_GET['course'] == "5") {
 		if ($_GET['stateInGrade'] == "0") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,ChemistryAttendanceStartTime,ChemistryAttendanceEndTime,ChemistryStateInGrade,ChemistryOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where ChemistryClassIdInMLS like ? and (ChemistryStateInGrade like ? or ChemistryStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course5AttendanceStartTime,course5AttendanceEndTime,course5StateInGrade,course5OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course5ClassIdInMLS like ? and (course5StateInGrade like ? or course5StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
 		} else if ($_GET['stateInGrade'] == "1") {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,ChemistryAttendanceStartTime,ChemistryAttendanceEndTime,ChemistryStateInGrade,ChemistryOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where ChemistryClassIdInMLS like ? and (ChemistryStateInGrade like ? or ChemistryStateInGrade like ? or ChemistryStateInGrade like ?) order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course5AttendanceStartTime,course5AttendanceEndTime,course5StateInGrade,course5OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course5ClassIdInMLS like ? and (course5StateInGrade like ? or course5StateInGrade like ? or course5StateInGrade like ?) order by convert(name1 using gbk) asc");
 			//asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
 		} else {
-			$sbmt = $pdo -> prepare("select uid,name1,name2,ChemistryAttendanceStartTime,ChemistryAttendanceEndTime,ChemistryStateInGrade,ChemistryOutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where ChemistryClassIdInMLS like ? and ChemistryStateInGrade like ? order by convert(name1 using gbk) asc");
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course5AttendanceStartTime,course5AttendanceEndTime,course5StateInGrade,course5OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course5ClassIdInMLS like ? and course5StateInGrade like ? order by convert(name1 using gbk) asc");
 			//asc desc
-			//$sbmt = $pdo -> prepare("select * from recordStudentTable where ChemistryClassIdInMLS like ? and ChemistryStateInGrade like ? order by ChemistryStateInGrade desc"); //asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course5ClassIdInMLS like ? and course5StateInGrade like ? order by course5StateInGrade desc"); //asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
+		}
+	}
+
+	if ($_GET['course'] == "6") {
+		if ($_GET['stateInGrade'] == "0") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course6AttendanceStartTime,course6AttendanceEndTime,course6StateInGrade,course6OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course6ClassIdInMLS like ? and (course6StateInGrade like ? or course6StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
+		} else if ($_GET['stateInGrade'] == "1") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course6AttendanceStartTime,course6AttendanceEndTime,course6StateInGrade,course6OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course6ClassIdInMLS like ? and (course6StateInGrade like ? or course6StateInGrade like ? or course6StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
+		} else {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course6AttendanceStartTime,course6AttendanceEndTime,course6StateInGrade,course6OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course6ClassIdInMLS like ? and course6StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course6ClassIdInMLS like ? and course6StateInGrade like ? order by course6StateInGrade desc"); //asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
+		}
+	}
+
+	if ($_GET['course'] == "7") {
+		if ($_GET['stateInGrade'] == "0") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course7AttendanceStartTime,course7AttendanceEndTime,course7StateInGrade,course7OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course7ClassIdInMLS like ? and (course7StateInGrade like ? or course7StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
+		} else if ($_GET['stateInGrade'] == "1") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course7AttendanceStartTime,course7AttendanceEndTime,course7StateInGrade,course7OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course7ClassIdInMLS like ? and (course7StateInGrade like ? or course7StateInGrade like ? or course7StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
+		} else {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course7AttendanceStartTime,course7AttendanceEndTime,course7StateInGrade,course7OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course7ClassIdInMLS like ? and course7StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course7ClassIdInMLS like ? and course7StateInGrade like ? order by course7StateInGrade desc"); //asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
+		}
+	}
+
+	if ($_GET['course'] == "8") {
+		if ($_GET['stateInGrade'] == "0") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course8AttendanceStartTime,course8AttendanceEndTime,course8StateInGrade,course8OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course8ClassIdInMLS like ? and (course8StateInGrade like ? or course8StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
+		} else if ($_GET['stateInGrade'] == "1") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course8AttendanceStartTime,course8AttendanceEndTime,course8StateInGrade,course8OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course8ClassIdInMLS like ? and (course8StateInGrade like ? or course8StateInGrade like ? or course8StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
+		} else {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course8AttendanceStartTime,course8AttendanceEndTime,course8StateInGrade,course8OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course8ClassIdInMLS like ? and course8StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course8ClassIdInMLS like ? and course8StateInGrade like ? order by course8StateInGrade desc"); //asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
+		}
+	}
+
+	if ($_GET['course'] == "9") {
+		if ($_GET['stateInGrade'] == "0") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course9AttendanceStartTime,course9AttendanceEndTime,course9StateInGrade,course9OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course9ClassIdInMLS like ? and (course9StateInGrade like ? or course9StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
+		} else if ($_GET['stateInGrade'] == "1") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course9AttendanceStartTime,course9AttendanceEndTime,course9StateInGrade,course9OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course9ClassIdInMLS like ? and (course9StateInGrade like ? or course9StateInGrade like ? or course9StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
+		} else {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course9AttendanceStartTime,course9AttendanceEndTime,course9StateInGrade,course9OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course9ClassIdInMLS like ? and course9StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course9ClassIdInMLS like ? and course9StateInGrade like ? order by course9StateInGrade desc"); //asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
+		}
+	}
+
+	if ($_GET['course'] == "10") {
+		if ($_GET['stateInGrade'] == "0") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course10AttendanceStartTime,course10AttendanceEndTime,course10StateInGrade,course10OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course10ClassIdInMLS like ? and (course10StateInGrade like ? or course10StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "0", "4"));
+		} else if ($_GET['stateInGrade'] == "1") {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course10AttendanceStartTime,course10AttendanceEndTime,course10StateInGrade,course10OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course10ClassIdInMLS like ? and (course10StateInGrade like ? or course10StateInGrade like ? or course10StateInGrade like ?) order by convert(name1 using gbk) asc");
+			//asc desc
+			$sbmt -> execute(array($_GET['classIdInMLS'], "1", "2", "3"));
+		} else {
+			$sbmt = $pdo -> prepare("select uid,name1,name2,course10AttendanceStartTime,course10AttendanceEndTime,course10StateInGrade,course10OutGradeReason,priceBK, hour1, priceHour1YDY, pay1, hour2, priceHour2YDY, pay2, hour3, priceHour3YDY, pay3, lastPrice from recordStudentTable where course10ClassIdInMLS like ? and course10StateInGrade like ? order by convert(name1 using gbk) asc");
+			//asc desc
+			//$sbmt = $pdo -> prepare("select * from recordStudentTable where course10ClassIdInMLS like ? and course10StateInGrade like ? order by course10StateInGrade desc"); //asc desc
 			$sbmt -> execute(array($_GET['classIdInMLS'], $_GET['stateInGrade']));
 		}
 	}
@@ -309,31 +394,56 @@ if (isset($_GET['sqlRemainFeeByStudentUID'])) {
 
 	if ($flagSubFeeCourse == "1") {
 		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
-							(select sum(Math),IFNULL(sum(Math),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(course1),IFNULL(sum(course1),0) as anum from addFeeTable where uid=?) as AA,
 							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
 	}
 
 	if ($flagSubFeeCourse == "2") {
 		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
-							(select sum(Chinese),IFNULL(sum(Chinese),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(course2),IFNULL(sum(course2),0) as anum from addFeeTable where uid=?) as AA,
 							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
 	}
 
 	if ($flagSubFeeCourse == "3") {
 		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
-							(select sum(English),IFNULL(sum(English),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(course3),IFNULL(sum(course3),0) as anum from addFeeTable where uid=?) as AA,
 							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
 	}
 
 	if ($flagSubFeeCourse == "4") {
 		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
-							(select sum(Physics),IFNULL(sum(Physics),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(course4),IFNULL(sum(course4),0) as anum from addFeeTable where uid=?) as AA,
 							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
 	}
 
 	if ($flagSubFeeCourse == "5") {
 		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
-							(select sum(Chemistry),IFNULL(sum(Chemistry),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(course5),IFNULL(sum(course5),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
+	}
+	if ($flagSubFeeCourse == "6") {
+		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
+							(select sum(course6),IFNULL(sum(course6),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
+	}
+	if ($flagSubFeeCourse == "7") {
+		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
+							(select sum(course7),IFNULL(sum(course7),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
+	}
+	if ($flagSubFeeCourse == "8") {
+		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
+							(select sum(course8),IFNULL(sum(course8),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
+	}
+	if ($flagSubFeeCourse == "9") {
+		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
+							(select sum(course9),IFNULL(sum(course9),0) as anum from addFeeTable where uid=?) as AA,
+							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
+	}
+	if ($flagSubFeeCourse == "10") {
+		$sbmt = $pdo -> prepare("select AA.anum - BB.bnum as remainFee from
+							(select sum(course10),IFNULL(sum(course10),0) as anum from addFeeTable where uid=?) as AA,
 							(select sum(price),IFNULL(sum(price),0) as bnum from subFeeTable  where uid=? and subFeeCourse=?) as BB;");
 	}
 
@@ -365,19 +475,34 @@ if (isset($_GET['testStudentID'])) {
 
 	// 更新学生表中的试听状态
 	if ($_GET['subFeeCourse'] == "1") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set MathStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course1StateInGrade=? where uid=?");
 	}
 	if ($_GET['subFeeCourse'] == "2") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChineseStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course2StateInGrade=? where uid=?");
 	}
 	if ($_GET['subFeeCourse'] == "3") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set EnglishStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course3StateInGrade=? where uid=?");
 	}
 	if ($_GET['subFeeCourse'] == "4") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set PhysicsStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course4StateInGrade=? where uid=?");
 	}
 	if ($_GET['subFeeCourse'] == "5") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChemistryStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course5StateInGrade=? where uid=?");
+	}
+	if ($_GET['subFeeCourse'] == "6") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course6StateInGrade=? where uid=?");
+	}
+	if ($_GET['subFeeCourse'] == "7") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course7StateInGrade=? where uid=?");
+	}
+	if ($_GET['subFeeCourse'] == "8") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course8StateInGrade=? where uid=?");
+	}
+	if ($_GET['subFeeCourse'] == "9") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course9StateInGrade=? where uid=?");
+	}
+	if ($_GET['subFeeCourse'] == "10") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course10StateInGrade=? where uid=?");
 	}
 
 	$flag = $sbmt -> execute(array($_GET['testResult'], $_GET['testStudentID']));
@@ -437,23 +562,43 @@ if (isset($_GET['subFeeStudentID'])) {
 
 	// 把上次上课扣费的真实价格保存到学生表中，便于考勤时载入上次扣费价格，（因为请假不扣费，旷课扣按正常扣费）
 	if ($_GET['subFeeCourse'] == "1") {
-		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,MathAttendanceStartTime=?,MathAttendanceEndTime=? where uid=?");
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course1AttendanceStartTime=?,course1AttendanceEndTime=? where uid=?");
 		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
 	}
 	if ($_GET['subFeeCourse'] == "2") {
-		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,ChineseAttendanceStartTime=?,ChineseAttendanceEndTime=? where uid=?");
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course2AttendanceStartTime=?,course2AttendanceEndTime=? where uid=?");
 		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
 	}
 	if ($_GET['subFeeCourse'] == "3") {
-		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,EnglishAttendanceStartTime=?,EnglishAttendanceEndTime=? where uid=?");
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course3AttendanceStartTime=?,course3AttendanceEndTime=? where uid=?");
 		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
 	}
 	if ($_GET['subFeeCourse'] == "4") {
-		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,PhysicsAttendanceStartTime=?,PhysicsAttendanceEndTime=? where uid=?");
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course4AttendanceStartTime=?,course4AttendanceEndTime=? where uid=?");
 		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
 	}
 	if ($_GET['subFeeCourse'] == "5") {
-		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,ChemistryAttendanceStartTime=?,ChemistryAttendanceEndTime=? where uid=?");
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course5AttendanceStartTime=?,course5AttendanceEndTime=? where uid=?");
+		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
+	}
+	if ($_GET['subFeeCourse'] == "6") {
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course6AttendanceStartTime=?,course6AttendanceEndTime=? where uid=?");
+		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
+	}
+	if ($_GET['subFeeCourse'] == "7") {
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course7AttendanceStartTime=?,course7AttendanceEndTime=? where uid=?");
+		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
+	}
+	if ($_GET['subFeeCourse'] == "8") {
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course8AttendanceStartTime=?,course8AttendanceEndTime=? where uid=?");
+		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
+	}
+	if ($_GET['subFeeCourse'] == "9") {
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course9AttendanceStartTime=?,course9AttendanceEndTime=? where uid=?");
+		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
+	}
+	if ($_GET['subFeeCourse'] == "10") {
+		$sbmtRecordStudentTable = $pdo -> prepare("update recordStudentTable set lastPrice=?,course10AttendanceStartTime=?,course10AttendanceEndTime=? where uid=?");
 		$flagRecordStudentTable = $sbmtRecordStudentTable -> execute(array($_GET['price'], strtotime($_GET['attandenceTime']), strtotime($_GET['endAttandenceTime']), $_GET['subFeeStudentID']));
 	}
 
@@ -508,23 +653,43 @@ if (isset($_GET['outGradeStudentID'])) {
 	//$flag = $sbmt -> execute(array("0" ,$time,$_GET['outGradeReason'], $_GET['outGradeStudentID']));
 
 	if ($_GET['course'] == "1") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set MathStateInGrade=?,MathOutOrBackGradeTime=?,MathOutGradeReason=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course1StateInGrade=?,course1OutOrBackGradeTime=?,course1OutGradeReason=? where uid=?");
 		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
 	}
 	if ($_GET['course'] == "2") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChineseStateInGrade=?,ChineseOutOrBackGradeTime=?,ChineseOutGradeReason=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course2StateInGrade=?,course2OutOrBackGradeTime=?,course2OutGradeReason=? where uid=?");
 		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
 	}
 	if ($_GET['course'] == "3") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set EnglishStateInGrade=?,EnglishOutOrBackGradeTime=?,EnglishOutGradeReason=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course3StateInGrade=?,course3OutOrBackGradeTime=?,course3OutGradeReason=? where uid=?");
 		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
 	}
 	if ($_GET['course'] == "4") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set PhysicsStateInGrade=?,PhysicsOutOrBackGradeTime=?,PhysicsOutGradeReason=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course4StateInGrade=?,course4OutOrBackGradeTime=?,course4OutGradeReason=? where uid=?");
 		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
 	}
 	if ($_GET['course'] == "5") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChemistryStateInGrade=?,ChemistryOutOrBackGradeTime=?,ChemistryOutGradeReason=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course5StateInGrade=?,course5OutOrBackGradeTime=?,course5OutGradeReason=? where uid=?");
+		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
+	}
+	if ($_GET['course'] == "6") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course6StateInGrade=?,course6OutOrBackGradeTime=?,course6OutGradeReason=? where uid=?");
+		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
+	}
+	if ($_GET['course'] == "7") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course7StateInGrade=?,course7OutOrBackGradeTime=?,course7OutGradeReason=? where uid=?");
+		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
+	}
+	if ($_GET['course'] == "8") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course8StateInGrade=?,course8OutOrBackGradeTime=?,course8OutGradeReason=? where uid=?");
+		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
+	}
+	if ($_GET['course'] == "9") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course9StateInGrade=?,course9OutOrBackGradeTime=?,course9OutGradeReason=? where uid=?");
+		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
+	}
+	if ($_GET['course'] == "10") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course10StateInGrade=?,course10OutOrBackGradeTime=?,course10OutGradeReason=? where uid=?");
 		$flag = $sbmt -> execute(array("0", $time, $_GET['outGradeReason'], $_GET['outGradeStudentID']));
 	}
 
@@ -559,23 +724,43 @@ if (isset($_GET['backGradeStudentID'])) {
 	// 	$sbmt = $pdo -> prepare("update recordStudentTable set stateInGrade=? where uid=?");
 	// 	$flag = $sbmt -> execute(array("1",$_GET['backGradeStudentID']));
 	if ($_GET['course'] == "1") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set MathStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course1StateInGrade=? where uid=?");
 		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
 	}
 	if ($_GET['course'] == "2") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChineseStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course2StateInGrade=? where uid=?");
 		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
 	}
 	if ($_GET['course'] == "3") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set EnglishStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course3StateInGrade=? where uid=?");
 		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
 	}
 	if ($_GET['course'] == "4") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set PhysicsStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course4StateInGrade=? where uid=?");
 		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
 	}
 	if ($_GET['course'] == "5") {
-		$sbmt = $pdo -> prepare("update recordStudentTable set ChemistryStateInGrade=? where uid=?");
+		$sbmt = $pdo -> prepare("update recordStudentTable set course5StateInGrade=? where uid=?");
+		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
+	}
+	if ($_GET['course'] == "6") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course6StateInGrade=? where uid=?");
+		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
+	}
+	if ($_GET['course'] == "7") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course7StateInGrade=? where uid=?");
+		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
+	}
+	if ($_GET['course'] == "8") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course8StateInGrade=? where uid=?");
+		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
+	}
+	if ($_GET['course'] == "9") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course9StateInGrade=? where uid=?");
+		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
+	}
+	if ($_GET['course'] == "10") {
+		$sbmt = $pdo -> prepare("update recordStudentTable set course10StateInGrade=? where uid=?");
 		$flag = $sbmt -> execute(array("1", $_GET['backGradeStudentID']));
 	}
 
@@ -608,7 +793,7 @@ if (isset($_POST['submitType'])) {
 	$time = strtotime($_POST['time']);
 
 	if (isset($_POST['submitAdd'])) {
-		if ($_POST['fee'] == $_POST['feeMath'] + $_POST['feeChinese'] + $_POST['feeEnglish'] + $_POST['feePhysics'] + $_POST['feeChemistry'] + $_POST['feeMathDoc'] + $_POST['feeChineseDoc'] + $_POST['feeEnglishDoc'] + $_POST['feePhysicsDoc'] + $_POST['feeChemistryDoc']) {
+		if ($_POST['fee'] == $_POST['feeCourse1'] + $_POST['feeCourse2'] + $_POST['feeCourse3'] + $_POST['feeCourse4'] + $_POST['feeCourse5'] + $_POST['feeCourse6'] + $_POST['feeCourse7'] + $_POST['feeCourse8'] + $_POST['feeCourse9'] + $_POST['feeCourse10'] + $_POST['feeCourse1Doc'] + $_POST['feeCourse2Doc'] + $_POST['feeCourse3Doc'] + $_POST['feeCourse4Doc'] + $_POST['feeCourse5Doc'] + $_POST['feeCourse6Doc'] + $_POST['feeCourse7Doc'] + $_POST['feeCourse8Doc'] + $_POST['feeCourse9Doc'] + $_POST['feeCourse10Doc']) {
 			$flagFeeOK = TRUE;
 			echo "金额核对正确！";
 			echo "<br>";
@@ -620,8 +805,8 @@ if (isset($_POST['submitType'])) {
 			return FALSE;
 		}
 
-		$sbmt = $pdo -> prepare("insert into fee (uid,name,schoolZone,receiptNum,billNum,fee,time,classType, feeMath,feeMathDoc,feePerMath,feeChinese,feeChineseDoc,feePerChinese,feeEnglish,feeEnglishDoc,feePerEnglish,feePhysics,feePhysicsDoc,feePerPhysics,feeChemistry,feeChemistryDoc,feePerChemistry ) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		$flagSubOK = $sbmt -> execute(array($_POST['userID'], str_replace(' ', '', $_POST['userName']), $schoolZone, $_POST['receiptNum'], $_POST['billNum'], $_POST['fee'], $time, $classType, $_POST['feeMath'], $_POST['feeMathDoc'], $_POST['feePerMath'], $_POST['feeChinese'], $_POST['feeChineseDoc'], $_POST['feePerChinese'], $_POST['feeEnglish'], $_POST['feeEnglishDoc'], $_POST['feePerEnglish'], $_POST['feePhysics'], $_POST['feePhysicsDoc'], $_POST['feePerPhysics'], $_POST['feeChemistry'], $_POST['feeChemistryDoc'], $_POST['feePerChemistry']));
+		$sbmt = $pdo -> prepare("insert into fee (uid,name,schoolZone,receiptNum,billNum,fee,time,classType, feeCourse1,feeCourse1Doc,feePerCourse1,feeCourse2,feeCourse2Doc,feePerCourse2,feeCourse3,feeCourse3Doc,feePerCourse3,feeCourse4,feeCourse4Doc,feePerCourse4,feeCourse5,feeCourse5Doc,feePerCourse5,feeCourse6,feeCourse6Doc,feePerCourse6,feeCourse7,feeCourse7Doc,feePerCourse7,feeCourse8,feeCourse8Doc,feePerCourse8,feeCourse9,feeCourse9Doc,feePerCourse9,feeCourse10,feeCourse10Doc,feePerCourse10 ) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$flagSubOK = $sbmt -> execute(array($_POST['userID'], str_replace(' ', '', $_POST['userName']), $schoolZone, $_POST['receiptNum'], $_POST['billNum'], $_POST['fee'], $time, $classType, $_POST['feeCourse1'], $_POST['feeCourse1Doc'], $_POST['feePerCourse1'], $_POST['feeCourse2'], $_POST['feeCourse2Doc'], $_POST['feePerCourse2'], $_POST['feeCourse3'], $_POST['feeCourse3Doc'], $_POST['feePerCourse3'], $_POST['feeCourse4'], $_POST['feeCourse4Doc'], $_POST['feePerCourse4'], $_POST['feeCourse5'], $_POST['feeCourse5Doc'], $_POST['feePerCourse5'], $_POST['feeCourse6'], $_POST['feeCourse6Doc'], $_POST['feePerCourse6'], $_POST['feeCourse7'], $_POST['feeCourse7Doc'], $_POST['feePerCourse7'], $_POST['feeCourse8'], $_POST['feeCourse8Doc'], $_POST['feePerCourse8'], $_POST['feeCourse9'], $_POST['feeCourse9Doc'], $_POST['feePerCourse9'], $_POST['feeCourse10'], $_POST['feeCourse10Doc'], $_POST['feePerCourse10']));
 
 		if (($flagSubOK) && ($flagFeeOK)) {
 			echo "添加成功！";
@@ -633,8 +818,8 @@ if (isset($_POST['submitType'])) {
 	}
 
 	if (isset($_POST['submitUpdate'])) {
-		$sbmt = $pdo -> prepare("update fee  set uid=?,name=?,fee=?,time=?,classType=?,feeMath=?,feeMathDoc=?,feePerMath=?,feeChinese=?,feeChineseDoc=?,feePerChinese=?,feeEnglish=?,feeEnglishDoc=?,feePerEnglish=?,feePhysics=?,feePhysicsDoc=?,feePerPhysics=?,feeChemistry=?,feeChemistryDoc=?,feePerChemistry=? where id=? and time=?");
-		$flag = $sbmt -> execute(array($_POST['userID'], str_replace(' ', '', $_POST['userName']), $_POST['fee'], $time, $classType, $_POST['feeMath'], $_POST['feeMathDoc'], $_POST['feePerMath'], $_POST['feeChinese'], $_POST['feeChineseDoc'], $_POST['feePerChinese'], $_POST['feeEnglish'], $_POST['feeEnglishDoc'], $_POST['feePerEnglish'], $_POST['feePhysics'], $_POST['feePhysicsDoc'], $_POST['feePerPhysics'], $_POST['feeChemistry'], $_POST['feeChemistryDoc'], $_POST['feePerChemistry'], $_POST['userID'], $_POST['time']));
+		$sbmt = $pdo -> prepare("update fee  set uid=?,name=?,fee=?,time=?,classType=?,feeCourse1=?,feeCourse1Doc=?,feePerCourse1=?,feeCourse2=?,feeCourse2Doc=?,feePerCourse2=?,feeCourse3=?,feeCourse3Doc=?,feePerCourse3=?,feeCourse4=?,feeCourse4Doc=?,feePerCourse4=?,feeCourse5=?,feeCourse5Doc=?,feePerCourse5=? where id=? and time=?");
+		$flag = $sbmt -> execute(array($_POST['userID'], str_replace(' ', '', $_POST['userName']), $_POST['fee'], $time, $classType, $_POST['feeCourse1'], $_POST['feeCourse1Doc'], $_POST['feePerCourse1'], $_POST['feeCourse2'], $_POST['feeCourse2Doc'], $_POST['feePerCourse2'], $_POST['feeCourse3'], $_POST['feeCourse3Doc'], $_POST['feePerCourse3'], $_POST['feeCourse4'], $_POST['feeCourse4Doc'], $_POST['feePerCourse4'], $_POST['feeCourse5'], $_POST['feeCourse5Doc'], $_POST['feePerCourse5'], $_POST['userID'], $_POST['time']));
 		if ($flag) {
 			echo "修改成功！";
 		} else {
