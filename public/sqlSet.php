@@ -62,7 +62,7 @@ if (isset($_GET['noValue'])) {
 	</head>
 	<body onload="initPage()">
 		<h3>校长设置信息查询</h3>
-		<table id="sqlSetTable" align="center" width="4000px" border="0" cellpadding="0" cellspacing="0">
+		<table id="sqlSetTable" align="center" width="4500px" border="0" cellpadding="0" cellspacing="0">
 
 		</table>
 	</body>
