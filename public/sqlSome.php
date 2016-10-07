@@ -239,7 +239,7 @@ if (isset($_GET['sqlName'])) {
 		<table id="sqlClassTable" align="center" width="1300px" border="0" cellpadding="0" cellspacing="0">
 
 		</table>
-		<table id="sqlFeeTable" align="center" width="1800px" border="0" cellpadding="0" cellspacing="0" style="display: block" >
+		<table id="sqlFeeTable" align="center" width="2800px" border="0" cellpadding="0" cellspacing="0" style="display: block" >
 
 		</table>
 	</body>
