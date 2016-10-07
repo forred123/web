@@ -63,42 +63,73 @@ if (isset($_GET['sqlTest'])) {
 	if ($_GET['course'] == "1") {
 		// 0为不在班（可回班），1为在班（不试听直接交费上课的，可退班），2为试听中，3为试听后留班的，4为试听后出班的（试听失败）
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-				and grade like ? and MathClassIdInMLS like ? and sex like ?  and MathProduct like ?
-				and (MathStateInGrade like ? or MathStateInGrade like ? or MathStateInGrade like ?)
+				and grade like ? and course1ClassIdInMLS like ? and sex like ?  and course1Product like ?
+				and (course1StateInGrade like ? or course1StateInGrade like ? or course1StateInGrade like ?)
 				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
 	} else if ($_GET['course'] == "2") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-				and grade like ? and ChineseClassIdInMLS like ? and sex like ? and ChineseProduct like ?
-				and (ChineseStateInGrade like ? or ChineseStateInGrade like ?  or ChineseStateInGrade like ?)
+				and grade like ? and course2ClassIdInMLS like ? and sex like ? and course2Product like ?
+				and (course2StateInGrade like ? or course2StateInGrade like ?  or course2StateInGrade like ?)
 				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
 	} else if ($_GET['course'] == "3") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-				and grade like ? and EnglishClassIdInMLS like ? and sex like ?  and EnglishProduct like ?
-				and (EnglishStateInGrade like ? or EnglishStateInGrade like ?  or EnglishStateInGrade like ? )
+				and grade like ? and course3ClassIdInMLS like ? and sex like ?  and course3Product like ?
+				and (course3StateInGrade like ? or course3StateInGrade like ?  or course3StateInGrade like ? )
 				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
 	} else if ($_GET['course'] == "4") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-				and grade like ? and PhysicsClassIdInMLS like ? and sex like ?  and PhysicsProduct like ?
-				and (PhysicsStateInGrade like ? or PhysicsStateInGrade like ? or PhysicsStateInGrade like ?)
+				and grade like ? and course4ClassIdInMLS like ? and sex like ?  and course4Product like ?
+				and (course4StateInGrade like ? or course4StateInGrade like ? or course4StateInGrade like ?)
 				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
 	} else if ($_GET['course'] == "5") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-				and grade like ? and ChemistryClassIdInMLS like ? and sex like ?  and ChemistryProduct like ?
-				and (ChemistryStateInGrade like ? or ChemistryStateInGrade like ? or ChemistryStateInGrade like ?)
+				and grade like ? and course5ClassIdInMLS like ? and sex like ?  and course5Product like ?
+				and (course5StateInGrade like ? or course5StateInGrade like ? or course5StateInGrade like ?)
+				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
+	} else if ($_GET['course'] == "6") {
+		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+				and grade like ? and course6ClassIdInMLS like ? and sex like ?  and course6Product like ?
+				and (course6StateInGrade like ? or course6StateInGrade like ? or course6StateInGrade like ?)
+				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
+	} else if ($_GET['course'] == "7") {
+		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+				and grade like ? and course7ClassIdInMLS like ? and sex like ?  and course7Product like ?
+				and (course7StateInGrade like ? or course7StateInGrade like ? or course7StateInGrade like ?)
+				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
+	} else if ($_GET['course'] == "8") {
+		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+				and grade like ? and course8ClassIdInMLS like ? and sex like ?  and course8Product like ?
+				and (course8StateInGrade like ? or course8StateInGrade like ? or course8StateInGrade like ?)
+				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
+	} else if ($_GET['course'] == "9") {
+		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+				and grade like ? and course9ClassIdInMLS like ? and sex like ?  and course9Product like ?
+				and (course9StateInGrade like ? or course9StateInGrade like ? or course9StateInGrade like ?)
+				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
+		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
+	} else if ($_GET['course'] == "10") {
+		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
+				and grade like ? and course10ClassIdInMLS like ? and sex like ?  and course10Product like ?
+				and (course10StateInGrade like ? or course10StateInGrade like ? or course10StateInGrade like ?)
 				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
 	} else {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?)
-				and grade like ? and (MathClassIdInMLS like ? or ChineseClassIdInMLS like ? or EnglishClassIdInMLS like ? or PhysicsClassIdInMLS like ? or ChemistryClassIdInMLS like ?) and sex like ?  
-				and (MathProduct like ? or ChineseProduct like ? or EnglishProduct like ? or PhysicsProduct like ? or ChemistryProduct like ?)
-				and (MathStateInGrade like ? or MathStateInGrade like ? or MathStateInGrade like ? or ChineseStateInGrade like ? or ChineseStateInGrade like ? or ChineseStateInGrade like ? or EnglishStateInGrade like ? or EnglishStateInGrade like ? or EnglishStateInGrade like ?
-					or PhysicsStateInGrade like ? or PhysicsStateInGrade like ?  or PhysicsStateInGrade like ? or ChemistryStateInGrade like ? or ChemistryStateInGrade like ? or ChemistryStateInGrade like ?)
+				and grade like ? and (course1ClassIdInMLS like ? or course2ClassIdInMLS like ? or course3ClassIdInMLS like ? or course4ClassIdInMLS like ? or course5ClassIdInMLS like ? or course6ClassIdInMLS like ? or course7ClassIdInMLS like ? or course8ClassIdInMLS like ? or course9ClassIdInMLS like ? or course10ClassIdInMLS like ?) and sex like ?  
+				and (course1Product like ? or course2Product like ? or course3Product like ? or course4Product like ? or course5Product like ? or course6Product like ? or course7Product like ? or course8Product like ? or course9Product like ? or course10Product like ?)
+				and (course1StateInGrade like ? or course1StateInGrade like ? or course1StateInGrade like ? or course2StateInGrade like ? or course2StateInGrade like ? or course2StateInGrade like ? or course3StateInGrade like ? or course3StateInGrade like ? or course3StateInGrade like ?
+					or course4StateInGrade like ? or course4StateInGrade like ?  or course4StateInGrade like ? or course5StateInGrade like ? or course5StateInGrade like ? or course5StateInGrade like ? or course6StateInGrade like ? or course6StateInGrade like ? or course6StateInGrade like ? 
+					or course7StateInGrade like ? or course7StateInGrade like ? or course7StateInGrade like ? or course8StateInGrade like ? or course8StateInGrade like ? or course8StateInGrade like ? or course9StateInGrade like ? or course9StateInGrade like ? or course9StateInGrade like ? or course10StateInGrade like ? or course10StateInGrade like ? or course10StateInGrade like ? )
 				and inTime >= ? and inTime <= ? and (name1 like ? or name2 like ?) order by inTime desc, convert (name1 using gbk) asc");
-		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
+		$sbmt -> execute(array($_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['schoolZone'] . "_", $_GET['grade'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['classIDInMLS'], $_GET['sex'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", "2", "3", "4", $timeStart, $timeEnd, str_replace(' ', '', $_GET['name']), str_replace(' ', '', $_GET['name'])));
 	}
 
 	$row = array();
@@ -307,7 +338,7 @@ if (isset($_GET['schoolZoneSQL'])) {
 	</head>
 	<body onload="initPage()">
 		<form action="sqlteacher.php" method="post">
-			<table align="center" width="2500px" border="0" cellpadding="0" cellspacing="0">
+			<table align="center" width="3500px" border="0" cellpadding="0" cellspacing="0">
 				<!-- <caption align="left"> -->
 				<h3>试听统计查询</h3>
 				<!-- </caption> -->
@@ -362,7 +393,7 @@ if (isset($_GET['schoolZoneSQL'])) {
 		</form>
 
 		<!--  查询结果表 -->
-		<table id="sqlStudentTable" align="center" width="2500px" border="0" cellpadding="0" cellspacing="0">
+		<table id="sqlStudentTable" align="center" width="3500px" border="0" cellpadding="0" cellspacing="0">
 
 		</table>
 		<!--  end查询结果表 -->
