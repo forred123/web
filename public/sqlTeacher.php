@@ -70,24 +70,24 @@ if (isset($_GET['sqlTeacher'])) {
 	if ($_GET['grade'] == "初中") {
 		$sbmt = $pdo -> prepare("select * from recordTeacherTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ? or schoolZone4 like ? or schoolZone5 like ?)
 								and (grade7 like ? or grade8 like ? or grade9 like ?)
-								and (course1 like ? or course2 like ? or course3 like ? or course4 like ? or course5 like ?)
+								and (course1 like ? or course2 like ? or course3 like ? or course4 like ? or course5 like ? or course6 like ? or course7 like ? or course8 like ? or course9 like ? or course10 like ?)
 								and (product1 like ? or product2 like ? or product3 like ? or product4 like ? or product5 like ?)
 								and workCondition like ? and workTime like ? and sex like ? and inTime >= ? and inTime <= ? order by convert (name using gbk) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], "初一", "初二", "初三", $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['workCondition'], $_GET['workTime'], $_GET['sex'], $timeStart, $timeEnd));
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], "初一", "初二", "初三", $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['workCondition'], $_GET['workTime'], $_GET['sex'], $timeStart, $timeEnd));
 	} else if ($_GET['grade'] == "高中") {
 		$sbmt = $pdo -> prepare("select * from recordTeacherTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ? or schoolZone4 like ? or schoolZone5 like ?)
 								and (grade10 like ? or grade11 like ? or grade12 like ?)
-								and (course1 like ? or course2 like ? or course3 like ? or course4 like ? or course5 like ?)
+								and (course1 like ? or course2 like ? or course3 like ? or course4 like ? or course5 like ? or course6 like ? or course7 like ? or course8 like ? or course9 like ? or course10 like ?)
 								and (product1 like ? or product2 like ? or product3 like ? or product4 like ? or product5 like ?)
 								and workCondition like ? and workTime like ? and sex like ? and inTime >= ? and inTime <= ? order by convert (name using gbk) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], "高一", "高二", "高三", $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['workCondition'], $_GET['workTime'], $_GET['sex'], $timeStart, $timeEnd));
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], "高一", "高二", "高三", $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['workCondition'], $_GET['workTime'], $_GET['sex'], $timeStart, $timeEnd));
 	} else {
 		$sbmt = $pdo -> prepare("select * from recordTeacherTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ? or schoolZone4 like ? or schoolZone5 like ?)
 								and (grade7 like ? or grade8 like ? or grade9 like ? or grade10 like ? or grade11 like ? or grade12 like ?)
-								and (course1 like ? or course2 like ? or course3 like ? or course4 like ? or course5 like ?)
+								and (course1 like ? or course2 like ? or course3 like ? or course4 like ? or course5 like ? or course6 like ? or course7 like ? or course8 like ? or course9 like ? or course10 like ?)
 								and (product1 like ? or product2 like ? or product3 like ? or product4 like ? or product5 like ?)
 								and workCondition like ? and workTime like ? and sex like ? and inTime >= ? and inTime <= ? order by convert (name using gbk) asc");
-		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['workCondition'], $_GET['workTime'], $_GET['sex'], $timeStart, $timeEnd));
+		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['grade'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['course'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['workCondition'], $_GET['workTime'], $_GET['sex'], $timeStart, $timeEnd));
 	}
 
 	$row = array();

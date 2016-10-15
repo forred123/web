@@ -3,10 +3,13 @@
  */
 
 var info;
+var principalSetObj;
 var i = 0;
 var len = 0;
 var flagSubmit = false;
 var productLoad = new Array();
+var maxCourseNum = 10;
+var courseLoad = new Array();
 
 function sqlTeacher() {
 	var schoolZone = document.getElementsByName("schoolZone")[0].options[document.getElementsByName("schoolZone")[0].options.selectedIndex].text;
@@ -115,7 +118,7 @@ function loadCourse(schoolZone) {
 	var index = 0;
 	// 根据所选校区自动加载相应的产品
 	for ( i = 0; i < len; i++) {
-		if (schoolZone == info[i].schoolZone) {
+		if (schoolZone == principalSetObj[i].schoolZone) {
 			index = i;
 			break;
 		}
@@ -127,20 +130,35 @@ function loadCourse(schoolZone) {
 		obj.removeChild(obj.options[i]);
 	}
 
-	if (info[index].course1 != "") {
-		obj.options.add(new Option("数学", 1));
+	if (principalSetObj[index].course1 != "") {
+		obj.options.add(new Option(courseLoad[0], 1));
 	}
-	if (info[index].course2 != "") {
-		obj.options.add(new Option("语文", 2));
+	if (principalSetObj[index].course2 != "") {
+		obj.options.add(new Option(courseLoad[1], 2));
 	}
-	if (info[index].course3 != "") {
-		obj.options.add(new Option("英语", 3));
+	if (principalSetObj[index].course3 != "") {
+		obj.options.add(new Option(courseLoad[2], 3));
 	}
-	if (info[index].course4 != "") {
-		obj.options.add(new Option("物理", 4));
+	if (principalSetObj[index].course4 != "") {
+		obj.options.add(new Option(courseLoad[3], 4));
 	}
-	if (info[index].course5 != "") {
-		obj.options.add(new Option("化学", 5));
+	if (principalSetObj[index].course5 != "") {
+		obj.options.add(new Option(courseLoad[4], 5));
+	}
+	if (principalSetObj[index].course6 != "") {
+		obj.options.add(new Option(courseLoad[5], 6));
+	}
+	if (principalSetObj[index].course7 != "") {
+		obj.options.add(new Option(courseLoad[6], 7));
+	}
+	if (principalSetObj[index].course8 != "") {
+		obj.options.add(new Option(courseLoad[7], 8));
+	}
+	if (principalSetObj[index].course9 != "") {
+		obj.options.add(new Option(courseLoad[8], 9));
+	}
+	if (principalSetObj[index].course10 != "") {
+		obj.options.add(new Option(courseLoad[9], 10));
 	}
 }
 
@@ -148,7 +166,7 @@ function loadGrade(schoolZone) {
 	var index = 0;
 	// 根据所选校区自动加载相应的产品
 	for ( i = 0; i < len; i++) {
-		if (schoolZone == info[i].schoolZone) {
+		if (schoolZone == principalSetObj[i].schoolZone) {
 			index = i;
 			break;
 		}
@@ -160,22 +178,22 @@ function loadGrade(schoolZone) {
 		obj.removeChild(obj.options[i]);
 	}
 
-	if (info[index].grade7 != "") {
+	if (principalSetObj[index].grade7 != "") {
 		obj.options.add(new Option("初一", 7));
 	}
-	if (info[index].grade8 != "") {
+	if (principalSetObj[index].grade8 != "") {
 		obj.options.add(new Option("初二", 8));
 	}
-	if (info[index].grade9 != "") {
+	if (principalSetObj[index].grade9 != "") {
 		obj.options.add(new Option("初三", 9));
 	}
-	if (info[index].grade10 != "") {
+	if (principalSetObj[index].grade10 != "") {
 		obj.options.add(new Option("高一", 10));
 	}
-	if (info[index].grade11 != "") {
+	if (principalSetObj[index].grade11 != "") {
 		obj.options.add(new Option("高二", 11));
 	}
-	if (info[index].grade12 != "") {
+	if (principalSetObj[index].grade12 != "") {
 		obj.options.add(new Option("高三", 12));
 	}
 }
@@ -184,27 +202,27 @@ function loadProduct(schoolZone) {
 	var index = 0;
 	// 根据所选校区自动加载相应的产品
 	for ( i = 0; i < len; i++) {
-		if (schoolZone == info[i].schoolZone) {
+		if (schoolZone == principalSetObj[i].schoolZone) {
 			index = i;
 			break;
 		}
 	}
 
 	for ( i = 0; i < len; i++) {
-		if (info[i].product1 != "") {
-			productLoad[0] = info[i].product1;
+		if (principalSetObj[i].product1 != "") {
+			productLoad[0] = principalSetObj[i].product1;
 		}
-		if (info[i].product2 != "") {
-			productLoad[1] = info[i].product2;
+		if (principalSetObj[i].product2 != "") {
+			productLoad[1] = principalSetObj[i].product2;
 		}
-		if (info[i].product3 != "") {
-			productLoad[2] = info[i].product3;
+		if (principalSetObj[i].product3 != "") {
+			productLoad[2] = principalSetObj[i].product3;
 		}
-		if (info[i].product4 != "") {
-			productLoad[3] = info[i].product4;
+		if (principalSetObj[i].product4 != "") {
+			productLoad[3] = principalSetObj[i].product4;
 		}
-		if (info[i].product5 != "") {
-			productLoad[4] = info[i].product5;
+		if (principalSetObj[i].product5 != "") {
+			productLoad[4] = principalSetObj[i].product5;
 		}
 	}
 
@@ -215,23 +233,23 @@ function loadProduct(schoolZone) {
 	}
 
 	i = 1;
-	if (info[index].product1 != "") {
+	if (principalSetObj[index].product1 != "") {
 		obj.options.add(new Option(productLoad[0], i));
 		i++;
 	}
-	if (info[index].product2 != "") {
+	if (principalSetObj[index].product2 != "") {
 		obj.options.add(new Option(productLoad[1], i));
 		i++;
 	}
-	if (info[index].product3 != "") {
+	if (principalSetObj[index].product3 != "") {
 		obj.options.add(new Option(productLoad[2], i));
 		i++;
 	}
-	if (info[index].product4 != "") {
+	if (principalSetObj[index].product4 != "") {
 		obj.options.add(new Option(productLoad[3], i));
 		i++;
 	}
-	if (info[index].product5 != "") {
+	if (principalSetObj[index].product5 != "") {
 		obj.options.add(new Option(productLoad[4], i));
 		i++;
 	}
@@ -262,12 +280,12 @@ function initPage() {
 				} else if (ret == "2") {
 					alert("检查到该校区名有多条记录，请联系管理员！");
 				} else {
-					info = eval(ret);
+					principalSetObj = eval(ret);
 
 					var obj1 = document.getElementsByName("schoolZone")[0];
 					i = 0;
-					for (var tmp in info) {
-						obj1.options.add(new Option(info[i].schoolZone, i + 1));
+					for (var tmp in principalSetObj) {
+						obj1.options.add(new Option(principalSetObj[i].schoolZone, i + 1));
 						i++;
 					}
 					len = i;
@@ -275,6 +293,9 @@ function initPage() {
 					// 默认填写当前日期
 					document.getElementsByName("timeStart")[0].value = getYear0FormatDate();
 					document.getElementsByName("timeEnd")[0].value = getNowFormatDate();
+
+					// 查询校长设置中的所有科目，用于载入查询条件中的科目
+					sqlCourse();
 				}
 
 			} else {
@@ -513,4 +534,110 @@ function removeRow(TableID) {
 		tabObj.deleteRow(0);
 	}
 	tableRowCount = 0;
+}
+
+function sqlCourse() {
+	var xmlhttp;
+
+	// 1创建AJAX对象
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	// 2指定回调函数
+	xmlhttp.onreadystatechange = function() {
+		// 4接收响应数据，处理服务器返回的信息
+		// 判断对象状态是否交互完成，如果为4则交互完成
+		if (xmlhttp.readyState == 4) {
+			// 判断对象状态是否交互成功,如果成功则为200
+
+			if (xmlhttp.status == 200) {
+				// 接收数据,得到服务器输出的XML数据
+
+				var ret = xmlhttp.responseText;
+
+				if (ret == "0") {
+					// alert("");
+				} else if (ret == "2") {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+					// alert("检查到该校区名有多条记录，请联系管理员！");
+				} else {
+					// document.getElementsByName("submitAdd")[0].disabled =
+					// true;
+
+					// var info = eval(ret);
+					info = eval(ret);
+
+					// var len = 0;
+					len = 0;
+					for (var tmp in info) {
+						len++;
+					}
+
+					// 根据所选校区自动加载相应的科目
+					// 根据所选校区自动加载相应的科目
+					var courseNameIndex = new Array();
+					for (var i = 0; i < maxCourseNum; i++) {
+						courseNameIndex[i] = 0;
+					}
+					for (var i = 0; i < len; i++) {
+						if (info[i].course1 != "") {
+							courseNameIndex[0] = i;
+						}
+						if (info[i].course2 != "") {
+							courseNameIndex[1] = i;
+						}
+						if (info[i].course3 != "") {
+							courseNameIndex[2] = i;
+						}
+						if (info[i].course4 != "") {
+							courseNameIndex[3] = i;
+						}
+						if (info[i].course5 != "") {
+							courseNameIndex[4] = i;
+						}
+						if (info[i].course6 != "") {
+							courseNameIndex[5] = i;
+						}
+						if (info[i].course7 != "") {
+							courseNameIndex[6] = i;
+						}
+						if (info[i].course8 != "") {
+							courseNameIndex[7] = i;
+						}
+						if (info[i].course9 != "") {
+							courseNameIndex[8] = i;
+						}
+						if (info[i].course10 != "") {
+							courseNameIndex[9] = i;
+						}
+					}
+
+					courseLoad[0] = info[courseNameIndex[0]].course1;
+					courseLoad[1] = info[courseNameIndex[1]].course2;
+					courseLoad[2] = info[courseNameIndex[2]].course3;
+					courseLoad[3] = info[courseNameIndex[3]].course4;
+					courseLoad[4] = info[courseNameIndex[4]].course5;
+					courseLoad[5] = info[courseNameIndex[5]].course6;
+					courseLoad[6] = info[courseNameIndex[6]].course7;
+					courseLoad[7] = info[courseNameIndex[7]].course8;
+					courseLoad[8] = info[courseNameIndex[8]].course9;
+					courseLoad[9] = info[courseNameIndex[9]].course10;
+				}
+
+			} else {
+				alert("错误，请求页面异常！");
+			}
+		}
+
+	};
+	// 3发出http请求
+	var url = "../admin/principalSet.php";
+	url = url + '?noValue=""';
+	// 很重要，必须有的
+	url = url + "&sid=" + Math.random();
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send(null);
 }
