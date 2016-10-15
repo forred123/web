@@ -77,6 +77,14 @@ alter table principalSetTable add course10 varchar(20) not null default '' after
 
 drop table principalSetTable;
 
+-- 导出数据库（sql脚本） 
+  mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+　　mysqldump -u root -p db_name > test_db.sql
+　　2.mysql导出数据库一个表
+　　mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+　　mysqldump -u wcnc -p test_db users> test_users.sql （结尾没有分号）
+－－导入数据库（sql脚本）
+   进入mysql后，选择数据库或新建一个数据库，选择这个数据库后输入命令source ***.sql
 
 -- 清空全部数据，不写日志，不可恢复，速度极快
 truncate table 表名;
