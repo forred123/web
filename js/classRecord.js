@@ -768,8 +768,8 @@ function checkTime() {
 		|| ((time2 <= lastTime2) && (time2 >= lastTime1))//结束时间在上次考勤区间中不可以
 		) {
 			//confliction = true;
-			// 临时方便测试不使用冲突检测机制，待测试完毕后找开即可
-			confliction = false;
+			// 临时方便测试不使用冲突检测机制，待测试完毕后找开即可confliction = false;
+			confliction = true;
 		} else {
 			confliction = false;
 		}
