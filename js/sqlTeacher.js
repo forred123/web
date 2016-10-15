@@ -475,7 +475,7 @@ function appendRow(obj, index) {
 	newTd7.innerHTML = obj.bankCardUser;
 	newTd8.innerHTML = obj.requireConditon;
 	newTd9.innerHTML = obj.product1 + "-" + obj.product2 + "-" + obj.product3 + "-" + obj.product4 + "-" + obj.product5;
-	newTd10.innerHTML = obj.course1 + "-" + obj.course2 + "-" + obj.course3 + "-" + obj.course4 + "-" + obj.course5;
+	newTd10.innerHTML = obj.course1 + "-" + obj.course2 + "-" + obj.course3 + "-" + obj.course4 + "-" + obj.course5 + "-" + obj.course6 + "-" + obj.course7 + "-" + obj.course8 + "-" + obj.course9 + "-" + obj.course10;
 	newTd11.innerHTML = obj.grade7 + "-" + obj.grade8 + "-" + obj.grade9 + "-" + obj.grade10 + "-" + obj.grade11 + "-" + obj.grade12;
 	newTd12.innerHTML = obj.school;
 	newTd13.innerHTML = obj.teacherWX;
