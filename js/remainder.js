@@ -262,7 +262,7 @@ function appendRow(TableID, course, obj, price, remainFee) {
 
 	if (course == 1) {
 		for ( i = 0; i < MaxSchoolZone; i++) {
-			if (className[i][0] == obj.MathClassIdInMLS) {
+			if (className[i][0] == obj.course1ClassIdInMLS) {
 				newTd6.innerHTML = className[i][1];
 				break;
 			}
@@ -554,6 +554,7 @@ function loadPriceAndAddRow(obj, flagCourse, remainFee, feeState) {
 				if (price != 0) {
 					conditiontmp = remainFee / price;
 				}
+				// 余额状态满足时才插入
 				if (conditiontmp < feeState) {
 					appendRow(remainderTable, flagCourse, obj, price, remainFee);
 				}

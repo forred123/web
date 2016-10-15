@@ -220,66 +220,66 @@ if (isset($_GET['sqlRemainder'])) {
 	// 先从学生表中查询部分条件的学生，然后再去交费表中查询该ID的学生的信息
 	if ($_GET['courseID'] == "1") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course1Product like ? and course1ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course1Product like ? and course1ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 
 	if ($_GET['courseID'] == "2") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and ChineseProduct like ? and course2ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course2Product like ? and course2ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 
 	if ($_GET['courseID'] == "3") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course3Product like ? and course3ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course3Product like ? and course3ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 
 	if ($_GET['courseID'] == "4") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course4Product like ? and course4ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course4Product like ? and course4ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 
 	if ($_GET['courseID'] == "5") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course5Product like ? and course5ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course5Product like ? and course5ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 
 	if ($_GET['courseID'] == "6") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course6Product like ? and course6ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course6Product like ? and course6ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 	if ($_GET['courseID'] == "7") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course7Product like ? and course7ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course7Product like ? and course7ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 	if ($_GET['courseID'] == "8") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course8Product like ? and course8ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course8Product like ? and course8ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 	if ($_GET['courseID'] == "9") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course9Product like ? and course9ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course9Product like ? and course9ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
 	if ($_GET['courseID'] == "10") {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
-								and course10Product like ? and course10ClassIdInMLS like ? and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and course10Product like ? and course10ClassIdInMLS like ? and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		//asc desc course1StateInGrade
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['classID'], $startDate, $endDate));
 	}
@@ -288,7 +288,7 @@ if (isset($_GET['sqlRemainder'])) {
 		$sbmt = $pdo -> prepare("select * from recordStudentTable where (schoolZone1 like ? or schoolZone2 like ? or schoolZone3 like ?) and grade like ? 
 								and (course1Product like ? or course2Product like ? or course3Product like ? or course4Product like ? or course5Product like ? or course6Product like ? or course7Product like ? or course8Product like ? or course9Product like ? or course10Product like ?)
 								and (course1ClassIdInMLS like ? or course2ClassIdInMLS like ? or course3ClassIdInMLS like ? or course4ClassIdInMLS like ? or course5ClassIdInMLS like ? or course6ClassIdInMLS like ? or course7ClassIdInMLS like ? or course8ClassIdInMLS like ? or course9ClassIdInMLS like ? or course10ClassIdInMLS like ?)
-								and time >= ? and time <=? order by convert(name1 using gbk) asc");
+								and inTime >= ? and inTime <=? order by convert(name1 using gbk) asc");
 		$sbmt -> execute(array($_GET['schoolZone'], $_GET['schoolZone'], $_GET['schoolZone'], $_GET['gradeID'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['product'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $_GET['classID'], $startDate, $endDate));
 	}
 
