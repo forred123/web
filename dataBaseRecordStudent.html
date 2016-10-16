@@ -130,7 +130,7 @@ role int not null default 0,#权限，校长是9，校区负责人是8，教师�
 primary key(uid)
 );
 
-//修改
+//修改 科目由固定5改自由10
 alter table recordStudentTable change MathClassIdInMLS course1ClassIdInMLS int unsigned not null default '0';
 alter table recordStudentTable change ChineseClassIdInMLS course2ClassIdInMLS int unsigned not null default '0';
 alter table recordStudentTable change EnglishClassIdInMLS course3ClassIdInMLS int unsigned not null default '0';

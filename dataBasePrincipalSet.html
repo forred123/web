@@ -68,7 +68,7 @@ create table principalSetTable(
 	primary key(id)
 );
 
-// 增加
+// 增加 科目由固定5改自由10
 alter table principalSetTable add course6 varchar(20) not null default '' after course5;
 alter table principalSetTable add course7 varchar(20) not null default '' after course6;
 alter table principalSetTable add course8 varchar(20) not null default '' after course7;

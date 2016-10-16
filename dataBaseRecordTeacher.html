@@ -53,13 +53,13 @@ create table recordTeacherTable(
 );
 
 
-// 增加一列
+// 增加一列,科目由固定5改自由10
 alter table recordTeacherTable add course6 char(4) not null default '-' after course5;
 alter table recordTeacherTable add course7 char(4) not null default '-' after course6;
 alter table recordTeacherTable add course8 char(4) not null default '-' after course7;
 alter table recordTeacherTable add course9 char(4) not null default '-' after course8;
 alter table recordTeacherTable add course10 char(4) not null default '-' after course9;
-
+//
 update recordTeacherTable set course6="" where uid=1;
 
 insert into recordTeacherTable (name,role) values("admin",9);
