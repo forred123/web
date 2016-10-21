@@ -355,7 +355,7 @@ if (isset($_POST['submitType'])) {
 		$str = $_POST['userID'];
 		$uid = substr($str, 1);
 
-		$sbmt = $pdo -> prepare("delete * from recordTeacherTable where uid = ?");
+		$sbmt = $pdo -> prepare("delete from recordTeacherTable where uid = ?");
 		$flag = $sbmt -> execute(array($uid));
 
 		if ($flag) {

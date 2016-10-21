@@ -62,11 +62,14 @@ alter table recordTeacherTable add course10 char(4) not null default '-' after c
 //
 update recordTeacherTable set course6="" where uid=1;
 
+insert into recordTeacherTable (uid,passWD,name,sex,role) values(1,"zhyx","admin","男","9");
+insert into recordTeacherTable (uid,passWD,name,sex,role) values(2,"mlsfdb","毛红玉","男","9");
+
 insert into recordTeacherTable (name,role) values("admin",9);
 
 //alter table user change passWD passWD char(32) not null default '';
 //默认密码为mls123
-insert into recordTeacher (uid,passWD,name,sex,role) values(1,md5("admin"),"admin","男","9");
+insert into recordTeacherTable (uid,passWD,name,sex,role) values(1,md5("admin"),"admin","男","9");
 
 update recordTeacher set role=9 where uid=1;
 
